@@ -1,0 +1,56 @@
+<h1>New workout</h1>
+<form [formGroup]="form">
+  <div>
+    <gym-text-input
+      label="New workout name"
+      formControlName="name"
+      errorMessage="Please enter a name for the workout"
+    />
+  </div>
+  <div>
+    <h2>Exercises</h2>
+    @for (exercise of exercises; track exercise.id) {
+      @if (isExercise(exercise)) {
+        <div class="exercise-wrapper">
+          <gym-exercise [exercise]="asExercise(exercise)" />
+          <button (click)="onEditExercise(asExercise(exercise))">
+            <gym-icon icon="pencil" />
+          </button>
+          <button (click)="onAskDeleteExercise($index)">
+            <gym-icon icon="trashbin" />
+          </button>
+        </div>
+      } @else {
+        <div class="superset-wrapper">
+          <gym-superset-editor
+            [baseSuperset]="asSuperset(exercise)"
+            [exerciseTypes]="exerciseTypes()"
+            (newExerciseType)="onGetNewExerciseType($event)"
+            (superset)="onGetSuperset($event, $index)"
+          />
+          <button (click)="onAskDeleteSuperset($index)">
+            <gym-icon icon="trashbin" />
+          </button>
+        </div>
+      }
+    }
+    @if (exercises.length === 0 && !exerciseEditorVisible()) {
+      <div>There are not exercises yet.</div>
+    }
+    <gym-exercise-editor
+      [baseExercise]="editingExercise()"
+      [exerciseTypes]="exerciseTypes()"
+      [(open)]="exerciseEditorVisible"
+      (exercise)="onGetExercise($event)"
+    />
+    <div class="add-buttons">
+      <button (click)="showExerciseEditor()">Add exercise</button>
+      <button (click)="addSuperset()">Add superset</button>
+    </div>
+  </div>
+</form>
+<gym-delete-warning-dialog
+  [(open)]="showAskDeleteExercise"
+  [whatToDelete]="deleteSuperset() ? 'superset' : 'exercise'"
+  (delete)="onDeleteExercise()"
+/>

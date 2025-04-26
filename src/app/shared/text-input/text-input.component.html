@@ -1,0 +1,13 @@
+<input
+  [(ngModel)]="value"
+  type="text"
+  [placeholder]="placeholder()"
+  (keyup)="onType()"
+  [disabled]="disabled()"
+  #input
+  (keydown.enter)="input.blur()"
+/>
+
+@if (showError) {
+  <div class="error">{{ errorMessage() }}</div>
+}

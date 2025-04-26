@@ -1,0 +1,40 @@
+@if (exercise()) {
+  <header>
+    <gym-exercise-image
+      [src]="exercise()!.type!.image!"
+      [alt]="exercise()!.type!.name"
+    />
+    <div class="exercise-data">
+      <div class="exercise-name">
+        {{ exercise()!.type!.name }}
+      </div>
+      <div class="exercise-icons">
+        @if (exercise()!.weighted) {
+          <gym-icon
+            [icon]="
+              exercise()!.weightType === 'total' ? 'dumbell' : 'halfdumbell'
+            "
+          />
+        }
+        <gym-icon
+          [icon]="
+            exercise()!.progressType === 'repetitions' ? 'repeat' : 'timer'
+          "
+        />
+      </div>
+    </div>
+  </header>
+  <div class="exercise-sets">
+    @for (set of exercise()!.sets; track $index) {
+      <div class="set-wrapper">
+        <div>{{ $index + 1 }}</div>
+        <gym-set
+          [set]="set"
+          [weighted]="exercise()!.weighted"
+          [weightType]="exercise()!.weightType"
+          [progressType]="exercise()!.progressType"
+        />
+      </div>
+    }
+  </div>
+}

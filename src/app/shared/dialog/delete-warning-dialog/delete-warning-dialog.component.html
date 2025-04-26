@@ -1,0 +1,11 @@
+<gym-dialog [(open)]="open" [alert]="true">
+  <header>Warning</header>
+  <p>
+    Are you sure you want to delete this
+    {{ whatToDelete() }}? This action cannot be undone.
+  </p>
+  <div class="actions">
+    <button (click)="onCancel()">Cancel</button>&nbsp;
+    <button (click)="onDelete()">Delete</button>
+  </div>
+</gym-dialog>

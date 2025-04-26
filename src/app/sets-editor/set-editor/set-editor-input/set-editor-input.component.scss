@@ -1,0 +1,40 @@
+.set-editor-input {
+  --margin: 10px;
+  --size: 1.5em;
+  display: flex;
+  align-items: center;
+  margin: var(--margin);
+
+  > gym-icon {
+    font-size: var(--size);
+    margin-right: var(--margin);
+  }
+
+  > input {
+    width: calc(var(--size) * 1.5);
+    height: var(--size);
+    text-align: end;
+    border: 0;
+    text-align: center;
+    padding: 0;
+    background-color: white;
+    color: black;
+    font-size: 1em;
+  }
+
+  > label {
+    height: var(--size);
+    display: inline-flex;
+    align-items: center;
+    margin-left: var(--margin);
+  }
+}
+:host {
+  &.ng-invalid {
+    .set-editor-input {
+      > input {
+        background-color: var(--light-red);
+      }
+    }
+  }
+}

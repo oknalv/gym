@@ -1,0 +1,30 @@
+:host {
+  --icon-primary-color: inherit;
+  --icon-secondary-color: inherit;
+  --icon-primary-opacity: 1;
+  --icon-secondary-opacity: 0.5;
+  font-family: gymIcons;
+  position: relative;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+
+  &::after {
+    position: absolute;
+    content: var(--icon-comp);
+    display: block;
+    opacity: var(--icon-secondary-opacity);
+    top: 0;
+    left: 0;
+    color: var(--icon-secondary-color);
+  }
+  &::before {
+    position: absolute;
+    content: var(--icon-id);
+    display: block;
+    top: 0;
+    left: 0;
+    color: var(--icon-primary-color);
+    opacity: var(--icon-primary-opacity);
+  }
+}

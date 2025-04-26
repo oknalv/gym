@@ -1,0 +1,9 @@
+<section>
+  <h1>Workouts</h1>
+  @for (workout of workouts(); track workout.id) {
+    <gym-workout />
+  } @empty {
+    <div>No workouts to display</div>
+  }
+  <button routerLink="/new-workout">Add workout</button>
+</section>

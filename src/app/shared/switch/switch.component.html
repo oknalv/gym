@@ -1,0 +1,18 @@
+<button
+  [class.selected]="selectedOn()"
+  (click)="select(options().on)"
+  [disabled]="disabled()"
+>
+  <div>
+    <ng-content select="on-option"></ng-content>
+  </div>
+</button>
+<button
+  [class.selected]="selectedOff()"
+  (click)="select(options().off)"
+  [disabled]="disabled()"
+>
+  <div>
+    <ng-content select="off-option"></ng-content>
+  </div>
+</button>

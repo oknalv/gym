@@ -1,0 +1,84 @@
+html {
+  --dark-red: #77172e;
+  --light-red: #faafa8;
+  --dark-green: #264d3b;
+  --light-green: #e2f6d3;
+  --light-blue: #aeccdc;
+  --light-yellow: #fff8b8;
+  --table-1: #284255;
+  --table-2: #256377;
+  --button-padding: 5px;
+  --border-width: 5px;
+  --background-color: #202124;
+  font-family: sans-serif;
+  background-color: var(--background-color);
+  color: white;
+}
+
+body {
+  margin: 0;
+}
+
+@font-face {
+  font-family: gymIcons;
+  src: url(/Gym-Icons.ttf);
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  font-size: 1em;
+  background-color: var(--table-2);
+  padding: var(--button-padding);
+  color: white;
+}
+
+input {
+  border: 0;
+  outline: none;
+}
+
+.error {
+  color: var(--light-red);
+  font-style: italic;
+  font-size: 0.75em;
+  margin-left: 10px;
+}
+
+.warning {
+  color: var(--light-yellow);
+  font-style: italic;
+  font-size: 0.75em;
+  margin-left: 10px;
+}
+
+.exercise-wrapper {
+  display: flex;
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+  > :first-child {
+    flex-grow: 1;
+  }
+
+  > button {
+    padding: 10px;
+    gym-icon {
+      font-size: 1.5em;
+    }
+  }
+
+  > button:first-of-type {
+    background-color: var(--light-green);
+    color: var(--dark-green);
+  }
+
+  > button:last-of-type {
+    background-color: var(--light-red);
+    color: var(--dark-red);
+  }
+}

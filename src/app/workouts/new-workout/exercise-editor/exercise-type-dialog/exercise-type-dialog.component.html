@@ -1,0 +1,11 @@
+<gym-dialog [(open)]="open">
+  <h1>Choose an exercise</h1>
+  <div>
+    @for (exerciseType of exerciseTypes(); track exerciseType.id) {
+      <gym-exercise-type
+        [type]="exerciseType"
+        (click)="onChooseExerciseType(exerciseType)"
+      />
+    }
+  </div>
+</gym-dialog>

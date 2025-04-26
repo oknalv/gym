@@ -1,0 +1,18 @@
+<div class="set-form" [formGroup]="form">
+  @if (weighted()) {
+    <gym-set-editor-input
+      formControlName="weight"
+      [icon]="weightType() === 'total' ? 'dumbell' : 'halfdumbell'"
+      label="kg"
+    />
+  }
+  @if (progressType() === "repetitions") {
+    <gym-set-editor-input
+      formControlName="repetitions"
+      icon="repeat"
+      label="reps"
+    />
+  } @else {
+    <gym-set-editor-input formControlName="time" icon="timer" label="secs" />
+  }
+</div>

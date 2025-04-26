@@ -1,0 +1,9 @@
+:host {
+  padding: 5px;
+  background-color: var(--table-2);
+
+  > button {
+    width: 100%;
+    background-color: var(--table-1);
+  }
+}

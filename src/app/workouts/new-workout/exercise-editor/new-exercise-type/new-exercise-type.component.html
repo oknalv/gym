@@ -1,0 +1,20 @@
+<div [formGroup]="form" (keydown.enter)="$event.preventDefault()">
+  <div>
+    <gym-text-input
+      formControlName="name"
+      label="Name"
+      errorMessage="Please enter a name for the exercise"
+    />
+  </div>
+  <div class="image-input">
+    <gym-exercise-image [src]="src" [alt]="name" />
+    <div class="image-buttons">
+      @if (src) {
+        <button (click)="onLoadImage()">Change image</button>
+        <button (click)="onDeleteImage()">Delete image</button>
+      } @else {
+        <button (click)="onLoadImage()">Add image</button>
+      }
+    </div>
+  </div>
+</div>

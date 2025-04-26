@@ -1,0 +1,32 @@
+dialog {
+  z-index: 1;
+  top: 0;
+  border: 0;
+  box-sizing: border-box;
+  background-color: var(--background-color);
+  color: white;
+  font-size: 1em;
+  width: 100%;
+  position: relative;
+  overflow: unset;
+  padding: 0;
+  > .close-dialog {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    display: flex;
+    z-index: 1;
+  }
+
+  > section {
+    position: relative;
+    height: 100%;
+    overflow: auto;
+    padding: 1em;
+    box-sizing: border-box;
+  }
+
+  &::backdrop {
+    background-color: #ffffff33;
+  }
+}

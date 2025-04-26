@@ -1,0 +1,26 @@
+:host {
+  --size-multiplier: 1;
+  --image-size: 100px;
+  --icon-size: var(--size);
+  background-color: white;
+  border: var(--border-width) solid var(--table-2);
+  height: calc(var(--image-size) * var(--size-multiplier));
+  width: calc(var(--image-size) * var(--size-multiplier));
+  display: inline flex;
+  justify-content: center;
+  align-items: center;
+  --size: 5em;
+
+  img {
+    max-width: calc(var(--image-size) * var(--size-multiplier));
+    max-height: calc(var(--image-size) * var(--size-multiplier));
+  }
+
+  gym-icon {
+    font-size: calc(var(--icon-size) * var(--size-multiplier));
+    color: var(--table-2);
+    // --icon-primary-color: var(--light-green);
+    // --icon-secondary-color: var(--table-2);
+    // --icon-secondary-opacity: 1;
+  }
+}

@@ -1,0 +1,23 @@
+:host {
+  > button {
+    color: white;
+    padding: 5px 5px 10px;
+    background-color: var(--table-1);
+    box-sizing: border-box;
+
+    &.selected {
+      background-color: var(--table-2);
+      padding-top: 0;
+      > div {
+        transform: translateY(5px);
+      }
+    }
+
+    &:not(.selected) {
+      box-shadow: inset 0px -5px 0px 0px #00000055;
+      > div {
+        opacity: 0.5;
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+.switch-option {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+
+  > gym-icon {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+  }
+}
+
+section {
+  margin: 20px 0;
+}
+
+gym-exercise-type {
+  margin-bottom: 5px;
+}
+
+.warning {
+  position: relative;
+
+  button {
+    position: absolute;
+    display: flex;
+    transform: translateX(-100%);
+    background-color: transparent;
+    color: var(--light-yellow);
+  }
+}

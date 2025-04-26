@@ -1,0 +1,56 @@
+:host {
+  --size: 1.5em;
+
+  .sets-editor {
+    overflow-x: auto;
+    display: flex;
+    color: white;
+
+    > * {
+      margin-top: calc(var(--size) / 2);
+      margin-bottom: var(--size);
+    }
+
+    .set-container {
+      display: inline-block;
+      position: relative;
+      background-color: var(--set-background-color);
+
+      .index {
+        position: absolute;
+        transform: translateY(-50%);
+        top: 0;
+        left: 0;
+        background-color: var(--set-background-color);
+        width: var(--size);
+        height: var(--size);
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .delete-set-button {
+        bottom: calc(var(--size) * -2 / 3);
+        right: 5px;
+        font-size: var(--size);
+        padding: 5px;
+        color: var(--dark-red);
+        background-color: var(--light-red);
+        border-radius: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+      }
+    }
+
+    .add-set-button {
+      font-size: var(--size);
+      height: 100%;
+      background-color: var(--light-green);
+      color: var(--dark-green);
+      padding: 10px;
+    }
+  }
+}

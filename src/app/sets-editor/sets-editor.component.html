@@ -1,0 +1,40 @@
+<h3>Sets</h3>
+<div [formGroup]="form">
+  <div class="sets-editor" #setsEditor formArrayName="sets">
+    @for (set of sets.controls; track set.controls["id"]) {
+      <div
+        class="set-container"
+        [style]="{
+          '--set-background-color': $even ? 'var(--table-1)' : 'var(--table-2)',
+        }"
+      >
+        <span class="index">{{ $index + 1 }}</span>
+        <gym-set-editor
+          [formGroup]="getSetForm($index)"
+          [weighted]="weighted()"
+          [weightType]="weightType()"
+          [progressType]="progressType()"
+        />
+        @if ($count > 1) {
+          <button (click)="onDeleteSet($index)" class="delete-set-button">
+            <gym-icon icon="times" />
+          </button>
+        }
+      </div>
+    }
+    <div>
+      <button (click)="onAddSet()" class="add-set-button">
+        <gym-icon icon="+" />
+      </button>
+    </div>
+  </div>
+</div>
+
+@if (invalidWeight()) {
+  <div class="error">
+    Weight must be a positive number greater or equal to 0
+  </div>
+}
+@if (invalidRepetitions()) {
+  <div class="error">Reps must be a positive integer greater or equal to 1</div>
+}

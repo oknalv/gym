@@ -1,0 +1,28 @@
+.image-input {
+  display: flex;
+  .image-buttons {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    justify-content: space-evenly;
+
+    > :first-child {
+      & + * {
+        background-color: var(--light-red);
+        color: var(--dark-red);
+      }
+    }
+  }
+}
+
+:host {
+  > div {
+    > div {
+      margin: 20px 0;
+    }
+  }
+}
+
+.error {
+  display: inline-block;
+}

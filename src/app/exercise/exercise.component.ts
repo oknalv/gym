@@ -1,0 +1,15 @@
+import { Component, input } from '@angular/core';
+import { Exercise } from '../exercise.model';
+import { ExerciseImageComponent } from '../shared/exercise-image/exercise-image.component';
+import { SetComponent } from './set/set.component';
+import { IconComponent } from '../shared/icon/icon.component';
+
+@Component({
+  selector: 'gym-exercise',
+  imports: [ExerciseImageComponent, SetComponent, IconComponent],
+  templateUrl: './exercise.component.html',
+  styleUrl: './exercise.component.scss',
+})
+export class ExerciseComponent {
+  exercise = input.required<Exercise | undefined>();
+}

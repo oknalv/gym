@@ -1,0 +1,121 @@
+<gym-dialog [(open)]="open">
+  <form [formGroup]="form">
+    <h1>{{ editMode() ? "Edit" : "New" }} exercise</h1>
+    <header>Exercise</header>
+    @if (exerciseTypes().length > 0) {
+      <gym-exercise-type-dialog
+        [(open)]="showExerciseTypeDialog"
+        [exerciseTypes]="exerciseTypes()"
+        (select)="onSelectExerciseType($event)"
+      />
+      @if (!exerciseType && !showNewExerciseTypeForm()) {
+        <button (click)="onOpenExerciseDialog()">Use existing</button>
+        or
+        <button (click)="onShowNewExerciseTypeForm()">Create new</button>
+        @if (showError) {
+          <p class="error">
+            You must either use an existing exercise or create a new one.
+          </p>
+        }
+      } @else {
+        @if (showNewExerciseTypeForm()) {
+          <gym-new-exercise-type formGroupName="newExerciseType" />
+
+          <button (click)="onOpenExerciseDialog()">
+            Use existing exercise instead
+          </button>
+        } @else {
+          <gym-exercise-type [type]="exerciseType!" />
+          <button (click)="onOpenExerciseDialog()">Change</button>
+          or
+          <button (click)="onShowNewExerciseTypeForm()">Create new</button>
+        }
+      }
+    } @else {
+      <gym-new-exercise-type formGroupName="newExerciseType" />
+    }
+    <section>
+      <header>Type of exercise</header>
+      <gym-switch
+        [options]="{
+          on: true,
+          off: false,
+        }"
+        formControlName="weighted"
+      >
+        <span ngProjectAs="on-option" class="switch-option">
+          <gym-icon icon="dumbell" /> Weighted
+        </span>
+        <span ngProjectAs="off-option" class="switch-option">
+          <gym-icon icon="notdumbell" /> Weightless
+        </span>
+      </gym-switch>
+    </section>
+    @if (weighted) {
+      <section>
+        <header>Choose how to measure the weight</header>
+        <gym-switch
+          [options]="{
+            on: 'total',
+            off: 'side',
+          }"
+          formControlName="weightType"
+        >
+          <span ngProjectAs="on-option" class="switch-option">
+            <gym-icon icon="dumbell" /> Use total weight
+          </span>
+          <span ngProjectAs="off-option" class="switch-option">
+            <gym-icon icon="halfdumbell" /> Use one side weight
+          </span>
+        </gym-switch>
+      </section>
+    }
+    <section>
+      <header>How to measure progress</header>
+      <gym-switch
+        [options]="{
+          on: 'repetitions',
+          off: 'time',
+        }"
+        formControlName="progressType"
+      >
+        <span ngProjectAs="on-option" class="switch-option">
+          <gym-icon icon="repeat" /> In reps
+        </span>
+        <span ngProjectAs="off-option" class="switch-option">
+          <gym-icon icon="timer" /> In time
+        </span>
+      </gym-switch>
+    </section>
+    <section>
+      @if (showSupersetSetsWarning()) {
+        <div class="warning">
+          <button (click)="onHideSupersetSetsWarning()">
+            <gym-icon icon="times" />
+          </button>
+          Warning: adding or removing sets will reflect in the sets of the rest
+          of the exercises of the superset. Removing any set will reflect in
+          removing the last set of the rest of the exercises. Adding a set will
+          reflect in adding a copy of the last set of each of the other
+          exercises in their corresponding exercises.
+        </div>
+      }
+      <gym-sets-editor
+        formGroupName="sets"
+        [weighted]="weighted!"
+        [weightType]="weightType!"
+        [progressType]="progressType!"
+      />
+    </section>
+
+    @if (showError) {
+      <p class="error">
+        There are errors in the new exercise. Please, correct them before adding
+        the exercise.
+      </p>
+    }
+    <button (click)="onSubmitExercise()">
+      {{ editMode() ? "Save" : "Add" }} exercise
+    </button>
+  </form>
+</gym-dialog>
