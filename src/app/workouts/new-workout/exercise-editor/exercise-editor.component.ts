@@ -74,7 +74,7 @@ export class ExerciseEditorComponent {
   });
 
   private exerciseId!: number;
-  private firstCreateClick = false;
+  private firstSubmitClick = false;
   private dirty = false;
 
   form = new FormGroup({
@@ -182,11 +182,11 @@ export class ExerciseEditorComponent {
   }
 
   get showError() {
-    return this.firstCreateClick && this.form.dirty && this.form.invalid;
+    return this.firstSubmitClick && this.form.dirty && this.form.invalid;
   }
 
   onSubmitExercise() {
-    this.firstCreateClick = true;
+    this.firstSubmitClick = true;
     this.markAsDirty();
     if (this.form.valid) {
       const exerciseType: ExerciseType = this.form.value.type!.exerciseType || {

@@ -27,6 +27,7 @@
             [exerciseTypes]="exerciseTypes()"
             (newExerciseType)="onGetNewExerciseType($event)"
             (superset)="onGetSuperset($event, $index)"
+            [showError]="firstSubmitClick()"
           />
           <button class="thick" (click)="onAskDeleteSuperset($index)">
             <gym-icon icon="trashbin" />
@@ -36,6 +37,9 @@
     }
     @if (exercises.length === 0 && !exerciseEditorVisible()) {
       <div>There are not exercises yet.</div>
+    }
+    @if (showExerciseListError) {
+      <div class="error">You should add at least one exercise or superset.</div>
     }
     <gym-exercise-editor
       [baseExercise]="editingExercise()"
@@ -48,7 +52,9 @@
       <button (click)="addSuperset()">Add superset</button>
     </div>
   </div>
-  <button class="create-workout">Add workout</button>
+  <button (click)="onSubmitWorkout()" class="create-workout">
+    Add workout
+  </button>
 </form>
 <gym-delete-warning-dialog
   [(open)]="showAskDeleteExercise"

@@ -16,6 +16,7 @@ describe('SupersetEditorComponent', () => {
     component = fixture.componentInstance;
     fixture.componentRef.setInput('baseSuperset', { id: 0, exercises: [] });
     fixture.componentRef.setInput('exerciseTypes', []);
+    fixture.componentRef.setInput('showError', false);
   });
 
   it('should create', () => {
@@ -430,5 +431,55 @@ describe('SupersetEditorComponent', () => {
       id: 0,
       exercises: [],
     });
+  });
+
+  it('should show the error when the showError input is true and there are no exercises', () => {
+    fixture.componentRef.setInput('baseSuperset', {
+      id: 0,
+      exercises: [],
+    });
+    fixture.componentRef.setInput('showError', true);
+    fixture.detectChanges();
+    expect(
+      fixture.elementRef.nativeElement.querySelector('.error'),
+    ).toBeTruthy();
+  });
+
+  it('should not show the error when the showError input is true and there are exercises', () => {
+    fixture.componentRef.setInput('baseSuperset', {
+      id: 0,
+      exercises: [
+        {
+          id: 0,
+          type: { id: 1, name: 'name', image: undefined },
+          weighted: true,
+          weightType: WeightType.total,
+          progressType: ProgressType.repetitions,
+          sets: [
+            {
+              repetitions: 1,
+              time: 1,
+              weight: 1,
+            },
+          ],
+        },
+      ],
+    });
+    fixture.componentRef.setInput('showError', true);
+    fixture.detectChanges();
+    expect(
+      fixture.elementRef.nativeElement.querySelector('.error'),
+    ).toBeFalsy();
+  });
+
+  it('should not show the error when the showError input is false', () => {
+    fixture.componentRef.setInput('baseSuperset', {
+      id: 0,
+      exercises: [],
+    });
+    fixture.detectChanges();
+    expect(
+      fixture.elementRef.nativeElement.querySelector('.error'),
+    ).toBeFalsy();
   });
 });

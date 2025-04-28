@@ -26,6 +26,7 @@ export class SupersetEditorComponent {
   private exerciseToDelete!: number;
   showAskDeleteExercise = signal(false);
   numberOfSets = signal(1);
+  showError = input.required<boolean>();
 
   get exercises() {
     return this.baseSuperset().exercises;

@@ -4,7 +4,7 @@ import { ExerciseType } from './exercise.model';
 @Injectable({
   providedIn: 'root',
 })
-export class ExercisesService {
+export class WorkoutService {
   private _exerciseTypes = signal<ExerciseType[]>([]);
   exerciseTypes = this._exerciseTypes.asReadonly();
   constructor() {}

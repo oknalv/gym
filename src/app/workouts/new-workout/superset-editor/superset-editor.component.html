@@ -10,6 +10,9 @@
   </div>
 } @empty {
   <div>There are not exercises in this superset yet.</div>
+  @if (showError()) {
+    <div class="error">Supersets must contain at least one exercise.</div>
+  }
 }
 <button class="add-exercise" (click)="showExerciseEditor()">
   Add exercise to superset

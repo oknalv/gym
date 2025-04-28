@@ -15,7 +15,7 @@ import {
 import { ExerciseEditorComponent } from './exercise-editor/exercise-editor.component';
 import { TextInputComponent } from '../../shared/text-input/text-input.component';
 import { Exercise, ExerciseType, Superset } from '../../exercise.model';
-import { ExercisesService } from '../../exercises.service';
+import { WorkoutService } from '../../workout.service';
 import { ExerciseComponent } from '../../exercise/exercise.component';
 import { IconComponent } from '../../shared/icon/icon.component';
 import { SupersetEditorComponent } from './superset-editor/superset-editor.component';
@@ -36,10 +36,10 @@ import { DeleteWarningDialogComponent } from '../../shared/dialog/delete-warning
   styleUrl: './new-workout.component.scss',
 })
 export class NewWorkoutComponent {
-  private exercisesService = inject(ExercisesService);
+  private workoutService = inject(WorkoutService);
   private newExerciseTypes: WritableSignal<ExerciseType[]> = signal([]);
   exerciseTypes = computed(() => [
-    ...this.exercisesService.exerciseTypes(),
+    ...this.workoutService.exerciseTypes(),
     ...this.newExerciseTypes(),
   ]);
   form = new FormGroup({
@@ -50,6 +50,7 @@ export class NewWorkoutComponent {
   deleteSuperset = signal(false);
   private exerciseToDelete!: number;
   editingExercise = signal<Exercise | undefined>(undefined);
+  firstSubmitClick = signal(false);
 
   exercises: (Exercise | Superset)[] = [];
 
@@ -59,6 +60,10 @@ export class NewWorkoutComponent {
         this.editingExercise.set(undefined);
       }
     });
+  }
+
+  get showExerciseListError() {
+    return this.firstSubmitClick() && this.exercises.length === 0;
   }
 
   asExercise(exercise: Exercise | Superset) {
@@ -132,5 +137,28 @@ export class NewWorkoutComponent {
       id: Date.now(),
       exercises: [],
     });
+  }
+
+  private emptySupersets() {
+    for (const superset of this.exercises) {
+      if (
+        (superset as Superset).exercises !== undefined &&
+        (superset as Superset).exercises.length === 0
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  onSubmitWorkout() {
+    this.firstSubmitClick.set(true);
+    this.form.controls.name.markAsDirty();
+    if (
+      this.form.valid &&
+      !this.showExerciseListError &&
+      !this.emptySupersets()
+    ) {
+    }
   }
 }
