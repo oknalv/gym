@@ -1,7 +1,7 @@
 .superset-wrapper {
   display: flex;
   &:not(:last-child) {
-    margin-bottom: 10px;
+    margin-bottom: var(--margin);
   }
   > :first-child {
     flex-grow: 1;
@@ -10,21 +10,23 @@
   > button {
     background-color: var(--light-red);
     color: var(--dark-red);
-    padding: 10px;
-    gym-icon {
-      font-size: 1.5em;
-    }
   }
 }
 
 .add-buttons {
-  display: flex;
+  margin: var(--margin) 0;
 
   > button {
-    width: 100%;
+    width: 50%;
 
     &:first-child {
       background-color: var(--table-1);
     }
   }
+}
+
+.create-workout {
+  width: 100%;
+  font-size: 1.5em;
+  margin: var(--margin) 0;
 }

@@ -1,0 +1,9 @@
+gym-exercise-type {
+  background-color: var(--table-1);
+  padding: var(--padding);
+  cursor: pointer;
+
+  &:not(:last-child) {
+    margin-bottom: var(--margin);
+  }
+}

@@ -6,17 +6,12 @@
   width: 100px;
 
   > gym-icon {
-    font-size: 1.5em;
-    margin-bottom: 5px;
+    margin-bottom: var(--padding);
   }
 }
 
 section {
-  margin: 20px 0;
-}
-
-gym-exercise-type {
-  margin-bottom: 5px;
+  margin: calc(2 * var(--margin)) 0;
 }
 
 .warning {

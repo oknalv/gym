@@ -2,24 +2,24 @@
   display: flex;
   flex-direction: column;
   background-color: var(--table-1);
-  padding: 5px;
+  padding: var(--padding);
 
   > header {
     display: flex;
     > gym-exercise-image {
-      margin-right: 10px;
+      margin-right: var(--margin);
       --size-multiplier: 0.5;
     }
     > .exercise-data {
       > .exercise-name {
         font-size: 1.5em;
-        margin-bottom: 10px;
+        margin-bottom: var(--margin);
       }
       > .exercise-icons {
         gym-icon {
           font-size: 1.25em;
           &:not(:last-child) {
-            margin-right: 10px;
+            margin-right: var(--margin);
           }
         }
       }
@@ -31,14 +31,14 @@
     flex-wrap: wrap;
 
     > .set-wrapper {
-      margin-top: 10px;
+      margin-top: var(--margin);
       display: flex;
       &:not(:last-child) {
-        margin-right: 10px;
+        margin-right: var(--margin);
       }
 
       > :first-child {
-        padding: 5px;
+        padding: var(--padding);
         background-color: var(--light-green);
         font-size: 0.75em;
         color: var(--dark-green);

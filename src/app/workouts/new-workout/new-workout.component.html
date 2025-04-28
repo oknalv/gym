@@ -2,7 +2,7 @@
 <form [formGroup]="form">
   <div>
     <gym-text-input
-      label="New workout name"
+      label="Name"
       formControlName="name"
       errorMessage="Please enter a name for the workout"
     />
@@ -13,10 +13,10 @@
       @if (isExercise(exercise)) {
         <div class="exercise-wrapper">
           <gym-exercise [exercise]="asExercise(exercise)" />
-          <button (click)="onEditExercise(asExercise(exercise))">
+          <button class="thick" (click)="onEditExercise(asExercise(exercise))">
             <gym-icon icon="pencil" />
           </button>
-          <button (click)="onAskDeleteExercise($index)">
+          <button class="thick" (click)="onAskDeleteExercise($index)">
             <gym-icon icon="trashbin" />
           </button>
         </div>
@@ -28,7 +28,7 @@
             (newExerciseType)="onGetNewExerciseType($event)"
             (superset)="onGetSuperset($event, $index)"
           />
-          <button (click)="onAskDeleteSuperset($index)">
+          <button class="thick" (click)="onAskDeleteSuperset($index)">
             <gym-icon icon="trashbin" />
           </button>
         </div>
@@ -48,6 +48,7 @@
       <button (click)="addSuperset()">Add superset</button>
     </div>
   </div>
+  <button class="create-workout">Add workout</button>
 </form>
 <gym-delete-warning-dialog
   [(open)]="showAskDeleteExercise"

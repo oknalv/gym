@@ -31,10 +31,8 @@
       }
 
       .delete-set-button {
-        bottom: calc(var(--size) * -2 / 3);
+        bottom: calc(var(--size) * -1);
         right: 5px;
-        font-size: var(--size);
-        padding: 5px;
         color: var(--dark-red);
         background-color: var(--light-red);
         border-radius: 100px;
@@ -46,11 +44,9 @@
     }
 
     .add-set-button {
-      font-size: var(--size);
       height: 100%;
       background-color: var(--light-green);
       color: var(--dark-green);
-      padding: 10px;
     }
   }
 }

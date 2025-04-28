@@ -9,7 +9,6 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { NewExerciseTypeComponent } from './new-exercise-type/new-exercise-type.component';
 import {
   ExerciseType,
   WeightType,
@@ -34,22 +33,20 @@ import {
 } from '../../../sets-editor/sets-editor.component';
 import { SwitchComponent } from '../../../shared/switch/switch.component';
 import { IconComponent } from '../../../shared/icon/icon.component';
-import { ExerciseTypeComponent } from '../../../exercise-type/exercise-type.component';
-import { ExerciseTypeDialogComponent } from './exercise-type-dialog/exercise-type-dialog.component';
 import { DialogComponent } from '../../../shared/dialog/dialog.component';
+import { ExerciseTypeEditorComponent } from './exercise-type-editor/exercise-type-editor.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'gym-exercise-editor',
   imports: [
-    NewExerciseTypeComponent,
     FormsModule,
     SetsEditorComponent,
     SwitchComponent,
     IconComponent,
     ReactiveFormsModule,
-    ExerciseTypeComponent,
-    ExerciseTypeDialogComponent,
     DialogComponent,
+    ExerciseTypeEditorComponent,
   ],
   templateUrl: './exercise-editor.component.html',
   styleUrl: './exercise-editor.component.scss',
@@ -75,21 +72,18 @@ export class ExerciseEditorComponent {
   showSupersetSetsWarning = computed(() => {
     return this.inSuperset() && !this.hideSupersetSetsWarning();
   });
-  showExerciseTypeDialog = signal(false);
-  showNewExerciseTypeForm = signal(false);
-
-  //dependencies
-  private destroyRef = inject(DestroyRef);
 
   private exerciseId!: number;
   private firstCreateClick = false;
   private dirty = false;
 
   form = new FormGroup({
-    exerciseType: new FormControl<ExerciseType | null>(null),
-    newExerciseType: new FormGroup({
-      name: new FormControl('', [Validators.required]),
-      image: new FormControl<string | undefined>(undefined),
+    type: new FormGroup({
+      exerciseType: new FormControl<ExerciseType | null>(null),
+      newExerciseType: new FormGroup({
+        name: new FormControl('', [Validators.required]),
+        image: new FormControl<string | undefined>(undefined),
+      }),
     }),
     weighted: new FormControl(true),
     weightType: new FormControl(WeightType.total),
@@ -122,64 +116,57 @@ export class ExerciseEditorComponent {
 
     //for updating some controls' validators depending on other controls' values
     //this updates the weight controls validators depending on weighted flag
-    const weightedSubscription = this.form.controls[
-      'weighted'
-    ].valueChanges.subscribe({
-      next: (newValue) => {
-        for (const set of (
-          (this.form.controls['sets'] as FormGroup).controls[
-            'sets'
-          ] as FormArray<FormGroup>
-        ).controls) {
-          set.controls['weight'].setValidators(getWeightValidators(newValue!));
-          set.controls['weight'].updateValueAndValidity();
-        }
-      },
-    });
+    this.form.controls['weighted'].valueChanges
+      .pipe(takeUntilDestroyed())
+      .subscribe({
+        next: (newValue) => {
+          for (const set of (
+            (this.form.controls['sets'] as FormGroup).controls[
+              'sets'
+            ] as FormArray<FormGroup>
+          ).controls) {
+            set.controls['weight'].setValidators(
+              getWeightValidators(newValue!),
+            );
+            set.controls['weight'].updateValueAndValidity();
+          }
+        },
+      });
     //this updates time and repetitions controls validators depending on progressType flag
-    const progressTypeSubscription = this.form.controls[
-      'progressType'
-    ].valueChanges.subscribe({
-      next: (newValue) => {
-        for (const set of (
-          (this.form.controls['sets'] as FormGroup).controls[
-            'sets'
-          ] as FormArray<FormGroup>
-        ).controls) {
-          set.controls['time'].setValidators(getTimeValidators(newValue!));
-          set.controls['time'].updateValueAndValidity();
-          set.controls['repetitions'].setValidators(
-            getRepetitionsValidators(newValue!),
-          );
-          set.controls['repetitions'].updateValueAndValidity();
-        }
-      },
-    });
+    this.form.controls['progressType'].valueChanges
+      .pipe(takeUntilDestroyed())
+      .subscribe({
+        next: (newValue) => {
+          for (const set of (
+            (this.form.controls['sets'] as FormGroup).controls[
+              'sets'
+            ] as FormArray<FormGroup>
+          ).controls) {
+            set.controls['time'].setValidators(getTimeValidators(newValue!));
+            set.controls['time'].updateValueAndValidity();
+            set.controls['repetitions'].setValidators(
+              getRepetitionsValidators(newValue!),
+            );
+            set.controls['repetitions'].updateValueAndValidity();
+          }
+        },
+      });
     //this updates name control depending on having the exerciseType field filled or not
-    const exerciseTypeSubscription = this.form.controls[
-      'exerciseType'
-    ].valueChanges.subscribe({
-      next: (newValue) => {
-        const nameControl = (this.form.controls['newExerciseType'] as FormGroup)
-          .controls['name'];
-        if (newValue) {
-          this.showNewExerciseTypeForm.set(false);
-          nameControl.setValidators([]);
-        } else {
-          nameControl.setValidators([Validators.required]);
-        }
-        nameControl.updateValueAndValidity();
-      },
-    });
-    this.destroyRef.onDestroy(() => {
-      weightedSubscription.unsubscribe();
-      progressTypeSubscription.unsubscribe();
-      exerciseTypeSubscription.unsubscribe();
-    });
-  }
-
-  get exerciseType() {
-    return this.form.value.exerciseType;
+    this.form.controls['type'].controls['exerciseType'].valueChanges
+      .pipe(takeUntilDestroyed())
+      .subscribe({
+        next: (newValue) => {
+          const nameControl = (
+            this.form.controls['type'].controls['newExerciseType'] as FormGroup
+          ).controls['name'];
+          if (newValue) {
+            nameControl.setValidators([]);
+          } else {
+            nameControl.setValidators([Validators.required]);
+          }
+          nameControl.updateValueAndValidity();
+        },
+      });
   }
 
   get weighted() {
@@ -202,10 +189,10 @@ export class ExerciseEditorComponent {
     this.firstCreateClick = true;
     this.markAsDirty();
     if (this.form.valid) {
-      const exerciseType: ExerciseType = this.exerciseType || {
+      const exerciseType: ExerciseType = this.form.value.type!.exerciseType || {
         id: Date.now(),
-        name: this.form.value.newExerciseType!.name!,
-        image: this.form.value.newExerciseType!.image!,
+        name: this.form.value.type!.newExerciseType!.name!,
+        image: this.form.value.type!.newExerciseType!.image!,
       };
       const newExercise: Exercise = {
         id: this.exerciseId,
@@ -220,15 +207,6 @@ export class ExerciseEditorComponent {
     }
   }
 
-  onOpenExerciseDialog() {
-    this.showExerciseTypeDialog.set(true);
-  }
-
-  onShowNewExerciseTypeForm() {
-    this.form.patchValue({ exerciseType: null });
-    this.showNewExerciseTypeForm.set(true);
-  }
-
   private getSet(
     set: Partial<{
       id: number | null;
@@ -238,16 +216,10 @@ export class ExerciseEditorComponent {
     }>,
   ) {
     return {
-      id: set.id!,
       weight: set.weight!,
       repetitions: set.repetitions!,
       time: set.time!,
     };
-  }
-
-  onSelectExerciseType(exerciseType: ExerciseType) {
-    this.form.controls['exerciseType'].setValue(exerciseType);
-    this.form.controls['exerciseType'].updateValueAndValidity();
   }
 
   resetForm() {
@@ -268,10 +240,11 @@ export class ExerciseEditorComponent {
   fillForm(exercise: Exercise) {
     this.exerciseId = exercise.id;
     this.dirty = false;
-    this.showNewExerciseTypeForm.set(false);
     this.form.patchValue({
-      exerciseType: exercise.type,
-      newExerciseType: { name: '', image: undefined },
+      type: {
+        exerciseType: exercise.type,
+        newExerciseType: { name: '', image: undefined },
+      },
       weighted: exercise.weighted,
       weightType: exercise.weightType,
       progressType: exercise.progressType,

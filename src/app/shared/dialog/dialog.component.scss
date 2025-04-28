@@ -16,6 +16,10 @@ dialog {
     right: 0.5em;
     display: flex;
     z-index: 1;
+
+    gym-icon {
+      font-size: 1em;
+    }
   }
 
   > section {

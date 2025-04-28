@@ -7,7 +7,6 @@ import {
   WritableSignal,
 } from '@angular/core';
 import {
-  FormArray,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
@@ -15,17 +14,10 @@ import {
 } from '@angular/forms';
 import { ExerciseEditorComponent } from './exercise-editor/exercise-editor.component';
 import { TextInputComponent } from '../../shared/text-input/text-input.component';
-import {
-  Exercise,
-  ExerciseType,
-  ProgressType,
-  Superset,
-  WeightType,
-} from '../../exercise.model';
+import { Exercise, ExerciseType, Superset } from '../../exercise.model';
 import { ExercisesService } from '../../exercises.service';
 import { ExerciseComponent } from '../../exercise/exercise.component';
 import { IconComponent } from '../../shared/icon/icon.component';
-import { DialogComponent } from '../../shared/dialog/dialog.component';
 import { SupersetEditorComponent } from './superset-editor/superset-editor.component';
 import { DeleteWarningDialogComponent } from '../../shared/dialog/delete-warning-dialog/delete-warning-dialog.component';
 

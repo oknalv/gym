@@ -1,4 +1,5 @@
 :host {
+  --size: 5em;
   --size-multiplier: 1;
   --image-size: 100px;
   --icon-size: var(--size);
@@ -9,7 +10,6 @@
   display: inline flex;
   justify-content: center;
   align-items: center;
-  --size: 5em;
 
   img {
     max-width: calc(var(--image-size) * var(--size-multiplier));

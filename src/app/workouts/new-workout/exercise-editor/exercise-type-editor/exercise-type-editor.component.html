@@ -1,0 +1,34 @@
+<div [formGroup]="form">
+  @if (exerciseTypes().length > 0) {
+    <gym-exercise-type-dialog
+      [(open)]="showExerciseTypeDialog"
+      [exerciseTypes]="exerciseTypes()"
+      (select)="onSelectExerciseType($event)"
+    />
+    @if (!exerciseType && !showNewExerciseTypeForm()) {
+      <button (click)="onOpenExerciseTypeDialog()">Use existing</button>
+      or
+      <button (click)="onShowNewExerciseTypeForm()">Create new</button>
+      @if (showError()) {
+        <p class="error">
+          You must either use an existing exercise or create a new one.
+        </p>
+      }
+    } @else {
+      @if (showNewExerciseTypeForm()) {
+        <gym-new-exercise-type formGroupName="newExerciseType" />
+
+        <button (click)="onOpenExerciseTypeDialog()">
+          Use existing exercise instead
+        </button>
+      } @else {
+        <gym-exercise-type [type]="exerciseType!" />
+        <button (click)="onOpenExerciseTypeDialog()">Change</button>
+        or
+        <button (click)="onShowNewExerciseTypeForm()">Create new</button>
+      }
+    }
+  } @else {
+    <gym-new-exercise-type formGroupName="newExerciseType" />
+  }
+</div>

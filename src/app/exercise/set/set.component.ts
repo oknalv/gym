@@ -10,7 +10,6 @@ import { ExerciseSet, ProgressType, WeightType } from '../../exercise.model';
 export class SetComponent {
   set = input.required<ExerciseSet>();
   weighted = input.required<boolean>();
-  weightType = input.required<WeightType>();
   progressType = input.required<ProgressType>();
 
   get text() {

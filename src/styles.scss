@@ -7,7 +7,8 @@ html {
   --light-yellow: #fff8b8;
   --table-1: #284255;
   --table-2: #256377;
-  --button-padding: 5px;
+  --padding: 5px;
+  --margin: 10px;
   --border-width: 5px;
   --background-color: #202124;
   font-family: sans-serif;
@@ -33,7 +34,7 @@ button {
   user-select: none;
   font-size: 1em;
   background-color: var(--table-2);
-  padding: var(--button-padding);
+  padding: var(--padding);
   color: white;
 }
 
@@ -46,30 +47,23 @@ input {
   color: var(--light-red);
   font-style: italic;
   font-size: 0.75em;
-  margin-left: 10px;
+  margin-left: var(--margin);
 }
 
 .warning {
   color: var(--light-yellow);
   font-style: italic;
   font-size: 0.75em;
-  margin-left: 10px;
+  margin-left: var(--margin);
 }
 
 .exercise-wrapper {
   display: flex;
   &:not(:last-child) {
-    margin-bottom: 10px;
+    margin-bottom: var(--margin);
   }
   > :first-child {
     flex-grow: 1;
-  }
-
-  > button {
-    padding: 10px;
-    gym-icon {
-      font-size: 1.5em;
-    }
   }
 
   > button:first-of-type {
@@ -81,4 +75,20 @@ input {
     background-color: var(--light-red);
     color: var(--dark-red);
   }
+}
+
+button.thick {
+  padding: calc(2 * var(--padding));
+}
+
+h1 {
+  font-size: 1.5em;
+}
+
+h2 {
+  font-size: 1.25em;
+}
+
+h3 {
+  font-size: 1.1em;
 }

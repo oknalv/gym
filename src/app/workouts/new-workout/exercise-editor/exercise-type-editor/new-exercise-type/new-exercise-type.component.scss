@@ -3,7 +3,7 @@
   .image-buttons {
     display: flex;
     flex-direction: column;
-    margin-left: 10px;
+    margin-left: var(--margin);
     justify-content: space-evenly;
 
     > :first-child {
@@ -18,7 +18,7 @@
 :host {
   > div {
     > div {
-      margin: 20px 0;
+      margin: var(--margin) 0;
     }
   }
 }

@@ -1,39 +1,14 @@
 <gym-dialog [(open)]="open">
   <form [formGroup]="form">
-    <h1>{{ editMode() ? "Edit" : "New" }} exercise</h1>
+    <h2>{{ editMode() ? "Edit" : "New" }} exercise</h2>
     <header>Exercise</header>
-    @if (exerciseTypes().length > 0) {
-      <gym-exercise-type-dialog
-        [(open)]="showExerciseTypeDialog"
+    <section>
+      <gym-exercise-type-editor
+        formGroupName="type"
         [exerciseTypes]="exerciseTypes()"
-        (select)="onSelectExerciseType($event)"
+        [showError]="showError"
       />
-      @if (!exerciseType && !showNewExerciseTypeForm()) {
-        <button (click)="onOpenExerciseDialog()">Use existing</button>
-        or
-        <button (click)="onShowNewExerciseTypeForm()">Create new</button>
-        @if (showError) {
-          <p class="error">
-            You must either use an existing exercise or create a new one.
-          </p>
-        }
-      } @else {
-        @if (showNewExerciseTypeForm()) {
-          <gym-new-exercise-type formGroupName="newExerciseType" />
-
-          <button (click)="onOpenExerciseDialog()">
-            Use existing exercise instead
-          </button>
-        } @else {
-          <gym-exercise-type [type]="exerciseType!" />
-          <button (click)="onOpenExerciseDialog()">Change</button>
-          or
-          <button (click)="onShowNewExerciseTypeForm()">Create new</button>
-        }
-      }
-    } @else {
-      <gym-new-exercise-type formGroupName="newExerciseType" />
-    }
+    </section>
     <section>
       <header>Type of exercise</header>
       <gym-switch

@@ -11,5 +11,5 @@ import { IconComponent } from '../shared/icon/icon.component';
   styleUrl: './exercise.component.scss',
 })
 export class ExerciseComponent {
-  exercise = input.required<Exercise | undefined>();
+  exercise = input.required<Exercise>();
 }

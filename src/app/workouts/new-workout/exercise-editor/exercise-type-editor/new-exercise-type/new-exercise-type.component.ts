@@ -10,8 +10,8 @@ import {
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { ExerciseImageComponent } from '../../../../shared/exercise-image/exercise-image.component';
-import { TextInputComponent } from '../../../../shared/text-input/text-input.component';
+import { ExerciseImageComponent } from '../../../../../shared/exercise-image/exercise-image.component';
+import { TextInputComponent } from '../../../../../shared/text-input/text-input.component';
 
 @Component({
   selector: 'gym-new-exercise-type',

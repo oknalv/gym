@@ -71,7 +71,7 @@ export class SupersetEditorComponent {
     this.superset.emit(this.baseSuperset());
   }
 
-  changeExerciseSets(exercise: Exercise, numberOfSets: number) {
+  private changeExerciseSets(exercise: Exercise, numberOfSets: number) {
     while (exercise.sets.length < numberOfSets) {
       exercise.sets.push(exercise.sets.at(-1)!);
     }

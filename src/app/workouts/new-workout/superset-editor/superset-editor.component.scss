@@ -1,5 +1,5 @@
 :host {
-  padding: 5px;
+  padding: var(--padding);
   background-color: var(--table-2);
 
   > button {
