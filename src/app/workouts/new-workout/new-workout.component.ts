@@ -22,6 +22,7 @@ import { SupersetEditorComponent } from './superset-editor/superset-editor.compo
 import { DeleteWarningDialogComponent } from '../../shared/dialog/delete-warning-dialog/delete-warning-dialog.component';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { asExercise, asSuperset, isExercise } from '../../utils';
 
 @Component({
   selector: 'gym-new-workout',
@@ -70,17 +71,11 @@ export class NewWorkoutComponent {
     return this.firstSubmitClick() && this.exercises.length === 0;
   }
 
-  asExercise(exercise: Exercise | Superset) {
-    return exercise as Exercise;
-  }
+  asExercise = asExercise;
 
-  asSuperset(exercise: Exercise | Superset) {
-    return exercise as Superset;
-  }
+  asSuperset = asSuperset;
 
-  isExercise(exercise: Exercise | Superset) {
-    return !!(exercise as Exercise).type;
-  }
+  isExercise = isExercise;
 
   showExerciseEditor() {
     this.exerciseEditorVisible.set(true);

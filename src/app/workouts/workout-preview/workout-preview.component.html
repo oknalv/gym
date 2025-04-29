@@ -1,3 +1,34 @@
-<div>{{ workout().name }}</div>
-<div>{{ exerciseCount() }}</div>
-<div>{{ workout().lastExecution ? workout().lastExecution : "never" }}</div>
+<div class="workout-data">
+  <div class="workout-name">{{ workout().name }}</div>
+  <div>
+    @if (exerciseCount() > 1) {
+      {{ exerciseCount() }}
+      {{ "workouts.preview.exercises" | translate }}
+    } @else {
+      {{ "workouts.preview.oneExercise" | translate }}
+    }
+  </div>
+  <div>
+    @if (workout().lastExecution) {
+      {{ workout().lastExecution | date }}
+    } @else {
+      {{ "workouts.preview.neverExecuted" | translate }}
+    }
+  </div>
+</div>
+<div class="exercises">
+  @for (exercise of workout().exercises; track exercise.id) {
+    @if (isExercise(exercise)) {
+      <div class="exercise-name">{{ asExercise(exercise).type!.name }}</div>
+    } @else {
+      <div class="superset">
+        @for (
+          supersetExercise of asSuperset(exercise).exercises;
+          track supersetExercise.id
+        ) {
+          <div class="exercise-name">{{ supersetExercise.type!.name }}</div>
+        }
+      </div>
+    }
+  }
+</div>

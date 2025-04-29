@@ -10,6 +10,12 @@
       "nameError": "Pleas enter a name for the workout.",
       "add": "Add workout",
       "error": "You should add at least one exercise or superset."
+    },
+    "preview": {
+      "oneExercise": "1 exercise",
+      "exercises": "exercises",
+      "lastExecution": "Last execution:",
+      "neverExecuted": "Never executed"
     }
   },
   "exercises": {
@@ -38,7 +44,7 @@
         "repetitions": "In reps",
         "time": "In time"
       },
-      "supersetWarning": "Warning: adding or removing sets will reflect in the sets of the rest of the exercises of the superset. Removing any set will reflect in removing the last set of the rest of the exercises. Adding a set will reflect in adding a copy of the last set of each of the other exercises in their corresponding exercises.",
+      "supersetsWarning": "Warning: adding or removing sets will reflect in the sets of the rest of the exercises of the superset. Removing any set will reflect in removing the last set of the rest of the exercises. Adding a set will reflect in adding a copy of the last set of each of the other exercises in their corresponding exercises.",
       "error": "There are errors in the new exercise. Please, correct them before adding the exercise.",
       "add": "Add exercise",
       "save": "Save exercise"

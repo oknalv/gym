@@ -1,8 +1,12 @@
 :host {
   display: flex;
   align-items: center;
-  > gym-exercise-image {
+  gym-exercise-image {
     --size-multiplier: 0.75;
     margin-right: var(--margin);
+  }
+  > .name {
+    word-wrap: break-word;
+    min-width: 10%;
   }
 }

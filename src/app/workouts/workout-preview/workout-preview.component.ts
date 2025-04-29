@@ -1,9 +1,12 @@
 import { Component, computed, input } from '@angular/core';
 import { Exercise, Superset, Workout } from '../../gym.model';
+import { TranslatePipe } from '@ngx-translate/core';
+import { DatePipe } from '@angular/common';
+import { asExercise, asSuperset, isExercise } from '../../utils';
 
 @Component({
   selector: 'gym-workout-preview',
-  imports: [],
+  imports: [TranslatePipe, DatePipe],
   templateUrl: './workout-preview.component.html',
   styleUrl: './workout-preview.component.scss',
 })
@@ -17,4 +20,10 @@ export class WorkoutPreviewComponent {
     }
     return count;
   });
+
+  asExercise = asExercise;
+
+  asSuperset = asSuperset;
+
+  isExercise = isExercise;
 }
