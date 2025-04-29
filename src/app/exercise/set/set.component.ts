@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { ExerciseSet, ProgressType, WeightType } from '../../exercise.model';
+import { ExerciseSet, ProgressType } from '../../gym.model';
 
 @Component({
   selector: 'gym-set',

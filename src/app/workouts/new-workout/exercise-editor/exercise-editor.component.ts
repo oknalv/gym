@@ -14,7 +14,7 @@ import {
   WeightType,
   ProgressType,
   Exercise,
-} from '../../../exercise.model';
+} from '../../../gym.model';
 import {
   AbstractControl,
   FormArray,

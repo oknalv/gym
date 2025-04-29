@@ -1,3 +1,10 @@
+export interface Workout {
+  id: number;
+  name: string;
+  lastExecution: Date | null;
+  exercises: (Exercise | Superset)[];
+}
+
 export interface Exercise {
   id: number;
   type: ExerciseType | null;
@@ -32,4 +39,25 @@ export enum WeightType {
 export enum ProgressType {
   repetitions = 'repetitions',
   time = 'time',
+}
+
+export interface WorkoutDTO {
+  id: number;
+  name: string;
+  lastExecution: number | null;
+  exercises: (ExerciseDTO | SupersetDTO)[];
+}
+
+export interface ExerciseDTO {
+  id: number;
+  type: number;
+  sets: ExerciseSet[];
+  weightType: WeightType;
+  weighted: boolean;
+  progressType: ProgressType;
+}
+
+export interface SupersetDTO {
+  id: number;
+  exercises: ExerciseDTO[];
 }

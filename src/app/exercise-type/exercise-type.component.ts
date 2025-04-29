@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { ExerciseType } from '../exercise.model';
+import { ExerciseType } from '../gym.model';
 import { ExerciseImageComponent } from '../shared/exercise-image/exercise-image.component';
 
 @Component({

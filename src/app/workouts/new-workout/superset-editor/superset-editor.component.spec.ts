@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SupersetEditorComponent } from './superset-editor.component';
-import { ProgressType, WeightType } from '../../../exercise.model';
+import { ProgressType, WeightType } from '../../../gym.model';
 
 describe('SupersetEditorComponent', () => {
   let component: SupersetEditorComponent;

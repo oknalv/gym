@@ -1,7 +1,7 @@
 <section>
   <h1>Workouts</h1>
   @for (workout of workouts(); track workout.id) {
-    <gym-workout />
+    <gym-workout-preview [workout]="workout" />
   } @empty {
     <div>No workouts to display</div>
   }

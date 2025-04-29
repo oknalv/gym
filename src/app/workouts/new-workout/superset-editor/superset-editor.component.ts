@@ -1,5 +1,5 @@
 import { Component, effect, input, model, output, signal } from '@angular/core';
-import { Exercise, ExerciseType, Superset } from '../../../exercise.model';
+import { Exercise, ExerciseType, Superset } from '../../../gym.model';
 import { ExerciseEditorComponent } from '../exercise-editor/exercise-editor.component';
 import { ExerciseComponent } from '../../../exercise/exercise.component';
 import { IconComponent } from '../../../shared/icon/icon.component';

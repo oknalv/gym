@@ -9,7 +9,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ProgressType, WeightType } from '../exercise.model';
+import { ProgressType, WeightType } from '../gym.model';
 
 @Component({
   template: `<ng-container>

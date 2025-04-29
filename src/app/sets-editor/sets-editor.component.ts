@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { SetEditorComponent } from './set-editor/set-editor.component';
 import { IconComponent } from '../shared/icon/icon.component';
-import { ExerciseSet, ProgressType, WeightType } from '../exercise.model';
+import { ExerciseSet, ProgressType, WeightType } from '../gym.model';
 import {
   AbstractControl,
   ControlContainer,

@@ -14,12 +14,13 @@ import {
 } from '@angular/forms';
 import { ExerciseEditorComponent } from './exercise-editor/exercise-editor.component';
 import { TextInputComponent } from '../../shared/text-input/text-input.component';
-import { Exercise, ExerciseType, Superset } from '../../exercise.model';
+import { Exercise, ExerciseType, Superset } from '../../gym.model';
 import { WorkoutService } from '../../workout.service';
 import { ExerciseComponent } from '../../exercise/exercise.component';
 import { IconComponent } from '../../shared/icon/icon.component';
 import { SupersetEditorComponent } from './superset-editor/superset-editor.component';
 import { DeleteWarningDialogComponent } from '../../shared/dialog/delete-warning-dialog/delete-warning-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'gym-new-workout',
@@ -37,6 +38,7 @@ import { DeleteWarningDialogComponent } from '../../shared/dialog/delete-warning
 })
 export class NewWorkoutComponent {
   private workoutService = inject(WorkoutService);
+  private router = inject(Router);
   private newExerciseTypes: WritableSignal<ExerciseType[]> = signal([]);
   exerciseTypes = computed(() => [
     ...this.workoutService.exerciseTypes(),
@@ -151,7 +153,8 @@ export class NewWorkoutComponent {
     return false;
   }
 
-  onSubmitWorkout() {
+  onSubmitWorkout(event: Event) {
+    event.preventDefault();
     this.firstSubmitClick.set(true);
     this.form.controls.name.markAsDirty();
     if (
@@ -159,6 +162,13 @@ export class NewWorkoutComponent {
       !this.showExerciseListError &&
       !this.emptySupersets()
     ) {
+      this.workoutService.addWorkout({
+        id: Date.now(),
+        name: this.form.value.name!,
+        exercises: this.exercises,
+        lastExecution: null,
+      });
+      this.router.navigate(['workouts']);
     }
   }
 }

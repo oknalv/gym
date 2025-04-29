@@ -1,5 +1,5 @@
 import { Component, input, model, output } from '@angular/core';
-import { ExerciseType } from '../../../../../exercise.model';
+import { ExerciseType } from '../../../../../gym.model';
 import { ExerciseTypeComponent } from '../../../../../exercise-type/exercise-type.component';
 import { DialogComponent } from '../../../../../shared/dialog/dialog.component';
 

@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ExerciseTypeEditorComponent } from './exercise-type-editor.component';
 import { Component, signal, viewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ExerciseType } from '../../../../exercise.model';
+import { ExerciseType } from '../../../../gym.model';
 
 @Component({
   template: `<ng-container>
