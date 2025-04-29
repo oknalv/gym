@@ -1,9 +1,9 @@
 <section>
-  <h1>Workouts</h1>
+  <h1>{{ "workouts.title" | translate }}</h1>
   @for (workout of workouts(); track workout.id) {
     <gym-workout-preview [workout]="workout" />
   } @empty {
-    <div>No workouts to display</div>
+    <div>{{ "workouts.empty" | translate }}</div>
   }
-  <button routerLink="/new-workout">Add workout</button>
+  <button routerLink="/new-workout">{{ "workouts.add" | translate }}</button>
 </section>

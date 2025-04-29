@@ -6,12 +6,16 @@
       (select)="onSelectExerciseType($event)"
     />
     @if (!exerciseType && !showNewExerciseTypeForm()) {
-      <button (click)="onOpenExerciseTypeDialog()">Use existing</button>
+      <button (click)="onOpenExerciseTypeDialog()">
+        {{ "exerciseTypes.setter.existing" | translate }}
+      </button>
       or
-      <button (click)="onShowNewExerciseTypeForm()">Create new</button>
+      <button (click)="onShowNewExerciseTypeForm()">
+        {{ "exerciseTypes.setter.create" | translate }}
+      </button>
       @if (showError()) {
         <p class="error">
-          You must either use an existing exercise or create a new one.
+          {{ "exerciseTypes.setter.error" | translate }}
         </p>
       }
     } @else {
@@ -19,13 +23,17 @@
         <gym-new-exercise-type formGroupName="newExerciseType" />
 
         <button (click)="onOpenExerciseTypeDialog()">
-          Use existing exercise instead
+          {{ "exerciseTypes.setter.existingInstead" | translate }}
         </button>
       } @else {
         <gym-exercise-type [type]="exerciseType!" />
-        <button (click)="onOpenExerciseTypeDialog()">Change</button>
+        <button (click)="onOpenExerciseTypeDialog()">
+          {{ "exerciseTypes.setter.change" | translate }}
+        </button>
         or
-        <button (click)="onShowNewExerciseTypeForm()">Create new</button>
+        <button (click)="onShowNewExerciseTypeForm()">
+          {{ "exerciseTypes.setter.create" | translate }}
+        </button>
       }
     }
   } @else {

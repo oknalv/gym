@@ -1,5 +1,5 @@
 <gym-dialog [(open)]="open">
-  <h2>Choose an exercise</h2>
+  <h2>{{ "exerciseTypes.picker.title" | translate }}</h2>
   <div>
     @for (exerciseType of exerciseTypes(); track exerciseType.id) {
       <gym-exercise-type

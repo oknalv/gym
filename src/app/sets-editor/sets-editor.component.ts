@@ -22,6 +22,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { TranslatePipe } from '@ngx-translate/core';
 
 let setId = 0;
 
@@ -32,6 +33,7 @@ let setId = 0;
     IconComponent,
     ReactiveFormsModule,
     FormsModule,
+    TranslatePipe,
   ],
   templateUrl: './sets-editor.component.html',
   styleUrl: './sets-editor.component.scss',

@@ -4,6 +4,7 @@ import { ExerciseTypeEditorComponent } from './exercise-type-editor.component';
 import { Component, signal, viewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ExerciseType } from '../../../../gym.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   template: `<ng-container>
@@ -33,7 +34,11 @@ describe('ExerciseTypeEditorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ExerciseTypeEditorComponent, ExerciseTypeEditorWrapper],
+      imports: [
+        ExerciseTypeEditorComponent,
+        ExerciseTypeEditorWrapper,
+        TranslateModule.forRoot(),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ExerciseTypeEditorWrapper);
@@ -73,8 +78,8 @@ describe('ExerciseTypeEditorComponent', () => {
     );
     const buttons = childElement.querySelectorAll(':scope > div > button');
     expect(buttons.length).toBe(2);
-    expect(buttons[0].innerText.startsWith('Use')).toBeTrue();
-    expect(buttons[1].innerText.startsWith('Create')).toBeTrue();
+    expect(buttons[0].innerText).toBe('exerciseTypes.setter.existing');
+    expect(buttons[1].innerText).toBe('exerciseTypes.setter.create');
   });
 
   it('should have the ExerciseTypeDialogComponent, the NewExerciseTypeComponent and the use existing instead button when the create new button is clicked', () => {
@@ -93,8 +98,8 @@ describe('ExerciseTypeEditorComponent', () => {
     );
     let buttons = childElement.querySelectorAll(':scope > div > button');
     expect(buttons.length).toBe(2);
-    expect(buttons[0].innerText.startsWith('Use')).toBeTrue();
-    expect(buttons[1].innerText.startsWith('Create')).toBeTrue();
+    expect(buttons[0].innerText).toBe('exerciseTypes.setter.existing');
+    expect(buttons[1].innerText).toBe('exerciseTypes.setter.create');
     buttons[1].click();
     fixture.detectChanges();
     expect(
@@ -107,7 +112,7 @@ describe('ExerciseTypeEditorComponent', () => {
     ).toBeTruthy();
     buttons = childElement.querySelectorAll(':scope > div > button');
     expect(buttons.length).toBe(1);
-    expect(buttons[0].innerText.startsWith('Use')).toBeTrue();
+    expect(buttons[0].innerText).toBe('exerciseTypes.setter.existingInstead');
   });
 
   it('should open the ExerciseTypeDialogComponent when use existing button is clicked', () => {
@@ -126,8 +131,8 @@ describe('ExerciseTypeEditorComponent', () => {
     );
     const buttons = childElement.querySelectorAll(':scope > div > button');
     expect(buttons.length).toBe(2);
-    expect(buttons[0].innerText.startsWith('Use')).toBeTrue();
-    expect(buttons[1].innerText.startsWith('Create')).toBeTrue();
+    expect(buttons[0].innerText).toBe('exerciseTypes.setter.existing');
+    expect(buttons[1].innerText).toBe('exerciseTypes.setter.create');
     expect(fixture.nativeElement.querySelector('dialog').open).toBeFalse();
     buttons[0].click();
     fixture.detectChanges();
@@ -150,8 +155,8 @@ describe('ExerciseTypeEditorComponent', () => {
     );
     const buttons = childElement.querySelectorAll(':scope > div > button');
     expect(buttons.length).toBe(2);
-    expect(buttons[0].innerText.startsWith('Use')).toBeTrue();
-    expect(buttons[1].innerText.startsWith('Create')).toBeTrue();
+    expect(buttons[0].innerText).toBe('exerciseTypes.setter.existing');
+    expect(buttons[1].innerText).toBe('exerciseTypes.setter.create');
     expect(
       fixture.elementRef.nativeElement.querySelector('.error'),
     ).toBeFalsy();
@@ -178,8 +183,8 @@ describe('ExerciseTypeEditorComponent', () => {
     );
     let buttons = childElement.querySelectorAll(':scope > div > button');
     expect(buttons.length).toBe(2);
-    expect(buttons[0].innerText.startsWith('Use')).toBeTrue();
-    expect(buttons[1].innerText.startsWith('Create')).toBeTrue();
+    expect(buttons[0].innerText).toBe('exerciseTypes.setter.existing');
+    expect(buttons[1].innerText).toBe('exerciseTypes.setter.create');
     buttons[1].click();
     fixture.detectChanges();
     expect(
@@ -192,7 +197,7 @@ describe('ExerciseTypeEditorComponent', () => {
     ).toBeTruthy();
     buttons = childElement.querySelectorAll(':scope > div > button');
     expect(buttons.length).toBe(1);
-    expect(buttons[0].innerText.startsWith('Use')).toBeTrue();
+    expect(buttons[0].innerText).toBe('exerciseTypes.setter.existingInstead');
     expect(fixture.nativeElement.querySelector('dialog').open).toBeFalse();
     buttons[0].click();
     fixture.detectChanges();
@@ -220,8 +225,8 @@ describe('ExerciseTypeEditorComponent', () => {
     );
     let buttons = childElement.querySelectorAll(':scope > div > button');
     expect(buttons.length).toBe(2);
-    expect(buttons[0].innerText.startsWith('Change')).toBeTrue();
-    expect(buttons[1].innerText.startsWith('Create')).toBeTrue();
+    expect(buttons[0].innerText).toBe('exerciseTypes.setter.change');
+    expect(buttons[1].innerText).toBe('exerciseTypes.setter.create');
   });
 
   it('should open the ExerciseTypeDialogComponent when change button is clicked', () => {
@@ -245,8 +250,8 @@ describe('ExerciseTypeEditorComponent', () => {
     );
     let buttons = childElement.querySelectorAll(':scope > div > button');
     expect(buttons.length).toBe(2);
-    expect(buttons[0].innerText.startsWith('Change')).toBeTrue();
-    expect(buttons[1].innerText.startsWith('Create')).toBeTrue();
+    expect(buttons[0].innerText).toBe('exerciseTypes.setter.change');
+    expect(buttons[1].innerText).toBe('exerciseTypes.setter.create');
     expect(fixture.nativeElement.querySelector('dialog').open).toBeFalse();
     buttons[0].click();
     fixture.detectChanges();

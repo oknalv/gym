@@ -1,8 +1,8 @@
 <gym-dialog [(open)]="open">
   <form [formGroup]="form">
-    <h2>{{ editMode() ? "Edit" : "New" }} exercise</h2>
-    <header>Exercise</header>
+    <h2>{{ titleKey() | translate }}</h2>
     <section>
+      <header>{{ "exercises.editor.exerciseType.header" | translate }}</header>
       <gym-exercise-type-editor
         formGroupName="type"
         [exerciseTypes]="exerciseTypes()"
@@ -10,7 +10,7 @@
       />
     </section>
     <section>
-      <header>Type of exercise</header>
+      <header>{{ "exercises.editor.weighted.header" | translate }}</header>
       <gym-switch
         [options]="{
           on: true,
@@ -19,16 +19,18 @@
         formControlName="weighted"
       >
         <span ngProjectAs="on-option" class="switch-option">
-          <gym-icon icon="dumbell" /> Weighted
+          <gym-icon icon="dumbell" />
+          {{ "exercises.editor.weighted.weighted" | translate }}
         </span>
         <span ngProjectAs="off-option" class="switch-option">
-          <gym-icon icon="notdumbell" /> Weightless
+          <gym-icon icon="notdumbell" />
+          {{ "exercises.editor.weighted.weightless" | translate }}
         </span>
       </gym-switch>
     </section>
     @if (weighted) {
       <section>
-        <header>Choose how to measure the weight</header>
+        <header>{{ "exercises.editor.weightType.header" | translate }}</header>
         <gym-switch
           [options]="{
             on: 'total',
@@ -37,16 +39,18 @@
           formControlName="weightType"
         >
           <span ngProjectAs="on-option" class="switch-option">
-            <gym-icon icon="dumbell" /> Use total weight
+            <gym-icon icon="dumbell" />
+            {{ "exercises.editor.weightType.total" | translate }}
           </span>
           <span ngProjectAs="off-option" class="switch-option">
-            <gym-icon icon="halfdumbell" /> Use one side weight
+            <gym-icon icon="halfdumbell" />
+            {{ "exercises.editor.weightType.side" | translate }}
           </span>
         </gym-switch>
       </section>
     }
     <section>
-      <header>How to measure progress</header>
+      <header>{{ "exercises.editor.progressType.header" | translate }}</header>
       <gym-switch
         [options]="{
           on: 'repetitions',
@@ -55,10 +59,12 @@
         formControlName="progressType"
       >
         <span ngProjectAs="on-option" class="switch-option">
-          <gym-icon icon="repeat" /> In reps
+          <gym-icon icon="repeat" />
+          {{ "exercises.editor.progressType.repetitions" | translate }}
         </span>
         <span ngProjectAs="off-option" class="switch-option">
-          <gym-icon icon="timer" /> In time
+          <gym-icon icon="timer" />
+          {{ "exercises.editor.progressType.time" | translate }}
         </span>
       </gym-switch>
     </section>
@@ -68,11 +74,7 @@
           <button (click)="onHideSupersetSetsWarning()">
             <gym-icon icon="times" />
           </button>
-          Warning: adding or removing sets will reflect in the sets of the rest
-          of the exercises of the superset. Removing any set will reflect in
-          removing the last set of the rest of the exercises. Adding a set will
-          reflect in adding a copy of the last set of each of the other
-          exercises in their corresponding exercises.
+          {{ "exercises.editor.supersetsWarning" | translate }}
         </div>
       }
       <gym-sets-editor
@@ -85,12 +87,11 @@
 
     @if (showError) {
       <p class="error">
-        There are errors in the new exercise. Please, correct them before adding
-        the exercise.
+        {{ "exercises.editor.error" | translate }}
       </p>
     }
     <button (click)="onSubmitExercise()">
-      {{ editMode() ? "Save" : "Add" }} exercise
+      {{ submitKey() | translate }}
     </button>
   </form>
 </gym-dialog>

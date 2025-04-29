@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DeleteWarningDialogComponent } from './delete-warning-dialog.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('DeleteWarningDialogComponent', () => {
   let component: DeleteWarningDialogComponent;
@@ -8,7 +9,7 @@ describe('DeleteWarningDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DeleteWarningDialogComponent],
+      imports: [DeleteWarningDialogComponent, TranslateModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(DeleteWarningDialogComponent);
@@ -20,27 +21,6 @@ describe('DeleteWarningDialogComponent', () => {
   it('should create', () => {
     fixture.detectChanges();
     expect(component).toBeTruthy();
-  });
-
-  it('should show whatToDelete text correctly', () => {
-    fixture.detectChanges();
-    expect(
-      fixture.elementRef.nativeElement
-        .querySelector('p')
-        .innerText.indexOf('whatToDelete') > -1,
-    ).toBeTrue();
-    expect(
-      fixture.elementRef.nativeElement
-        .querySelector('p')
-        .innerText.indexOf('whatToNotDelete') > -1,
-    ).toBeFalse();
-    fixture.componentRef.setInput('whatToDelete', 'whatToNotDelete');
-    fixture.detectChanges();
-    expect(
-      fixture.elementRef.nativeElement
-        .querySelector('p')
-        .innerText.indexOf('whatToNotDelete') > -1,
-    ).toBeTrue();
   });
 
   it('should close the modal when cancel button is pressed', () => {

@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ExerciseEditorComponent } from './exercise-editor.component';
 import { ProgressType, WeightType } from '../../../gym.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('ExerciseEditorComponent', () => {
   let component: ExerciseEditorComponent;
@@ -9,7 +10,7 @@ describe('ExerciseEditorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ExerciseEditorComponent],
+      imports: [ExerciseEditorComponent, TranslateModule.forRoot()],
     }).compileComponents();
 
     window.localStorage.setItem('hide-superset-sets-warning', 'false');
@@ -27,13 +28,11 @@ describe('ExerciseEditorComponent', () => {
 
   it('should be on create mode when baseExercise is not provided', () => {
     fixture.detectChanges();
-    expect(
-      fixture.elementRef.nativeElement
-        .querySelector('h2')
-        .innerText.startsWith('New'),
-    ).toBeTrue();
+    expect(fixture.elementRef.nativeElement.querySelector('h2').innerText).toBe(
+      'exercises.editor.new',
+    );
     const buttons = fixture.elementRef.nativeElement.querySelectorAll('button');
-    expect(buttons[buttons.length - 1].innerText.startsWith('Add')).toBeTrue();
+    expect(buttons[buttons.length - 1].innerText).toBe('exercises.editor.add');
   });
 
   it('should be on edit mode when baseExercise is provided', () => {
@@ -46,13 +45,11 @@ describe('ExerciseEditorComponent', () => {
       sets: [],
     });
     fixture.detectChanges();
-    expect(
-      fixture.elementRef.nativeElement
-        .querySelector('h2')
-        .innerText.startsWith('Edit'),
-    ).toBeTrue();
+    expect(fixture.elementRef.nativeElement.querySelector('h2').innerText).toBe(
+      'exercises.editor.edit',
+    );
     const buttons = fixture.elementRef.nativeElement.querySelectorAll('button');
-    expect(buttons[buttons.length - 1].innerText.startsWith('Save')).toBeTrue();
+    expect(buttons[buttons.length - 1].innerText).toBe('exercises.editor.save');
   });
 
   it('should have the weight type switch when weighted is true', () => {
@@ -61,11 +58,9 @@ describe('ExerciseEditorComponent', () => {
       ':scope > gym-dialog form > section',
     );
     expect(sections.length).toBe(5);
-    expect(
-      sections[2]
-        .querySelector('header')
-        .innerText.indexOf('how to measure the weight'),
-    ).not.toBe(-1);
+    expect(sections[2].querySelector('header').innerText).toBe(
+      'exercises.editor.weightType.header',
+    );
   });
 
   it('should not have the weight type switch when weighted is false', () => {
@@ -76,11 +71,9 @@ describe('ExerciseEditorComponent', () => {
       ':scope > gym-dialog form > section',
     );
     expect(sections.length).toBe(4);
-    expect(
-      sections[2]
-        .querySelector('header')
-        .innerText.indexOf('how to measure the weight'),
-    ).toBe(-1);
+    expect(sections[2].querySelector('header').innerText).not.toBe(
+      'exercises.editor.weightType.header',
+    );
   });
 
   it('should show error when form is invalid and submit button is clicked', () => {

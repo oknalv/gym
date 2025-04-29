@@ -12,10 +12,16 @@ import {
 } from '@angular/forms';
 import { ExerciseImageComponent } from '../../../../../shared/exercise-image/exercise-image.component';
 import { TextInputComponent } from '../../../../../shared/text-input/text-input.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'gym-new-exercise-type',
-  imports: [ReactiveFormsModule, ExerciseImageComponent, TextInputComponent],
+  imports: [
+    ReactiveFormsModule,
+    ExerciseImageComponent,
+    TextInputComponent,
+    TranslatePipe,
+  ],
   templateUrl: './new-exercise-type.component.html',
   styleUrl: './new-exercise-type.component.scss',
 })

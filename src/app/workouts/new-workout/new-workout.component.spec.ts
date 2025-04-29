@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NewWorkoutComponent } from './new-workout.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('NewWorkoutComponent', () => {
   let component: NewWorkoutComponent;
@@ -8,9 +9,8 @@ describe('NewWorkoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NewWorkoutComponent]
-    })
-    .compileComponents();
+      imports: [NewWorkoutComponent, TranslateModule.forRoot()],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(NewWorkoutComponent);
     component = fixture.componentInstance;

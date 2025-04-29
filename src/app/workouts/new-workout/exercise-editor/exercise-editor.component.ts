@@ -1,9 +1,7 @@
 import {
   Component,
   computed,
-  DestroyRef,
   effect,
-  inject,
   input,
   model,
   output,
@@ -36,6 +34,7 @@ import { IconComponent } from '../../../shared/icon/icon.component';
 import { DialogComponent } from '../../../shared/dialog/dialog.component';
 import { ExerciseTypeEditorComponent } from './exercise-type-editor/exercise-type-editor.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'gym-exercise-editor',
@@ -47,6 +46,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     ReactiveFormsModule,
     DialogComponent,
     ExerciseTypeEditorComponent,
+    TranslatePipe,
   ],
   templateUrl: './exercise-editor.component.html',
   styleUrl: './exercise-editor.component.scss',
@@ -71,6 +71,14 @@ export class ExerciseEditorComponent {
   );
   showSupersetSetsWarning = computed(() => {
     return this.inSuperset() && !this.hideSupersetSetsWarning();
+  });
+
+  titleKey = computed(() => {
+    return `exercises.editor.${this.editMode() ? 'edit' : 'new'}`;
+  });
+
+  submitKey = computed(() => {
+    return `exercises.editor.${this.editMode() ? 'save' : 'add'}`;
   });
 
   private exerciseId!: number;

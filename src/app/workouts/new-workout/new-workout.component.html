@@ -1,14 +1,14 @@
-<h1>New workout</h1>
+<h1>{{ "workouts.new.title" | translate }}</h1>
 <form [formGroup]="form">
   <div>
     <gym-text-input
-      label="Name"
+      [label]="'workouts.new.name' | translate"
       formControlName="name"
-      errorMessage="Please enter a name for the workout"
+      [errorMessage]="'workouts.new.nameError' | translate"
     />
   </div>
   <div>
-    <h2>Exercises</h2>
+    <h2>{{ "exercises.title" | translate }}</h2>
     @for (exercise of exercises; track exercise.id) {
       @if (isExercise(exercise)) {
         <div class="exercise-wrapper">
@@ -36,10 +36,10 @@
       }
     }
     @if (exercises.length === 0 && !exerciseEditorVisible()) {
-      <div>There are not exercises yet.</div>
+      <div>{{ "exercises.empty" | translate }}</div>
     }
     @if (showExerciseListError) {
-      <div class="error">You should add at least one exercise or superset.</div>
+      <div class="error">{{ "workouts.new.error" | translate }}</div>
     }
     <gym-exercise-editor
       [baseExercise]="editingExercise()"
@@ -48,12 +48,16 @@
       (exercise)="onGetExercise($event)"
     />
     <div class="add-buttons">
-      <button (click)="showExerciseEditor()">Add exercise</button>
-      <button (click)="addSuperset()">Add superset</button>
+      <button (click)="showExerciseEditor()">
+        {{ "exercises.add" | translate }}
+      </button>
+      <button (click)="addSuperset()">
+        {{ "exercises.addSuperset" | translate }}
+      </button>
     </div>
   </div>
   <button (click)="onSubmitWorkout($event)" class="create-workout">
-    Add workout
+    {{ "workouts.new.add" | translate }}
   </button>
 </form>
 <gym-delete-warning-dialog

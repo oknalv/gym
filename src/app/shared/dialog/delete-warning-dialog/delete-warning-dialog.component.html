@@ -1,11 +1,17 @@
 <gym-dialog [(open)]="open" [alert]="true">
-  <header>Warning</header>
+  <header>{{ "shared.deleteDialog.title" | translate }}</header>
   <p>
-    Are you sure you want to delete this
-    {{ whatToDelete() }}? This action cannot be undone.
+    {{
+      "shared.deleteDialog.text"
+        | translate: { whatToDelete: whatToDeleteKey() | translate }
+    }}
   </p>
   <div class="actions">
-    <button (click)="onCancel()">Cancel</button>&nbsp;
-    <button (click)="onDelete()">Delete</button>
+    <button (click)="onCancel()">
+      {{ "shared.deleteDialog.cancel" | translate }}</button
+    >&nbsp;
+    <button (click)="onDelete()">
+      {{ "shared.deleteDialog.delete" | translate }}
+    </button>
   </div>
 </gym-dialog>

@@ -2,18 +2,24 @@
   <div>
     <gym-text-input
       formControlName="name"
-      label="Name"
-      errorMessage="Please enter a name for the exercise"
+      [label]="'exerciseTypes.new.name' | translate"
+      [errorMessage]="'exerciseTypes.new.error' | translate"
     />
   </div>
   <div class="image-input">
     <gym-exercise-image [src]="src" [alt]="name" />
     <div class="image-buttons">
       @if (src) {
-        <button (click)="onLoadImage()">Change image</button>
-        <button (click)="onDeleteImage()">Delete image</button>
+        <button (click)="onLoadImage()">
+          {{ "exerciseTypes.new.image.change" | translate }}
+        </button>
+        <button (click)="onDeleteImage()">
+          {{ "exerciseTypes.new.image.delete" | translate }}
+        </button>
       } @else {
-        <button (click)="onLoadImage()">Add image</button>
+        <button (click)="onLoadImage()">
+          {{ "exerciseTypes.new.image.add" | translate }}
+        </button>
       }
     </div>
   </div>

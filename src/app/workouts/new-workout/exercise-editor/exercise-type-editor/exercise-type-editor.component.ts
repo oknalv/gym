@@ -9,6 +9,7 @@ import { ExerciseType } from '../../../../gym.model';
 import { ExerciseTypeDialogComponent } from './exercise-type-dialog/exercise-type-dialog.component';
 import { NewExerciseTypeComponent } from './new-exercise-type/new-exercise-type.component';
 import { ExerciseTypeComponent } from '../../../../exercise-type/exercise-type.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'gym-exercise-type-editor',
@@ -17,6 +18,7 @@ import { ExerciseTypeComponent } from '../../../../exercise-type/exercise-type.c
     NewExerciseTypeComponent,
     ExerciseTypeComponent,
     ReactiveFormsModule,
+    TranslatePipe,
   ],
   templateUrl: './exercise-type-editor.component.html',
   styleUrl: './exercise-type-editor.component.scss',

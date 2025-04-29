@@ -1,0 +1,92 @@
+{
+  "workouts": {
+    "title": "Workouts",
+    "empty": "There are no workouts yet.",
+    "add": "Add workout",
+    "new": {
+      "title": "New workout",
+      "workoutElement": "workout",
+      "name": "Name",
+      "nameError": "Pleas enter a name for the workout.",
+      "add": "Add workout",
+      "error": "You should add at least one exercise or superset."
+    }
+  },
+  "exercises": {
+    "title": "Exercises",
+    "empty": "There are no exercises yet.",
+    "add": "Add exercise",
+    "addSuperset": "Add superset",
+    "editor": {
+      "new": "New exercise",
+      "edit": "Edit exercise",
+      "exerciseType": {
+        "header": "Exercise"
+      },
+      "weighted": {
+        "header": "Type of exercise",
+        "weighted": "Weighted",
+        "weightless": "Weightless"
+      },
+      "weightType": {
+        "header": "Choose how to measure the weight",
+        "total": "Use total weight",
+        "side": "Use one side weight"
+      },
+      "progressType": {
+        "header": "How to measure progress",
+        "repetitions": "In reps",
+        "time": "In time"
+      },
+      "supersetWarning": "Warning: adding or removing sets will reflect in the sets of the rest of the exercises of the superset. Removing any set will reflect in removing the last set of the rest of the exercises. Adding a set will reflect in adding a copy of the last set of each of the other exercises in their corresponding exercises.",
+      "error": "There are errors in the new exercise. Please, correct them before adding the exercise.",
+      "add": "Add exercise",
+      "save": "Save exercise"
+    }
+  },
+  "exerciseTypes": {
+    "setter": {
+      "existing": "Use existing",
+      "create": "Create new",
+      "existingInstead": "Use existing exercise instead",
+      "change": "change",
+      "error": "You must either use an existing exercise or create a new one."
+    },
+    "new": {
+      "name": "Name",
+      "nameError": "Please enter a name for the exercise",
+      "image": {
+        "change": "Change image",
+        "delete": "Delete image",
+        "add": "Add image"
+      }
+    },
+    "picker": {
+      "title": "Choose an exercise"
+    }
+  },
+  "supersets": {
+    "editor": {
+      "empty": "There are not exercises in this superset yet.",
+      "error": "Supersets must contain at least one exercise.",
+      "add": "Add exercise to superset"
+    }
+  },
+  "sets": {
+    "editor": {
+      "title": "Sets",
+      "weightError": "Weight must be a positive number greater or equal to 0",
+      "repetitionsError": "Reps must be a positive integer greater or equal to 1"
+    }
+  },
+  "shared": {
+    "deleteDialog": {
+      "title": "Warning",
+      "text": "Are you sure you want to delete this {{whatToDelete}}? This action cannot be undone.",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "exercise": "exercise",
+      "superset": "superset"
+    }
+  }
+}

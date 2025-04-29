@@ -9,13 +9,13 @@
     </button>
   </div>
 } @empty {
-  <div>There are not exercises in this superset yet.</div>
+  <div>{{ "supersets.editor.empty" | translate }}</div>
   @if (showError()) {
-    <div class="error">Supersets must contain at least one exercise.</div>
+    <div class="error">{{ "supersets.editor.error" | translate }}</div>
   }
 }
 <button class="add-exercise" (click)="showExerciseEditor()">
-  Add exercise to superset
+  {{ "supersets.editor.add" | translate }}
 </button>
 
 <gym-exercise-editor

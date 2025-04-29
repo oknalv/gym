@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SupersetEditorComponent } from './superset-editor.component';
 import { ProgressType, WeightType } from '../../../gym.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('SupersetEditorComponent', () => {
   let component: SupersetEditorComponent;
@@ -9,7 +10,7 @@ describe('SupersetEditorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SupersetEditorComponent],
+      imports: [SupersetEditorComponent, TranslateModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SupersetEditorComponent);

@@ -1,4 +1,4 @@
-<h3>Sets</h3>
+<h3>{{ "sets.editor.title" | translate }}</h3>
 <div [formGroup]="form">
   <div class="sets-editor" #setsEditor formArrayName="sets">
     @for (set of sets.controls; track set.controls["id"]) {
@@ -32,9 +32,11 @@
 
 @if (invalidWeight()) {
   <div class="error">
-    Weight must be a positive number greater or equal to 0
+    {{ "sets.editor.weightError" | translate }}
   </div>
 }
 @if (invalidRepetitions()) {
-  <div class="error">Reps must be a positive integer greater or equal to 1</div>
+  <div class="error">
+    {{ "sets.editor.repetitionsError" | translate }}
+  </div>
 }

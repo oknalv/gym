@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NewExerciseTypeComponent } from './new-exercise-type.component';
 import { Component, viewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   template: `<ng-container>
@@ -24,7 +25,11 @@ describe('NewExerciseTypeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NewExerciseTypeComponent, NewExerciseTypeWrapper],
+      imports: [
+        NewExerciseTypeComponent,
+        NewExerciseTypeWrapper,
+        TranslateModule.forRoot(),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(NewExerciseTypeWrapper);

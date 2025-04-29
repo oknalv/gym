@@ -4,6 +4,7 @@ import { ExerciseEditorComponent } from '../exercise-editor/exercise-editor.comp
 import { ExerciseComponent } from '../../../exercise/exercise.component';
 import { IconComponent } from '../../../shared/icon/icon.component';
 import { DeleteWarningDialogComponent } from '../../../shared/dialog/delete-warning-dialog/delete-warning-dialog.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'gym-superset-editor',
@@ -12,6 +13,7 @@ import { DeleteWarningDialogComponent } from '../../../shared/dialog/delete-warn
     ExerciseComponent,
     IconComponent,
     DeleteWarningDialogComponent,
+    TranslatePipe,
   ],
   templateUrl: './superset-editor.component.html',
   styleUrl: './superset-editor.component.scss',

@@ -10,6 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ProgressType, WeightType } from '../gym.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   template: `<ng-container>
@@ -45,7 +46,11 @@ describe('SetsEditorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SetsEditorComponent, SetsEditorWrapper],
+      imports: [
+        SetsEditorComponent,
+        SetsEditorWrapper,
+        TranslateModule.forRoot(),
+      ],
       providers: [ReactiveFormsModule],
     }).compileComponents();
 
@@ -146,7 +151,7 @@ describe('SetsEditorComponent', () => {
     fixture.detectChanges();
     errors = fixture.elementRef.nativeElement.querySelectorAll('.error');
     expect(errors.length).toBe(1);
-    expect(errors[0].innerText).toContain('Weight');
+    expect(errors[0].innerText).toBe('sets.editor.weightError');
   });
 
   it("should show repetitions error when any of the sets' repetitions is invalid", () => {
@@ -162,7 +167,7 @@ describe('SetsEditorComponent', () => {
     fixture.detectChanges();
     errors = fixture.elementRef.nativeElement.querySelectorAll('.error');
     expect(errors.length).toBe(1);
-    expect(errors[0].innerText).toContain('Reps');
+    expect(errors[0].innerText).toBe('sets.editor.repetitionsError');
   });
 
   it("should show both repetitions and weight error when any of the sets' repetitions and weight are invalid", () => {
@@ -181,7 +186,7 @@ describe('SetsEditorComponent', () => {
     fixture.detectChanges();
     errors = fixture.elementRef.nativeElement.querySelectorAll('.error');
     expect(errors.length).toBe(2);
-    expect(errors[0].innerText).toContain('Weight');
-    expect(errors[1].innerText).toContain('Reps');
+    expect(errors[0].innerText).toBe('sets.editor.weightError');
+    expect(errors[1].innerText).toBe('sets.editor.repetitionsError');
   });
 });

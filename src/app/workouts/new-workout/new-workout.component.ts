@@ -21,6 +21,7 @@ import { IconComponent } from '../../shared/icon/icon.component';
 import { SupersetEditorComponent } from './superset-editor/superset-editor.component';
 import { DeleteWarningDialogComponent } from '../../shared/dialog/delete-warning-dialog/delete-warning-dialog.component';
 import { Router } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'gym-new-workout',
@@ -32,6 +33,7 @@ import { Router } from '@angular/router';
     IconComponent,
     SupersetEditorComponent,
     DeleteWarningDialogComponent,
+    TranslatePipe,
   ],
   templateUrl: './new-workout.component.html',
   styleUrl: './new-workout.component.scss',

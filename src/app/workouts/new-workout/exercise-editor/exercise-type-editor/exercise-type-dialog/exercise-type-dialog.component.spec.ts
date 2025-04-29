@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ExerciseTypeDialogComponent } from './exercise-type-dialog.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('ExerciseTypeDialogComponent', () => {
   let component: ExerciseTypeDialogComponent;
@@ -8,7 +9,7 @@ describe('ExerciseTypeDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ExerciseTypeDialogComponent],
+      imports: [ExerciseTypeDialogComponent, TranslateModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ExerciseTypeDialogComponent);
