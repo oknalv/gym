@@ -1,4 +1,10 @@
-import { Component, computed, input } from '@angular/core';
+import {
+  Component,
+  computed,
+  ElementRef,
+  input,
+  viewChild,
+} from '@angular/core';
 import { Exercise, Superset, Workout } from '../../gym.model';
 import { TranslatePipe } from '@ngx-translate/core';
 import { DatePipe } from '@angular/common';
@@ -12,6 +18,7 @@ import { asExercise, asSuperset, isExercise } from '../../utils';
 })
 export class WorkoutPreviewComponent {
   workout = input.required<Workout>();
+  data = viewChild<ElementRef<HTMLElement>>('data');
   exerciseCount = computed(() => {
     let count = 0;
     for (const exercise of this.workout().exercises) {

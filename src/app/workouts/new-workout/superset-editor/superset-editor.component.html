@@ -1,10 +1,13 @@
 @for (exercise of baseSuperset().exercises; track exercise.id) {
   <div class="exercise-wrapper">
     <gym-exercise [exercise]="exercise" />
-    <button class="edit-exercise" (click)="onEditExercise(exercise)">
+    <button class="edit-exercise thick" (click)="onEditExercise(exercise)">
       <gym-icon icon="pencil" />
     </button>
-    <button class="ask-delete-exercise" (click)="onAskDeleteExercise($index)">
+    <button
+      class="ask-delete-exercise thick"
+      (click)="onAskDeleteExercise($index)"
+    >
       <gym-icon icon="trashbin" />
     </button>
   </div>

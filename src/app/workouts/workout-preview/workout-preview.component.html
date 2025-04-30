@@ -1,19 +1,21 @@
 <div class="workout-data">
-  <div class="workout-name">{{ workout().name }}</div>
+  <header>{{ workout().name }}</header>
   <div>
-    @if (exerciseCount() > 1) {
-      {{ exerciseCount() }}
-      {{ "workouts.preview.exercises" | translate }}
-    } @else {
-      {{ "workouts.preview.oneExercise" | translate }}
-    }
-  </div>
-  <div>
-    @if (workout().lastExecution) {
-      {{ workout().lastExecution | date }}
-    } @else {
-      {{ "workouts.preview.neverExecuted" | translate }}
-    }
+    <div>
+      @if (exerciseCount() > 1) {
+        {{ exerciseCount() }}
+        {{ "workouts.preview.exercises" | translate }}
+      } @else {
+        {{ "workouts.preview.oneExercise" | translate }}
+      }
+    </div>
+    <div>
+      @if (workout().lastExecution) {
+        {{ workout().lastExecution | date }}
+      } @else {
+        {{ "workouts.preview.neverExecuted" | translate }}
+      }
+    </div>
   </div>
 </div>
 <div class="exercises">

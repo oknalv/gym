@@ -1,14 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WorkoutPreviewComponent } from './workout-preview.component';
+import { TranslateModule } from '@ngx-translate/core';
 
-describe('WorkoutComponent', () => {
+describe('WorkoutPreviewComponent', () => {
   let component: WorkoutPreviewComponent;
   let fixture: ComponentFixture<WorkoutPreviewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WorkoutPreviewComponent],
+      imports: [WorkoutPreviewComponent, TranslateModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(WorkoutPreviewComponent);

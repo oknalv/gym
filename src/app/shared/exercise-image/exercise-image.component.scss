@@ -7,7 +7,7 @@
   border: var(--border-width) solid var(--table-2);
   height: calc(var(--image-size) * var(--size-multiplier));
   width: calc(var(--image-size) * var(--size-multiplier));
-  display: inline flex;
+  display: flex;
   justify-content: center;
   align-items: center;
 
@@ -16,11 +16,19 @@
     max-height: calc(var(--image-size) * var(--size-multiplier));
   }
 
-  gym-icon {
-    font-size: calc(var(--icon-size) * var(--size-multiplier));
-    color: var(--table-2);
-    // --icon-primary-color: var(--light-green);
-    // --icon-secondary-color: var(--table-2);
-    // --icon-secondary-opacity: 1;
+  > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(var(--image-size) * var(--size-multiplier));
+    width: calc(var(--image-size) * var(--size-multiplier));
+
+    gym-icon {
+      font-size: calc(var(--icon-size) * var(--size-multiplier));
+      color: var(--table-2);
+      // --icon-primary-color: var(--light-green);
+      // --icon-secondary-color: var(--table-2);
+      // --icon-secondary-opacity: 1;
+    }
   }
 }

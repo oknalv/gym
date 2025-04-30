@@ -14,6 +14,7 @@
       > .exercise-name {
         font-size: 1.5em;
         margin-bottom: var(--margin);
+        word-break: break-all;
       }
       > .exercise-icons {
         gym-icon {

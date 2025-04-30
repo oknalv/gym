@@ -6,4 +6,10 @@
     width: 100%;
     background-color: var(--table-1);
   }
+
+  .exercise-wrapper {
+    &:not(:last-child) {
+      margin-bottom: var(--padding);
+    }
+  }
 }
