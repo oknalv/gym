@@ -1,0 +1,17 @@
+<input
+  [class.hidden]="!editing()"
+  type="number"
+  [(ngModel)]="value"
+  #input
+  (keydown.enter)="input.blur()"
+  (blur)="onBlur()"
+  (keyup)="onType()"
+/>
+@if (!editing()) {
+  <div class="fake-input" (click)="onFocus()">
+    {{ formattedValue() }}
+  </div>
+}
+<div class="label">
+  {{ labelKey() | translate }}
+</div>

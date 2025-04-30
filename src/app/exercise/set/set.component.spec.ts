@@ -47,6 +47,6 @@ describe('SetComponent', () => {
   it('should display time when progress type is time', () => {
     fixture.componentRef.setInput('progressType', ProgressType.time);
     fixture.detectChanges();
-    expect(fixture.elementRef.nativeElement.innerText).toBe('1 kg × 2 secs');
+    expect(fixture.elementRef.nativeElement.innerText).toBe('1 kg × 2s');
   });
 });

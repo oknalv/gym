@@ -1,5 +1,6 @@
 import { Component, input } from '@angular/core';
 import { ExerciseSet, ProgressType } from '../../gym.model';
+import { getFormattedTime } from '../../utils';
 
 @Component({
   selector: 'gym-set',
@@ -23,6 +24,6 @@ export class SetComponent {
   get progress() {
     return this.progressType() === 'repetitions'
       ? `${this.set().repetitions} reps`
-      : `${this.set().time} secs`;
+      : `${getFormattedTime(this.set().time, true)}`;
   }
 }

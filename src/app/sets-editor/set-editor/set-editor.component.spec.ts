@@ -4,6 +4,7 @@ import { SetEditorComponent } from './set-editor.component';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Component, signal, viewChild } from '@angular/core';
 import { ProgressType, WeightType } from '../../gym.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   template: `<ng-container>
@@ -34,7 +35,11 @@ describe('SetEditorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SetEditorWrapper, SetEditorComponent],
+      imports: [
+        SetEditorWrapper,
+        SetEditorComponent,
+        TranslateModule.forRoot(),
+      ],
       providers: [ReactiveFormsModule],
     }).compileComponents();
 
@@ -77,7 +82,7 @@ describe('SetEditorComponent', () => {
     ).toBeTruthy();
     expect(
       fixture.elementRef.nativeElement.querySelector(
-        'gym-set-editor-input[formcontrolname="time"]',
+        'gym-set-editor-time-input[formcontrolname="time"]',
       ),
     ).toBeFalsy();
   });
@@ -87,7 +92,7 @@ describe('SetEditorComponent', () => {
     fixture.detectChanges();
     expect(
       fixture.elementRef.nativeElement.querySelector(
-        'gym-set-editor-input[formcontrolname="time"]',
+        'gym-set-editor-time-input[formcontrolname="time"]',
       ),
     ).toBeTruthy();
     expect(

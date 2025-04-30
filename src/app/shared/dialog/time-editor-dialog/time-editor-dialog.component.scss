@@ -1,0 +1,21 @@
+:host {
+  --font-size: 3em;
+
+  .separator {
+    font-size: var(--font-size);
+    padding: 0 var(--padding);
+  }
+  .actions {
+    float: right;
+    > button:last-child {
+      background-color: var(--light-green);
+      color: var(--dark-green);
+    }
+  }
+
+  form {
+    margin: calc(2 * var(--margin)) 0;
+    display: flex;
+    justify-content: center;
+  }
+}

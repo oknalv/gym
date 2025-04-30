@@ -1,11 +1,9 @@
-<div class="set-editor-input">
-  <gym-icon [icon]="icon()" />
-  <input
-    type="number"
-    [(ngModel)]="value"
-    (keyup)="onType()"
-    #input
-    (keydown.enter)="input.blur()"
-  />
-  <label> {{ label() }}</label>
-</div>
+<gym-icon [icon]="icon()" />
+<input
+  type="number"
+  [(ngModel)]="value"
+  (keyup)="onType()"
+  #input
+  (keydown.enter)="input.blur()"
+/>
+<label> {{ label() }}</label>

@@ -93,6 +93,15 @@
       "delete": "Delete",
       "exercise": "exercise",
       "superset": "superset"
+    },
+    "timeEditorDialog": {
+      "title": "Change time",
+      "cancel": "Cancel",
+      "accept": "Accept",
+      "hours": "hours",
+      "minutes": "minutes",
+      "seconds": "seconds",
+      "error": "Please enter a valid time of at least 1 second."
     }
   }
 }

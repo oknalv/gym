@@ -23,6 +23,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
+import { integerValidator } from '../utils';
 
 let setId = 0;
 
@@ -116,14 +117,7 @@ export function getWeightValidators(weighted: boolean) {
 
 export function getRepetitionsValidators(progressType: ProgressType) {
   return progressType === ProgressType.repetitions
-    ? [
-        Validators.required,
-        Validators.min(1),
-        (control: AbstractControl) => {
-          if (control.value % 1 === 0) return null;
-          return { notInteger: true };
-        },
-      ]
+    ? [Validators.required, Validators.min(1), integerValidator]
     : [];
 }
 

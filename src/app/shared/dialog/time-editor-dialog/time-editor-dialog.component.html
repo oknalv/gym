@@ -1,0 +1,21 @@
+<gym-dialog [alert]="true" [(open)]="open">
+  <header>{{ "shared.timeEditorDialog.title" | translate }}</header>
+  <form [formGroup]="form">
+    <gym-time-editor-dialog-input formControlName="hours" label="hours" />
+    <span class="separator">:</span>
+    <gym-time-editor-dialog-input formControlName="minutes" label="minutes" />
+    <span class="separator">:</span>
+    <gym-time-editor-dialog-input formControlName="seconds" label="seconds" />
+  </form>
+  @if (showError) {
+    <div class="error">{{ "shared.timeEditorDialog.error" | translate }}</div>
+  }
+  <div class="actions">
+    <button (click)="onCancel()">
+      {{ "shared.timeEditorDialog.cancel" | translate }}</button
+    >&nbsp;
+    <button (click)="onAccept()">
+      {{ "shared.timeEditorDialog.accept" | translate }}
+    </button>
+  </div>
+</gym-dialog>

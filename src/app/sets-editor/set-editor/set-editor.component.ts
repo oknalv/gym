@@ -14,10 +14,16 @@ import {
 } from '@angular/forms';
 import { ProgressType, WeightType } from '../../gym.model';
 import { SetEditorInputComponent } from './set-editor-input/set-editor-input.component';
+import { SetEditorTimeInputComponent } from './set-editor-time-input/set-editor-time-input.component';
 
 @Component({
   selector: 'gym-set-editor',
-  imports: [ReactiveFormsModule, FormsModule, SetEditorInputComponent],
+  imports: [
+    ReactiveFormsModule,
+    FormsModule,
+    SetEditorInputComponent,
+    SetEditorTimeInputComponent,
+  ],
   templateUrl: './set-editor.component.html',
   styleUrl: './set-editor.component.scss',
 })

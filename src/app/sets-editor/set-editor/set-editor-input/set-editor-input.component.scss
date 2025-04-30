@@ -1,4 +1,4 @@
-.set-editor-input {
+:host {
   --size: 1.5em;
   display: flex;
   align-items: center;
@@ -11,7 +11,6 @@
   > input {
     width: calc(var(--size) * 1.5);
     height: var(--size);
-    text-align: end;
     border: 0;
     text-align: center;
     padding: 0;
@@ -29,10 +28,8 @@
 }
 :host {
   &.ng-invalid {
-    .set-editor-input {
-      > input {
-        background-color: var(--light-red);
-      }
+    > input {
+      background-color: var(--light-red);
     }
   }
 }
