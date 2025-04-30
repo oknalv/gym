@@ -38,7 +38,8 @@ export class TimeEditorDialogInputComponent
   value!: WritableSignal<number>;
   label = input.required<string>();
   formattedValue = computed(() => {
-    if (this.value() === null || this.value === undefined) return '\xA0';
+    if (this.value() === null || this.value() === undefined) return '\xA0';
+    if (this.value() < 0) return this.value();
     if (this.label() === 'hours' || this.value() > 9) return this.value() + '';
     return '0' + this.value();
   });

@@ -1,42 +1,41 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SetEditorTimeInputComponent } from './set-editor-time-input.component';
+import { TimeInputComponent } from './time-input.component';
 import { Component, viewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   template: ` <ng-container [formGroup]="form">
-    <gym-set-editor-time-input formControlName="test" />
+    <gym-time-input formControlName="test" />
   </ng-container>`,
-  imports: [SetEditorTimeInputComponent, ReactiveFormsModule],
+  imports: [TimeInputComponent, ReactiveFormsModule],
 })
-class SetEditorTimeInputWrapper {
-  child = viewChild(SetEditorTimeInputComponent);
+class TimeInputWrapper {
+  child = viewChild(TimeInputComponent);
   form = new FormGroup({
     test: new FormControl(''),
   });
 }
-
-describe('SetEditorTimeInputComponent', () => {
-  let component: SetEditorTimeInputWrapper;
-  let fixture: ComponentFixture<SetEditorTimeInputWrapper>;
+describe('TimeInputComponent', () => {
+  let component: TimeInputWrapper;
+  let fixture: ComponentFixture<TimeInputWrapper>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        SetEditorTimeInputComponent,
-        SetEditorTimeInputWrapper,
+        TimeInputComponent,
+        TimeInputWrapper,
         TranslateModule.forRoot(),
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SetEditorTimeInputWrapper);
+    fixture = TestBed.createComponent(TimeInputWrapper);
     component = fixture.componentInstance;
   });
 
   it('should create', () => {
     fixture.detectChanges();
-    expect(component).toBeTruthy();
+    expect(component.child()).toBeTruthy();
   });
 });

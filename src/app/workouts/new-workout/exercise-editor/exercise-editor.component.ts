@@ -35,6 +35,7 @@ import { DialogComponent } from '../../../shared/dialog/dialog.component';
 import { ExerciseTypeEditorComponent } from './exercise-type-editor/exercise-type-editor.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe } from '@ngx-translate/core';
+import { TimeInputComponent } from '../../../shared/time-input/time-input.component';
 
 @Component({
   selector: 'gym-exercise-editor',
@@ -47,6 +48,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     DialogComponent,
     ExerciseTypeEditorComponent,
     TranslatePipe,
+    TimeInputComponent,
   ],
   templateUrl: './exercise-editor.component.html',
   styleUrl: './exercise-editor.component.scss',
@@ -106,6 +108,7 @@ export class ExerciseEditorComponent {
         }>
       >([]),
     }),
+    restingTime: new FormControl(60),
   });
 
   constructor() {
@@ -209,6 +212,7 @@ export class ExerciseEditorComponent {
         weighted: this.form.value.weighted!,
         weightType: this.form.value.weightType!,
         sets: this.form.value.sets?.sets?.map(this.getSet)!,
+        restingTime: this.form.value.restingTime!,
       };
       this.resetForm();
       this.exercise.emit(newExercise);
@@ -242,6 +246,7 @@ export class ExerciseEditorComponent {
         repetitions: 10,
         time: 60,
       })),
+      restingTime: 60,
     });
   }
 
@@ -256,6 +261,7 @@ export class ExerciseEditorComponent {
       weighted: exercise.weighted,
       weightType: exercise.weightType,
       progressType: exercise.progressType,
+      restingTime: exercise.restingTime,
     });
     this.form.controls['sets'].controls['sets'].clear();
     exercise.sets.forEach((set) => {

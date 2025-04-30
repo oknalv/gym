@@ -84,6 +84,10 @@
         [progressType]="progressType!"
       />
     </section>
+    <section>
+      <header>{{ "exercises.editor.restingTime.header" | translate }}</header>
+      <gym-time-input formControlName="restingTime" />
+    </section>
 
     @if (showError) {
       <p class="error">

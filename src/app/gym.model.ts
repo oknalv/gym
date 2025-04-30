@@ -12,6 +12,7 @@ export interface Exercise {
   weightType: WeightType;
   weighted: boolean;
   progressType: ProgressType;
+  restingTime: number;
 }
 
 export interface Superset {
@@ -55,6 +56,7 @@ export interface ExerciseDTO {
   weightType: WeightType;
   weighted: boolean;
   progressType: ProgressType;
+  restingTime: number;
 }
 
 export interface SupersetDTO {

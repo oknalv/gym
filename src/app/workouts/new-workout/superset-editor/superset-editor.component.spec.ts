@@ -42,6 +42,7 @@ describe('SupersetEditorComponent', () => {
           weight: 1,
         },
       ],
+      restingTime: 1,
     });
     expect(component.editingExercise()).toBeTruthy();
     expect(component.exerciseEditorVisible()).toBeFalse();
@@ -126,6 +127,7 @@ describe('SupersetEditorComponent', () => {
           weight: 1,
         },
       ],
+      restingTime: 1,
     });
     expect(component.baseSuperset().exercises.length).toBe(1);
     component.onGetExercise({
@@ -141,6 +143,7 @@ describe('SupersetEditorComponent', () => {
           weight: 1,
         },
       ],
+      restingTime: 1,
     });
     expect(component.baseSuperset().exercises.length).toBe(2);
   });
@@ -180,6 +183,7 @@ describe('SupersetEditorComponent', () => {
           weight: 2,
         },
       ],
+      restingTime: 1,
     });
     expect(component.baseSuperset().exercises.length).toBe(1);
     expect(component.baseSuperset().exercises[0]).toEqual({
@@ -195,6 +199,7 @@ describe('SupersetEditorComponent', () => {
           weight: 2,
         },
       ],
+      restingTime: 1,
     });
   });
 
@@ -216,6 +221,7 @@ describe('SupersetEditorComponent', () => {
           weight: 2,
         },
       ],
+      restingTime: 1,
     });
     expect(component.newExerciseType.emit).toHaveBeenCalledWith({
       id: 2,
@@ -242,6 +248,7 @@ describe('SupersetEditorComponent', () => {
           weight: 2,
         },
       ],
+      restingTime: 1,
     });
     expect(component.newExerciseType.emit).not.toHaveBeenCalled();
   });
@@ -261,6 +268,7 @@ describe('SupersetEditorComponent', () => {
           weight: 2,
         },
       ],
+      restingTime: 1,
     });
     expect(component.baseSuperset().exercises[0].sets.length).toBe(1);
     component.onGetExercise({
@@ -281,6 +289,7 @@ describe('SupersetEditorComponent', () => {
           weight: 2,
         },
       ],
+      restingTime: 1,
     });
     expect(component.baseSuperset().exercises[0].sets.length).toBe(2);
     expect(component.baseSuperset().exercises[1].sets.length).toBe(2);
@@ -297,6 +306,7 @@ describe('SupersetEditorComponent', () => {
           weight: 2,
         },
       ],
+      restingTime: 1,
     });
     expect(component.baseSuperset().exercises[0].sets.length).toBe(1);
     expect(component.baseSuperset().exercises[1].sets.length).toBe(1);
@@ -319,6 +329,7 @@ describe('SupersetEditorComponent', () => {
           weight: 2,
         },
       ],
+      restingTime: 1,
     });
     expect(component.superset.emit).toHaveBeenCalledWith({
       id: 0,
@@ -336,6 +347,7 @@ describe('SupersetEditorComponent', () => {
               weight: 2,
             },
           ],
+          restingTime: 1,
         },
       ],
     });
@@ -357,6 +369,7 @@ describe('SupersetEditorComponent', () => {
           weight: 2,
         },
       ],
+      restingTime: 1,
     });
     expect(component.superset.emit).toHaveBeenCalledWith({
       id: 0,
@@ -379,6 +392,7 @@ describe('SupersetEditorComponent', () => {
               weight: 2,
             },
           ],
+          restingTime: 1,
         },
         {
           id: 2,
@@ -398,6 +412,7 @@ describe('SupersetEditorComponent', () => {
               weight: 2,
             },
           ],
+          restingTime: 1,
         },
       ],
     });
@@ -421,6 +436,7 @@ describe('SupersetEditorComponent', () => {
               weight: 1,
             },
           ],
+          restingTime: 1,
         },
       ],
     });
@@ -463,6 +479,7 @@ describe('SupersetEditorComponent', () => {
               weight: 1,
             },
           ],
+          restingTime: 1,
         },
       ],
     });

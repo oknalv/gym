@@ -7,7 +7,11 @@ import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   template: ` <ng-container [formGroup]="form">
-    <gym-set-editor-time-input formControlName="test" />
+    <gym-set-editor-time-input
+      formControlName="test"
+      icon="repeat"
+      label="reps"
+    />
   </ng-container>`,
   imports: [SetEditorTimeInputComponent, ReactiveFormsModule],
 })
