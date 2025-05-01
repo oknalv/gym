@@ -124,7 +124,10 @@ export class ExerciseEditorComponent {
       if (this.baseExercise()) this.fillForm(this.baseExercise()!);
       else this.resetForm();
     });
-
+    //for resetting the form after closing
+    effect(() => {
+      if (!this.open()) this.resetForm();
+    });
     //for updating some controls' validators depending on other controls' values
     //this updates the weight controls validators depending on weighted flag
     this.form.controls['weighted'].valueChanges
