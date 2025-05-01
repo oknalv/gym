@@ -5,7 +5,7 @@ import { getFormattedTime, getHoursMinutesAndSeconds } from '../../../utils';
   name: 'time',
 })
 export class TimePipe implements PipeTransform {
-  transform(value: number, units = false) {
-    return getFormattedTime(value, units);
+  transform(value: number) {
+    return getFormattedTime(value);
   }
 }

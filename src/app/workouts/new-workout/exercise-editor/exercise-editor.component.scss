@@ -16,11 +16,13 @@ section {
 
 .warning {
   position: relative;
+  margin-top: var(--margin);
+  margin-bottom: var(--margin);
 
   button {
     position: absolute;
     display: flex;
-    transform: translateX(-100%);
+    transform: translate(-100%, calc(-1 * var(--margin)));
     background-color: transparent;
     color: var(--light-yellow);
   }

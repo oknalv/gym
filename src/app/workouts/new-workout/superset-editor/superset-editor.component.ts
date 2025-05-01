@@ -66,6 +66,7 @@ export class SupersetEditorComponent {
       this.newExerciseType.emit(receivedExercise.type!);
     }
     for (const exercise of this.baseSuperset().exercises) {
+      exercise.restingTime = receivedExercise.restingTime;
       if (exercise.sets.length !== receivedExercise.sets.length) {
         this.changeExerciseSets(exercise, receivedExercise.sets.length);
       }

@@ -46,4 +46,13 @@
       }
     }
   }
+
+  > .resting-time {
+    margin-top: var(--margin);
+    display: flex;
+    align-items: center;
+    > gym-icon {
+      margin-right: var(--margin);
+    }
+  }
 }

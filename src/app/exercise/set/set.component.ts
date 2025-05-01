@@ -24,6 +24,6 @@ export class SetComponent {
   get progress() {
     return this.progressType() === 'repetitions'
       ? `${this.set().repetitions} reps`
-      : `${getFormattedTime(this.set().time, true)}`;
+      : getFormattedTime(this.set().time);
   }
 }

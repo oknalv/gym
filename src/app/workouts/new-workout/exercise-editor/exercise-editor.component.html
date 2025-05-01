@@ -74,7 +74,7 @@
           <button (click)="onHideSupersetSetsWarning()">
             <gym-icon icon="times" />
           </button>
-          {{ "exercises.editor.supersetsWarning" | translate }}
+          {{ "exercises.editor.supersetSetsWarning" | translate }}
         </div>
       }
       <gym-sets-editor
@@ -85,6 +85,14 @@
       />
     </section>
     <section>
+      @if (showSupersetRestingTimeWarning()) {
+        <div class="warning">
+          <button (click)="onHideSupersetRestingTimeWarning()">
+            <gym-icon icon="times" />
+          </button>
+          {{ "exercises.editor.supersetRestingTimeWarning" | translate }}
+        </div>
+      }
       <header>{{ "exercises.editor.restingTime.header" | translate }}</header>
       <gym-time-input formControlName="restingTime" />
     </section>

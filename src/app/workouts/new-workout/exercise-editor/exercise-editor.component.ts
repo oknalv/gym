@@ -74,6 +74,12 @@ export class ExerciseEditorComponent {
   showSupersetSetsWarning = computed(() => {
     return this.inSuperset() && !this.hideSupersetSetsWarning();
   });
+  private hideSupersetRestingTimeWarning = signal(
+    localStorage.getItem('hide-superset-resting-time-warning') === 'true',
+  );
+  showSupersetRestingTimeWarning = computed(() => {
+    return this.inSuperset() && !this.hideSupersetRestingTimeWarning();
+  });
 
   titleKey = computed(() => {
     return `exercises.editor.${this.editMode() ? 'edit' : 'new'}`;
@@ -117,6 +123,13 @@ export class ExerciseEditorComponent {
       localStorage.setItem(
         'hide-superset-sets-warning',
         JSON.stringify(this.hideSupersetSetsWarning()),
+      );
+    });
+    //for storing hide-resting-time-warning flag in localStorage
+    effect(() => {
+      localStorage.setItem(
+        'hide-superset-resting-time-warning',
+        JSON.stringify(this.hideSupersetRestingTimeWarning()),
       );
     });
     //for filling the form with either the provided exercise or with a new one
@@ -294,5 +307,9 @@ export class ExerciseEditorComponent {
 
   onHideSupersetSetsWarning() {
     this.hideSupersetSetsWarning.set(true);
+  }
+
+  onHideSupersetRestingTimeWarning() {
+    this.hideSupersetRestingTimeWarning.set(true);
   }
 }

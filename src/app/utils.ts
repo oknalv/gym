@@ -26,10 +26,7 @@ export function getHoursMinutesAndSeconds(seconds: number) {
   };
 }
 
-export function getFormattedTime(seconds: number, units = false) {
+export function getFormattedTime(seconds: number) {
   const time = getHoursMinutesAndSeconds(seconds);
-  if (units) {
-    return `${time.hours > 0 ? time.hours + 'h ' : ''}${time.minutes > 0 || (time.hours > 0 && time.seconds > 0) ? time.minutes + 'm ' : ''}${time.seconds > 0 ? time.seconds + 's' : ''}`.trim();
-  }
-  return `${time.hours}:${time.minutes < 10 ? '0' : ''}${time.minutes}:${time.seconds < 10 ? '0' : ''}${time.seconds}`;
+  return `${time.hours > 0 ? time.hours + 'h ' : ''}${time.minutes > 0 || (time.hours > 0 && time.seconds > 0) ? time.minutes + 'm ' : ''}${time.seconds > 0 ? time.seconds + 's' : ''}`.trim();
 }
