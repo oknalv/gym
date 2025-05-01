@@ -1,0 +1,12 @@
+.warning {
+  display: flex;
+  margin-left: 0;
+  margin-top: var(--margin);
+  margin-bottom: var(--margin);
+}
+
+button {
+  background-color: transparent;
+  color: var(--light-yellow);
+  height: fit-content;
+}

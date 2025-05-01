@@ -1,0 +1,10 @@
+@if (!hideWarning()) {
+  <div class="warning">
+    <button (click)="onHideWarning()">
+      <gym-icon icon="times" />
+    </button>
+    <span>
+      {{ warningKey() | translate }}
+    </span>
+  </div>
+}

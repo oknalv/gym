@@ -1,0 +1,53 @@
+gym-exercise:not(:last-child) {
+  margin-bottom: var(--margin);
+}
+
+.superset-wrapper {
+  padding: var(--padding);
+  background-color: var(--table-2);
+
+  &:not(:last-child) {
+    margin-bottom: var(--margin);
+  }
+
+  gym-exercise:not(:last-child) {
+    margin-bottom: var(--padding);
+  }
+}
+
+header {
+  display: flex;
+  > .info {
+    flex-grow: 1;
+  }
+  > .actions {
+    > button {
+      font-size: 2em;
+      height: 3em;
+      width: 3em;
+      background-color: var(--light-green);
+      color: var(--dark-green);
+    }
+    > div {
+      display: flex;
+
+      > button {
+        flex-grow: 1;
+
+        &:first-child {
+          background-color: var(--light-cyan);
+          color: var(--dark-cyan);
+        }
+
+        &:last-child {
+          background-color: var(--light-red);
+          color: var(--dark-red);
+        }
+      }
+    }
+  }
+}
+
+h1 {
+  word-break: break-all;
+}

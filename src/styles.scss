@@ -3,10 +3,14 @@ html {
   --light-red: #faafa8;
   --dark-green: #264d3b;
   --light-green: #e2f6d3;
-  --light-blue: #aeccdc;
+  --dark-yellow: #7c4a03;
   --light-yellow: #fff8b8;
-  --table-1: #284255;
-  --table-2: #256377;
+  --dark-cyan: #256377;
+  --light-cyan: #d4e4ed;
+  --dark-blue: #284255;
+  --light-blue: #aeccdc;
+  --table-1: var(--dark-blue);
+  --table-2: var(--dark-cyan);
   --padding: 5px;
   --margin: 10px;
   --border-width: 5px;
@@ -67,8 +71,8 @@ input {
   }
 
   > button:first-of-type {
-    background-color: var(--light-green);
-    color: var(--dark-green);
+    background-color: var(--light-cyan);
+    color: var(--dark-cyan);
   }
 
   > button:last-of-type {

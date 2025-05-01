@@ -14,16 +14,11 @@ section {
   margin: calc(2 * var(--margin)) 0;
 }
 
-.warning {
-  position: relative;
-  margin-top: var(--margin);
-  margin-bottom: var(--margin);
+.resting-time-container {
+  display: flex;
+  align-items: center;
 
-  button {
-    position: absolute;
-    display: flex;
-    transform: translate(-100%, calc(-1 * var(--margin)));
-    background-color: transparent;
-    color: var(--light-yellow);
+  gym-icon {
+    margin-right: var(--margin);
   }
 }

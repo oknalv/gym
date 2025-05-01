@@ -14,7 +14,11 @@
     "preview": {
       "oneExercise": "1 exercise",
       "exercises": "exercises",
-      "lastExecution": "Last execution:",
+      "lastExecution": "Last time done:",
+      "neverExecuted": "Never done"
+    },
+    "detail": {
+      "lastExecution": "Last time done:",
       "neverExecuted": "Never done"
     }
   },

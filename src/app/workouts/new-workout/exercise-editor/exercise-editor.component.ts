@@ -36,6 +36,7 @@ import { ExerciseTypeEditorComponent } from './exercise-type-editor/exercise-typ
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe } from '@ngx-translate/core';
 import { TimeInputComponent } from '../../../shared/time-input/time-input.component';
+import { CloseableWarningComponent } from '../../../shared/closeable-warning/closeable-warning.component';
 
 @Component({
   selector: 'gym-exercise-editor',
@@ -49,6 +50,7 @@ import { TimeInputComponent } from '../../../shared/time-input/time-input.compon
     ExerciseTypeEditorComponent,
     TranslatePipe,
     TimeInputComponent,
+    CloseableWarningComponent,
   ],
   templateUrl: './exercise-editor.component.html',
   styleUrl: './exercise-editor.component.scss',
@@ -67,18 +69,6 @@ export class ExerciseEditorComponent {
   open = model.required<boolean>();
   editMode = computed(() => {
     return !!this.baseExercise();
-  });
-  private hideSupersetSetsWarning = signal(
-    localStorage.getItem('hide-superset-sets-warning') === 'true',
-  );
-  showSupersetSetsWarning = computed(() => {
-    return this.inSuperset() && !this.hideSupersetSetsWarning();
-  });
-  private hideSupersetRestingTimeWarning = signal(
-    localStorage.getItem('hide-superset-resting-time-warning') === 'true',
-  );
-  showSupersetRestingTimeWarning = computed(() => {
-    return this.inSuperset() && !this.hideSupersetRestingTimeWarning();
   });
 
   titleKey = computed(() => {
@@ -118,20 +108,6 @@ export class ExerciseEditorComponent {
   });
 
   constructor() {
-    //for storing hide-superset-sets-warning flag in localStorage
-    effect(() => {
-      localStorage.setItem(
-        'hide-superset-sets-warning',
-        JSON.stringify(this.hideSupersetSetsWarning()),
-      );
-    });
-    //for storing hide-resting-time-warning flag in localStorage
-    effect(() => {
-      localStorage.setItem(
-        'hide-superset-resting-time-warning',
-        JSON.stringify(this.hideSupersetRestingTimeWarning()),
-      );
-    });
     //for filling the form with either the provided exercise or with a new one
     effect(() => {
       if (this.baseExercise()) this.fillForm(this.baseExercise()!);
@@ -303,13 +279,5 @@ export class ExerciseEditorComponent {
         }
       }
     }
-  }
-
-  onHideSupersetSetsWarning() {
-    this.hideSupersetSetsWarning.set(true);
-  }
-
-  onHideSupersetRestingTimeWarning() {
-    this.hideSupersetRestingTimeWarning.set(true);
   }
 }

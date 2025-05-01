@@ -1,5 +1,9 @@
-.workouts-preview-wrapper {
+.workouts-container {
   > * {
     margin-bottom: var(--margin);
+
+    gym-workout-preview {
+      cursor: pointer;
+    }
   }
 }

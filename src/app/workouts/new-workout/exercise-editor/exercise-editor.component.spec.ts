@@ -89,44 +89,6 @@ describe('ExerciseEditorComponent', () => {
     ).toBe(2);
   });
 
-  it('should show warning when it is in superset', () => {
-    fixture.componentRef.setInput('inSuperset', true);
-    fixture.detectChanges();
-    expect(
-      fixture.elementRef.nativeElement.querySelector('.warning'),
-    ).toBeTruthy();
-  });
-
-  it('should hide warning after clicking close button', () => {
-    fixture.componentRef.setInput('inSuperset', true);
-    fixture.detectChanges();
-    expect(
-      fixture.elementRef.nativeElement.querySelector('.warning'),
-    ).toBeTruthy();
-    fixture.elementRef.nativeElement.querySelector('.warning > button').click();
-    fixture.detectChanges();
-    expect(
-      fixture.elementRef.nativeElement.querySelector('.warning'),
-    ).toBeFalsy();
-  });
-
-  it('should now show warning when not in superset', () => {
-    fixture.componentRef.setInput('inSuperset', false);
-    fixture.detectChanges();
-    expect(
-      fixture.elementRef.nativeElement.querySelector('.warning'),
-    ).toBeFalsy();
-  });
-
-  it('should now show warning when in superset and it had already been closed', () => {
-    fixture.componentRef.setInput('inSuperset', true);
-    component.onHideSupersetSetsWarning();
-    fixture.detectChanges();
-    expect(
-      fixture.elementRef.nativeElement.querySelector('.warning'),
-    ).toBeFalsy();
-  });
-
   it('should be invalid when it is weighted and any of the weights is negative', () => {
     fixture.detectChanges();
     component.form.setValue({

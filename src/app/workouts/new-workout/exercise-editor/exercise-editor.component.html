@@ -69,13 +69,11 @@
       </gym-switch>
     </section>
     <section>
-      @if (showSupersetSetsWarning()) {
-        <div class="warning">
-          <button (click)="onHideSupersetSetsWarning()">
-            <gym-icon icon="times" />
-          </button>
-          {{ "exercises.editor.supersetSetsWarning" | translate }}
-        </div>
+      @if (inSuperset()) {
+        <gym-closeable-warning
+          storageKey="hide-superset-sets-warning"
+          warningKey="exercises.editor.supersetSetsWarning"
+        />
       }
       <gym-sets-editor
         formGroupName="sets"
@@ -85,16 +83,17 @@
       />
     </section>
     <section>
-      @if (showSupersetRestingTimeWarning()) {
-        <div class="warning">
-          <button (click)="onHideSupersetRestingTimeWarning()">
-            <gym-icon icon="times" />
-          </button>
-          {{ "exercises.editor.supersetRestingTimeWarning" | translate }}
-        </div>
+      @if (inSuperset()) {
+        <gym-closeable-warning
+          storageKey="hide-superset-resting-time-warning"
+          warningKey="exercises.editor.supersetRestingTimeWarning"
+        />
       }
       <header>{{ "exercises.editor.restingTime.header" | translate }}</header>
-      <gym-time-input formControlName="restingTime" />
+      <div class="resting-time-container">
+        <gym-icon icon="rest" />
+        <gym-time-input formControlName="restingTime" />
+      </div>
     </section>
 
     @if (showError) {

@@ -1,0 +1,38 @@
+<div routerLink="/workouts" gymBackLink>{{ "workouts.title" | translate }}</div>
+<header>
+  <div class="info">
+    <h1>{{ workout?.name }}</h1>
+    <div>
+      @if (workout?.lastExecution) {
+        {{ "workouts.detail.lastExecution" | translate }}
+        {{ workout?.lastExecution | date }}
+      } @else {
+        {{ "workouts.detail.neverExecuted" | translate }}
+      }
+    </div>
+  </div>
+  <div class="actions">
+    <button class="play"><gym-icon icon="play" /></button>
+    <div>
+      <button><gym-icon icon="pencil" /></button>
+      <button><gym-icon icon="trashbin" /></button>
+    </div>
+  </div>
+</header>
+<section>
+  <h2>{{ "exercises.title" | translate }}</h2>
+  @for (exercise of workout?.exercises; track exercise.id) {
+    @if (isExercise(exercise)) {
+      <gym-exercise [exercise]="asExercise(exercise)" />
+    } @else {
+      <div class="superset-wrapper">
+        @for (
+          supersetExercise of asSuperset(exercise).exercises;
+          track supersetExercise.id
+        ) {
+          <gym-exercise [exercise]="supersetExercise" />
+        }
+      </div>
+    }
+  }
+</section>
