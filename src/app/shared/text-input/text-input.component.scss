@@ -1,4 +1,6 @@
 :host {
+  margin: var(--margin) 0;
+  display: block;
   > input {
     height: 2em;
     border: 0;

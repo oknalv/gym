@@ -35,7 +35,7 @@
         "weightless": "Weightless"
       },
       "weightType": {
-        "header": "Choose how to measure the weight",
+        "header": "How to measure the weight",
         "total": "Use total weight",
         "side": "Use one side weight"
       },
@@ -45,7 +45,7 @@
         "time": "In time"
       },
       "restingTime": {
-        "header": "Choose the resting time between sets"
+        "header": "Resting time between sets"
       },
       "supersetsWarning": "Warning: adding or removing sets will reflect in the sets of the rest of the exercises of the superset. Removing any set will reflect in removing the last set of the rest of the exercises. Adding a set will reflect in adding a copy of the last set of each of the other exercises in their corresponding exercises.",
       "error": "There are errors in the new exercise. Please, correct them before adding the exercise.",
@@ -58,7 +58,7 @@
       "existing": "Use existing",
       "create": "Create new",
       "existingInstead": "Use existing exercise instead",
-      "change": "change",
+      "change": "Change",
       "error": "You must either use an existing exercise or create a new one."
     },
     "new": {

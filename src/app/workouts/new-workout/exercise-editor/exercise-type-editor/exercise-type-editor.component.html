@@ -6,34 +6,39 @@
       (select)="onSelectExerciseType($event)"
     />
     @if (!exerciseType && !showNewExerciseTypeForm()) {
-      <button (click)="onOpenExerciseTypeDialog()">
-        {{ "exerciseTypes.setter.existing" | translate }}
-      </button>
-      or
-      <button (click)="onShowNewExerciseTypeForm()">
-        {{ "exerciseTypes.setter.create" | translate }}
-      </button>
-      @if (showError()) {
-        <p class="error">
-          {{ "exerciseTypes.setter.error" | translate }}
-        </p>
-      }
-    } @else {
-      @if (showNewExerciseTypeForm()) {
-        <gym-new-exercise-type formGroupName="newExerciseType" />
-
+      <div class="actions">
         <button (click)="onOpenExerciseTypeDialog()">
-          {{ "exerciseTypes.setter.existingInstead" | translate }}
-        </button>
-      } @else {
-        <gym-exercise-type [type]="exerciseType!" />
-        <button (click)="onOpenExerciseTypeDialog()">
-          {{ "exerciseTypes.setter.change" | translate }}
+          {{ "exerciseTypes.setter.existing" | translate }}
         </button>
         or
         <button (click)="onShowNewExerciseTypeForm()">
           {{ "exerciseTypes.setter.create" | translate }}
         </button>
+      </div>
+      @if (showError()) {
+        <div class="error">
+          {{ "exerciseTypes.setter.error" | translate }}
+        </div>
+      }
+    } @else {
+      @if (showNewExerciseTypeForm()) {
+        <gym-new-exercise-type formGroupName="newExerciseType" />
+        <div class="actions">
+          <button (click)="onOpenExerciseTypeDialog()">
+            {{ "exerciseTypes.setter.existingInstead" | translate }}
+          </button>
+        </div>
+      } @else {
+        <gym-exercise-type [type]="exerciseType!" />
+        <div class="actions">
+          <button (click)="onOpenExerciseTypeDialog()">
+            {{ "exerciseTypes.setter.change" | translate }}
+          </button>
+          or
+          <button (click)="onShowNewExerciseTypeForm()">
+            {{ "exerciseTypes.setter.create" | translate }}
+          </button>
+        </div>
       }
     }
   } @else {

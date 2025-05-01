@@ -1,11 +1,9 @@
 <div [formGroup]="form" (keydown.enter)="$event.preventDefault()">
-  <div>
-    <gym-text-input
-      formControlName="name"
-      [label]="'exerciseTypes.new.name' | translate"
-      [errorMessage]="'exerciseTypes.new.error' | translate"
-    />
-  </div>
+  <gym-text-input
+    formControlName="name"
+    [label]="'exerciseTypes.new.name' | translate"
+    [errorMessage]="'exerciseTypes.new.nameError' | translate"
+  />
   <div class="image-input">
     <gym-exercise-image [src]="src" [alt]="name" />
     <div class="image-buttons">

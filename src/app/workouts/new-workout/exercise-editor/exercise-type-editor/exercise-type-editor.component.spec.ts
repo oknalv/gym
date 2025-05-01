@@ -73,10 +73,8 @@ describe('ExerciseTypeEditorComponent', () => {
         'gym-exercise-type-dialog',
       ),
     ).toBeTruthy();
-    const childElement = fixture.elementRef.nativeElement.querySelector(
-      'gym-exercise-type-editor',
-    );
-    const buttons = childElement.querySelectorAll(':scope > div > button');
+    const buttons =
+      fixture.elementRef.nativeElement.querySelectorAll('.actions > button');
     expect(buttons.length).toBe(2);
     expect(buttons[0].innerText).toBe('exerciseTypes.setter.existing');
     expect(buttons[1].innerText).toBe('exerciseTypes.setter.create');
@@ -93,10 +91,8 @@ describe('ExerciseTypeEditorComponent', () => {
         'gym-exercise-type-dialog',
       ),
     ).toBeTruthy();
-    const childElement = fixture.elementRef.nativeElement.querySelector(
-      'gym-exercise-type-editor',
-    );
-    let buttons = childElement.querySelectorAll(':scope > div > button');
+    let buttons =
+      fixture.elementRef.nativeElement.querySelectorAll('.actions > button');
     expect(buttons.length).toBe(2);
     expect(buttons[0].innerText).toBe('exerciseTypes.setter.existing');
     expect(buttons[1].innerText).toBe('exerciseTypes.setter.create');
@@ -110,7 +106,8 @@ describe('ExerciseTypeEditorComponent', () => {
         'gym-exercise-type-dialog',
       ),
     ).toBeTruthy();
-    buttons = childElement.querySelectorAll(':scope > div > button');
+    buttons =
+      fixture.elementRef.nativeElement.querySelectorAll('.actions > button');
     expect(buttons.length).toBe(1);
     expect(buttons[0].innerText).toBe('exerciseTypes.setter.existingInstead');
   });
@@ -126,10 +123,8 @@ describe('ExerciseTypeEditorComponent', () => {
         'gym-exercise-type-dialog',
       ),
     ).toBeTruthy();
-    const childElement = fixture.elementRef.nativeElement.querySelector(
-      'gym-exercise-type-editor',
-    );
-    const buttons = childElement.querySelectorAll(':scope > div > button');
+    const buttons =
+      fixture.elementRef.nativeElement.querySelectorAll('.actions > button');
     expect(buttons.length).toBe(2);
     expect(buttons[0].innerText).toBe('exerciseTypes.setter.existing');
     expect(buttons[1].innerText).toBe('exerciseTypes.setter.create');
@@ -150,10 +145,8 @@ describe('ExerciseTypeEditorComponent', () => {
         'gym-exercise-type-dialog',
       ),
     ).toBeTruthy();
-    const childElement = fixture.elementRef.nativeElement.querySelector(
-      'gym-exercise-type-editor',
-    );
-    const buttons = childElement.querySelectorAll(':scope > div > button');
+    const buttons =
+      fixture.elementRef.nativeElement.querySelectorAll('.actions > button');
     expect(buttons.length).toBe(2);
     expect(buttons[0].innerText).toBe('exerciseTypes.setter.existing');
     expect(buttons[1].innerText).toBe('exerciseTypes.setter.create');
@@ -178,10 +171,8 @@ describe('ExerciseTypeEditorComponent', () => {
         'gym-exercise-type-dialog',
       ),
     ).toBeTruthy();
-    const childElement = fixture.elementRef.nativeElement.querySelector(
-      'gym-exercise-type-editor',
-    );
-    let buttons = childElement.querySelectorAll(':scope > div > button');
+    let buttons =
+      fixture.elementRef.nativeElement.querySelectorAll('.actions > button');
     expect(buttons.length).toBe(2);
     expect(buttons[0].innerText).toBe('exerciseTypes.setter.existing');
     expect(buttons[1].innerText).toBe('exerciseTypes.setter.create');
@@ -195,7 +186,8 @@ describe('ExerciseTypeEditorComponent', () => {
         'gym-exercise-type-dialog',
       ),
     ).toBeTruthy();
-    buttons = childElement.querySelectorAll(':scope > div > button');
+    buttons =
+      fixture.elementRef.nativeElement.querySelectorAll('.actions > button');
     expect(buttons.length).toBe(1);
     expect(buttons[0].innerText).toBe('exerciseTypes.setter.existingInstead');
     expect(fixture.nativeElement.querySelector('dialog').open).toBeFalse();
@@ -220,10 +212,8 @@ describe('ExerciseTypeEditorComponent', () => {
         'gym-exercise-type-dialog',
       ),
     ).toBeTruthy();
-    const childElement = fixture.elementRef.nativeElement.querySelector(
-      'gym-exercise-type-editor',
-    );
-    let buttons = childElement.querySelectorAll(':scope > div > button');
+    const buttons =
+      fixture.elementRef.nativeElement.querySelectorAll('.actions > button');
     expect(buttons.length).toBe(2);
     expect(buttons[0].innerText).toBe('exerciseTypes.setter.change');
     expect(buttons[1].innerText).toBe('exerciseTypes.setter.create');
@@ -245,10 +235,8 @@ describe('ExerciseTypeEditorComponent', () => {
         'gym-exercise-type-dialog',
       ),
     ).toBeTruthy();
-    const childElement = fixture.elementRef.nativeElement.querySelector(
-      'gym-exercise-type-editor',
-    );
-    let buttons = childElement.querySelectorAll(':scope > div > button');
+    const buttons =
+      fixture.elementRef.nativeElement.querySelectorAll('.actions > button');
     expect(buttons.length).toBe(2);
     expect(buttons[0].innerText).toBe('exerciseTypes.setter.change');
     expect(buttons[1].innerText).toBe('exerciseTypes.setter.create');

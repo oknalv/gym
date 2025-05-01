@@ -1,4 +1,6 @@
 :host {
+  margin: var(--margin) 0;
+  display: block;
   > button {
     color: white;
     padding: var(--padding) var(--padding) calc(2 * var(--padding));

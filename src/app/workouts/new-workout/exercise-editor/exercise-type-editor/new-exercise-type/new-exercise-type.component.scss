@@ -1,28 +1,19 @@
-.image-input {
-  display: flex;
-  .image-buttons {
+:host {
+  .image-input {
     display: flex;
-    flex-direction: column;
-    margin-left: var(--margin);
-    justify-content: space-evenly;
+    margin: var(--margin) 0;
+    .image-buttons {
+      display: flex;
+      flex-direction: column;
+      margin-left: var(--margin);
+      justify-content: space-evenly;
 
-    > :first-child {
-      & + * {
-        background-color: var(--light-red);
-        color: var(--dark-red);
+      > :first-child {
+        & + * {
+          background-color: var(--light-red);
+          color: var(--dark-red);
+        }
       }
     }
   }
-}
-
-:host {
-  > div {
-    > div {
-      margin: var(--margin) 0;
-    }
-  }
-}
-
-.error {
-  display: inline-block;
 }

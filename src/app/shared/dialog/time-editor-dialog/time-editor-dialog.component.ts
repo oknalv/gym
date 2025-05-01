@@ -43,7 +43,9 @@ export class TimeEditorDialogComponent {
 
   constructor() {
     effect(() => {
-      this.form.patchValue(getHoursMinutesAndSeconds(this.value()));
+      if (!this.open()) {
+        this.form.patchValue(getHoursMinutesAndSeconds(this.value()));
+      }
     });
     this.form.controls.hours.valueChanges.pipe(takeUntilDestroyed()).subscribe({
       next: (newValue) => {
@@ -70,7 +72,6 @@ export class TimeEditorDialogComponent {
   }
 
   onCancel() {
-    this.form.patchValue(getHoursMinutesAndSeconds(this.value()));
     this.open.set(false);
   }
 

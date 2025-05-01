@@ -1,4 +1,6 @@
 :host {
+  margin: var(--margin) 0;
+  display: block;
   > .value {
     height: 2em;
     border: 0;

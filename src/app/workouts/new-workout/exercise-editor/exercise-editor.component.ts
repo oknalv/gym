@@ -251,6 +251,7 @@ export class ExerciseEditorComponent {
   }
 
   fillForm(exercise: Exercise) {
+    this.firstSubmitClick = false;
     this.exerciseId = exercise.id;
     this.dirty = false;
     this.form.patchValue({
