@@ -1,3 +1,13 @@
-.app-body {
-  margin: 0 var(--margin);
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  .app-body {
+    overflow: auto;
+    flex-grow: 1;
+
+    > div {
+      margin: 0 var(--margin);
+    }
+  }
 }

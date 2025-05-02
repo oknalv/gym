@@ -11,6 +11,7 @@ import { DataService } from './data.service';
 import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { WorkoutService } from './workout.service';
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient,
@@ -22,7 +23,12 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withComponentInputBinding()),
     provideAppInitializer(() => {
       const dataService = inject(DataService);
-      return dataService.init();
+      const workoutService = inject(WorkoutService);
+      return new Promise((resolve) => {
+        dataService.init().then(() => {
+          workoutService.init().then(resolve);
+        });
+      });
     }),
     provideHttpClient(),
     provideTranslateService({

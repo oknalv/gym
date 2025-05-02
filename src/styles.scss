@@ -21,10 +21,12 @@ html {
   --background-color: #202124;
   background-color: var(--background-color);
   color: white;
+  height: 100%;
 }
 
 body {
   margin: 0;
+  height: 100%;
 }
 
 @font-face {

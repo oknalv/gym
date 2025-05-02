@@ -2,7 +2,6 @@
   "workouts": {
     "title": "Workouts",
     "empty": "There are no workouts yet.",
-    "add": "Add workout",
     "editor": {
       "new": "New workout",
       "edit": "Edit workout",
@@ -22,6 +21,10 @@
     "detail": {
       "lastExecution": "Last time done:",
       "neverExecuted": "Never done"
+    },
+    "backLinks": {
+      "workout": "Workout details",
+      "workouts": "Workouts"
     }
   },
   "exercises": {

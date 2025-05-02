@@ -1,3 +1,11 @@
+export interface Execution {
+  workoutId: number;
+  completedExerciseIds: number[];
+  ongoingExerciseId: number | null;
+  restingStart: Date | null;
+  setIndex: number;
+}
+
 export interface Workout {
   id: number;
   name: string;
@@ -40,6 +48,14 @@ export enum WeightType {
 export enum ProgressType {
   repetitions = 'repetitions',
   time = 'time',
+}
+
+export interface ExecutionDTO {
+  workoutId: number;
+  completedExerciseIds: number[];
+  ongoingExerciseId: number | null;
+  restingStart: number | null;
+  setIndex: number;
 }
 
 export interface WorkoutDTO {

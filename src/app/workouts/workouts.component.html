@@ -1,5 +1,7 @@
 <section>
-  <h1>{{ "workouts.title" | translate }}</h1>
+  <h1>
+    {{ "workouts.title" | translate }} <gym-icon icon="+" routerLink="new" />
+  </h1>
   <div class="workouts-container">
     @for (workout of workouts(); track workout.id) {
       <div [routerLink]="workout.id.toString()">
@@ -9,5 +11,4 @@
       <div>{{ "workouts.empty" | translate }}</div>
     }
   </div>
-  <button routerLink="new">{{ "workouts.add" | translate }}</button>
 </section>

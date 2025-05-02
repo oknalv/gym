@@ -24,6 +24,7 @@ import { DeleteWarningDialogComponent } from '../../shared/dialog/delete-warning
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { asExercise, asSuperset, isExercise } from '../../utils';
+import { BackLinkComponent } from '../../shared/back-link/back-link.component';
 
 @Component({
   selector: 'gym-workout-editor',
@@ -36,6 +37,7 @@ import { asExercise, asSuperset, isExercise } from '../../utils';
     SupersetEditorComponent,
     DeleteWarningDialogComponent,
     TranslatePipe,
+    BackLinkComponent,
   ],
   templateUrl: './workout-editor.component.html',
   styleUrl: './workout-editor.component.scss',
@@ -50,6 +52,9 @@ export class WorkoutEditorComponent {
   });
   submitKey = computed(() => {
     return `workouts.editor.${this.editMode() ? 'save' : 'add'}`;
+  });
+  backLinkKey = computed(() => {
+    return `workouts.backLinks.${this.editMode() ? 'workout' : 'workouts'}`;
   });
 
   private workoutService = inject(WorkoutService);
@@ -72,6 +77,8 @@ export class WorkoutEditorComponent {
 
   exercises: (Exercise | Superset)[] = [];
 
+  private lastExecution: Date | null = null;
+
   constructor() {
     effect(() => {
       if (this.id()) {
@@ -80,7 +87,8 @@ export class WorkoutEditorComponent {
           .find((workout) => workout.id === +this.id()!);
         if (workout) {
           this.form.controls.name.setValue(workout.name);
-          this.exercises = workout.exercises;
+          this.exercises = [...workout.exercises];
+          this.lastExecution = workout.lastExecution;
         } else {
           this.router.navigate(['..']);
         }
@@ -190,7 +198,7 @@ export class WorkoutEditorComponent {
           id: +this.id()!,
           name: this.form.value.name!,
           exercises: this.exercises,
-          lastExecution: null,
+          lastExecution: this.lastExecution,
         });
       } else {
         await this.workoutService.addWorkout({

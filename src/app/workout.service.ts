@@ -18,11 +18,14 @@ export class WorkoutService {
   exerciseTypes = this._exerciseTypes.asReadonly();
   private _workouts = signal<Workout[]>([]);
   workouts = this._workouts.asReadonly();
-  constructor(private dataService: DataService) {
-    this.initWorkouts().then();
+
+  constructor(private dataService: DataService) {}
+
+  async init() {
+    return this.initWorkouts();
   }
 
-  private initExerciseTypes() {
+  private async initExerciseTypes() {
     return new Promise<void>((resolve, reject) => {
       this.dataService
         .getAllData(this.dataService.exerciseTypeStoreName)
@@ -34,7 +37,7 @@ export class WorkoutService {
     });
   }
 
-  private initWorkouts() {
+  private async initWorkouts() {
     return new Promise<void>(async (resolve, reject) => {
       await this.initExerciseTypes();
       this.dataService

@@ -9,6 +9,7 @@ import { asExercise, asSuperset, isExercise } from '../../utils';
 import { ExerciseComponent } from '../../exercise/exercise.component';
 import { IconComponent } from '../../shared/icon/icon.component';
 import { DeleteWarningDialogComponent } from '../../shared/dialog/delete-warning-dialog/delete-warning-dialog.component';
+import { ExecutionService } from '../../execution.service';
 
 @Component({
   selector: 'gym-workout-detail',
@@ -27,6 +28,7 @@ import { DeleteWarningDialogComponent } from '../../shared/dialog/delete-warning
 export class WorkoutDetailComponent {
   id = input.required<string>();
   workoutService = inject(WorkoutService);
+  executionService = inject(ExecutionService);
   router = inject(Router);
   workout?: Workout;
   showAskDeleteWorkout = signal(false);
@@ -53,5 +55,9 @@ export class WorkoutDetailComponent {
   async onDeleteWorkout() {
     await this.workoutService.deleteWorkout(+this.id());
     this.router.navigate(['workouts']);
+  }
+
+  onStartWorkout() {
+    this.executionService.startWorkout(+this.id());
   }
 }

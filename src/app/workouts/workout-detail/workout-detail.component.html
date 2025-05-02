@@ -1,4 +1,4 @@
-<div routerLink="/workouts" gymBackLink>{{ "workouts.title" | translate }}</div>
+<gym-back-link>{{ "workouts.backLinks.workouts" | translate }}</gym-back-link>
 <header>
   <div class="info">
     <h1>{{ workout?.name }}</h1>
@@ -12,7 +12,9 @@
     </div>
   </div>
   <div class="actions">
-    <button class="play"><gym-icon icon="play" /></button>
+    <button class="play" (click)="onStartWorkout()">
+      <gym-icon icon="play" />
+    </button>
     <div>
       <button routerLink="edit"><gym-icon icon="pencil" /></button>
       <button (click)="onAskDeleteWorkout()">

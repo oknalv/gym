@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WorkoutEditorComponent } from './workout-editor.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { provideRouter } from '@angular/router';
 
 describe('WorkoutEditorComponent', () => {
   let component: WorkoutEditorComponent;
@@ -10,6 +11,7 @@ describe('WorkoutEditorComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [WorkoutEditorComponent, TranslateModule.forRoot()],
+      providers: [provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(WorkoutEditorComponent);

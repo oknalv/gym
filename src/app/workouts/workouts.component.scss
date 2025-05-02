@@ -7,3 +7,12 @@
     }
   }
 }
+h1 {
+  display: flex;
+  justify-content: space-between;
+
+  gym-icon {
+    font-size: 1em;
+    cursor: pointer;
+  }
+}
