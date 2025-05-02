@@ -1,3 +1,7 @@
+* {
+  font-family: sans-serif;
+}
+
 html {
   --dark-red: #77172e;
   --light-red: #faafa8;
@@ -15,7 +19,6 @@ html {
   --margin: 10px;
   --border-width: 5px;
   --background-color: #202124;
-  font-family: sans-serif;
   background-color: var(--background-color);
   color: white;
 }
@@ -98,7 +101,7 @@ h3 {
 }
 
 input[type="number"] {
-  -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 input::-webkit-outer-spin-button,

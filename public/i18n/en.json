@@ -3,12 +3,14 @@
     "title": "Workouts",
     "empty": "There are no workouts yet.",
     "add": "Add workout",
-    "new": {
-      "title": "New workout",
+    "editor": {
+      "new": "New workout",
+      "edit": "Edit workout",
       "workoutElement": "workout",
       "name": "Name",
-      "nameError": "Pleas enter a name for the workout.",
+      "nameError": "Please enter a name for the workout.",
       "add": "Add workout",
+      "save": "Save workout",
       "error": "You should add at least one exercise or superset."
     },
     "preview": {
@@ -100,7 +102,8 @@
       "cancel": "Cancel",
       "delete": "Delete",
       "exercise": "exercise",
-      "superset": "superset"
+      "superset": "superset",
+      "workout": "workout"
     },
     "timeEditorDialog": {
       "title": "Change time",

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NewWorkoutComponent } from './new-workout.component';
+import { WorkoutEditorComponent } from './workout-editor.component';
 import { TranslateModule } from '@ngx-translate/core';
 
-describe('NewWorkoutComponent', () => {
-  let component: NewWorkoutComponent;
-  let fixture: ComponentFixture<NewWorkoutComponent>;
+describe('WorkoutEditorComponent', () => {
+  let component: WorkoutEditorComponent;
+  let fixture: ComponentFixture<WorkoutEditorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NewWorkoutComponent, TranslateModule.forRoot()],
+      imports: [WorkoutEditorComponent, TranslateModule.forRoot()],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(NewWorkoutComponent);
+    fixture = TestBed.createComponent(WorkoutEditorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { WorkoutsComponent } from './workouts/workouts.component';
-import { NewWorkoutComponent } from './workouts/new-workout/new-workout.component';
+import { WorkoutEditorComponent } from './workouts/workout-editor/workout-editor.component';
 import { WorkoutDetailComponent } from './workouts/workout-detail/workout-detail.component';
 
 export const routes: Routes = [
@@ -14,11 +14,15 @@ export const routes: Routes = [
     component: WorkoutsComponent,
   },
   {
+    path: 'workouts/new',
+    component: WorkoutEditorComponent,
+  },
+  {
     path: 'workouts/:id',
     component: WorkoutDetailComponent,
   },
   {
-    path: 'new-workout',
-    component: NewWorkoutComponent,
+    path: 'workouts/:id/edit',
+    component: WorkoutEditorComponent,
   },
 ];

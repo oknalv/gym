@@ -14,8 +14,10 @@
   <div class="actions">
     <button class="play"><gym-icon icon="play" /></button>
     <div>
-      <button><gym-icon icon="pencil" /></button>
-      <button><gym-icon icon="trashbin" /></button>
+      <button routerLink="edit"><gym-icon icon="pencil" /></button>
+      <button (click)="onAskDeleteWorkout()">
+        <gym-icon icon="trashbin" />
+      </button>
     </div>
   </div>
 </header>
@@ -36,3 +38,8 @@
     }
   }
 </section>
+<gym-delete-warning-dialog
+  [(open)]="showAskDeleteWorkout"
+  whatToDelete="workout"
+  (delete)="onDeleteWorkout()"
+/>

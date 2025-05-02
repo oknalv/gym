@@ -3,6 +3,7 @@ import {
   computed,
   effect,
   inject,
+  input,
   signal,
   WritableSignal,
 } from '@angular/core';
@@ -20,12 +21,12 @@ import { ExerciseComponent } from '../../exercise/exercise.component';
 import { IconComponent } from '../../shared/icon/icon.component';
 import { SupersetEditorComponent } from './superset-editor/superset-editor.component';
 import { DeleteWarningDialogComponent } from '../../shared/dialog/delete-warning-dialog/delete-warning-dialog.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { asExercise, asSuperset, isExercise } from '../../utils';
 
 @Component({
-  selector: 'gym-new-workout',
+  selector: 'gym-workout-editor',
   imports: [
     ReactiveFormsModule,
     ExerciseEditorComponent,
@@ -36,12 +37,24 @@ import { asExercise, asSuperset, isExercise } from '../../utils';
     DeleteWarningDialogComponent,
     TranslatePipe,
   ],
-  templateUrl: './new-workout.component.html',
-  styleUrl: './new-workout.component.scss',
+  templateUrl: './workout-editor.component.html',
+  styleUrl: './workout-editor.component.scss',
 })
-export class NewWorkoutComponent {
+export class WorkoutEditorComponent {
+  id = input<string>();
+  editMode = computed(() => {
+    return !!this.id();
+  });
+  titleKey = computed(() => {
+    return `workouts.editor.${this.editMode() ? 'edit' : 'new'}`;
+  });
+  submitKey = computed(() => {
+    return `workouts.editor.${this.editMode() ? 'save' : 'add'}`;
+  });
+
   private workoutService = inject(WorkoutService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
   private newExerciseTypes: WritableSignal<ExerciseType[]> = signal([]);
   exerciseTypes = computed(() => [
     ...this.workoutService.exerciseTypes(),
@@ -60,6 +73,19 @@ export class NewWorkoutComponent {
   exercises: (Exercise | Superset)[] = [];
 
   constructor() {
+    effect(() => {
+      if (this.id()) {
+        const workout = this.workoutService
+          .workouts()
+          .find((workout) => workout.id === +this.id()!);
+        if (workout) {
+          this.form.controls.name.setValue(workout.name);
+          this.exercises = workout.exercises;
+        } else {
+          this.router.navigate(['..']);
+        }
+      }
+    });
     effect(() => {
       if (!this.exerciseEditorVisible()) {
         this.editingExercise.set(undefined);
@@ -150,7 +176,7 @@ export class NewWorkoutComponent {
     return false;
   }
 
-  onSubmitWorkout(event: Event) {
+  async onSubmitWorkout(event: Event) {
     event.preventDefault();
     this.firstSubmitClick.set(true);
     this.form.controls.name.markAsDirty();
@@ -159,13 +185,22 @@ export class NewWorkoutComponent {
       !this.showExerciseListError &&
       !this.emptySupersets()
     ) {
-      this.workoutService.addWorkout({
-        id: Date.now(),
-        name: this.form.value.name!,
-        exercises: this.exercises,
-        lastExecution: null,
-      });
-      this.router.navigate(['workouts']);
+      if (this.editMode()) {
+        await this.workoutService.editWorkout({
+          id: +this.id()!,
+          name: this.form.value.name!,
+          exercises: this.exercises,
+          lastExecution: null,
+        });
+      } else {
+        await this.workoutService.addWorkout({
+          id: Date.now(),
+          name: this.form.value.name!,
+          exercises: this.exercises,
+          lastExecution: null,
+        });
+      }
+      this.router.navigate(['..'], { relativeTo: this.route });
     }
   }
 }

@@ -124,4 +124,50 @@ export class WorkoutService {
     );
     await this.initWorkouts();
   }
+
+  async editWorkout(workout: Workout) {
+    const newExerciseTypes: Set<ExerciseType> = new Set();
+    const editWorkoutDTO: WorkoutDTO = {
+      id: workout.id,
+      name: workout.name,
+      lastExecution: null,
+      exercises: workout.exercises.map((exercise) => {
+        const type = (exercise as Exercise).type;
+        if (type) {
+          const _exercise = exercise as Exercise;
+          if (!this.exerciseTypes().includes(type)) newExerciseTypes.add(type);
+          return { ..._exercise, type: type.id } as ExerciseDTO;
+        } else {
+          const superset = exercise as Superset;
+          return {
+            ...superset,
+            exercises: superset.exercises.map((supersetExercise) => {
+              if (!this.exerciseTypes().includes(supersetExercise.type!))
+                newExerciseTypes.add(supersetExercise.type!);
+              return {
+                ...supersetExercise,
+                type: supersetExercise.type!.id,
+              } as ExerciseDTO;
+            }),
+          } as SupersetDTO;
+        }
+      }),
+    };
+    for (const newExerciseType of newExerciseTypes) {
+      await this.dataService.addData(
+        this.dataService.exerciseTypeStoreName,
+        newExerciseType,
+      );
+    }
+    await this.dataService.updateData(
+      this.dataService.workoutStoreName,
+      editWorkoutDTO,
+    );
+    await this.initWorkouts();
+  }
+
+  async deleteWorkout(id: number) {
+    await this.dataService.deleteData(this.dataService.workoutStoreName, id);
+    await this.initWorkouts();
+  }
 }

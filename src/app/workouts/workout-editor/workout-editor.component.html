@@ -1,10 +1,10 @@
-<h1>{{ "workouts.new.title" | translate }}</h1>
+<h1>{{ titleKey() | translate }}</h1>
 <form [formGroup]="form">
   <div>
     <gym-text-input
-      [label]="'workouts.new.name' | translate"
+      [label]="'workouts.editor.name' | translate"
       formControlName="name"
-      [errorMessage]="'workouts.new.nameError' | translate"
+      [errorMessage]="'workouts.editor.nameError' | translate"
     />
   </div>
   <div>
@@ -39,7 +39,7 @@
       <div>{{ "exercises.empty" | translate }}</div>
     }
     @if (showExerciseListError) {
-      <div class="error">{{ "workouts.new.error" | translate }}</div>
+      <div class="error">{{ "workouts.editor.error" | translate }}</div>
     }
     <gym-exercise-editor
       [baseExercise]="editingExercise()"
@@ -57,7 +57,7 @@
     </div>
   </div>
   <button (click)="onSubmitWorkout($event)" class="create-workout">
-    {{ "workouts.new.add" | translate }}
+    {{ submitKey() | translate }}
   </button>
 </form>
 <gym-delete-warning-dialog
