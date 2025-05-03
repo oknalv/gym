@@ -119,4 +119,8 @@ export class ExecutionService {
       };
     });
   }
+
+  exitExecution() {
+    this._ongoingExecution.set(null);
+  }
 }

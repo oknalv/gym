@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { WorkoutsComponent } from './workouts/workouts.component';
 import { WorkoutEditorComponent } from './workouts/workout-editor/workout-editor.component';
 import { WorkoutDetailComponent } from './workouts/workout-detail/workout-detail.component';
+import { ExecutionComponent } from './execution/execution.component';
 
 export const routes: Routes = [
   {
@@ -24,5 +25,9 @@ export const routes: Routes = [
   {
     path: 'workouts/:id/edit',
     component: WorkoutEditorComponent,
+  },
+  {
+    path: 'execution',
+    component: ExecutionComponent,
   },
 ];

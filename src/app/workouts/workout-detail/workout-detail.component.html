@@ -12,12 +12,14 @@
     </div>
   </div>
   <div class="actions">
-    <button class="play" (click)="onStartWorkout()">
+    <button class="play" (click)="onStartWorkout()" [disabled]="isExecuting()">
       <gym-icon icon="play" />
     </button>
     <div>
-      <button routerLink="edit"><gym-icon icon="pencil" /></button>
-      <button (click)="onAskDeleteWorkout()">
+      <button routerLink="edit" [disabled]="isBeingExecuted()">
+        <gym-icon icon="pencil" />
+      </button>
+      <button (click)="onAskDeleteWorkout()" [disabled]="isBeingExecuted()">
         <gym-icon icon="trashbin" />
       </button>
     </div>

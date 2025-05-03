@@ -1,11 +1,41 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { FooterComponent } from './footer/footer.component';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { ExecutionService } from './execution.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'gym-root',
   imports: [FooterComponent, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  host: {
+    '[class.executing]': 'isExecuting()',
+    '[class.in-execution]': 'isInExecution()',
+  },
 })
-export class AppComponent {}
+export class AppComponent {
+  private executionService = inject(ExecutionService);
+  private router = inject(Router);
+  private currentPage = signal('');
+  isExecuting = computed(() => {
+    return !!this.executionService.ongoingExecution();
+  });
+  isInExecution = computed(() => {
+    return this.currentPage() === '/execution';
+  });
+
+  constructor() {
+    this.router.events
+      .pipe(
+        takeUntilDestroyed(),
+        filter((event) => event instanceof NavigationEnd),
+      )
+      .subscribe({
+        next: (event) => {
+          this.currentPage.set(event.url);
+        },
+      });
+  }
+}

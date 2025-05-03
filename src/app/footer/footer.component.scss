@@ -19,5 +19,25 @@ footer {
       background-color: var(--light-cyan);
       color: var(--dark-cyan);
     }
+
+    &.executing {
+      color: var(--light-green);
+
+      &.active {
+        background-color: var(--dark-green);
+        color: var(--light-green);
+      }
+    }
+  }
+}
+
+:host-context(.executing) {
+  .execution {
+    color: var(--light-green);
+
+    &.active {
+      background-color: var(--light-green);
+      color: var(--dark-green);
+    }
   }
 }

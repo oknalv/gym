@@ -16,10 +16,11 @@ describe('WorkoutDetailComponent', () => {
 
     fixture = TestBed.createComponent(WorkoutDetailComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    fixture.componentRef.setInput('id', '0');
   });
 
   it('should create', () => {
+    fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 });

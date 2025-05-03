@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import {
   Exercise,
   ExerciseDTO,
@@ -9,6 +9,7 @@ import {
   WorkoutDTO,
 } from './gym.model';
 import { DataService } from './data.service';
+import { ExecutionService } from './execution.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,7 @@ export class WorkoutService {
   exerciseTypes = this._exerciseTypes.asReadonly();
   private _workouts = signal<Workout[]>([]);
   workouts = this._workouts.asReadonly();
+  private executionService = inject(ExecutionService);
 
   constructor(private dataService: DataService) {}
 
@@ -170,6 +172,9 @@ export class WorkoutService {
   }
 
   async deleteWorkout(id: number) {
+    if (this.executionService.ongoingExecution()?.workoutId === id) {
+      throw 'WORKOUT_EXECUTING';
+    }
     await this.dataService.deleteData(this.dataService.workoutStoreName, id);
     await this.initWorkouts();
   }

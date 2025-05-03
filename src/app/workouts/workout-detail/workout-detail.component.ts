@@ -1,4 +1,11 @@
-import { Component, effect, inject, input, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { Workout } from '../../gym.model';
 import { WorkoutService } from '../../workout.service';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -32,6 +39,12 @@ export class WorkoutDetailComponent {
   router = inject(Router);
   workout?: Workout;
   showAskDeleteWorkout = signal(false);
+  isExecuting = computed(() => {
+    return !!this.executionService.ongoingExecution();
+  });
+  isBeingExecuted = computed(() => {
+    return +this.id() === this.executionService.ongoingExecution()?.workoutId;
+  });
 
   constructor() {
     effect(() => {
@@ -59,5 +72,6 @@ export class WorkoutDetailComponent {
 
   onStartWorkout() {
     this.executionService.startWorkout(+this.id());
+    this.router.navigate(['execution']);
   }
 }
