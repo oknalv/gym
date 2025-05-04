@@ -23,14 +23,12 @@
     @if (isExercise(exercise)) {
       <div class="exercise-name">{{ asExercise(exercise).type!.name }}</div>
     } @else {
-      <div class="superset">
-        @for (
-          supersetExercise of asSuperset(exercise).exercises;
-          track supersetExercise.id
-        ) {
-          <div class="exercise-name">{{ supersetExercise.type!.name }}</div>
-        }
-      </div>
+      @for (
+        supersetExercise of asSuperset(exercise).exercises;
+        track supersetExercise.id
+      ) {
+        <div class="exercise-name">{{ supersetExercise.type!.name }}</div>
+      }
     }
   }
 </div>

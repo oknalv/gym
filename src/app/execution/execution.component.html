@@ -1,1 +1,54 @@
-{{ workout()?.name || "empty" }}
+@if (execution()) {
+  @if (mustChooseExercise()) {
+    <div class="choose-exercise">
+      <h1>
+        {{ "execution.chooseExercise" | translate }}
+      </h1>
+      <section>
+        @for (exercise of workout()!.exercises; track exercise.id) {
+          @if (isExercise(exercise)) {
+            <gym-exercise-option
+              [exercise]="asExercise(exercise)"
+              (click)="onChooseExercise(exercise.id)"
+            />
+          } @else {
+            <gym-superset-option
+              [superset]="asSuperset(exercise)"
+              (click)="onChooseExercise(exercise.id)"
+            />
+          }
+        }
+      </section>
+    </div>
+  } @else if (mustPerformSet()) {
+    @if (isExercise(ongoingExercise()!)) {
+      <gym-ongoing-exercise
+        [exercise]="asExercise(ongoingExercise()!)"
+        [setIndex]="execution()!.setIndex"
+      />
+    } @else {
+      <gym-ongoing-superset
+        [superset]="asSuperset(ongoingExercise()!)"
+        [setIndex]="execution()!.setIndex"
+      />
+    }
+    <div class="actions">
+      <button class="abandon" (click)="onAbandonExercise()">
+        <gym-icon icon="exit" />
+        <div>
+          {{
+            "execution.abandonExercise"
+              | translate
+                : {
+                    whatToLeave:
+                      "execution." +
+                        (isExercise(ongoingExercise()!)
+                          ? "exercise"
+                          : "superset") | translate,
+                  }
+          }}
+        </div>
+      </button>
+    </div>
+  }
+}

@@ -25,6 +25,9 @@ export class AppComponent {
   isInExecution = computed(() => {
     return this.currentPage() === '/execution';
   });
+  showExecutionPreview = computed(() => {
+    return this.isExecuting() && !this.isInExecution();
+  });
 
   constructor() {
     this.router.events
@@ -37,5 +40,8 @@ export class AppComponent {
           this.currentPage.set(event.url);
         },
       });
+    if (this.isExecuting()) {
+      this.router.navigate(['/execution']);
+    }
   }
 }

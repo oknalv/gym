@@ -1,0 +1,14 @@
+<h1>{{ "execution.supersetTitle" | translate }}</h1>
+<h2>
+  {{
+    "execution.setOf"
+      | translate
+        : { number: setIndex() + 1, total: superset().exercises[0].sets.length }
+  }}
+</h2>
+@for (exercise of superset().exercises; track exercise.id) {
+  <gym-ongoing-superset-exercise
+    [exercise]="exercise"
+    [setIndex]="setIndex()"
+  />
+}

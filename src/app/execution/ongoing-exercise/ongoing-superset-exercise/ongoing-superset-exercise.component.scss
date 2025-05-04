@@ -1,0 +1,27 @@
+:host {
+  background-color: var(--table-1);
+  display: block;
+  padding: var(--padding);
+}
+
+header {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--margin);
+
+  > gym-exercise-image {
+    --size-multiplier: 0.75;
+    margin-right: var(--margin);
+  }
+  > h2 {
+    word-break: break-all;
+  }
+}
+
+.set {
+  font-size: 1.5em;
+
+  > gym-icon {
+    font-size: 1em;
+  }
+}

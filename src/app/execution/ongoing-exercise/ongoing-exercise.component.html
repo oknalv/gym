@@ -1,0 +1,29 @@
+<header>
+  <gym-exercise-image
+    [src]="exercise().type!.image!"
+    [alt]="exercise().type!.name"
+  />
+  <h1>{{ exercise().type!.name }}</h1>
+</header>
+<h2>
+  {{
+    "execution.setOf"
+      | translate: { number: setIndex() + 1, total: exercise().sets.length }
+  }}
+</h2>
+<div class="set">
+  @if (exercise().weighted) {
+    <gym-icon
+      [icon]="exercise().weightType === 'total' ? 'dumbbell' : 'halfdumbbell'"
+    />
+    {{ set().weight }} kg
+  }
+  <br />
+  @if (exercise().progressType === "repetitions") {
+    <gym-icon icon="repeat" />
+    {{ set().repetitions }} reps
+  } @else {
+    <gym-icon icon="hourglass" />
+    {{ set().time | time }}
+  }
+</div>

@@ -1,6 +1,6 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { ExerciseSet, ProgressType } from '../../gym.model';
-import { getFormattedTime } from '../../utils';
+import { setToString } from '../../utils';
 
 @Component({
   selector: 'gym-set',
@@ -12,18 +12,7 @@ export class SetComponent {
   set = input.required<ExerciseSet>();
   weighted = input.required<boolean>();
   progressType = input.required<ProgressType>();
-
-  get text() {
-    return this.weight + this.progress;
-  }
-
-  get weight() {
-    return this.weighted() ? `${this.set().weight} kg × ` : '';
-  }
-
-  get progress() {
-    return this.progressType() === 'repetitions'
-      ? `${this.set().repetitions} reps`
-      : getFormattedTime(this.set().time);
-  }
+  text = computed(() => {
+    return setToString(this.set(), this.weighted(), this.progressType());
+  });
 }

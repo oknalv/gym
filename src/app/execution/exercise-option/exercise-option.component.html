@@ -1,0 +1,16 @@
+<gym-exercise-image
+  [src]="exercise().type!.image!"
+  [alt]="exercise().type!.name"
+/>
+<div>
+  <div class="exercise-name">
+    {{ exercise().type!.name }}
+  </div>
+  <div class="set-count">
+    @if (exercise().sets.length > 1) {
+      {{ exercise().sets.length }} {{ "execution.sets" | translate }}
+    } @else {
+      {{ "execution.oneSet" | translate }}
+    }
+  </div>
+</div>

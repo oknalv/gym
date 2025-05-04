@@ -6,7 +6,7 @@
   > .workout-data {
     > header {
       font-size: 1.5em;
-      word-wrap: break-word;
+      word-break: break-all;
     }
 
     > div {
@@ -30,7 +30,7 @@
     animation: detect-scroll linear;
     animation-timeline: scroll(self);
     --original-box-shadow: inset 0px calc(-1.5 * var(--margin))
-      calc(1 * var(--margin)) calc(-1 * var(--margin)) var(--table-1);
+      calc(0.5 * var(--margin)) calc(-1 * var(--margin)) var(--table-1);
     --box-shadow-can-scroll: var(--can-scroll) var(--original-box-shadow);
     --box-shadow-cant-scroll: none;
     --box-shadow: var(--box-shadow-can-scroll, var(--box-shadow-cant-scroll));
@@ -54,12 +54,6 @@
 
       &:not(:last-child) {
         margin-bottom: var(--exercises-padding);
-      }
-    }
-
-    > .superset {
-      &:not(:last-child) {
-        margin-bottom: calc(var(--margin) / 2);
       }
     }
   }

@@ -98,6 +98,17 @@
       "repetitionsError": "Reps must be a positive integer greater or equal to 1"
     }
   },
+  "execution": {
+    "chooseExercise": "Choose an exercise or superset",
+    "sets": "sets",
+    "oneSet": "1 set",
+    "supersetOf": "Superset of {{count}} exercises",
+    "setOf": "Set {{number}} of {{total}}",
+    "supersetTitle": "Superset",
+    "abandonExercise": "Leave {{whatToLeave}} without completing",
+    "superset": "superset",
+    "exercise": "exercise"
+  },
   "shared": {
     "deleteDialog": {
       "title": "Warning",

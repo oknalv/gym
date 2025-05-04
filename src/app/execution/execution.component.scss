@@ -1,0 +1,23 @@
+.superset-wrapper {
+  background-color: var(--dark-blue);
+}
+
+.choose-exercise {
+  > section {
+    > * {
+      margin-bottom: var(--margin);
+    }
+  }
+}
+
+.actions {
+  margin: var(--margin) 0;
+
+  gym-icon {
+    margin-bottom: var(--padding);
+  }
+  .abandon {
+    background-color: var(--light-yellow);
+    color: var(--dark-yellow);
+  }
+}

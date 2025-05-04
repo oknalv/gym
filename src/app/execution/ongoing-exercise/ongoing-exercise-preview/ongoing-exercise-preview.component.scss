@@ -1,0 +1,15 @@
+:host {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: var(--padding);
+
+  > .exercise-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  > .set {
+    text-align: right;
+    font-style: italic;
+  }
+}

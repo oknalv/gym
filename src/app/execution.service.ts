@@ -41,19 +41,21 @@ export class ExecutionService {
     if (this.ongoingExecution()) {
       throw 'EXECUTION_ALREADY_STARTED';
     }
-    const execution: Execution = {
+    this._ongoingExecution.set({
       workoutId: workoutId,
       completedExerciseIds: [],
       ongoingExerciseId: null,
       restingStart: null,
       setIndex: 0,
-    };
-    this._ongoingExecution.set(execution);
+    });
   }
 
   startExercise(exerciseId: number) {
     if (!this.ongoingExecution()) {
       throw 'EXECUTION_NOT_STARTED';
+    }
+    if (this.ongoingExecution()!.ongoingExerciseId) {
+      throw 'EXERCISE_ALREADY_STARTED';
     }
     this._ongoingExecution.update((execution) => {
       return {
@@ -61,6 +63,23 @@ export class ExecutionService {
         setIndex: 0,
         restingStart: null,
         ongoingExerciseId: exerciseId,
+      };
+    });
+  }
+
+  abandonExercise() {
+    if (!this.ongoingExecution()) {
+      throw 'EXECUTION_NOT_STARTED';
+    }
+    if (!this.ongoingExecution()!.ongoingExerciseId) {
+      throw 'EXERCISE_NOT_STARTED';
+    }
+    this._ongoingExecution.update((execution) => {
+      return {
+        ...execution!,
+        setIndex: 0,
+        restingStart: null,
+        ongoingExerciseId: null,
       };
     });
   }

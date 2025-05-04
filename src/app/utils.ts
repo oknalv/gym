@@ -1,5 +1,5 @@
 import { AbstractControl } from '@angular/forms';
-import { Exercise, Superset } from './gym.model';
+import { Exercise, ExerciseSet, ProgressType, Superset } from './gym.model';
 
 export function asExercise(exercise: Exercise | Superset) {
   return exercise as Exercise;
@@ -29,4 +29,17 @@ export function getHoursMinutesAndSeconds(seconds: number) {
 export function getFormattedTime(seconds: number) {
   const time = getHoursMinutesAndSeconds(seconds);
   return `${time.hours > 0 ? time.hours + 'h ' : ''}${time.minutes > 0 || (time.hours > 0 && time.seconds > 0) ? time.minutes + 'm ' : ''}${time.seconds > 0 ? time.seconds + 's' : ''}`.trim();
+}
+
+export function setToString(
+  set: ExerciseSet,
+  weighted: boolean,
+  progressType: ProgressType,
+) {
+  const weight = weighted ? `${set.weight} kg × ` : '';
+  const progress =
+    progressType === ProgressType.repetitions
+      ? `${set.repetitions} reps`
+      : getFormattedTime(set.time);
+  return weight + progress;
 }

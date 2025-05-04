@@ -6,7 +6,7 @@
     margin-right: var(--margin);
   }
   > .name {
-    word-wrap: break-word;
+    word-break: break-all;
     min-width: 10%;
   }
 }

@@ -13,5 +13,7 @@
   }
   &.executing.in-execution {
     --background-color: var(--dark-green);
+    --table-1: var(--dark-turquoise);
+    --table-2: var(--dark-green);
   }
 }

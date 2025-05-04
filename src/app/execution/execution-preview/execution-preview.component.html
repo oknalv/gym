@@ -1,0 +1,20 @@
+@if (mustChooseExercise()) {
+  {{ "execution.chooseExercise" | translate }}
+} @else if (mustPerformSet()) {
+  @if (isExercise(ongoingExercise()!)) {
+    <gym-ongoing-exercise-preview
+      [exercise]="asExercise(ongoingExercise()!)"
+      [setIndex]="execution()!.setIndex"
+    />
+  } @else {
+    @for (
+      exercise of asSuperset(ongoingExercise()!).exercises;
+      track exercise.id
+    ) {
+      <gym-ongoing-exercise-preview
+        [exercise]="exercise"
+        [setIndex]="execution()!.setIndex"
+      />
+    }
+  }
+}

@@ -10,7 +10,9 @@
     <div class="exercise-icons">
       @if (exercise().weighted) {
         <gym-icon
-          [icon]="exercise().weightType === 'total' ? 'dumbell' : 'halfdumbell'"
+          [icon]="
+            exercise().weightType === 'total' ? 'dumbbell' : 'halfdumbbell'
+          "
         />
       }
       <gym-icon
