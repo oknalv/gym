@@ -139,7 +139,7 @@ export class ExecutionService {
     });
   }
 
-  exitExecution() {
+  abandonWorkout() {
     this._ongoingExecution.set(null);
   }
 }

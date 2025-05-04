@@ -1,4 +1,11 @@
-import { Component, computed, DestroyRef, effect, inject } from '@angular/core';
+import {
+  Component,
+  computed,
+  DestroyRef,
+  effect,
+  inject,
+  signal,
+} from '@angular/core';
 import { ExecutionService } from '../execution.service';
 import { WorkoutService } from '../workout.service';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -7,6 +14,8 @@ import { ExerciseOptionComponent } from './exercise-option/exercise-option.compo
 import { SupersetOptionComponent } from './superset-option/superset-option.component';
 import { OngoingExerciseComponent } from './ongoing-exercise/ongoing-exercise.component';
 import { OngoingSupersetComponent } from './ongoing-superset/ongoing-superset.component';
+import { IconComponent } from '../shared/icon/icon.component';
+import { DialogComponent } from '../shared/dialog/dialog.component';
 
 @Component({
   selector: 'gym-execution',
@@ -16,6 +25,8 @@ import { OngoingSupersetComponent } from './ongoing-superset/ongoing-superset.co
     SupersetOptionComponent,
     OngoingExerciseComponent,
     OngoingSupersetComponent,
+    IconComponent,
+    DialogComponent,
   ],
   templateUrl: './execution.component.html',
   styleUrl: './execution.component.scss',
@@ -25,6 +36,8 @@ export class ExecutionComponent {
   private workoutService = inject(WorkoutService);
   private destroyRef = inject(DestroyRef);
   execution = this.executionService.ongoingExecution;
+  showAskLeaveWorkout = signal(false);
+
   workout = computed(() => {
     if (this.execution()) {
       const workout = this.workoutService
@@ -95,7 +108,11 @@ export class ExecutionComponent {
     this.executionService.startExercise(exerciseId);
   }
 
-  onAbandonExercise() {
-    this.executionService.abandonExercise();
+  onAskLeaveWorkout() {
+    this.showAskLeaveWorkout.set(true);
+  }
+
+  onLeaveWorkout() {
+    this.executionService.abandonWorkout();
   }
 }

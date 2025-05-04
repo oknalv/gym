@@ -28,7 +28,7 @@ import {
   getTimeValidators,
   getWeightValidators,
   SetsEditorComponent,
-} from '../../../sets-editor/sets-editor.component';
+} from './sets-editor/sets-editor.component';
 import { SwitchComponent } from '../../../shared/switch/switch.component';
 import { IconComponent } from '../../../shared/icon/icon.component';
 import { DialogComponent } from '../../../shared/dialog/dialog.component';

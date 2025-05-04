@@ -4,9 +4,10 @@
   } @else {
     @if (mustChooseExercise()) {
       <div class="choose-exercise">
-        <h1>
+        <h1>{{ workout()!.name }}</h1>
+        <h2>
           {{ "execution.chooseExercise" | translate }}
-        </h1>
+        </h2>
         <section>
           @for (exercise of workout()!.exercises; track exercise.id) {
             @if (isExercise(exercise)) {
@@ -22,7 +23,31 @@
             }
           }
         </section>
+        <div class="actions">
+          <button (click)="onAskLeaveWorkout()">
+            <div>
+              <gym-icon icon="exit" />
+            </div>
+            {{ "execution.abandonWorkout" | translate }}
+          </button>
+        </div>
       </div>
+      <gym-dialog [(open)]="showAskLeaveWorkout" [alert]="true">
+        <header>
+          {{ "execution.abandonWorkoutDialog.title" | translate }}
+        </header>
+        <p>
+          {{ "execution.abandonWorkoutDialog.text" | translate }}
+        </p>
+        <div class="abandon-actions">
+          <button (click)="showAskLeaveWorkout.set(false)">
+            {{ "execution.abandonWorkoutDialog.cancel" | translate }}</button
+          >&nbsp;
+          <button (click)="onLeaveWorkout()">
+            {{ "execution.abandonWorkoutDialog.abandon" | translate }}
+          </button>
+        </div>
+      </gym-dialog>
     } @else {
       @if (isExercise(ongoingExercise()!)) {
         <gym-ongoing-exercise [exercise]="asExercise(ongoingExercise()!)" />

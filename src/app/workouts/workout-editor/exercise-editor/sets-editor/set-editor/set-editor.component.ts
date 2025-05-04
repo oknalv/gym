@@ -12,7 +12,7 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { ProgressType, WeightType } from '../../gym.model';
+import { ProgressType, WeightType } from '../../../../../gym.model';
 import { SetEditorInputComponent } from './set-editor-input/set-editor-input.component';
 import { SetEditorTimeInputComponent } from './set-editor-time-input/set-editor-time-input.component';
 

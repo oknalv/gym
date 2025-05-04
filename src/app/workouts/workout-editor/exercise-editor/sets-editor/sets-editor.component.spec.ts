@@ -9,7 +9,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ProgressType, WeightType } from '../gym.model';
+import { ProgressType, WeightType } from '../../../../gym.model';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({

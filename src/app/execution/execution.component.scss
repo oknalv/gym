@@ -1,7 +1,3 @@
-.superset-wrapper {
-  background-color: var(--dark-blue);
-}
-
 .choose-exercise {
   > section {
     > * {
@@ -10,14 +6,26 @@
   }
 }
 
-.actions {
-  margin: var(--margin) 0;
+h1 {
+  text-align: center;
+}
 
-  gym-icon {
-    margin-bottom: var(--padding);
+.actions {
+  > button {
+    width: 100%;
+    background-color: var(--light-red);
+    color: var(--dark-red);
   }
-  .abandon {
-    background-color: var(--light-yellow);
-    color: var(--dark-yellow);
+}
+
+.abandon-actions {
+  float: right;
+  > button:first-child {
+    background-color: var(--dark-turquoise);
+    color: white;
+  }
+  > button:last-child {
+    background-color: var(--light-red);
+    color: var(--dark-red);
   }
 }

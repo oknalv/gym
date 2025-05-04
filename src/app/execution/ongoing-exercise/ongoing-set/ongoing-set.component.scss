@@ -1,0 +1,39 @@
+.set-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  > * {
+    width: fit-content;
+  }
+  .set {
+    font-size: 1.5em;
+
+    > gym-icon {
+      font-size: 1em;
+    }
+  }
+
+  > .actions {
+    > button {
+      height: 100%;
+      background-color: var(--dark-purple);
+      color: var(--light-purple);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      > div {
+        font-size: 1em;
+        position: relative;
+        width: fit-content;
+        flex-grow: 0;
+        margin-bottom: var(padding);
+        gym-icon:first-child {
+          font-size: 0.5em;
+          position: absolute;
+          right: 0;
+        }
+      }
+    }
+  }
+}

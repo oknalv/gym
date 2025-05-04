@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SetEditorComponent } from './set-editor.component';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Component, signal, viewChild } from '@angular/core';
-import { ProgressType, WeightType } from '../../gym.model';
+import { ProgressType, WeightType } from '../../../../../gym.model';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({

@@ -10,8 +10,8 @@ import {
   viewChild,
 } from '@angular/core';
 import { SetEditorComponent } from './set-editor/set-editor.component';
-import { IconComponent } from '../shared/icon/icon.component';
-import { ExerciseSet, ProgressType, WeightType } from '../gym.model';
+import { IconComponent } from '../../../../shared/icon/icon.component';
+import { ExerciseSet, ProgressType, WeightType } from '../../../../gym.model';
 import {
   AbstractControl,
   ControlContainer,
@@ -23,7 +23,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
-import { integerValidator } from '../utils';
+import { integerValidator } from '../../../../utils';
 
 let setId = 0;
 

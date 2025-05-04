@@ -1,0 +1,7 @@
+.timer-wrapper {
+  text-align: center;
+  > gym-timer {
+    font-size: 2em;
+    margin: var(--margin);
+  }
+}

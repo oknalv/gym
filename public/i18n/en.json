@@ -112,7 +112,15 @@
     "finishExercise": "Rest and finish {{whatToFinish}}",
     "skipExercise": "Skip {{whatToSkip}} finishing it",
     "skipRest": "Skip rest",
-    "skipRestFinish": "Skip rest and finish {{whatToFinish}}"
+    "skipRestFinish": "Skip rest and finish {{whatToFinish}}",
+    "runTimer": "Run timer",
+    "abandonWorkout": "Leave workout",
+    "abandonWorkoutDialog": {
+      "title": "Warning",
+      "text": "Are you sure you want to leave the workout? You are going to loose your progress in this session.",
+      "cancel": "Cancel",
+      "abandon": "Leave"
+    }
   },
   "shared": {
     "deleteDialog": {
@@ -132,6 +140,9 @@
       "minutes": "minutes",
       "seconds": "seconds",
       "error": "Please enter a valid time of at least 1 second."
+    },
+    "timerDialog": {
+      "title": "Timer"
     }
   }
 }

@@ -1,21 +1,16 @@
-header {
-  text-align: center;
+.exercise-data {
+  background-color: var(--table-1);
+  padding: var(--padding);
+  header {
+    text-align: center;
 
-  > gym-exercise-image {
-    --table-2: var(--table-1);
-    margin: 0 auto;
-    --size-multiplier: 1.5;
-  }
+    > gym-exercise-image {
+      margin: 0 auto;
+      --size-multiplier: 1.5;
+    }
 
-  > h1 {
-    word-break: break-all;
-  }
-}
-
-.set {
-  font-size: 2em;
-
-  > gym-icon {
-    font-size: 1em;
+    > h1 {
+      word-break: break-all;
+    }
   }
 }

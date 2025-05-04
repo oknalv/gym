@@ -5,19 +5,9 @@
   />
   <h2>{{ exercise().type!.name }}</h2>
 </header>
-<div class="set">
-  @if (exercise().weighted) {
-    <gym-icon
-      [icon]="exercise().weightType === 'total' ? 'dumbbell' : 'halfdumbbell'"
-    />
-    {{ set().weight }} kg
-  }
-  <br />
-  @if (exercise().progressType === "repetitions") {
-    <gym-icon icon="repeat" />
-    {{ set().repetitions }} reps
-  } @else {
-    <gym-icon icon="hourglass" />
-    {{ set().time | time }}
-  }
-</div>
+<gym-ongoing-set
+  [set]="set()"
+  [progressType]="exercise().progressType"
+  [weighted]="exercise().weighted"
+  [weightType]="exercise().weightType"
+/>

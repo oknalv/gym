@@ -1,0 +1,33 @@
+<div class="set-wrapper">
+  <div class="set">
+    @if (weighted()) {
+      <gym-icon
+        [icon]="weightType() === 'total' ? 'dumbbell' : 'halfdumbbell'"
+      />
+      {{ set().weight }} kg
+    }
+    <br />
+    @if (progressType() === "repetitions") {
+      <gym-icon icon="repeat" />
+      {{ set().repetitions }} reps
+    } @else {
+      <gym-icon icon="hourglass" />
+      {{ set().time | time }}
+    }
+  </div>
+  @if (progressType() === "time") {
+    <div class="actions">
+      <button (click)="onRunTimer()">
+        <div>
+          <gym-icon icon="hourglass" />
+          <gym-icon icon="play" />
+        </div>
+        {{ "execution.runTimer" | translate }}
+      </button>
+    </div>
+  }
+</div>
+
+@if (progressType() === "time") {
+  <gym-timer-dialog [(open)]="showTimer" [secondsToFinish]="set().time" />
+}

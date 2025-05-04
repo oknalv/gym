@@ -1,0 +1,13 @@
+<gym-dialog [(open)]="open" [alert]="true">
+  <header>{{ "shared.timerDialog.title" | translate }}</header>
+  @if (startingTime()) {
+    <div class="timer-wrapper">
+      <gym-timer
+        [startingTime]="startingTime()!"
+        [millisecondsToFinish]="secondsToFinish() * 1000"
+        [stopOnZero]="true"
+        (stop)="onClose()"
+      />
+    </div>
+  }
+</gym-dialog>
