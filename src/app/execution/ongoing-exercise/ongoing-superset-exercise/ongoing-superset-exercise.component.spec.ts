@@ -2,14 +2,24 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OngoingSupersetExerciseComponent } from './ongoing-superset-exercise.component';
 import { ProgressType, WeightType } from '../../../gym.model';
+import { ExecutionService } from '../../../execution.service';
 
 describe('OngoingSupersetExerciseComponent', () => {
   let component: OngoingSupersetExerciseComponent;
   let fixture: ComponentFixture<OngoingSupersetExerciseComponent>;
+  const mockExecutionService = jasmine.createSpyObj('ExecutionService', [
+    'ongoingExecution',
+  ]);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [OngoingSupersetExerciseComponent],
+      providers: [
+        {
+          provide: ExecutionService,
+          useValue: mockExecutionService,
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(OngoingSupersetExerciseComponent);
@@ -23,7 +33,13 @@ describe('OngoingSupersetExerciseComponent', () => {
       weighted: true,
       weightType: WeightType.total,
     });
-    fixture.componentRef.setInput('setIndex', 0);
+    mockExecutionService.ongoingExecution.and.returnValue({
+      workoutId: 0,
+      completedExerciseIds: [],
+      ongoingExerciseId: null,
+      restingStart: null,
+      setIndex: 0,
+    });
   });
 
   it('should create', () => {

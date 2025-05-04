@@ -3,13 +3,26 @@
   grid-template-columns: 1fr 1fr;
   column-gap: var(--padding);
 
-  > .exercise-name {
+  > .exercises-names {
     overflow: hidden;
-    text-overflow: ellipsis;
+    > div {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
-  > .set {
+  > .sets {
     text-align: right;
     font-style: italic;
+  }
+
+  > .resting-time {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gym-icon {
+      font-size: 1em;
+      margin-left: var(--margin);
+    }
   }
 }

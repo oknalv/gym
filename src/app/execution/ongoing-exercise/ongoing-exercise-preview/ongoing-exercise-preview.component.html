@@ -1,6 +1,22 @@
-<div class="exercise-name">
-  {{ exercise().type!.name }}
+<div class="exercises-names">
+  @for (exercise of exercises(); track exercise.id) {
+    <div>
+      {{ exercise.type!.name }}
+    </div>
+  }
 </div>
-<div class="set">
-  {{ setText() }}
-</div>
+@if (restingStart()) {
+  <div class="resting-time">
+    <gym-timer
+      [startingTime]="restingStart()!"
+      [millisecondsToFinish]="exercises()[0].restingTime * 1000"
+    />
+    <gym-icon icon="rest" />
+  </div>
+} @else {
+  <div class="sets">
+    @for (set of setTexts(); track $index) {
+      <div>{{ set }}</div>
+    }
+  </div>
+}

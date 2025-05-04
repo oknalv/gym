@@ -105,9 +105,14 @@
     "supersetOf": "Superset of {{count}} exercises",
     "setOf": "Set {{number}} of {{total}}",
     "supersetTitle": "Superset",
-    "abandonExercise": "Leave {{whatToLeave}} without completing",
+    "abandonExercise": "Leave {{whatToAbandon}} without finishing",
     "superset": "superset",
-    "exercise": "exercise"
+    "exercise": "exercise",
+    "finishSet": "Rest and finish set",
+    "finishExercise": "Rest and finish {{whatToFinish}}",
+    "skipExercise": "Skip {{whatToSkip}} finishing it",
+    "skipRest": "Skip rest",
+    "skipRestFinish": "Skip rest and finish {{whatToFinish}}"
   },
   "shared": {
     "deleteDialog": {

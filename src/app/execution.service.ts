@@ -129,7 +129,7 @@ export class ExecutionService {
       return {
         ...execution!,
         restingStart: null,
-        setIndex: execution!.setIndex + 1,
+        setIndex: 0,
         completedExerciseIds: [
           ...execution!.completedExerciseIds,
           execution!.ongoingExerciseId!,

@@ -1,0 +1,53 @@
+:host {
+  margin: var(--margin) 0;
+  display: block;
+  width: 100%;
+
+  .timer-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--light-green);
+    color: var(--dark-green);
+    padding: var(--padding);
+
+    gym-icon {
+      font-size: 3em;
+    }
+    gym-timer {
+      font-size: 3em;
+    }
+  }
+
+  button {
+    width: 100%;
+    font-size: 2em;
+  }
+
+  .secondary-actions {
+    display: flex;
+    button {
+      font-size: 1em;
+    }
+  }
+
+  gym-icon {
+    margin-bottom: var(--padding);
+  }
+  .abandon,
+  .skip-rest {
+    background-color: var(--light-yellow);
+    color: var(--dark-yellow);
+  }
+  .skip-exercise {
+    background-color: var(--light-red);
+    color: var(--dark-red);
+  }
+
+  .finish {
+    background-color: var(--light-green);
+    color: var(--dark-green);
+    font-size: 2em;
+  }
+}

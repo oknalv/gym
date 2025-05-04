@@ -7,8 +7,10 @@
   }}
 </h2>
 @for (exercise of superset().exercises; track exercise.id) {
-  <gym-ongoing-superset-exercise
-    [exercise]="exercise"
-    [setIndex]="setIndex()"
-  />
+  <gym-ongoing-superset-exercise [exercise]="exercise" />
 }
+<gym-execution-actions
+  elementKey="superset"
+  [isLastSet]="isLastSet()"
+  [restingTime]="superset().exercises[0].restingTime"
+/>

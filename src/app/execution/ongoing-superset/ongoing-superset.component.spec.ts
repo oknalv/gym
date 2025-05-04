@@ -3,14 +3,24 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { OngoingSupersetComponent } from './ongoing-superset.component';
 import { ProgressType, WeightType } from '../../gym.model';
 import { TranslateModule } from '@ngx-translate/core';
+import { ExecutionService } from '../../execution.service';
 
 describe('OngoingSupersetComponent', () => {
   let component: OngoingSupersetComponent;
   let fixture: ComponentFixture<OngoingSupersetComponent>;
+  const mockExecutionService = jasmine.createSpyObj('ExecutionService', [
+    'ongoingExecution',
+  ]);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [OngoingSupersetComponent, TranslateModule.forRoot()],
+      providers: [
+        {
+          provide: ExecutionService,
+          useValue: mockExecutionService,
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(OngoingSupersetComponent);
@@ -29,7 +39,13 @@ describe('OngoingSupersetComponent', () => {
         },
       ],
     });
-    fixture.componentRef.setInput('setIndex', 0);
+    mockExecutionService.ongoingExecution.and.returnValue({
+      workoutId: 0,
+      completedExerciseIds: [],
+      ongoingExerciseId: null,
+      restingStart: null,
+      setIndex: 0,
+    });
   });
 
   it('should create', () => {

@@ -1,19 +1,14 @@
 @if (mustChooseExercise()) {
   {{ "execution.chooseExercise" | translate }}
-} @else if (mustPerformSet()) {
-  @if (isExercise(ongoingExercise()!)) {
-    <gym-ongoing-exercise-preview
-      [exercise]="asExercise(ongoingExercise()!)"
-      [setIndex]="execution()!.setIndex"
-    />
-  } @else {
-    @for (
-      exercise of asSuperset(ongoingExercise()!).exercises;
-      track exercise.id
-    ) {
+} @else {
+  @if (!workoutFinished()) {
+    @if (isExercise(ongoingExercise()!)) {
       <gym-ongoing-exercise-preview
-        [exercise]="exercise"
-        [setIndex]="execution()!.setIndex"
+        [exercises]="[asExercise(ongoingExercise()!)]"
+      />
+    } @else {
+      <gym-ongoing-exercise-preview
+        [exercises]="asSuperset(ongoingExercise()!).exercises"
       />
     }
   }

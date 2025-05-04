@@ -1,51 +1,39 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ExecutionPreviewComponent } from './execution-preview.component';
+import { ExecutionActionsComponent } from './execution-actions.component';
 import { ExecutionService } from '../../execution.service';
-import { WorkoutService } from '../../workout.service';
+import { TranslateModule } from '@ngx-translate/core';
 
-describe('ExecutionPreviewComponent', () => {
-  let component: ExecutionPreviewComponent;
-  let fixture: ComponentFixture<ExecutionPreviewComponent>;
+describe('ExecutionActionsComponent', () => {
+  let component: ExecutionActionsComponent;
+  let fixture: ComponentFixture<ExecutionActionsComponent>;
   const mockExecutionService = jasmine.createSpyObj('ExecutionService', [
     'ongoingExecution',
-  ]);
-  const mockWorkoutService = jasmine.createSpyObj('WorkoutService', [
-    'workouts',
   ]);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ExecutionPreviewComponent],
+      imports: [ExecutionActionsComponent, TranslateModule.forRoot()],
       providers: [
         {
           provide: ExecutionService,
           useValue: mockExecutionService,
         },
-        {
-          provide: WorkoutService,
-          useValue: mockWorkoutService,
-        },
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ExecutionPreviewComponent);
+    fixture = TestBed.createComponent(ExecutionActionsComponent);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('elementKey', 'elementKey');
+    fixture.componentRef.setInput('isLastSet', false);
+    fixture.componentRef.setInput('restingTime', 1);
     mockExecutionService.ongoingExecution.and.returnValue({
-      workoutId: 0,
+      workoutId: 1,
       completedExerciseIds: [],
       ongoingExerciseId: null,
       restingStart: null,
       setIndex: 0,
     });
-    mockWorkoutService.workouts.and.returnValue([
-      {
-        id: 0,
-        name: 'name',
-        lastExecution: null,
-        exercises: [],
-      },
-    ]);
   });
 
   it('should create', () => {

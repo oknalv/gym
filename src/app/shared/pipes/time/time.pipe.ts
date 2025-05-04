@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { getFormattedTime, getHoursMinutesAndSeconds } from '../../../utils';
+import { getFormattedTime } from '../../../utils';
 
 @Pipe({
   name: 'time',

@@ -26,6 +26,11 @@ export function getHoursMinutesAndSeconds(seconds: number) {
   };
 }
 
+export function getHoursMinutesSecondsAndMilliseconds(milliseconds: number) {
+  const hms = getHoursMinutesAndSeconds(Math.floor(milliseconds / 1000));
+  return { ...hms, milliseconds: milliseconds % 1000 };
+}
+
 export function getFormattedTime(seconds: number) {
   const time = getHoursMinutesAndSeconds(seconds);
   return `${time.hours > 0 ? time.hours + 'h ' : ''}${time.minutes > 0 || (time.hours > 0 && time.seconds > 0) ? time.minutes + 'm ' : ''}${time.seconds > 0 ? time.seconds + 's' : ''}`.trim();

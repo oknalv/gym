@@ -15,7 +15,7 @@ describe('FooterComponent', () => {
 
     fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;
-    fixture.componentRef.setInput('showExecutionPreview', true);
+    fixture.componentRef.setInput('showExecutionPreview', false);
   });
 
   it('should create', () => {

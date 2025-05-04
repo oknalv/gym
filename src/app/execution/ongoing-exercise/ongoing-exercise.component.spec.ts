@@ -3,14 +3,24 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { OngoingExerciseComponent } from './ongoing-exercise.component';
 import { ProgressType, WeightType } from '../../gym.model';
 import { TranslateModule } from '@ngx-translate/core';
+import { ExecutionService } from '../../execution.service';
 
 describe('OngoingExerciseComponent', () => {
   let component: OngoingExerciseComponent;
   let fixture: ComponentFixture<OngoingExerciseComponent>;
+  const mockExecutionService = jasmine.createSpyObj('ExecutionService', [
+    'ongoingExecution',
+  ]);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [OngoingExerciseComponent, TranslateModule.forRoot()],
+      providers: [
+        {
+          provide: ExecutionService,
+          useValue: mockExecutionService,
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(OngoingExerciseComponent);
@@ -24,7 +34,13 @@ describe('OngoingExerciseComponent', () => {
       weighted: true,
       weightType: WeightType.total,
     });
-    fixture.componentRef.setInput('setIndex', 0);
+    mockExecutionService.ongoingExecution.and.returnValue({
+      workoutId: 0,
+      completedExerciseIds: [],
+      ongoingExerciseId: null,
+      restingStart: null,
+      setIndex: 0,
+    });
   });
 
   it('should create', () => {

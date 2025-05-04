@@ -27,3 +27,8 @@
     {{ set().time | time }}
   }
 </div>
+<gym-execution-actions
+  elementKey="exercise"
+  [isLastSet]="isLastSet()"
+  [restingTime]="exercise().restingTime"
+/>
