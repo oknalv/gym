@@ -124,7 +124,8 @@
     },
     "workoutFinished": "Workout finished",
     "noWorkoutExecuting": "There isn't any ongoing workout.",
-    "chooseWorkout": "Choose a workout"
+    "chooseWorkout": "Choose a workout",
+    "completedExercises": "Completed exercises"
   },
   "shared": {
     "deleteDialog": {

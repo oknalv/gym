@@ -18,6 +18,7 @@ import { OngoingSupersetComponent } from './ongoing-superset/ongoing-superset.co
 import { IconComponent } from '../shared/icon/icon.component';
 import { DialogComponent } from '../shared/dialog/dialog.component';
 import { RouterLink } from '@angular/router';
+import { Exercise, Superset } from '../gym.model';
 
 @Component({
   selector: 'gym-execution',
@@ -50,6 +51,21 @@ export class ExecutionComponent implements AfterViewInit {
     }
     return null;
   });
+  doneAndToDoExercises = computed(() => {
+    const exercises = {
+      done: [] as (Exercise | Superset)[],
+      toDo: [] as (Exercise | Superset)[],
+    };
+    return (
+      this.workout()?.exercises.reduce((accumulator, exercise) => {
+        if (this.execution()?.completedExerciseIds!.includes(exercise.id))
+          accumulator.done.push(exercise);
+        else accumulator.toDo.push(exercise);
+        return accumulator;
+      }, exercises) || exercises
+    );
+  });
+
   ongoingExercise = computed(() => {
     if (!this.execution()) return null;
     return this.workout()?.exercises.find(
@@ -154,6 +170,10 @@ export class ExecutionComponent implements AfterViewInit {
 
   onLeaveWorkout() {
     this.executionService.abandonWorkout();
+  }
+
+  redoExercise(exerciseId: number) {
+    this.executionService.redoExercise(exerciseId);
   }
 
   protected async updateWorkoutLastExecution() {

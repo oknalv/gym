@@ -11,7 +11,7 @@
           {{ "execution.chooseExercise" | translate }}
         </h2>
         <section>
-          @for (exercise of workout()!.exercises; track exercise.id) {
+          @for (exercise of doneAndToDoExercises().toDo; track exercise.id) {
             @if (isExercise(exercise)) {
               <gym-exercise-option
                 [exercise]="asExercise(exercise)"
@@ -23,6 +23,21 @@
                 (click)="onChooseExercise(exercise.id)"
               />
             }
+          }
+        </section>
+        <h3>{{ "execution.completedExercises" | translate }}</h3>
+        <section>
+          @for (exercise of doneAndToDoExercises().done; track exercise.id) {
+            <div class="completed-exercise">
+              @if (isExercise(exercise)) {
+                <gym-exercise-option [exercise]="asExercise(exercise)" />
+              } @else {
+                <gym-superset-option [superset]="asSuperset(exercise)" />
+              }
+              <button class="thick" (click)="redoExercise(exercise.id)">
+                <gym-icon icon="repeat" />
+              </button>
+            </div>
           }
         </section>
         <div class="actions">

@@ -63,12 +63,39 @@ export class ExecutionService {
     if (this.ongoingExecution()!.ongoingExerciseId) {
       throw 'EXERCISE_ALREADY_STARTED';
     }
+    if (this.ongoingExecution()!.completedExerciseIds.includes(exerciseId)) {
+      throw 'EXERCISE_ALREADY_DONE';
+    }
     this._ongoingExecution.update((execution) => {
       return {
         ...execution!,
         setIndex: 0,
         restingStart: null,
         ongoingExerciseId: exerciseId,
+      };
+    });
+  }
+
+  redoExercise(exerciseId: number) {
+    if (!this.ongoingExecution()) {
+      throw 'EXECUTION_NOT_STARTED';
+    }
+    if (this.ongoingExecution()!.ongoingExerciseId) {
+      throw 'EXERCISE_ALREADY_STARTED';
+    }
+    if (!this.ongoingExecution()!.completedExerciseIds.includes(exerciseId)) {
+      throw 'EXERCISE_NOT_DONE';
+    }
+    this._ongoingExecution.update((execution) => {
+      return {
+        ...execution!,
+        setIndex: 0,
+        restingStart: null,
+        ongoingExerciseId: exerciseId,
+        completedExerciseIds:
+          this._ongoingExecution()!.completedExerciseIds.filter(
+            (completedId) => completedId !== exerciseId,
+          ),
       };
     });
   }

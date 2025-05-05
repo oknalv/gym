@@ -39,3 +39,15 @@ h1 {
     margin-top: var(--margin);
   }
 }
+
+.completed-exercise {
+  display: flex;
+  > :first-child {
+    flex-grow: 1;
+  }
+
+  > button {
+    background-color: var(--light-green);
+    color: var(--dark-green);
+  }
+}
