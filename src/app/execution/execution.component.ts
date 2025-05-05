@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   computed,
   DestroyRef,
@@ -16,6 +17,7 @@ import { OngoingExerciseComponent } from './ongoing-exercise/ongoing-exercise.co
 import { OngoingSupersetComponent } from './ongoing-superset/ongoing-superset.component';
 import { IconComponent } from '../shared/icon/icon.component';
 import { DialogComponent } from '../shared/dialog/dialog.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'gym-execution',
@@ -27,11 +29,12 @@ import { DialogComponent } from '../shared/dialog/dialog.component';
     OngoingSupersetComponent,
     IconComponent,
     DialogComponent,
+    RouterLink,
   ],
   templateUrl: './execution.component.html',
   styleUrl: './execution.component.scss',
 })
-export class ExecutionComponent {
+export class ExecutionComponent implements AfterViewInit {
   private executionService = inject(ExecutionService);
   private workoutService = inject(WorkoutService);
   private destroyRef = inject(DestroyRef);
@@ -58,7 +61,10 @@ export class ExecutionComponent {
     if (!this.execution()) return false;
     return (
       this.workout()!.exercises.length ===
-      this.execution()!.completedExerciseIds.length
+        this.execution()!.completedExerciseIds.length ||
+      (this.workout()!.exercises.length - 1 ===
+        this.execution()!.completedExerciseIds.length &&
+        this.exerciseFinished())
     );
   });
 
@@ -69,20 +75,48 @@ export class ExecutionComponent {
     );
   });
 
+  isLastExercise = computed(() => {
+    if (!this.execution()) return false;
+    return (
+      this.workout()!.exercises.length - 1 ===
+      this.execution()!.completedExerciseIds.length
+    );
+  });
+
+  private exerciseFinished() {
+    const exercise = this.ongoingExerciseOrFirstSupersetExercise();
+    if (!exercise) return false;
+    return (
+      this.execution()!.restingStart &&
+      exercise &&
+      Date.now() -
+        exercise.restingTime * 1000 -
+        this.execution()!.restingStart!.getTime() >=
+        0
+    );
+  }
+
+  private ongoingExerciseOrFirstSupersetExercise = computed(() => {
+    if (!this.execution()) return null;
+    return this.ongoingExercise()
+      ? isExercise(this.ongoingExercise()!)
+        ? asExercise(this.ongoingExercise()!)
+        : asSuperset(this.ongoingExercise()!).exercises[0]
+      : null;
+  });
+
   constructor() {
     let restingInterval: number;
     effect(() => {
       const restingStart = this.execution()?.restingStart;
       if (restingStart) {
         restingInterval = window.setInterval(() => {
-          const exercise = isExercise(this.ongoingExercise()!)
-            ? asExercise(this.ongoingExercise()!)
-            : asSuperset(this.ongoingExercise()!).exercises[0];
-          const remaining =
-            Date.now() - exercise.restingTime * 1000 - restingStart.getTime();
-          if (remaining >= 0) {
+          if (this.exerciseFinished()) {
             clearInterval(restingInterval);
-            if (exercise.sets.length - 1 === this.execution()?.setIndex) {
+            if (
+              this.ongoingExerciseOrFirstSupersetExercise()!.sets.length - 1 ===
+              this.execution()?.setIndex
+            ) {
               this.executionService.completeExercise();
             } else {
               this.executionService.nextSet();
@@ -96,6 +130,12 @@ export class ExecutionComponent {
     this.destroyRef.onDestroy(() => {
       if (restingInterval) clearInterval(restingInterval);
     });
+  }
+  async ngAfterViewInit() {
+    if (this.workoutFinished()) {
+      await this.updateWorkoutLastExecution();
+      this.onLeaveWorkout();
+    }
   }
 
   asExercise = asExercise;
@@ -114,5 +154,12 @@ export class ExecutionComponent {
 
   onLeaveWorkout() {
     this.executionService.abandonWorkout();
+  }
+
+  protected async updateWorkoutLastExecution() {
+    await this.workoutService.editWorkout({
+      ...this.workout()!,
+      lastExecution: this.execution()!.workoutStart,
+    });
   }
 }

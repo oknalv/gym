@@ -7,10 +7,13 @@
   }}
 </h2>
 @for (exercise of superset().exercises; track exercise.id) {
-  <gym-ongoing-superset-exercise [exercise]="exercise" />
+  <gym-ongoing-superset-exercise
+    [exercise]="exercise"
+    [isLastExercise]="false"
+  />
 }
 <gym-execution-actions
-  elementKey="superset"
+  [elementKey]="isLastExercise() ? 'workout' : 'superset'"
   [isLastSet]="isLastSet()"
   [restingTime]="superset().exercises[0].restingTime"
 />

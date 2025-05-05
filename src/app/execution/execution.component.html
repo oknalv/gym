@@ -1,6 +1,8 @@
 @if (execution()) {
   @if (workoutFinished()) {
-    WORKOUT FINISHED
+    <div class="execution-message">
+      {{ "execution.workoutFinished" | translate }}
+    </div>
   } @else {
     @if (mustChooseExercise()) {
       <div class="choose-exercise">
@@ -50,10 +52,24 @@
       </gym-dialog>
     } @else {
       @if (isExercise(ongoingExercise()!)) {
-        <gym-ongoing-exercise [exercise]="asExercise(ongoingExercise()!)" />
+        <gym-ongoing-exercise
+          [exercise]="asExercise(ongoingExercise()!)"
+          [isLastExercise]="isLastExercise()"
+        />
       } @else {
-        <gym-ongoing-superset [superset]="asSuperset(ongoingExercise()!)" />
+        <gym-ongoing-superset
+          [superset]="asSuperset(ongoingExercise()!)"
+          [isLastExercise]="isLastExercise()"
+        />
       }
     }
   }
+} @else {
+  <div class="execution-message">
+    {{ "execution.noWorkoutExecuting" | translate }}
+    <button routerLink="/workouts">
+      <div><gym-icon icon="list" /></div>
+      {{ "execution.chooseWorkout" | translate }}
+    </button>
+  </div>
 }

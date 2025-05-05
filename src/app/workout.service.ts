@@ -99,14 +99,23 @@ export class WorkoutService {
         const type = (exercise as Exercise).type;
         if (type) {
           const _exercise = exercise as Exercise;
-          if (!this.exerciseTypes().includes(type)) newExerciseTypes.add(type);
+          if (
+            !this.exerciseTypes()
+              .map((type) => type.id)
+              .includes(type.id)
+          )
+            newExerciseTypes.add(type);
           return { ..._exercise, type: type.id } as ExerciseDTO;
         } else {
           const superset = exercise as Superset;
           return {
             ...superset,
             exercises: superset.exercises.map((supersetExercise) => {
-              if (!this.exerciseTypes().includes(supersetExercise.type!))
+              if (
+                !this.exerciseTypes()
+                  .map((type) => type.id)
+                  .includes(supersetExercise.type!.id)
+              )
                 newExerciseTypes.add(supersetExercise.type!);
               return {
                 ...supersetExercise,
@@ -135,19 +144,30 @@ export class WorkoutService {
     const editWorkoutDTO: WorkoutDTO = {
       id: workout.id,
       name: workout.name,
-      lastExecution: null,
+      lastExecution: workout.lastExecution
+        ? workout.lastExecution.getTime()
+        : null,
       exercises: workout.exercises.map((exercise) => {
         const type = (exercise as Exercise).type;
         if (type) {
           const _exercise = exercise as Exercise;
-          if (!this.exerciseTypes().includes(type)) newExerciseTypes.add(type);
+          if (
+            !this.exerciseTypes()
+              .map((type) => type.id)
+              .includes(type.id)
+          )
+            newExerciseTypes.add(type);
           return { ..._exercise, type: type.id } as ExerciseDTO;
         } else {
           const superset = exercise as Superset;
           return {
             ...superset,
             exercises: superset.exercises.map((supersetExercise) => {
-              if (!this.exerciseTypes().includes(supersetExercise.type!))
+              if (
+                !this.exerciseTypes()
+                  .map((type) => type.id)
+                  .includes(supersetExercise.type!.id)
+              )
                 newExerciseTypes.add(supersetExercise.type!);
               return {
                 ...supersetExercise,

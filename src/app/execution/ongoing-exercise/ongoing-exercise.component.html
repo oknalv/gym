@@ -20,7 +20,7 @@
   />
 </div>
 <gym-execution-actions
-  elementKey="exercise"
+  [elementKey]="isLastExercise() ? 'workout' : 'exercise'"
   [isLastSet]="isLastSet()"
   [restingTime]="exercise().restingTime"
 />

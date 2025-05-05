@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
 import { OngoingExerciseComponent } from '../ongoing-exercise.component';
 import { ExerciseImageComponent } from '../../../shared/exercise-image/exercise-image.component';
-import { IconComponent } from '../../../shared/icon/icon.component';
-import { TimePipe } from '../../../shared/pipes/time/time.pipe';
-import { TranslatePipe } from '@ngx-translate/core';
-import { TimerDialogComponent } from '../../../shared/dialog/timer-dialog/timer-dialog.component';
 import { OngoingSetComponent } from '../ongoing-set/ongoing-set.component';
 
 @Component({

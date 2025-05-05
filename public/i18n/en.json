@@ -108,6 +108,7 @@
     "abandonExercise": "Leave {{whatToAbandon}} without finishing",
     "superset": "superset",
     "exercise": "exercise",
+    "workout": "workout",
     "finishSet": "Rest and finish set",
     "finishExercise": "Rest and finish {{whatToFinish}}",
     "skipExercise": "Skip {{whatToSkip}} finishing it",
@@ -120,7 +121,10 @@
       "text": "Are you sure you want to leave the workout? You are going to loose your progress in this session.",
       "cancel": "Cancel",
       "abandon": "Leave"
-    }
+    },
+    "workoutFinished": "Workout finished",
+    "noWorkoutExecuting": "There isn't any ongoing workout.",
+    "chooseWorkout": "Choose a workout"
   },
   "shared": {
     "deleteDialog": {

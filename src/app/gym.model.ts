@@ -4,6 +4,7 @@ export interface Execution {
   ongoingExerciseId: number | null;
   restingStart: Date | null;
   setIndex: number;
+  workoutStart: Date;
 }
 
 export interface Workout {
@@ -56,6 +57,7 @@ export interface ExecutionDTO {
   ongoingExerciseId: number | null;
   restingStart: number | null;
   setIndex: number;
+  workoutStart: number;
 }
 
 export interface WorkoutDTO {

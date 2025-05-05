@@ -19,12 +19,17 @@ export class ExecutionService {
         restingStart: execution.restingStart
           ? new Date(execution.restingStart)
           : null,
+        workoutStart: new Date(execution.workoutStart),
       });
     }
     effect(() => {
       let execution: ExecutionDTO | null = null;
       if (this.ongoingExecution()) {
-        execution = { ...this.ongoingExecution()!, restingStart: null };
+        execution = {
+          ...this.ongoingExecution()!,
+          restingStart: null,
+          workoutStart: this.ongoingExecution()!.workoutStart.getTime(),
+        };
         if (this.ongoingExecution()!.restingStart) {
           execution.restingStart =
             this.ongoingExecution()!.restingStart!.getTime();
@@ -47,6 +52,7 @@ export class ExecutionService {
       ongoingExerciseId: null,
       restingStart: null,
       setIndex: 0,
+      workoutStart: new Date(),
     });
   }
 

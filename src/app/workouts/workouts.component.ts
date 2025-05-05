@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { WorkoutPreviewComponent } from './workout-preview/workout-preview.component';
 import { RouterLink } from '@angular/router';
 import { WorkoutService } from '../workout.service';
@@ -13,5 +13,14 @@ import { IconComponent } from '../shared/icon/icon.component';
 })
 export class WorkoutsComponent {
   private workoutService = inject(WorkoutService);
-  workouts = this.workoutService.workouts;
+  workouts = computed(() => {
+    return this.workoutService.workouts().sort((a, b) => {
+      if (!a.lastExecution && !b.lastExecution) {
+        return a.name < b.name ? -1 : 1;
+      }
+      if (!a.lastExecution) return -1;
+      if (!b.lastExecution) return 1;
+      return a.lastExecution.getTime() - b.lastExecution.getTime();
+    });
+  });
 }

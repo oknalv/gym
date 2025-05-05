@@ -18,6 +18,7 @@ import { ExecutionService } from '../../execution.service';
 export class OngoingSupersetComponent {
   superset = input.required<Superset>();
   executionService = inject(ExecutionService);
+  isLastExercise = input.required<boolean>();
   setIndex = computed(() => {
     return this.executionService.ongoingExecution()!.setIndex;
   });

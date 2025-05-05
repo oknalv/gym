@@ -31,7 +31,6 @@ export class ExecutionActionsComponent {
   }
 
   onRest() {
-    console.log('here');
     this.executionService.rest();
   }
 
