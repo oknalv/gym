@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ExerciseComponent } from './exercise.component';
-import { ProgressType, WeightType } from '../gym.model';
+import { ProgressType, WeightType } from '../../gym.model';
 
 describe('ExerciseComponent', () => {
   let component: ExerciseComponent;

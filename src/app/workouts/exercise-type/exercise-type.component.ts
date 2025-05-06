@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
-import { ExerciseType } from '../gym.model';
-import { ExerciseImageComponent } from '../shared/exercise-image/exercise-image.component';
+import { ExerciseType } from '../../gym.model';
+import { ExerciseImageComponent } from '../../shared/exercise-image/exercise-image.component';
 
 @Component({
   selector: 'gym-exercise-type',

@@ -13,7 +13,7 @@ import { DatePipe } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { BackLinkComponent } from '../../shared/back-link/back-link.component';
 import { asExercise, asSuperset, isExercise } from '../../utils';
-import { ExerciseComponent } from '../../exercise/exercise.component';
+import { ExerciseComponent } from '../exercise/exercise.component';
 import { IconComponent } from '../../shared/icon/icon.component';
 import { DeleteWarningDialogComponent } from '../../shared/dialog/delete-warning-dialog/delete-warning-dialog.component';
 import { ExecutionService } from '../../execution.service';

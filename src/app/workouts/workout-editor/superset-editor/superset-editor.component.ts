@@ -1,7 +1,7 @@
 import { Component, effect, input, model, output, signal } from '@angular/core';
 import { Exercise, ExerciseType, Superset } from '../../../gym.model';
 import { ExerciseEditorComponent } from '../exercise-editor/exercise-editor.component';
-import { ExerciseComponent } from '../../../exercise/exercise.component';
+import { ExerciseComponent } from '../../exercise/exercise.component';
 import { IconComponent } from '../../../shared/icon/icon.component';
 import { DeleteWarningDialogComponent } from '../../../shared/dialog/delete-warning-dialog/delete-warning-dialog.component';
 import { TranslatePipe } from '@ngx-translate/core';

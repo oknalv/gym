@@ -8,7 +8,7 @@ import {
 import { ExerciseType } from '../../../../gym.model';
 import { ExerciseTypeDialogComponent } from './exercise-type-dialog/exercise-type-dialog.component';
 import { NewExerciseTypeComponent } from './new-exercise-type/new-exercise-type.component';
-import { ExerciseTypeComponent } from '../../../../exercise-type/exercise-type.component';
+import { ExerciseTypeComponent } from '../../../exercise-type/exercise-type.component';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({

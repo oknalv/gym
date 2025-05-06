@@ -1,16 +1,6 @@
+import { Component, forwardRef, input, signal } from '@angular/core';
 import {
-  Component,
-  forwardRef,
-  inject,
-  input,
-  OnInit,
-  signal,
-  WritableSignal,
-} from '@angular/core';
-import {
-  ControlContainer,
   ControlValueAccessor,
-  FormControl,
   FormsModule,
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
@@ -30,29 +20,12 @@ import { IconComponent } from '../../../../../../shared/icon/icon.component';
     },
   ],
 })
-export class SetEditorInputComponent implements ControlValueAccessor, OnInit {
-  value!: WritableSignal<number>;
+export class SetEditorInputComponent implements ControlValueAccessor {
+  value = signal(1);
   icon = input.required<string>();
   label = input.required<string>();
 
-  formControlName = input<string>();
-  formControl = input<FormControl>();
-  controlContainer = inject(ControlContainer);
-
   private onChange = (value: number) => {};
-
-  private control!: FormControl<number>;
-
-  ngOnInit(): void {
-    if (this.formControlName()) {
-      this.control = this.controlContainer.control!.get(
-        this.formControlName()!,
-      )! as FormControl<number>;
-    } else if (this.formControl()) {
-      this.control = this.formControl()!;
-    }
-    this.value = signal(this.control.value);
-  }
 
   onType() {
     this.onChange(this.value());

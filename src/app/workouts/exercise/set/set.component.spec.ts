@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SetComponent } from './set.component';
-import { ProgressType } from '../../gym.model';
+import { ProgressType } from '../../../gym.model';
 
 describe('SetComponent', () => {
   let component: SetComponent;

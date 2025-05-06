@@ -1,7 +1,7 @@
 import { Component, computed, inject, input } from '@angular/core';
-import { ExerciseSet, ProgressType } from '../../gym.model';
-import { setToString } from '../../utils';
-import { ConfigurationService } from '../../configuration.service';
+import { ExerciseSet, ProgressType } from '../../../gym.model';
+import { setToString } from '../../../utils';
+import { ConfigurationService } from '../../../configuration.service';
 
 @Component({
   selector: 'gym-set',
