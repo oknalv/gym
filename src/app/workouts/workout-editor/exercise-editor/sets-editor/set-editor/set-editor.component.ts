@@ -1,5 +1,6 @@
 import {
   Component,
+  computed,
   inject,
   input,
   OnInit,
@@ -15,6 +16,7 @@ import {
 import { ProgressType, WeightType } from '../../../../../gym.model';
 import { SetEditorInputComponent } from './set-editor-input/set-editor-input.component';
 import { SetEditorTimeInputComponent } from './set-editor-time-input/set-editor-time-input.component';
+import { ConfigurationService } from '../../../../../configuration.service';
 
 @Component({
   selector: 'gym-set-editor',
@@ -33,6 +35,10 @@ export class SetEditorComponent implements OnInit {
   weightType = input.required<WeightType>();
   progressType = input.required<ProgressType>();
   controlContainer = inject(ControlContainer);
+  private configurationService = inject(ConfigurationService);
+  weightUnit = computed(() => {
+    return this.configurationService.configuration().weightUnit;
+  });
 
   weight = signal(5);
   repetitions = signal(10);

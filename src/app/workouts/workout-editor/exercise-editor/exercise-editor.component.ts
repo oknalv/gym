@@ -56,6 +56,10 @@ import { CloseableWarningComponent } from '../../../shared/closeable-warning/clo
   styleUrl: './exercise-editor.component.scss',
 })
 export class ExerciseEditorComponent {
+  HIDE_SUPERSET_SETS_WARNING_KEY = 'gym-hide-superset-sets-warning';
+  HIDE_SUPERSET_RESTING_TIME_WARNING_KEY =
+    'gym-hide-superset-resting-time-warning';
+
   //main input and output
   baseExercise = input.required<Exercise | undefined>();
   exercise = output<Exercise>();

@@ -1,15 +1,5 @@
+import { Component, computed, forwardRef, input, signal } from '@angular/core';
 import {
-  Component,
-  computed,
-  forwardRef,
-  inject,
-  input,
-  OnInit,
-  signal,
-  WritableSignal,
-} from '@angular/core';
-import {
-  ControlContainer,
   ControlValueAccessor,
   FormControl,
   NG_VALUE_ACCESSOR,
@@ -28,18 +18,14 @@ import {
     },
   ],
 })
-export class SwitchComponent<T> implements ControlValueAccessor, OnInit {
+export class SwitchComponent<T> implements ControlValueAccessor {
   options = input.required<SwitchOptions<T>>();
-  value!: WritableSignal<T>;
 
-  formControlName = input<string>();
-  formControl = input<FormControl>();
-  controlContainer = inject(ControlContainer);
+  value = signal<T | undefined>(undefined);
+
   disabled = signal(false);
 
   private onChange = (option: T) => {};
-
-  private control!: FormControl<T>;
 
   selectedOn = computed(() => {
     return !this.disabled() && this.value() === this.options().on;
@@ -50,17 +36,6 @@ export class SwitchComponent<T> implements ControlValueAccessor, OnInit {
   });
 
   constructor() {}
-
-  ngOnInit(): void {
-    if (this.formControlName()) {
-      this.control = this.controlContainer.control!.get(
-        this.formControlName()!,
-      )! as FormControl<T>;
-    } else if (this.formControl()) {
-      this.control = this.formControl()!;
-    }
-    this.value = signal(this.control.value);
-  }
 
   select(option: T) {
     this.value.set(option);

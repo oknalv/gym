@@ -3,7 +3,7 @@
     <gym-set-editor-input
       formControlName="weight"
       [icon]="weightType() === 'total' ? 'dumbbell' : 'halfdumbbell'"
-      label="kg"
+      [label]="weightUnit()"
     />
   }
   @if (progressType() === "repetitions") {

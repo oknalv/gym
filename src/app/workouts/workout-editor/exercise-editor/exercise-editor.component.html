@@ -71,7 +71,7 @@
     <section>
       @if (inSuperset()) {
         <gym-closeable-warning
-          storageKey="hide-superset-sets-warning"
+          [storageKey]="HIDE_SUPERSET_SETS_WARNING_KEY"
           warningKey="exercises.editor.supersetSetsWarning"
         />
       }
@@ -85,7 +85,7 @@
     <section>
       @if (inSuperset()) {
         <gym-closeable-warning
-          storageKey="hide-superset-resting-time-warning"
+          [storageKey]="HIDE_SUPERSET_RESTING_TIME_WARNING_KEY"
           warningKey="exercises.editor.supersetRestingTimeWarning"
         />
       }

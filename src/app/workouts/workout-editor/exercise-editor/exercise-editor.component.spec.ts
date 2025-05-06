@@ -13,7 +13,6 @@ describe('ExerciseEditorComponent', () => {
       imports: [ExerciseEditorComponent, TranslateModule.forRoot()],
     }).compileComponents();
 
-    window.localStorage.setItem('hide-superset-sets-warning', 'false');
     fixture = TestBed.createComponent(ExerciseEditorComponent);
     component = fixture.componentInstance;
     fixture.componentRef.setInput('exerciseTypes', []);

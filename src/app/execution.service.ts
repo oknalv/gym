@@ -5,7 +5,7 @@ import { Execution, ExecutionDTO } from './gym.model';
   providedIn: 'root',
 })
 export class ExecutionService {
-  private ONGOING_EXECUTION_STORE_KEY = 'ongoing-execution';
+  private ONGOING_EXECUTION_STORE_KEY = 'gym-ongoing-execution';
   private _ongoingExecution = signal<Execution | null>(null);
   ongoingExecution = this._ongoingExecution.asReadonly();
 

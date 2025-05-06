@@ -1,0 +1,14 @@
+<h1>{{ "configuration.title" | translate }}</h1>
+<section>
+  <div>{{ "configuration.weightUnit" | translate }}</div>
+  <gym-switch
+    [options]="{
+      on: 'kg',
+      off: 'lb',
+    }"
+    [(ngModel)]="weightUnit"
+  >
+    <span ngProjectAs="on-option"> kg </span>
+    <span ngProjectAs="off-option"> lb </span>
+  </gym-switch>
+</section>

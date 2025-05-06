@@ -127,6 +127,10 @@
     "chooseWorkout": "Choose a workout",
     "completedExercises": "Completed exercises"
   },
+  "configuration": {
+    "title": "Configuration",
+    "weightUnit": "Choose what weight unit you want to see in the app (changing it won't convert the already input weights)"
+  },
   "shared": {
     "deleteDialog": {
       "title": "Warning",

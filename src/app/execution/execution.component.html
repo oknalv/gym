@@ -25,21 +25,23 @@
             }
           }
         </section>
-        <h3>{{ "execution.completedExercises" | translate }}</h3>
-        <section>
-          @for (exercise of doneAndToDoExercises().done; track exercise.id) {
-            <div class="completed-exercise">
-              @if (isExercise(exercise)) {
-                <gym-exercise-option [exercise]="asExercise(exercise)" />
-              } @else {
-                <gym-superset-option [superset]="asSuperset(exercise)" />
-              }
-              <button class="thick" (click)="redoExercise(exercise.id)">
-                <gym-icon icon="repeat" />
-              </button>
-            </div>
-          }
-        </section>
+        @if (doneAndToDoExercises().done.length > 0) {
+          <h3>{{ "execution.completedExercises" | translate }}</h3>
+          <section>
+            @for (exercise of doneAndToDoExercises().done; track exercise.id) {
+              <div class="completed-exercise">
+                @if (isExercise(exercise)) {
+                  <gym-exercise-option [exercise]="asExercise(exercise)" />
+                } @else {
+                  <gym-superset-option [superset]="asSuperset(exercise)" />
+                }
+                <button class="thick" (click)="redoExercise(exercise.id)">
+                  <gym-icon icon="repeat" />
+                </button>
+              </div>
+            }
+          </section>
+        }
         <div class="actions">
           <button (click)="onAskLeaveWorkout()">
             <div>
@@ -82,6 +84,7 @@
 } @else {
   <div class="execution-message">
     {{ "execution.noWorkoutExecuting" | translate }}
+    <br />
     <button routerLink="/workouts">
       <div><gym-icon icon="list" /></div>
       {{ "execution.chooseWorkout" | translate }}

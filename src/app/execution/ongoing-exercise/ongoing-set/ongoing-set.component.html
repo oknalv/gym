@@ -4,7 +4,7 @@
       <gym-icon
         [icon]="weightType() === 'total' ? 'dumbbell' : 'halfdumbbell'"
       />
-      {{ set().weight }} kg
+      {{ set().weight }} {{ weightUnit() }}
     }
     <br />
     @if (progressType() === "repetitions") {
