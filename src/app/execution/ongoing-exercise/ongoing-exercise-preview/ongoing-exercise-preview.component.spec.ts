@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { OngoingExercisePreviewComponent } from './ongoing-exercise-preview.component';
 import { ProgressType, WeightType } from '../../../gym.model';
 import { ExecutionService } from '../../../execution.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('OngoingExercisePreviewComponent', () => {
   let component: OngoingExercisePreviewComponent;
@@ -13,7 +14,7 @@ describe('OngoingExercisePreviewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OngoingExercisePreviewComponent],
+      imports: [OngoingExercisePreviewComponent, TranslateModule.forRoot()],
       providers: [
         {
           provide: ExecutionService,

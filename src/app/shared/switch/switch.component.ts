@@ -1,9 +1,5 @@
 import { Component, computed, forwardRef, input, signal } from '@angular/core';
-import {
-  ControlValueAccessor,
-  FormControl,
-  NG_VALUE_ACCESSOR,
-} from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'gym-switch',
@@ -34,8 +30,6 @@ export class SwitchComponent<T> implements ControlValueAccessor {
   selectedOff = computed(() => {
     return !this.disabled() && this.value() === this.options().off;
   });
-
-  constructor() {}
 
   select(option: T) {
     this.value.set(option);

@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SetComponent } from './set.component';
 import { ProgressType } from '../../../gym.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('SetComponent', () => {
   let component: SetComponent;
@@ -9,7 +10,7 @@ describe('SetComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SetComponent],
+      imports: [SetComponent, TranslateModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SetComponent);

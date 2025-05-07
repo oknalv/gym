@@ -12,14 +12,36 @@ import { TimerComponent } from '../../shared/timer/timer.component';
 })
 export class ExecutionActionsComponent {
   elementKey = input.required<string>();
-  _elementKey = computed(() => {
-    return `execution.${this.elementKey()}`;
+  private _elementKey = computed(() => {
+    return `${this.elementKey()[0].toUpperCase()}${this.elementKey().substring(1)}`;
   });
   isLastSet = input.required<boolean>();
+  isLastExercise = input.required<boolean>();
   restingTime = input.required<number>();
   private executionService = inject(ExecutionService);
   restingStart = computed(() => {
     return this.executionService.ongoingExecution()!.restingStart;
+  });
+  skipRestKey = computed(() => {
+    let key = 'execution.skipRest';
+    if (this.isLastSet()) key += 'Finish';
+    if (this.isLastExercise()) key += 'Workout';
+    else key += this._elementKey();
+    return key;
+  });
+  finishSetKey = computed(() => {
+    if (!this.isLastSet()) return 'execution.finishSet';
+    let key = 'execution.finish' + this._elementKey();
+    if (this.isLastExercise()) key = 'execution.finishWorkout';
+    return key;
+  });
+  abandonKey = computed(() => {
+    return 'execution.abandon' + this._elementKey();
+  });
+  skipExerciseKey = computed(() => {
+    let key = 'execution.skip' + this._elementKey();
+    if (this.isLastExercise()) key += 'Workout';
+    return key;
   });
 
   onAbandonExercise() {

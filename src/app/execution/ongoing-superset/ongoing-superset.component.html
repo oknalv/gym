@@ -13,7 +13,8 @@
   />
 }
 <gym-execution-actions
-  [elementKey]="isLastExercise() ? 'workout' : 'superset'"
+  elementKey="superset"
   [isLastSet]="isLastSet()"
+  [isLastExercise]="isLastExercise()"
   [restingTime]="superset().exercises[0].restingTime"
 />

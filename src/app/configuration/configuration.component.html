@@ -12,3 +12,11 @@
     <span ngProjectAs="off-option"> lb </span>
   </gym-switch>
 </section>
+<section>
+  <div>{{ "configuration.language" | translate }}</div>
+  <gym-select [options]="availableLanguages" [(ngModel)]="language">
+    <ng-template let-option>
+      <span>{{ "configuration." + option | translate }}</span>
+    </ng-template>
+  </gym-select>
+</section>

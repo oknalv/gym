@@ -7,7 +7,7 @@
       "edit": "Edit workout",
       "workoutElement": "workout",
       "name": "Name",
-      "nameError": "Please enter a name for the workout.",
+      "nameError": "Please, enter a name for the workout.",
       "add": "Add workout",
       "save": "Save workout",
       "error": "You should add at least one exercise or superset."
@@ -15,7 +15,6 @@
     "preview": {
       "oneExercise": "1 exercise",
       "exercises": "exercises",
-      "lastExecution": "Last time done:",
       "neverExecuted": "Never done"
     },
     "detail": {
@@ -58,7 +57,8 @@
       },
       "supersetSetsWarning": "Warning: adding or removing sets will reflect in the sets of the rest of the exercises of the superset. Removing any set will reflect in removing the last set of the rest of the exercises. Adding a set will reflect in adding a copy of the last set of each of the other exercises in their corresponding exercises.",
       "supersetRestingTimeWarning": "Warning: changing the resting time will modify the resting time of the rest of the exercises of the superset.",
-      "error": "There are errors in the new exercise. Please, correct them before adding the exercise.",
+      "errorAdd": "There are errors in the new exercise. Please, correct them before adding the exercise.",
+      "errorSave": "There are errors in the exercise. Please, correct them before saving the exercise.",
       "add": "Add exercise",
       "save": "Save exercise"
     }
@@ -73,7 +73,7 @@
     },
     "new": {
       "name": "Name",
-      "nameError": "Please enter a name for the exercise",
+      "nameError": "Please, enter a name for the exercise.",
       "image": {
         "change": "Change image",
         "delete": "Delete image",
@@ -94,8 +94,8 @@
   "sets": {
     "editor": {
       "title": "Sets",
-      "weightError": "Weight must be a positive number greater or equal to 0",
-      "repetitionsError": "Reps must be a positive integer greater or equal to 1"
+      "weightError": "Weight must be a positive number greater or equal to 0.",
+      "repetitionsError": "Reps must be a positive integer greater or equal to 1."
     }
   },
   "execution": {
@@ -105,15 +105,20 @@
     "supersetOf": "Superset of {{count}} exercises",
     "setOf": "Set {{number}} of {{total}}",
     "supersetTitle": "Superset",
-    "abandonExercise": "Leave {{whatToAbandon}} without finishing",
-    "superset": "superset",
-    "exercise": "exercise",
-    "workout": "workout",
+    "abandonExercise": "Leave exercise without finishing",
+    "abandonSuperset": "Leave superset without finishing",
     "finishSet": "Rest and finish set",
-    "finishExercise": "Rest and finish {{whatToFinish}}",
-    "skipExercise": "Skip {{whatToSkip}} finishing it",
+    "finishExercise": "Rest and finish exercise",
+    "finishSuperset": "Rest and finish superset",
+    "finishWorkout": "Rest and finish workout",
+    "skipExercise": "Skip exercise finishing it",
+    "skipSuperset": "Skip superset finishing it",
+    "skipExerciseWorkout": "Skip exercise and finish workout",
+    "skipSupersetWorkout": "Skip superset and finish workout",
     "skipRest": "Skip rest",
-    "skipRestFinish": "Skip rest and finish {{whatToFinish}}",
+    "skipRestFinishExercise": "Skip rest and finish exercise",
+    "skipRestFinishSuperset": "Skip rest and finish superset",
+    "skipRestFinishWorkout": "Skip rest and finish workout",
     "runTimer": "Run timer",
     "abandonWorkout": "Leave workout",
     "abandonWorkoutDialog": {
@@ -125,11 +130,14 @@
     "workoutFinished": "Workout finished",
     "noWorkoutExecuting": "There isn't any ongoing workout.",
     "chooseWorkout": "Choose a workout",
-    "completedExercises": "Completed exercises"
+    "completedExercises": "Completed exercises and supersets"
   },
   "configuration": {
     "title": "Configuration",
-    "weightUnit": "Choose what weight unit you want to see in the app (changing it won't convert the already input weights)"
+    "weightUnit": "Choose what weight unit you want to see in the app (changing it won't convert the already input weights)",
+    "language": "Language of the app",
+    "en": "English",
+    "es": "Español"
   },
   "shared": {
     "deleteDialog": {
@@ -148,7 +156,7 @@
       "hours": "hours",
       "minutes": "minutes",
       "seconds": "seconds",
-      "error": "Please enter a valid time of at least 1 second."
+      "error": "Please, enter a valid time of at least 1 second."
     },
     "timerDialog": {
       "title": "Timer"

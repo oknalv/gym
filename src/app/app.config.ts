@@ -12,6 +12,7 @@ import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { WorkoutService } from './workout.service';
+import { ConfigurationService } from './configuration.service';
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient,
@@ -22,6 +23,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes, withComponentInputBinding()),
     provideAppInitializer(() => {
+      inject(ConfigurationService);
       const dataService = inject(DataService);
       const workoutService = inject(WorkoutService);
       return new Promise((resolve) => {

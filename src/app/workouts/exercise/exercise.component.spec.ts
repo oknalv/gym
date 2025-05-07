@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ExerciseComponent } from './exercise.component';
 import { ProgressType, WeightType } from '../../gym.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('ExerciseComponent', () => {
   let component: ExerciseComponent;
@@ -9,7 +10,7 @@ describe('ExerciseComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ExerciseComponent],
+      imports: [ExerciseComponent, TranslateModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ExerciseComponent);

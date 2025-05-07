@@ -27,6 +27,7 @@ describe('ExecutionActionsComponent', () => {
     fixture.componentRef.setInput('elementKey', 'elementKey');
     fixture.componentRef.setInput('isLastSet', false);
     fixture.componentRef.setInput('restingTime', 1);
+    fixture.componentRef.setInput('isLastExercise', false);
     mockExecutionService.ongoingExecution.and.returnValue({
       workoutId: 1,
       completedExerciseIds: [],

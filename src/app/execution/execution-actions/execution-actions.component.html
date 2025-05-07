@@ -10,14 +10,7 @@
     <button class="skip-rest" (click)="onSkipRest()">
       <gym-icon icon="skip" />
       <div>
-        @if (!isLastSet()) {
-          {{ "execution.skipRest" | translate }}
-        } @else {
-          {{
-            "execution.skipRestFinish"
-              | translate: { whatToFinish: _elementKey() | translate }
-          }}
-        }
+        {{ skipRestKey() | translate }}
       </div>
     </button>
   </div>
@@ -25,34 +18,21 @@
   <button class="finish" (click)="onRest()">
     <gym-icon icon="rest" />
     <div>
-      @if (isLastSet()) {
-        {{
-          "execution.finishExercise"
-            | translate: { whatToFinish: _elementKey() | translate }
-        }}
-      } @else {
-        {{ "execution.finishSet" | translate }}
-      }
+      {{ finishSetKey() | translate }}
     </div>
   </button>
   <div class="secondary-actions">
     <button class="abandon" (click)="onAbandonExercise()">
       <gym-icon icon="exit" />
       <div>
-        {{
-          "execution.abandonExercise"
-            | translate: { whatToAbandon: _elementKey() | translate }
-        }}
+        {{ abandonKey() | translate }}
       </div>
     </button>
     @if (!isLastSet()) {
       <button class="skip-exercise" (click)="onSkipExercise()">
         <gym-icon icon="skip" />
         <div>
-          {{
-            "execution.skipExercise"
-              | translate: { whatToSkip: _elementKey() | translate }
-          }}
+          {{ skipExerciseKey() | translate }}
         </div>
       </button>
     }

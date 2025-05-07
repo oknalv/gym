@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OngoingSetComponent } from './ongoing-set.component';
 import { ProgressType, WeightType } from '../../../gym.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('OngoingSetComponent', () => {
   let component: OngoingSetComponent;
@@ -9,7 +10,7 @@ describe('OngoingSetComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OngoingSetComponent],
+      imports: [OngoingSetComponent, TranslateModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(OngoingSetComponent);

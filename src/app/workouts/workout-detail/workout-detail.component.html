@@ -5,7 +5,7 @@
     <div>
       @if (workout?.lastExecution) {
         {{ "workouts.detail.lastExecution" | translate }}
-        {{ workout?.lastExecution | date }}
+        {{ workout?.lastExecution | date: "yyyy/MM/dd" }}
       } @else {
         {{ "workouts.detail.neverExecuted" | translate }}
       }

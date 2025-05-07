@@ -98,7 +98,7 @@
 
     @if (showError) {
       <p class="error">
-        {{ "exercises.editor.error" | translate }}
+        {{ errorsKey() | translate }}
       </p>
     }
     <button (click)="onSubmitExercise()">

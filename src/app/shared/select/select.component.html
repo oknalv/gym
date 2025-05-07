@@ -1,0 +1,14 @@
+@for (option of options(); track option) {
+  <button
+    [class.selected]="option === value()"
+    (click)="select(option)"
+    [disabled]="disabled()"
+  >
+    <div>
+      <ng-container
+        [ngTemplateOutlet]="optionTemplate()!"
+        [ngTemplateOutletContext]="{ $implicit: option }"
+      ></ng-container>
+    </div>
+  </button>
+}

@@ -83,6 +83,10 @@ export class ExerciseEditorComponent {
     return `exercises.editor.${this.editMode() ? 'save' : 'add'}`;
   });
 
+  errorsKey = computed(() => {
+    return `exercises.editor.${this.editMode() ? 'errorSave' : 'errorAdd'}`;
+  });
+
   private exerciseId!: number;
   private firstSubmitClick = false;
   private dirty = false;

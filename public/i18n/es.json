@@ -1,0 +1,163 @@
+{
+  "workouts": {
+    "title": "Entrenamientos",
+    "empty": "Todavía no hay entrenamientos",
+    "editor": {
+      "new": "Nuevo entrenamiento",
+      "edit": "Editar entrenamiento",
+      "workoutElement": "entrenamiento",
+      "name": "Nombre",
+      "nameError": "Por favor, introduce un nombre para el entrenamiento.",
+      "add": "Añadir entrenamiento",
+      "save": "Guardar entrenamiento",
+      "error": "Debes añadir al menos un ejercicio o una superserie"
+    },
+    "preview": {
+      "oneExercise": "1 ejercicio",
+      "exercises": "ejercicios",
+      "neverExecuted": "Nunca realizado"
+    },
+    "detail": {
+      "lastExecution": "Realizado por última vez:",
+      "neverExecuted": "Nunca realizado"
+    },
+    "backLinks": {
+      "workout": "Detalles del entrenamiento",
+      "workouts": "Entrenamientos"
+    }
+  },
+  "exercises": {
+    "title": "Ejercicios",
+    "empty": "Todavía no hay ejercicios",
+    "add": "Añadir ejercicio",
+    "addSuperset": "Añadir superserie",
+    "editor": {
+      "new": "Nuevo ejercicio",
+      "edit": "Editar ejercicio",
+      "exerciseType": {
+        "header": "Ejercicio"
+      },
+      "weighted": {
+        "header": "Tipo de ejercicio",
+        "weighted": "Con peso",
+        "weightless": "Sin peso"
+      },
+      "weightType": {
+        "header": "Cómo medir el peso",
+        "total": "Usar el peso total",
+        "side": "Usar el peso de un lado"
+      },
+      "progressType": {
+        "header": "Cómo medir el progreso",
+        "repetitions": "En repeticiones",
+        "time": "En tiempo"
+      },
+      "restingTime": {
+        "header": "Tiempo de descanso entre series"
+      },
+      "supersetSetsWarning": "Advertencia: añadir o eliminar series se reflejará en las series del resto de ejercicios de la superserie. Eliminar una serie se reflejará eliminando la última serie del resto de ejercicios. Añadir una serie se reflejará añadiendo una copia de la última serie de cada uno de los otros ejercicios en sus ejercicios correspondientes.",
+      "supersetRestingTimeWarning": "Advertencia: cambiar el tiempo de descanso modificará el tiempo de descanso del resto de los ejercicios de la superserie.",
+      "errorAdd": "Hay errores en el nuevo ejercicio. Por favor, corrígelos antes de añadir el ejercicio.",
+      "errorSave": "Hay errores en el ejercicio. Por favor, corrígelos antes de guardar el ejercicio.",
+      "add": "Añadir ejercicio",
+      "save": "Guardar ejercicio"
+    }
+  },
+  "exerciseTypes": {
+    "setter": {
+      "existing": "Usar uno existente",
+      "create": "Crear uno nuevo",
+      "existingInstead": "Usar uno existente en su lugar",
+      "change": "Cambiar",
+      "error": "Debes o usar un ejercicio existente o crear uno nuevo."
+    },
+    "new": {
+      "name": "Nombre",
+      "nameError": "Por favor, introduce un nombre para el ejercicio.",
+      "image": {
+        "change": "Cambiar imagen",
+        "delete": "Eliminar imagen",
+        "add": "Añadir imagen"
+      }
+    },
+    "picker": {
+      "title": "Elige un ejercicio"
+    }
+  },
+  "supersets": {
+    "editor": {
+      "empty": "Todavía no hay ejercicios en la superserie.",
+      "error": "Las superseries deben contener al menos un ejercicio.",
+      "add": "Añadir ejercicio a la superserie"
+    }
+  },
+  "sets": {
+    "editor": {
+      "title": "Series",
+      "weightError": "El peso debe ser un número positivo mayor o igual que 0.",
+      "repetitionsError": "Las repeticiones deben ser un número entero positivo mayor o igual que 1."
+    }
+  },
+  "execution": {
+    "chooseExercise": "Elige un ejercicio o una superserie",
+    "sets": "series",
+    "oneSet": "1 serie",
+    "supersetOf": "Superserie de {{count}} ejercicios",
+    "setOf": "Serie {{number}} de {{total}}",
+    "supersetTitle": "Superserie",
+    "abandonExercise": "Salir del ejercicio sin terminarlo",
+    "abandonSuperset": "Salir de la superserie sin terminarla",
+    "finishSet": "Descansar y terminar la serie",
+    "finishExercise": "Descansar y terminar el ejercicio",
+    "finishSuperset": "Descansar y terminar la superserie",
+    "finishWorkout": "Descansar y terminar el entrenamiento",
+    "skipExercise": "Saltarse el ejercicio terminándolo",
+    "skipSuperset": "Saltarse la superserie terminándola",
+    "skipExerciseWorkout": "Saltarse el ejercicio y terminar el entrenamiento",
+    "skipSupersetWorkout": "Saltarse la superserie y terminar el entrenamiento",
+    "skipRest": "Saltarse el descanso",
+    "skipRestFinishExercise": "Saltarse el descanso y terminar el ejercicio",
+    "skipRestFinishSuperset": "Saltarse el descanso y terminar la superserie",
+    "skipRestFinishWorkout": "Saltarse el descanso y terminar el entrenamiento",
+    "runTimer": "Iniciar temporizador",
+    "abandonWorkout": "Salir del entrenamiento",
+    "abandonWorkoutDialog": {
+      "title": "Advertencia",
+      "text": "¿Seguro que quieres salir del entrenamiento? Perderás el progreso de esta sesión.",
+      "cancel": "Cancelar",
+      "abandon": "Salir"
+    },
+    "workoutFinished": "Entrenamiento terminado",
+    "noWorkoutExecuting": "No hay ningún entrenamiento en progreso.",
+    "chooseWorkout": "Elegir un entrenamiento",
+    "completedExercises": "Ejercicios y superseries completados."
+  },
+  "configuration": {
+    "title": "Configuración",
+    "weightUnit": "Elige qué unidad de peso quieres ver en la aplicación (cambiarla no convertirá los pesos ya introducidos)",
+    "language": "Idioma de la aplicación"
+  },
+  "shared": {
+    "deleteDialog": {
+      "title": "Advertencia",
+      "text": "¿Seguro que quieres eliminar {{whatToDelete}}? Esta acción no se puede deshacer.",
+      "cancel": "Cancelar",
+      "delete": "Eliminar",
+      "exercise": "este ejercicio",
+      "superset": "esta superserie",
+      "workout": "este entrenamiento"
+    },
+    "timeEditorDialog": {
+      "title": "Cambiar tiempo",
+      "cancel": "Cancelar",
+      "accept": "Aceptar",
+      "hours": "horas",
+      "minutes": "minutos",
+      "seconds": "segundos",
+      "error": "Por favor, introduce un tiemp válido de al menos 1 segundo."
+    },
+    "timerDialog": {
+      "title": "Temporizador"
+    }
+  }
+}
