@@ -12,3 +12,11 @@
     }
   </div>
 </section>
+@if (hasExerciseTypes()) {
+  <section class="actions">
+    <button (click)="onShowManageExerciseTypes()">
+      {{ "workouts.manageExerciseTypes" | translate }}
+    </button>
+  </section>
+  <gym-exercise-type-manager [(open)]="manageExerciseTypesVisible" />
+}

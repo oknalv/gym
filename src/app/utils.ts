@@ -1,17 +1,35 @@
 import { AbstractControl } from '@angular/forms';
-import { Exercise, ExerciseSet, ProgressType, Superset } from './gym.model';
+import {
+  Exercise,
+  ExerciseDTO,
+  ExerciseSet,
+  ProgressType,
+  Superset,
+  SupersetDTO,
+} from './gym.model';
 import { WeightUnit } from './configuration.model';
 
 export function asExercise(exercise: Exercise | Superset) {
   return exercise as Exercise;
+}
+export function asExerciseDTO(exercise: ExerciseDTO | SupersetDTO) {
+  return exercise as ExerciseDTO;
 }
 
 export function asSuperset(exercise: Exercise | Superset) {
   return exercise as Superset;
 }
 
+export function asSupersetDTO(exercise: ExerciseDTO | SupersetDTO) {
+  return exercise as SupersetDTO;
+}
+
 export function isExercise(exercise: Exercise | Superset) {
   return !!(exercise as Exercise).type;
+}
+
+export function isExerciseDTO(exercise: ExerciseDTO | SupersetDTO) {
+  return !!(exercise as ExerciseDTO).type;
 }
 
 export function integerValidator(control: AbstractControl) {

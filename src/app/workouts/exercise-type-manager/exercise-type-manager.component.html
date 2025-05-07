@@ -1,0 +1,43 @@
+<gym-dialog [(open)]="open">
+  <h2>{{ "exerciseTypes.manager.title" | translate }}</h2>
+  <div>
+    @for (exerciseType of exerciseTypes(); track exerciseType.id) {
+      <div class="exercise-type-wrapper">
+        <gym-exercise-type [type]="exerciseType" />
+        <button class="thick" (click)="onEditExerciseType(exerciseType)">
+          <gym-icon icon="pencil" />
+        </button>
+        <button
+          class="thick"
+          (click)="onAskDeleteExerciseType(exerciseType.id)"
+        >
+          <gym-icon icon="trashbin" />
+        </button>
+      </div>
+    }
+  </div>
+  <gym-dialog [(open)]="showExerciseTypeEditor" [alert]="true">
+    <header>{{ "exerciseTypes.manager.dialog.title" | translate }}</header>
+    <gym-new-exercise-type [formGroup]="form" />
+    <div class="actions">
+      <button (click)="showExerciseTypeEditor.set(false)">
+        {{ "exerciseTypes.manager.dialog.cancel" | translate }}</button
+      >&nbsp;
+      <button (click)="onSaveExerciseType()" class="green">
+        {{ "exerciseTypes.manager.dialog.save" | translate }}
+      </button>
+    </div>
+  </gym-dialog>
+  <gym-dialog [(open)]="showDeleteExerciseTypeWarning" [alert]="true">
+    <header>{{ "exerciseTypes.manager.warning.title" | translate }}</header>
+    <p>{{ "exerciseTypes.manager.warning.text" | translate }}</p>
+    <div class="actions">
+      <button (click)="showDeleteExerciseTypeWarning.set(false)">
+        {{ "exerciseTypes.manager.warning.cancel" | translate }}</button
+      >&nbsp;
+      <button (click)="onDeleteExerciseType()" class="red">
+        {{ "exerciseTypes.manager.warning.delete" | translate }}
+      </button>
+    </div>
+  </gym-dialog>
+</gym-dialog>

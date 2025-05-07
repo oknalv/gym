@@ -10,6 +10,7 @@ import {
 } from './gym.model';
 import { DataService } from './data.service';
 import { ExecutionService } from './execution.service';
+import { asExerciseDTO, asSupersetDTO, isExerciseDTO } from './utils';
 
 @Injectable({
   providedIn: 'root',
@@ -196,6 +197,79 @@ export class WorkoutService {
       throw 'WORKOUT_EXECUTING';
     }
     await this.dataService.deleteData(this.dataService.workoutStoreName, id);
+    await this.initWorkouts();
+  }
+
+  async editExerciseType(exerciseType: ExerciseType) {
+    await this.dataService.updateData(
+      this.dataService.exerciseTypeStoreName,
+      exerciseType,
+    );
+    await this.initWorkouts();
+  }
+
+  async deleteExerciseType(id: number) {
+    const workouts = (
+      await this.dataService.getAllData(this.dataService.workoutStoreName)
+    ).reduce(
+      (accumulator, workout: WorkoutDTO) => {
+        let touched = false;
+        for (let i = workout.exercises.length - 1; i >= 0; i--) {
+          const exercise = workout.exercises[i];
+          if (isExerciseDTO(exercise)) {
+            if (asExerciseDTO(exercise).type === id) {
+              workout.exercises.splice(i, 1);
+              touched = true;
+            }
+          } else {
+            const superset = asSupersetDTO(exercise);
+            for (
+              let j = asSupersetDTO(exercise).exercises.length - 1;
+              j >= 0;
+              j--
+            ) {
+              const supersetExercise = superset.exercises[j];
+              if (supersetExercise.type === id) {
+                superset.exercises.splice(j, 1);
+                touched = true;
+              }
+            }
+            if (superset.exercises.length === 0) {
+              workout.exercises.splice(i, 1);
+              touched = true;
+            }
+          }
+        }
+        if (touched) {
+          if (workout.exercises.length === 0) {
+            accumulator.toDelete.push(workout);
+          } else {
+            accumulator.toUpdate.push(workout);
+          }
+        }
+        return accumulator;
+      },
+      {
+        toUpdate: [],
+        toDelete: [],
+      } as { toUpdate: WorkoutDTO[]; toDelete: WorkoutDTO[] },
+    );
+    for (const workout of workouts.toDelete) {
+      await this.dataService.deleteData(
+        this.dataService.workoutStoreName,
+        workout.id,
+      );
+    }
+    for (const workout of workouts.toUpdate) {
+      await this.dataService.updateData(
+        this.dataService.workoutStoreName,
+        workout,
+      );
+    }
+    await this.dataService.deleteData(
+      this.dataService.exerciseTypeStoreName,
+      id,
+    );
     await this.initWorkouts();
   }
 }

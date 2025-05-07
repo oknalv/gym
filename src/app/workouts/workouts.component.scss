@@ -7,6 +7,10 @@
     }
   }
 }
+
+section:not(:first-child) {
+  margin-top: calc(2 * var(--margin));
+}
 h1 {
   display: flex;
   justify-content: space-between;

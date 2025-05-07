@@ -1,7 +1,7 @@
 {
   "workouts": {
     "title": "Entrenamientos",
-    "empty": "Todavía no hay entrenamientos",
+    "empty": "Todavía no hay entrenamientos.",
     "editor": {
       "new": "Nuevo entrenamiento",
       "edit": "Editar entrenamiento",
@@ -28,7 +28,7 @@
   },
   "exercises": {
     "title": "Ejercicios",
-    "empty": "Todavía no hay ejercicios",
+    "empty": "Todavía no hay ejercicios.",
     "add": "Añadir ejercicio",
     "addSuperset": "Añadir superserie",
     "editor": {
