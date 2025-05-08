@@ -1,0 +1,29 @@
+:host {
+  --shadow-opacity: 0.1;
+  --shadow-color: initial;
+  --text-color: initial;
+  --text-opacity: initial;
+  --centiseconds-size: 0.5em;
+  position: relative;
+  color: var(--text-color);
+  display: inline-block;
+  * {
+    font-family: gymIcons;
+  }
+
+  .time {
+    opacity: var(--text-opacity);
+  }
+
+  .shadow {
+    color: var(--shadow-color);
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: var(--shadow-opacity);
+  }
+}
+
+.small {
+  font-size: var(--centiseconds-size);
+}

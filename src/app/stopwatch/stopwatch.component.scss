@@ -1,0 +1,107 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .laps {
+    flex-grow: 1;
+    margin: 0 auto;
+    position: relative;
+    overflow-y: auto;
+    > div {
+      height: 100%;
+      overflow-y: auto;
+    }
+    > div > div {
+      margin: var(--margin) 0;
+      display: grid;
+      grid-template-columns: min-content min-content min-content;
+      gap: var(--margin);
+      justify-items: end;
+      align-items: center;
+
+      > .lap-number {
+        font-family: gymIcons;
+        font-size: 0.75em;
+      }
+    }
+
+    &::before,
+    &::after {
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: var(--margin);
+      content: "";
+      z-index: 1;
+    }
+    &::before {
+      top: 0;
+      box-shadow: inset 0px var(--margin) var(--margin) calc(-1 * var(--margin))
+        var(--background-color);
+    }
+    &::after {
+      bottom: 0;
+      box-shadow: inset 0px calc(-1 * var(--margin)) var(--margin)
+        calc(-1 * var(--margin)) var(--background-color);
+    }
+  }
+
+  .actions {
+    margin: var(--margin) 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    > button {
+      font-size: 2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 2.5em;
+      width: 2.5em;
+      border-radius: 200px;
+
+      &.center {
+        font-size: 3em;
+        background-color: var(--light-cyan);
+        color: var(--dark-cyan);
+      }
+    }
+
+    > .empty-space {
+      font-size: 2em;
+      height: 2.5em;
+      width: 2.5em;
+    }
+  }
+}
+
+.main-watch {
+  margin-top: calc(var(--big-margin) / 2);
+  margin-bottom: var(--margin);
+  text-align: center;
+
+  gym-watch {
+    font-size: 2.5em;
+
+    &.pause {
+      animation: blink 1s linear infinite;
+    }
+  }
+}
+
+@keyframes blink {
+  0% {
+    --text-opacity: initial;
+  }
+  49% {
+    --text-opacity: initial;
+  }
+  50% {
+    --text-opacity: var(--shadow-opacity);
+  }
+
+  100% {
+    --text-opacity: var(--shadow-opacity);
+  }
+}

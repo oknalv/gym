@@ -154,6 +154,9 @@
     "en": "English",
     "es": "Español"
   },
+  "stopwatch": {
+    "title": "Stopwatch"
+  },
   "shared": {
     "deleteDialog": {
       "title": "Warning",

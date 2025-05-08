@@ -1,0 +1,45 @@
+<section>
+  <h1>{{ "stopwatch.title" | translate }}</h1>
+  <div class="main-watch">
+    <gym-watch [time]="time()" [class.pause]="status() === 'pause'" />
+  </div>
+</section>
+<section class="laps">
+  <div>
+    <div>
+      @if (nextLap()) {
+        <div class="lap-number">{{ laps().length + 1 }}</div>
+        <gym-watch [time]="nextLap()!.difference" />
+        <gym-watch [time]="nextLap()!.value" />
+      }
+      @for (lap of laps(); track laps().length - $index) {
+        <div class="lap-number">{{ laps().length - $index }}</div>
+        <gym-watch [time]="lap.difference" />
+        <gym-watch [time]="lap.value" />
+      }
+    </div>
+  </div>
+</section>
+<section class="actions">
+  @switch (status()) {
+    @case ("play") {
+      <button (click)="onStop()"><gym-icon icon="stop" /></button>
+      <button (click)="onPause()" class="center">
+        <gym-icon icon="pause" />
+      </button>
+      <button (click)="onAddLap()"><gym-icon icon="repeat" /></button>
+    }
+    @case ("pause") {
+      <button (click)="onStop()"><gym-icon icon="stop" /></button>
+      <button (click)="onPlay()" class="center">
+        <gym-icon icon="play" />
+      </button>
+      <div class="empty-space"></div>
+    }
+    @case ("stop") {
+      <button (click)="onPlay()" class="center">
+        <gym-icon icon="play" />
+      </button>
+    }
+  }
+</section>

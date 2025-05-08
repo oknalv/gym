@@ -1,0 +1,24 @@
+<div class="time">
+  @if (formattedHours()) {
+    <span class="digits">{{ formattedHours() }}</span>
+    <span class="separator">:</span>
+  }
+  <span class="digits">{{ formattedMinutes() }}</span>
+  <span class="separator">:</span>
+  <span class="digits">{{ formattedSeconds() }}</span>
+  <span class="separator small">.</span>
+  <span class="digits small">{{ formattedCentiseconds() }}</span>
+</div>
+<div class="shadow">
+  @if (formattedHours()) {
+    @for (char of formattedHours(); track char) {
+      <span class="digits">{{ char }}_comp</span>
+    }
+    <span class="separator">:_comp</span>
+  }
+  <span class="digits">{{ formattedMinutes() }}_comp</span>
+  <span class="separator">:_comp</span>
+  <span class="digits">{{ formattedSeconds() }}_comp</span>
+  <span class="separator small">._comp</span>
+  <span class="digits small">{{ formattedCentiseconds() }}_comp</span>
+</div>

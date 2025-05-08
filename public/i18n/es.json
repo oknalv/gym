@@ -24,7 +24,8 @@
     "backLinks": {
       "workout": "Detalles del entrenamiento",
       "workouts": "Entrenamientos"
-    }
+    },
+    "manageExerciseTypes": "Gestionar los ejercicios creados"
   },
   "exercises": {
     "title": "Ejercicios",
@@ -82,6 +83,20 @@
     },
     "picker": {
       "title": "Elige un ejercicio"
+    },
+    "manager": {
+      "title": "Ejercicios",
+      "dialog": {
+        "title": "Editar ejercicio",
+        "cancel": "Cancelar",
+        "save": "Guardar"
+      },
+      "warning": {
+        "title": "Advertencia",
+        "text": "¿Seguro que quieres eliminar este ejercicio? Esta acción no se puede deshacer y eliminará este ejercicio en todos los entrenamientos que lo tengan y, si un entrenamiento tiene solo este ejercicio, ese entrenamiento también será eliminado.",
+        "cancel": "Cancelar",
+        "delete": "Eliminar"
+      }
     }
   },
   "supersets": {
