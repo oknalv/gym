@@ -83,25 +83,5 @@
 
   gym-watch {
     font-size: 2.5em;
-
-    &.pause {
-      animation: blink 1s linear infinite;
-    }
-  }
-}
-
-@keyframes blink {
-  0% {
-    --text-opacity: initial;
-  }
-  49% {
-    --text-opacity: initial;
-  }
-  50% {
-    --text-opacity: var(--shadow-opacity);
-  }
-
-  100% {
-    --text-opacity: var(--shadow-opacity);
   }
 }

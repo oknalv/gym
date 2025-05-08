@@ -1,23 +1,22 @@
 :host {
   margin: var(--margin) 0;
-  display: block;
+  display: flex;
+  align-items: end;
   > button {
     color: white;
-    padding: var(--padding) var(--padding) calc(2 * var(--padding));
+    padding: var(--padding);
     background-color: var(--table-1);
     box-sizing: border-box;
 
     &.selected {
       background-color: var(--table-2);
-      padding-top: 0;
-      > div {
-        transform: translateY(5px);
-      }
+      margin-top: var(--padding);
     }
 
     &:not(.selected) {
       box-shadow: inset 0px calc(-1 * var(--padding)) 0px 0px #00000055;
       > div {
+        border-bottom: var(--padding) solid var(--table-1);
         opacity: 0.5;
       }
     }

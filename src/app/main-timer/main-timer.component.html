@@ -1,0 +1,43 @@
+<h1>{{ "timer.title" | translate }}</h1>
+<section class="watch-wrapper">
+  @if (status() === "stop") {
+    <div class="watch">
+      <div class="time-editor" (click)="timeEditorDialogVisible.set(true)">
+        <gym-watch [time]="time()" [hideCentiseconds]="true" />
+        <gym-icon icon="pencil" />
+      </div>
+    </div>
+    <gym-time-editor-dialog
+      [(open)]="timeEditorDialogVisible"
+      [value]="milliseconds() / 1000"
+      (valueChange)="setTime($event)"
+    />
+  } @else {
+    <div class="watch">
+      <gym-watch [time]="time()" [paused]="status() === 'pause'" />
+    </div>
+  }
+</section>
+@if (milliseconds() > 0) {
+  <section class="actions">
+    @switch (status()) {
+      @case ("play") {
+        <button (click)="onStop()"><gym-icon icon="stop" /></button>
+        <button (click)="onPause()">
+          <gym-icon icon="pause" />
+        </button>
+      }
+      @case ("pause") {
+        <button (click)="onStop()"><gym-icon icon="stop" /></button>
+        <button (click)="onPlay()">
+          <gym-icon icon="play" />
+        </button>
+      }
+      @case ("stop") {
+        <button (click)="onPlay()">
+          <gym-icon icon="play" />
+        </button>
+      }
+    }
+  </section>
+}

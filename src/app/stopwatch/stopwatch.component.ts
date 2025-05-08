@@ -56,7 +56,7 @@ export class StopwatchComponent {
   });
 
   constructor() {
-    const interval = setInterval(() => {
+    const interval = window.setInterval(() => {
       this._time.set(this.stopwatchService.millisecondsElapsed);
     }, 10);
     this.destroyRef.onDestroy(() => clearInterval(interval));

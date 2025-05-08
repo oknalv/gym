@@ -1,7 +1,7 @@
+<h1>{{ "stopwatch.title" | translate }}</h1>
 <section>
-  <h1>{{ "stopwatch.title" | translate }}</h1>
   <div class="main-watch">
-    <gym-watch [time]="time()" [class.pause]="status() === 'pause'" />
+    <gym-watch [time]="time()" [paused]="status() === 'pause'" />
   </div>
 </section>
 <section class="laps">

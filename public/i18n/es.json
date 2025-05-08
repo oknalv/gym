@@ -152,6 +152,12 @@
     "weightUnit": "Elige qué unidad de peso quieres ver en la aplicación (cambiarla no convertirá los pesos ya introducidos)",
     "language": "Idioma de la aplicación"
   },
+  "stopwatch": {
+    "title": "Cronómetro"
+  },
+  "timer": {
+    "title": "Temporizador"
+  },
   "shared": {
     "deleteDialog": {
       "title": "Advertencia",

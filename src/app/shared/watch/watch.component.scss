@@ -22,8 +22,28 @@
     left: 0;
     opacity: var(--shadow-opacity);
   }
+
+  &.paused {
+    animation: blink 1s linear infinite;
+  }
 }
 
 .small {
   font-size: var(--centiseconds-size);
+}
+
+@keyframes blink {
+  0% {
+    --text-opacity: initial;
+  }
+  49% {
+    --text-opacity: initial;
+  }
+  50% {
+    --text-opacity: var(--shadow-opacity);
+  }
+
+  100% {
+    --text-opacity: var(--shadow-opacity);
+  }
 }

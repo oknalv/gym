@@ -157,6 +157,9 @@
   "stopwatch": {
     "title": "Stopwatch"
   },
+  "timer": {
+    "title": "Timer"
+  },
   "shared": {
     "deleteDialog": {
       "title": "Warning",

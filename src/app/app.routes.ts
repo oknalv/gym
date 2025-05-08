@@ -5,6 +5,7 @@ import { WorkoutDetailComponent } from './workouts/workout-detail/workout-detail
 import { ExecutionComponent } from './execution/execution.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { StopwatchComponent } from './stopwatch/stopwatch.component';
+import { MainTimerComponent } from './main-timer/main-timer.component';
 
 export const routes: Routes = [
   {
@@ -39,5 +40,9 @@ export const routes: Routes = [
   {
     path: 'stopwatch',
     component: StopwatchComponent,
+  },
+  {
+    path: 'timer',
+    component: MainTimerComponent,
   },
 ];

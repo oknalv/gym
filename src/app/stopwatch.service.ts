@@ -1,4 +1,5 @@
 import { computed, effect, Injectable, signal } from '@angular/core';
+import { RunnerStatus } from './common.model';
 
 @Injectable({
   providedIn: 'root',
@@ -11,10 +12,10 @@ export class StopwatchService {
   laps = this._laps.asReadonly();
   status = computed(() => {
     if (!this.startTime()) {
-      if (this.millisecondsOffset() > 0) return StopwatchStatus.pause;
-      else return StopwatchStatus.stop;
+      if (this.millisecondsOffset() > 0) return RunnerStatus.pause;
+      else return RunnerStatus.stop;
     }
-    return StopwatchStatus.play;
+    return RunnerStatus.play;
   });
 
   get millisecondsElapsed() {
@@ -84,11 +85,4 @@ interface Stopwatch {
   startTime: number | null;
   millisecondsOffset: number;
   laps: number[];
-  status: StopwatchStatus;
-}
-
-export enum StopwatchStatus {
-  stop = 'stop',
-  play = 'play',
-  pause = 'pause',
 }

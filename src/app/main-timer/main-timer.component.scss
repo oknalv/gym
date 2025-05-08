@@ -1,0 +1,56 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .watch-wrapper {
+    flex-grow: 1;
+  }
+}
+
+.watch {
+  text-align: center;
+  margin-top: var(--big-margin);
+  font-size: 2.5em;
+  > .time-editor {
+    border-bottom: 1px solid white;
+    width: fit-content;
+    padding: var(--padding);
+    display: inline-flex;
+    align-items: end;
+    background-color: rgba(255, 255, 255, 0.05);
+
+    > gym-icon {
+      margin-left: var(--margin);
+      font-size: 0.75em;
+    }
+  }
+}
+
+.actions {
+  margin: var(--margin) 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  > button {
+    font-size: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5em;
+    width: 2.5em;
+    border-radius: 200px;
+
+    &.center {
+      font-size: 3em;
+      background-color: var(--light-cyan);
+      color: var(--dark-cyan);
+    }
+  }
+
+  > .empty-space {
+    font-size: 2em;
+    height: 2.5em;
+    width: 2.5em;
+  }
+}
