@@ -21,8 +21,9 @@ export class WorkoutService {
   private _workouts = signal<Workout[]>([]);
   workouts = this._workouts.asReadonly();
   private executionService = inject(ExecutionService);
+  private dataService = inject(DataService);
 
-  constructor(private dataService: DataService) {}
+  constructor() {}
 
   async init() {
     return this.initWorkouts();

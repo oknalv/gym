@@ -12,11 +12,24 @@
     }
   </div>
 </section>
-@if (hasExerciseTypes()) {
-  <section class="actions">
+<section class="actions">
+  @if (hasExerciseTypes()) {
     <button (click)="onShowManageExerciseTypes()">
+      <gym-icon icon="pencil" />
+      <br />
       {{ "workouts.manageExerciseTypes" | translate }}
     </button>
-  </section>
-  <gym-exercise-type-manager [(open)]="manageExerciseTypesVisible" />
-}
+    <button (click)="onExportData()">
+      <gym-icon icon="export" />
+      <br />
+      {{ "workouts.export" | translate }}
+    </button>
+    <gym-exercise-type-manager [(open)]="manageExerciseTypesVisible" />
+  } @else {
+    <button (click)="onImportData()">
+      <gym-icon icon="import" />
+      <br />
+      {{ "workouts.import" | translate }}
+    </button>
+  }
+</section>

@@ -9,7 +9,7 @@
 }
 
 section:not(:first-child) {
-  margin-top: calc(2 * var(--margin));
+  margin: calc(2 * var(--margin)) 0;
 }
 h1 {
   display: flex;
@@ -18,5 +18,21 @@ h1 {
   gym-icon {
     font-size: 1em;
     cursor: pointer;
+  }
+}
+
+.actions {
+  display: flex;
+  > button {
+    flex-grow: 1;
+    display: block;
+    margin: var(--margin) 0;
+    > gym-icon {
+      font-size: 2em;
+    }
+
+    &:not(:last-of-type) {
+      background-color: var(--table-1);
+    }
   }
 }

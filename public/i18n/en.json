@@ -25,7 +25,9 @@
       "workout": "Workout details",
       "workouts": "Workouts"
     },
-    "manageExerciseTypes": "Manage created exercises"
+    "manageExerciseTypes": "Manage created exercises",
+    "export": "Export app data",
+    "import": "Import app data"
   },
   "exercises": {
     "title": "Exercises",
