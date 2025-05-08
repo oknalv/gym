@@ -1,6 +1,11 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { FooterComponent } from './footer/footer.component';
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router,
+  RouterOutlet,
+} from '@angular/router';
 import { ExecutionService } from './execution.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
@@ -41,7 +46,9 @@ export class AppComponent {
         },
       });
     if (this.isExecuting()) {
-      this.router.navigate(['/execution']);
+      this.router.navigate(['/execution'], { replaceUrl: true });
+    } else {
+      this.router.navigate(['/workouts'], { replaceUrl: true });
     }
   }
 }

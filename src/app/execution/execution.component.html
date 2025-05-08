@@ -85,7 +85,7 @@
   <div class="execution-message">
     {{ "execution.noWorkoutExecuting" | translate }}
     <br />
-    <button routerLink="/workouts">
+    <button routerLink="/workouts" [replaceUrl]="true">
       <div><gym-icon icon="list" /></div>
       {{ "execution.chooseWorkout" | translate }}
     </button>

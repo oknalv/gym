@@ -51,7 +51,8 @@ export class WorkoutDetailComponent {
       this.workout = this.workoutService
         .workouts()
         .find((workout) => workout.id === +this.id());
-      if (!this.workout) this.router.navigate(['workouts']);
+      if (!this.workout)
+        this.router.navigate(['workouts'], { replaceUrl: true });
     });
   }
 
@@ -67,11 +68,11 @@ export class WorkoutDetailComponent {
 
   async onDeleteWorkout() {
     await this.workoutService.deleteWorkout(+this.id());
-    this.router.navigate(['workouts']);
+    this.router.navigate(['workouts'], { replaceUrl: true });
   }
 
   onStartWorkout() {
     this.executionService.startWorkout(+this.id());
-    this.router.navigate(['execution']);
+    this.router.navigate(['execution'], { replaceUrl: true });
   }
 }

@@ -59,7 +59,6 @@ export class WorkoutEditorComponent {
 
   private workoutService = inject(WorkoutService);
   private router = inject(Router);
-  private route = inject(ActivatedRoute);
   private newExerciseTypes: WritableSignal<ExerciseType[]> = signal([]);
   exerciseTypes = computed(() => [
     ...this.workoutService.exerciseTypes(),
@@ -90,7 +89,7 @@ export class WorkoutEditorComponent {
           this.exercises = [...workout.exercises];
           this.lastExecution = workout.lastExecution;
         } else {
-          this.router.navigate(['..']);
+          this.router.navigate(['..'], { replaceUrl: true });
         }
       }
     });
@@ -208,7 +207,7 @@ export class WorkoutEditorComponent {
           lastExecution: null,
         });
       }
-      this.router.navigate(['..'], { relativeTo: this.route });
+      this.router.navigate(['..'], { replaceUrl: true });
     }
   }
 }

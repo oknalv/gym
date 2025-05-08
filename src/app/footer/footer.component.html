@@ -1,20 +1,25 @@
 @if (showExecutionPreview()) {
-  <gym-execution-preview routerLink="execution" />
+  <gym-execution-preview routerLink="execution" [replaceUrl]="true" />
 }
 <footer>
-  <div routerLink="workouts" routerLinkActive="active">
+  <div routerLink="workouts" routerLinkActive="active" [replaceUrl]="true">
     <gym-icon icon="list" />
   </div>
-  <div routerLink="execution" routerLinkActive="active" class="execution">
+  <div
+    routerLink="execution"
+    routerLinkActive="active"
+    [replaceUrl]="true"
+    class="execution"
+  >
     <gym-icon icon="lift" />
   </div>
-  <div routerLink="stopwatch" routerLinkActive="active">
+  <div routerLink="stopwatch" routerLinkActive="active" [replaceUrl]="true">
     <gym-icon icon="stopwatch" />
   </div>
-  <div routerLink="timer" routerLinkActive="active">
+  <div routerLink="timer" routerLinkActive="active" [replaceUrl]="true">
     <gym-icon icon="hourglass" />
   </div>
-  <div routerLink="configuration" routerLinkActive="active">
+  <div routerLink="configuration" routerLinkActive="active" [replaceUrl]="true">
     <gym-icon icon="gear" />
   </div>
 </footer>
