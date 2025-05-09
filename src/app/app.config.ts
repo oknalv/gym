@@ -15,6 +15,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { WorkoutService } from './workout.service';
 import { ConfigurationService } from './configuration.service';
 import { provideServiceWorker } from '@angular/service-worker';
+import { NotificationService } from './notification.service';
+import { TimerService } from './timer.service';
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient,
@@ -25,6 +27,8 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes, withComponentInputBinding()),
     provideAppInitializer(() => {
+      inject(NotificationService);
+      inject(TimerService);
       inject(ConfigurationService);
       const dataService = inject(DataService);
       const workoutService = inject(WorkoutService);
@@ -43,7 +47,7 @@ export const appConfig: ApplicationConfig = {
       },
       defaultLanguage: 'en',
     }),
-    provideServiceWorker('ngsw-worker.js', {
+    provideServiceWorker('my-service-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000',
     }),

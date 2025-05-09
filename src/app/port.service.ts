@@ -34,7 +34,6 @@ export class PortService {
 
   async import() {
     return new Promise<void>((resolve) => {
-      console.log('hello');
       const input = document.createElement('input');
       input.type = 'file';
       input.accept = 'application/json';
@@ -44,7 +43,6 @@ export class PortService {
           const appDataContainer: AppDataContainer = JSON.parse(
             reader.result as string,
           );
-          console.log(appDataContainer);
           for (const exerciseType of appDataContainer.exerciseTypes) {
             await this.dataService.addData(
               this.dataService.exerciseTypeStoreName,

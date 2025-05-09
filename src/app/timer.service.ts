@@ -1,16 +1,20 @@
 import { DestroyRef, effect, inject, Injectable, signal } from '@angular/core';
 import { RunnerStatus } from './common.model';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TimerService {
   private TIMER_KEY = 'gym-timer';
-  private _remainingMilliseconds = signal(0);
-  remainingMilliseconds = this._remainingMilliseconds.asReadonly();
+  private startTime = signal<Date | null>(null);
+  private millisecondsOffset = signal(0);
   private _status = signal<RunnerStatus>(RunnerStatus.stop);
   status = this._status.asReadonly();
+  private _remainingMilliseconds = signal(0);
+  remainingMilliseconds = this._remainingMilliseconds.asReadonly();
   private destroyRef = inject(DestroyRef);
+  private notificationService = inject(NotificationService);
   private interval: number | null = null;
 
   constructor() {
@@ -18,39 +22,53 @@ export class TimerService {
       window.localStorage.getItem(this.TIMER_KEY) || 'null',
     );
     if (timer) {
-      this._remainingMilliseconds.set(
-        Math.max(
-          timer.remainingMilliseconds - (Date.now() - timer.lastUpdated),
-          0,
-        ),
-      );
+      this.millisecondsOffset.set(timer.millisecondsOffset);
+      this._remainingMilliseconds.set(timer.millisecondsOffset);
       this._status.set(timer.status);
+      if (timer.startTime) {
+        this.notificationService.abortNotification(timer.startTime);
+        this.startTime.set(new Date());
+        const remainingMilliseconds = Math.max(
+          timer.millisecondsOffset - (Date.now() - timer.startTime),
+          0,
+        );
+        this._remainingMilliseconds.set(remainingMilliseconds);
+        this.millisecondsOffset.set(remainingMilliseconds);
+      }
     }
     effect(() => {
       localStorage.setItem(
         this.TIMER_KEY,
         JSON.stringify({
-          remainingMilliseconds: this.remainingMilliseconds(),
+          millisecondsOffset: this.millisecondsOffset(),
           status: this._status(),
-          lastUpdated: Date.now(),
+          startTime: this.startTime()?.getTime() || null,
         }),
       );
     });
     effect(() => {
       if (this._status() === RunnerStatus.play) {
+        this.notificationService.notifyAfter(
+          this.millisecondsOffset(),
+          this.startTime()!.getTime(),
+        );
         this.interval = window.setInterval(() => {
-          this._remainingMilliseconds.update((milliseconds) => {
-            return milliseconds - 10;
-          });
+          this._remainingMilliseconds.set(
+            Math.max(
+              this.millisecondsOffset() -
+                (Date.now() - this.startTime()!.getTime()),
+              0,
+            ),
+          );
           if (this._remainingMilliseconds() < 10) {
-            this.stop();
+            this.stop(false);
           }
         }, 10);
       }
-    });
 
-    this.destroyRef.onDestroy(() => {
-      if (this.interval !== null) clearInterval(this.interval);
+      this.destroyRef.onDestroy(() => {
+        if (this.interval !== null) clearInterval(this.interval);
+      });
     });
   }
 
@@ -58,6 +76,7 @@ export class TimerService {
     if (this._status() !== RunnerStatus.stop) {
       throw 'TIMER_RUNNING';
     }
+    this.millisecondsOffset.set(millisecons);
     this._remainingMilliseconds.set(millisecons);
   }
 
@@ -66,28 +85,36 @@ export class TimerService {
       throw 'TIMER_ALREADY_STARTED';
     }
     this._status.set(RunnerStatus.play);
+    this.startTime.set(new Date());
   }
 
   pause() {
     if (this._status() !== RunnerStatus.play) {
       throw 'TIMER_NOT_STARTED';
     }
-    if (this.interval !== null) clearInterval(this.interval);
     this._status.set(RunnerStatus.pause);
+    this.notificationService.abortNotification(this.startTime()!.getTime());
+    if (this.interval !== null) clearInterval(this.interval);
+    this.startTime.set(null);
+    this.millisecondsOffset.set(this.remainingMilliseconds());
   }
 
-  stop() {
+  stop(abort = true) {
     if (this._status() === RunnerStatus.stop) {
       throw 'TIMER_NOT_STARTED';
     }
-    if (this.interval !== null) clearInterval(this.interval);
-    this._remainingMilliseconds.set(0);
     this._status.set(RunnerStatus.stop);
+    if (abort)
+      this.notificationService.abortNotification(this.startTime()!.getTime());
+    if (this.interval !== null) clearInterval(this.interval);
+    this.startTime.set(null);
+    this.millisecondsOffset.set(0);
+    this._remainingMilliseconds.set(0);
   }
 }
 
 interface Timer {
-  lastUpdated: number;
-  remainingMilliseconds: number;
+  startTime: number | null;
+  millisecondsOffset: number;
   status: RunnerStatus;
 }

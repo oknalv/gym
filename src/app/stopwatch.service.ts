@@ -20,11 +20,7 @@ export class StopwatchService {
 
   get millisecondsElapsed() {
     if (!this.startTime()) return this.millisecondsOffset();
-    return (
-      this.millisecondsOffset() +
-      new Date().getTime() -
-      this.startTime()!.getTime()
-    );
+    return this.millisecondsOffset() + Date.now() - this.startTime()!.getTime();
   }
 
   constructor() {

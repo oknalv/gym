@@ -19,7 +19,7 @@ import { WatchComponent } from '../watch/watch.component';
 })
 export class TimerComponent {
   startingTime = input.required<Date>();
-  millisecondsToFinish = input<number>(0);
+  millisecondsToFinish = input.required<number>();
   stopOnZero = input<boolean>(false);
   stop = output<void>();
   elapsedTime = signal({ hours: 0, minutes: 0, seconds: 0, milliseconds: 0 });
