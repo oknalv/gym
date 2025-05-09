@@ -3,6 +3,7 @@ import {
   inject,
   provideAppInitializer,
   provideZoneChangeDetection,
+  isDevMode,
 } from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 
@@ -13,6 +14,7 @@ import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { WorkoutService } from './workout.service';
 import { ConfigurationService } from './configuration.service';
+import { provideServiceWorker } from '@angular/service-worker';
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient,
@@ -40,6 +42,10 @@ export const appConfig: ApplicationConfig = {
         deps: [HttpClient],
       },
       defaultLanguage: 'en',
+    }),
+    provideServiceWorker('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000',
     }),
   ],
 };
