@@ -1,120 +1,114 @@
-import { DestroyRef, effect, inject, Injectable, signal } from '@angular/core';
-import { RunnerStatus } from './common.model';
-import { NotificationService } from './notification.service';
+import { computed, inject, Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { ConfigurationService } from './configuration.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TimerService {
-  private TIMER_KEY = 'gym-timer';
-  private startTime = signal<Date | null>(null);
-  private millisecondsOffset = signal(0);
-  private _status = signal<RunnerStatus>(RunnerStatus.stop);
-  status = this._status.asReadonly();
-  private _remainingMilliseconds = signal(0);
-  remainingMilliseconds = this._remainingMilliseconds.asReadonly();
-  private destroyRef = inject(DestroyRef);
-  private notificationService = inject(NotificationService);
-  private interval: number | null = null;
+  private readonly TIMERS_KEY = 'gym-timers';
+  private timers = new Map<string, [Timer, BehaviorSubject<number>]>();
+  private messageChannel = new MessageChannel();
+  private notificationAudio = new Audio('timer-beep.mp3');
+  private configurationService = inject(ConfigurationService);
+  private timerSound = computed(
+    () => this.configurationService.configuration().timerSound,
+  );
 
   constructor() {
-    const timer: Timer | null = JSON.parse(
-      window.localStorage.getItem(this.TIMER_KEY) || 'null',
+    const timers: [string, Timer][] = JSON.parse(
+      window.localStorage.getItem(this.TIMERS_KEY) || '[]',
     );
-    if (timer) {
-      this.millisecondsOffset.set(timer.millisecondsOffset);
-      this._remainingMilliseconds.set(timer.millisecondsOffset);
-      this._status.set(timer.status);
-      if (timer.startTime) {
-        this.notificationService.abortNotification(timer.startTime);
-        this.startTime.set(new Date());
+    timers.forEach(([timerId, timer]) => {
+      if (timer.persist) {
         const remainingMilliseconds = Math.max(
-          timer.millisecondsOffset - (Date.now() - timer.startTime),
+          timer.remainingMilliseconds - (Date.now() - timer.lastUpdate),
           0,
         );
-        this._remainingMilliseconds.set(remainingMilliseconds);
-        this.millisecondsOffset.set(remainingMilliseconds);
+        if (remainingMilliseconds > 0) {
+          this.play(timerId, remainingMilliseconds, timer.text);
+        }
+      } else {
+        this.stop(timerId);
       }
-    }
-    effect(() => {
-      localStorage.setItem(
-        this.TIMER_KEY,
-        JSON.stringify({
-          millisecondsOffset: this.millisecondsOffset(),
-          status: this._status(),
-          startTime: this.startTime()?.getTime() || null,
-        }),
+    });
+    this.updateLocalStorage();
+    navigator.serviceWorker.ready.then(() => {
+      navigator.serviceWorker.controller!.postMessage(
+        { type: 'PORT_INITIALIZATION' },
+        [this.messageChannel.port2],
       );
-    });
-    effect(() => {
-      if (this._status() === RunnerStatus.play) {
-        this.notificationService.notifyAfter(
-          this.millisecondsOffset(),
-          this.startTime()!.getTime(),
-        );
-        this.interval = window.setInterval(() => {
-          this._remainingMilliseconds.set(
-            Math.max(
-              this.millisecondsOffset() -
-                (Date.now() - this.startTime()!.getTime()),
-              0,
-            ),
-          );
-          if (this._remainingMilliseconds() < 10) {
-            this.stop(false);
-          }
-        }, 10);
-      }
-
-      this.destroyRef.onDestroy(() => {
-        if (this.interval !== null) clearInterval(this.interval);
-      });
+      this.messageChannel.port1.onmessage = (event) => {
+        const timerId = event.data.timerId;
+        const remainingMilliseconds = event.data.remainingMilliseconds;
+        const timerTuple = this.timers.get(timerId);
+        if (timerTuple) {
+          timerTuple[1].next(remainingMilliseconds);
+          this.timers.set(timerId, [
+            { ...timerTuple[0], remainingMilliseconds, lastUpdate: Date.now() },
+            timerTuple[1],
+          ]);
+        }
+        if (remainingMilliseconds === 0) {
+          if (this.timerSound()) this.notificationAudio.play();
+          this.timers.get(timerId)?.[1].complete();
+          this.timers.delete(timerId);
+        }
+        this.updateLocalStorage();
+      };
     });
   }
 
-  setRemainingMilliseconds(millisecons: number) {
-    if (this._status() !== RunnerStatus.stop) {
-      throw 'TIMER_RUNNING';
-    }
-    this.millisecondsOffset.set(millisecons);
-    this._remainingMilliseconds.set(millisecons);
+  play(timerId: string, milliseconds: number, text: string, persist = true) {
+    navigator.serviceWorker.controller!.postMessage({
+      timerId,
+      milliseconds,
+      text,
+      type: 'play',
+    });
+    this.timers.set(timerId, [
+      {
+        remainingMilliseconds: milliseconds,
+        lastUpdate: Date.now(),
+        text,
+        persist,
+      },
+      new BehaviorSubject(milliseconds),
+    ]);
+    this.updateLocalStorage();
+    return this.getTimer(timerId)!;
   }
 
-  play() {
-    if (this._status() === RunnerStatus.play) {
-      throw 'TIMER_ALREADY_STARTED';
-    }
-    this._status.set(RunnerStatus.play);
-    this.startTime.set(new Date());
+  stop(timerId: string) {
+    navigator.serviceWorker.controller!.postMessage({
+      timerId,
+      type: 'stop',
+    });
+    this.timers.get(timerId)?.[1].complete();
+    this.timers.delete(timerId);
+    this.updateLocalStorage();
   }
 
-  pause() {
-    if (this._status() !== RunnerStatus.play) {
-      throw 'TIMER_NOT_STARTED';
-    }
-    this._status.set(RunnerStatus.pause);
-    this.notificationService.abortNotification(this.startTime()!.getTime());
-    if (this.interval !== null) clearInterval(this.interval);
-    this.startTime.set(null);
-    this.millisecondsOffset.set(this.remainingMilliseconds());
+  getTimer(timerId: string) {
+    return this.timers.get(timerId)?.[1].asObservable();
   }
 
-  stop(abort = true) {
-    if (this._status() === RunnerStatus.stop) {
-      throw 'TIMER_NOT_STARTED';
-    }
-    this._status.set(RunnerStatus.stop);
-    if (abort)
-      this.notificationService.abortNotification(this.startTime()!.getTime());
-    if (this.interval !== null) clearInterval(this.interval);
-    this.startTime.set(null);
-    this.millisecondsOffset.set(0);
-    this._remainingMilliseconds.set(0);
+  private updateLocalStorage() {
+    window.localStorage.setItem(
+      this.TIMERS_KEY,
+      JSON.stringify(
+        [...this.timers.entries()].map(([timerId, [timer, _]]) => [
+          timerId,
+          timer,
+        ]),
+      ),
+    );
   }
 }
 
 interface Timer {
-  startTime: number | null;
-  millisecondsOffset: number;
-  status: RunnerStatus;
+  remainingMilliseconds: number;
+  lastUpdate: number;
+  text: string;
+  persist: boolean;
 }

@@ -137,6 +137,7 @@
     "skipRestFinishSuperset": "Skip rest and finish superset",
     "skipRestFinishWorkout": "Skip rest and finish workout",
     "runTimer": "Run timer",
+    "exerciseTimerFinished": "Exercise's time's up!",
     "abandonWorkout": "Leave workout",
     "abandonWorkoutDialog": {
       "title": "Warning",
@@ -147,12 +148,14 @@
     "workoutFinished": "Workout finished",
     "noWorkoutExecuting": "There isn't any ongoing workout.",
     "chooseWorkout": "Choose a workout",
-    "completedExercises": "Completed exercises and supersets"
+    "completedExercises": "Completed exercises and supersets",
+    "restingTimerFinished": "Resting time's up!"
   },
   "configuration": {
     "title": "Configuration",
     "weightUnit": "Choose what weight unit you want to see in the app (changing it won't convert the already input weights)",
     "language": "Language of the app",
+    "timerSound": "Play a sound when a timer is up",
     "en": "English",
     "es": "Español"
   },
@@ -160,7 +163,8 @@
     "title": "Stopwatch"
   },
   "timer": {
-    "title": "Timer"
+    "title": "Timer",
+    "finishMessage": "Time's up!"
   },
   "shared": {
     "deleteDialog": {

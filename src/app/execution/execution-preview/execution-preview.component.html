@@ -5,10 +5,12 @@
     @if (isExercise(ongoingExercise()!)) {
       <gym-ongoing-exercise-preview
         [exercises]="[asExercise(ongoingExercise()!)]"
+        [timerId]="TIMER_ID"
       />
     } @else {
       <gym-ongoing-exercise-preview
         [exercises]="asSuperset(ongoingExercise()!).exercises"
+        [timerId]="TIMER_ID"
       />
     }
   }

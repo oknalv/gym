@@ -72,11 +72,13 @@
         <gym-ongoing-exercise
           [exercise]="asExercise(ongoingExercise()!)"
           [isLastExercise]="isLastExercise()"
+          [timerId]="TIMER_ID"
         />
       } @else {
         <gym-ongoing-superset
           [superset]="asSuperset(ongoingExercise()!)"
           [isLastExercise]="isLastExercise()"
+          [timerId]="TIMER_ID"
         />
       }
     }

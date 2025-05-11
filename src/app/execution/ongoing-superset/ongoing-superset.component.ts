@@ -16,6 +16,7 @@ import { ExecutionService } from '../../execution.service';
   styleUrl: './ongoing-superset.component.scss',
 })
 export class OngoingSupersetComponent {
+  timerId = input.required<string>();
   superset = input.required<Superset>();
   executionService = inject(ExecutionService);
   isLastExercise = input.required<boolean>();

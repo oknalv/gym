@@ -5,7 +5,7 @@ import { RunnerStatus } from './common.model';
   providedIn: 'root',
 })
 export class StopwatchService {
-  private STOPWATCH_KEY = 'gym-stopwatch';
+  private readonly STOPWATCH_KEY = 'gym-stopwatch';
   private startTime = signal<Date | null>(null);
   private millisecondsOffset = signal(0);
   private _laps = signal<number[]>([]);

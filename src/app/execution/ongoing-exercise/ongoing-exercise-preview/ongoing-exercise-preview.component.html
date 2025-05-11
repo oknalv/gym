@@ -8,8 +8,10 @@
 @if (restingStart()) {
   <div class="resting-time">
     <gym-timer
-      [startingTime]="restingStart()!"
-      [millisecondsToFinish]="exercises()[0].restingTime * 1000"
+      [timerId]="timerId()"
+      [millisecondsToRun]="exercises()[0].restingTime * 1000"
+      [notificationText]="'execution.restingTimerFinished' | translate"
+      (stop)="onFinishRest()"
     />
     <gym-icon icon="rest" />
   </div>

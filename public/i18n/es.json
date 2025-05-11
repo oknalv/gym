@@ -137,6 +137,7 @@
     "skipRestFinishSuperset": "Saltarse el descanso y terminar la superserie",
     "skipRestFinishWorkout": "Saltarse el descanso y terminar el entrenamiento",
     "runTimer": "Iniciar temporizador",
+    "exerciseTimerFinished": "¡Se acabó el tiempo del ejercicio!",
     "abandonWorkout": "Salir del entrenamiento",
     "abandonWorkoutDialog": {
       "title": "Advertencia",
@@ -147,18 +148,21 @@
     "workoutFinished": "Entrenamiento terminado",
     "noWorkoutExecuting": "No hay ningún entrenamiento en progreso.",
     "chooseWorkout": "Elegir un entrenamiento",
-    "completedExercises": "Ejercicios y superseries completados."
+    "completedExercises": "Ejercicios y superseries completados.",
+    "restingTimerFinished": "¡Se acabó el tiempo de descanso!"
   },
   "configuration": {
     "title": "Configuración",
     "weightUnit": "Elige qué unidad de peso quieres ver en la aplicación (cambiarla no convertirá los pesos ya introducidos)",
-    "language": "Idioma de la aplicación"
+    "language": "Idioma de la aplicación",
+    "timerSound": "Reproducir un sonido cuando un temporizador termine"
   },
   "stopwatch": {
     "title": "Cronómetro"
   },
   "timer": {
-    "title": "Temporizador"
+    "title": "Temporizador",
+    "finishMessage": "¡Se acabó el tiempo!"
   },
   "shared": {
     "deleteDialog": {

@@ -1,8 +1,7 @@
-import { Component, effect, inject, input, model, signal } from '@angular/core';
+import { Component, effect, input, model, signal } from '@angular/core';
 import { DialogComponent } from '../dialog.component';
 import { TranslatePipe } from '@ngx-translate/core';
 import { TimerComponent } from '../../timer/timer.component';
-import { NotificationService } from '../../../notification.service';
 
 @Component({
   selector: 'gym-timer-dialog',
@@ -12,22 +11,22 @@ import { NotificationService } from '../../../notification.service';
 })
 export class TimerDialogComponent {
   open = model.required<boolean>();
-  startingTime = signal<Date | null>(null);
+  timerId = input.required<string>();
   secondsToFinish = input.required<number>();
-  private notificationService = inject(NotificationService);
+  notificationText = input.required<string>();
+  millisecondsToFinish = signal<number | null>(null);
 
   constructor() {
     effect(() => {
       if (this.open()) {
-        this.startingTime.set(new Date());
+        this.millisecondsToFinish.set(this.secondsToFinish() * 1000);
       } else {
-        this.startingTime.set(null);
+        this.millisecondsToFinish.set(null);
       }
     });
   }
 
   onClose() {
-    this.notificationService.notify();
     this.open.set(false);
   }
 }

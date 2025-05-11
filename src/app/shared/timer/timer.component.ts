@@ -2,14 +2,16 @@ import {
   Component,
   computed,
   DestroyRef,
-  effect,
   inject,
   input,
+  OnInit,
   output,
   signal,
 } from '@angular/core';
 import { getHoursMinutesSecondsAndMilliseconds } from '../../utils';
 import { WatchComponent } from '../watch/watch.component';
+import { TimerService } from '../../timer.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'gym-timer',
@@ -17,39 +19,45 @@ import { WatchComponent } from '../watch/watch.component';
   templateUrl: './timer.component.html',
   styleUrl: './timer.component.scss',
 })
-export class TimerComponent {
-  startingTime = input.required<Date>();
-  millisecondsToFinish = input.required<number>();
-  stopOnZero = input<boolean>(false);
+export class TimerComponent implements OnInit {
+  timerId = input.required<string>();
+  millisecondsToRun = input.required<number>();
+  notificationText = input.required<string>();
+  persist = input(true);
+  private timerService = inject(TimerService);
+  private _time = signal(0);
+  time = computed(() => {
+    return getHoursMinutesSecondsAndMilliseconds(this._time());
+  });
+  private timerSubscription?: Subscription;
   stop = output<void>();
-  elapsedTime = signal({ hours: 0, minutes: 0, seconds: 0, milliseconds: 0 });
   private destroyRef = inject(DestroyRef);
 
   constructor() {
-    let timerInterval: number;
-    effect(() => {
-      timerInterval = window.setInterval(() => {
-        const elapsedMilliseconds =
-          Date.now() -
-          this.startingTime().getTime() -
-          this.millisecondsToFinish();
-        this.elapsedTime.set(
-          getHoursMinutesSecondsAndMilliseconds(Math.abs(elapsedMilliseconds)),
-        );
-        if (this.stopOnZero() && elapsedMilliseconds > 0) {
-          this.stop.emit();
-          clearInterval(timerInterval);
-          this.elapsedTime.set({
-            hours: 0,
-            minutes: 0,
-            seconds: 0,
-            milliseconds: 0,
-          });
-        }
-      }, 10);
-    });
     this.destroyRef.onDestroy(() => {
-      if (timerInterval) clearInterval(timerInterval);
+      this.timerSubscription?.unsubscribe();
+      if (this._time() <= 0 || !this.persist())
+        this.timerService.stop(this.timerId());
+    });
+  }
+
+  ngOnInit() {
+    let timerObservable = this.timerService.getTimer(this.timerId());
+    if (!timerObservable) {
+      timerObservable = this.timerService.play(
+        this.timerId(),
+        this.millisecondsToRun(),
+        this.notificationText(),
+        this.persist(),
+      );
+    }
+    this.timerSubscription = timerObservable!.subscribe({
+      next: (value) => {
+        this._time.set(value);
+      },
+      complete: () => {
+        this.stop.emit();
+      },
     });
   }
 }

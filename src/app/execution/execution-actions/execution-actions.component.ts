@@ -12,6 +12,7 @@ import { TimerComponent } from '../../shared/timer/timer.component';
 })
 export class ExecutionActionsComponent {
   elementKey = input.required<string>();
+  timerId = input.required<string>();
   private _elementKey = computed(() => {
     return `${this.elementKey()[0].toUpperCase()}${this.elementKey().substring(1)}`;
   });
@@ -54,6 +55,11 @@ export class ExecutionActionsComponent {
 
   onRest() {
     this.executionService.rest();
+  }
+
+  onFinishRest() {
+    if (this.isLastSet()) this.executionService.completeExercise();
+    else this.executionService.nextSet();
   }
 
   onSkipRest() {

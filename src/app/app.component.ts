@@ -35,6 +35,7 @@ export class AppComponent {
   });
 
   constructor() {
+    Notification.requestPermission();
     this.router.events
       .pipe(
         takeUntilDestroyed(),

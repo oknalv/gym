@@ -20,3 +20,16 @@
     </ng-template>
   </gym-select>
 </section>
+<section>
+  <div>{{ "configuration.timerSound" | translate }}</div>
+  <gym-switch
+    [options]="{
+      on: true,
+      off: false,
+    }"
+    [(ngModel)]="timerSound"
+  >
+    <gym-icon ngProjectAs="off-option" icon="mute" />
+    <gym-icon ngProjectAs="on-option" icon="sound" />
+  </gym-switch>
+</section>

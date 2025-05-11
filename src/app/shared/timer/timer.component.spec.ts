@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TimerComponent } from './timer.component';
+import { TimerService } from '../../timer.service';
+import { MockTimerService } from '../../../../test/mock-timer.service';
 
 describe('TimerComponent', () => {
   let component: TimerComponent;
@@ -8,16 +10,24 @@ describe('TimerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TimerComponent]
-    })
-    .compileComponents();
+      imports: [TimerComponent],
+      providers: [
+        {
+          provide: TimerService,
+          useClass: MockTimerService,
+        },
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(TimerComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    fixture.componentRef.setInput('timerId', 'timerId');
+    fixture.componentRef.setInput('millisecondsToRun', 1);
+    fixture.componentRef.setInput('notificationText', 'notificationText');
   });
 
   it('should create', () => {
+    fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 });

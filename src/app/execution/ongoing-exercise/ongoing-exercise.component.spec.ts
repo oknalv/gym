@@ -35,6 +35,7 @@ describe('OngoingExerciseComponent', () => {
       weightType: WeightType.total,
     });
     fixture.componentRef.setInput('isLastExercise', false);
+    fixture.componentRef.setInput('timerId', 'timerId');
     mockExecutionService.ongoingExecution.and.returnValue({
       workoutId: 0,
       completedExerciseIds: [],

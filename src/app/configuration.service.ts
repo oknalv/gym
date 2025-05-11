@@ -6,10 +6,11 @@ import { TranslateService } from '@ngx-translate/core';
   providedIn: 'root',
 })
 export class ConfigurationService {
-  private CONFIGURATION_KEY = 'gym-configuration';
+  private readonly CONFIGURATION_KEY = 'gym-configuration';
   private _configuration = signal<Configuration>({
     weightUnit: WeightUnit.kg,
     language: navigator.language.split('-')[0],
+    timerSound: false,
   });
   configuration = this._configuration.asReadonly();
   private translateService = inject(TranslateService);
@@ -47,6 +48,12 @@ export class ConfigurationService {
     this.translateService.use(language);
     this._configuration.update((configuration) => {
       return { ...configuration, language };
+    });
+  }
+
+  setTimerSound(timerSound: boolean) {
+    this._configuration.update((configuration) => {
+      return { ...configuration, timerSound };
     });
   }
 }

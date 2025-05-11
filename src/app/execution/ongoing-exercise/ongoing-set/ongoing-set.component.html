@@ -29,5 +29,10 @@
 </div>
 
 @if (progressType() === "time") {
-  <gym-timer-dialog [(open)]="showTimer" [secondsToFinish]="set().time" />
+  <gym-timer-dialog
+    [(open)]="showTimer"
+    [secondsToFinish]="set().time"
+    timerId="exercise-timer"
+    [notificationText]="'execution.exerciseTimerFinished' | translate"
+  />
 }

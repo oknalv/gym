@@ -5,10 +5,17 @@ import { FormsModule } from '@angular/forms';
 import { WeightUnit } from '../configuration.model';
 import { ConfigurationService } from '../configuration.service';
 import { SelectComponent } from '../shared/select/select.component';
+import { IconComponent } from '../shared/icon/icon.component';
 
 @Component({
   selector: 'gym-configuration',
-  imports: [TranslatePipe, SwitchComponent, FormsModule, SelectComponent],
+  imports: [
+    TranslatePipe,
+    SwitchComponent,
+    FormsModule,
+    SelectComponent,
+    IconComponent,
+  ],
   templateUrl: './configuration.component.html',
   styleUrl: './configuration.component.scss',
 })
@@ -18,15 +25,20 @@ export class ConfigurationComponent {
   availableLanguages = this.configurationService.availableLanguages;
   weightUnit = signal(WeightUnit.kg);
   language = signal('en');
+  timerSound = signal(false);
 
   constructor() {
     this.weightUnit.set(this.configuration().weightUnit);
-    this.language = signal(this.configuration().language);
+    this.language.set(this.configuration().language);
+    this.timerSound.set(this.configuration().timerSound);
     effect(() => {
       this.configurationService.setWeightUnit(this.weightUnit());
     });
     effect(() => {
       this.configurationService.setLanguage(this.language());
+    });
+    effect(() => {
+      this.configurationService.setTimerSound(this.timerSound());
     });
   }
 }

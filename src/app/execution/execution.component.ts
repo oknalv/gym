@@ -2,8 +2,6 @@ import {
   AfterViewInit,
   Component,
   computed,
-  DestroyRef,
-  effect,
   inject,
   signal,
 } from '@angular/core';
@@ -36,9 +34,9 @@ import { Exercise, Superset } from '../gym.model';
   styleUrl: './execution.component.scss',
 })
 export class ExecutionComponent implements AfterViewInit {
+  readonly TIMER_ID = 'resting-time';
   private executionService = inject(ExecutionService);
   private workoutService = inject(WorkoutService);
-  private destroyRef = inject(DestroyRef);
   execution = this.executionService.ongoingExecution;
   showAskLeaveWorkout = signal(false);
 
@@ -121,32 +119,6 @@ export class ExecutionComponent implements AfterViewInit {
       : null;
   });
 
-  constructor() {
-    let restingInterval: number;
-    effect(() => {
-      const restingStart = this.execution()?.restingStart;
-      if (restingStart) {
-        restingInterval = window.setInterval(() => {
-          if (this.exerciseFinished()) {
-            clearInterval(restingInterval);
-            if (
-              this.ongoingExerciseOrFirstSupersetExercise()!.sets.length - 1 ===
-              this.execution()?.setIndex
-            ) {
-              this.executionService.completeExercise();
-            } else {
-              this.executionService.nextSet();
-            }
-          }
-        }, 10);
-      } else {
-        if (restingInterval) clearInterval(restingInterval);
-      }
-    });
-    this.destroyRef.onDestroy(() => {
-      if (restingInterval) clearInterval(restingInterval);
-    });
-  }
   async ngAfterViewInit() {
     if (this.workoutFinished()) {
       await this.updateWorkoutLastExecution();

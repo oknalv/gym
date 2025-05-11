@@ -2,8 +2,10 @@
   <div class="timer-wrapper">
     <gym-icon icon="rest" />
     <gym-timer
-      [startingTime]="restingStart()!"
-      [millisecondsToFinish]="restingTime() * 1000"
+      [timerId]="timerId()"
+      [millisecondsToRun]="restingTime() * 1000"
+      [notificationText]="'execution.restingTimerFinished' | translate"
+      (stop)="onFinishRest()"
     />
   </div>
   <div class="secondary-actions">

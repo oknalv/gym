@@ -18,9 +18,9 @@ import { OngoingSetComponent } from './ongoing-set/ongoing-set.component';
   styleUrl: './ongoing-exercise.component.scss',
 })
 export class OngoingExerciseComponent {
+  timerId = input.required<string>();
   exercise = input.required<Exercise>();
   executionService = inject(ExecutionService);
-  showTimer = signal(false);
   isLastExercise = input.required<boolean>();
   setIndex = computed(() => {
     return this.executionService.ongoingExecution()!.setIndex;
@@ -31,8 +31,4 @@ export class OngoingExerciseComponent {
   set = computed(() => {
     return this.exercise().sets[this.setIndex()];
   });
-
-  onRunTimer() {
-    this.showTimer.set(true);
-  }
 }

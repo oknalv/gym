@@ -6,14 +6,16 @@ import { ExecutionService } from '../../../execution.service';
 import { TimerComponent } from '../../../shared/timer/timer.component';
 import { IconComponent } from '../../../shared/icon/icon.component';
 import { ConfigurationService } from '../../../configuration.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'gym-ongoing-exercise-preview',
-  imports: [TimerComponent, IconComponent],
+  imports: [TimerComponent, IconComponent, TranslatePipe],
   templateUrl: './ongoing-exercise-preview.component.html',
   styleUrl: './ongoing-exercise-preview.component.scss',
 })
 export class OngoingExercisePreviewComponent {
+  timerId = input.required<string>();
   exercises = input.required<Exercise[]>();
   private executionService = inject(ExecutionService);
   private configurationService = inject(ConfigurationService);
@@ -36,4 +38,13 @@ export class OngoingExercisePreviewComponent {
       ),
     );
   });
+
+  onFinishRest() {
+    if (
+      this.exercises()[0].sets.length - 1 ===
+      this.executionService.ongoingExecution()?.setIndex
+    )
+      this.executionService.completeExercise();
+    else this.executionService.nextSet();
+  }
 }
