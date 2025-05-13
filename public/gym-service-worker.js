@@ -40,8 +40,8 @@ self.addEventListener("message", (event) => {
                   }
                   self.registration.showNotification("Gym", {
                     body: event.data.text,
-                    icon: "icons/icon-72x72.png",
-                    badge: "icons/icon-72x72.png",
+                    icon: "icons/favicon.png",
+                    badge: "icons/favicon.png",
                     silent: false,
                     tag: event.data.timerId,
                   });
