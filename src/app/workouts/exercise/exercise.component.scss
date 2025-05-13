@@ -22,6 +22,9 @@
           &:not(:last-child) {
             margin-right: var(--margin);
           }
+          &.remark {
+            color: var(--light-red);
+          }
         }
       }
     }

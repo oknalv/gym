@@ -3,6 +3,7 @@ import {
   Exercise,
   ExerciseDTO,
   ExerciseType,
+  Remark,
   Superset,
   SupersetDTO,
   Workout,
@@ -10,7 +11,14 @@ import {
 } from './gym.model';
 import { DataService } from './data.service';
 import { ExecutionService } from './execution.service';
-import { asExerciseDTO, asSupersetDTO, isExerciseDTO } from './utils';
+import {
+  asExercise,
+  asExerciseDTO,
+  asSuperset,
+  asSupersetDTO,
+  isExercise,
+  isExerciseDTO,
+} from './utils';
 
 @Injectable({
   providedIn: 'root',
@@ -272,5 +280,59 @@ export class WorkoutService {
       id,
     );
     await this.initWorkouts();
+  }
+
+  async changeRemarkOfOngoingWorkoutExercise(
+    exerciseId: number,
+    remark: Remark | null,
+  ) {
+    if (!this.executionService.ongoingExecution()) {
+      throw 'WORKOUT_NOT_EXECUTING';
+    }
+    if (!this.executionService.ongoingExecution()!.ongoingExerciseId) {
+      throw 'EXERCISE_NOT_EXECUTING';
+    }
+    const workout = this._workouts().find(
+      (workout) =>
+        workout.id === this.executionService.ongoingExecution()!.workoutId,
+    );
+    if (!workout) {
+      throw 'WORKOUT_NOT_FOUND';
+    }
+    if (
+      this.executionService.ongoingExecution()!.ongoingExerciseId === exerciseId
+    ) {
+      let exercise = workout.exercises.find(
+        (exercise) => exercise.id === exerciseId,
+      );
+      if (!exercise) {
+        throw 'EXERCISE_NOT_FOUND';
+      }
+      if (!isExercise(exercise)) {
+        throw 'SUPERSET_INSTEAD_OF_EXERCISE';
+      }
+      exercise = asExercise(exercise);
+      exercise.remark = remark;
+    } else {
+      const superset = workout.exercises.find(
+        (exercise) =>
+          exercise.id ===
+          this.executionService.ongoingExecution()!.ongoingExerciseId,
+      );
+      if (!superset) {
+        throw 'SUPERSET_NOT_FOUND';
+      }
+      if (isExercise(superset)) {
+        throw 'EXERCISE_INSTEAD_OF_SUPERSET';
+      }
+      const exercise = asSuperset(superset).exercises.find(
+        (exercise) => exercise.id === exerciseId,
+      );
+      if (!exercise) {
+        throw 'EXERCISE_NOT_FOUND_IN_SUPERSET';
+      }
+      exercise.remark = remark;
+    }
+    await this.editWorkout(workout);
   }
 }

@@ -16,12 +16,13 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class SwitchComponent<T> implements ControlValueAccessor {
   options = input.required<SwitchOptions<T>>();
+  nullable = input(false);
 
-  value = signal<T | undefined>(undefined);
+  value = signal<T | null | undefined>(undefined);
 
   disabled = signal(false);
 
-  private onChange = (option: T) => {};
+  private onChange = (option: T | null) => {};
 
   selectedOn = computed(() => {
     return !this.disabled() && this.value() === this.options().on;
@@ -31,7 +32,10 @@ export class SwitchComponent<T> implements ControlValueAccessor {
     return !this.disabled() && this.value() === this.options().off;
   });
 
-  select(option: T) {
+  select(option: T | null) {
+    if (this.nullable() && this.value() === option) {
+      option = null;
+    }
     this.value.set(option);
     this.onChange(option);
   }

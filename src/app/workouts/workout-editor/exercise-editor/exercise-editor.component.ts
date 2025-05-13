@@ -12,6 +12,7 @@ import {
   WeightType,
   ProgressType,
   Exercise,
+  Remark,
 } from '../../../gym.model';
 import {
   AbstractControl,
@@ -113,6 +114,7 @@ export class ExerciseEditorComponent {
       >([]),
     }),
     restingTime: new FormControl(60),
+    remark: new FormControl<Remark | null>(null),
   });
 
   constructor() {
@@ -213,6 +215,7 @@ export class ExerciseEditorComponent {
         weightType: this.form.value.weightType!,
         sets: this.form.value.sets?.sets?.map(this.getSet)!,
         restingTime: this.form.value.restingTime!,
+        remark: this.form.value.remark!,
       };
       this.resetForm();
       this.exercise.emit(newExercise);
@@ -247,6 +250,7 @@ export class ExerciseEditorComponent {
         time: 60,
       })),
       restingTime: 60,
+      remark: null,
     });
   }
 
@@ -263,6 +267,7 @@ export class ExerciseEditorComponent {
       weightType: exercise.weightType,
       progressType: exercise.progressType,
       restingTime: exercise.restingTime,
+      remark: exercise.remark,
     });
     this.form.controls['sets'].controls['sets'].clear();
     exercise.sets.forEach((set) => {

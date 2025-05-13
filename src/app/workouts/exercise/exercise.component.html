@@ -18,6 +18,12 @@
       <gym-icon
         [icon]="exercise().progressType === 'repetitions' ? 'repeat' : 'timer'"
       />
+      @if (exercise().remark) {
+        <gym-icon
+          class="remark"
+          [icon]="exercise().remark === 'failed' ? 'thumbsdown' : 'increase'"
+        />
+      }
     </div>
   </div>
 </header>

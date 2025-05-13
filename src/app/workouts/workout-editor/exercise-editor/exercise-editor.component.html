@@ -95,6 +95,26 @@
         <gym-time-input formControlName="restingTime" />
       </div>
     </section>
+    <section>
+      <header>{{ "exercises.editor.remark.header" | translate }}</header>
+      <gym-switch
+        [options]="{
+          on: 'increase',
+          off: 'failed',
+        }"
+        formControlName="remark"
+        [nullable]="true"
+      >
+        <span ngProjectAs="on-option" class="switch-option">
+          <gym-icon icon="increase" />
+          {{ "exercises.editor.remark.increase" | translate }}
+        </span>
+        <span ngProjectAs="off-option" class="switch-option">
+          <gym-icon icon="thumbsdown" />
+          {{ "exercises.editor.remark.failed" | translate }}
+        </span>
+      </gym-switch>
+    </section>
 
     @if (showError) {
       <p class="error">

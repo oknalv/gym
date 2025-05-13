@@ -71,7 +71,6 @@ export class MainTimerComponent {
         this.status.set(RunnerStatus.pause);
       }
     }
-    console.log(this.status());
     effect(() => {
       localStorage.setItem(
         this.MAIN_TIMER_KEY,

@@ -21,6 +21,11 @@
       > .exercise-name {
         font-size: 1.5em;
         word-break: break-all;
+
+        > gym-icon {
+          font-size: 0.75em;
+          color: var(--light-red);
+        }
       }
     }
   }

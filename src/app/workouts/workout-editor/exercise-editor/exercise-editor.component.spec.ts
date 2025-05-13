@@ -56,7 +56,7 @@ describe('ExerciseEditorComponent', () => {
     const sections = fixture.elementRef.nativeElement.querySelectorAll(
       ':scope > gym-dialog form > section',
     );
-    expect(sections.length).toBe(6);
+    expect(sections.length).toBe(7);
     expect(sections[2].querySelector('header').innerText).toBe(
       'exercises.editor.weightType.header',
     );
@@ -69,7 +69,7 @@ describe('ExerciseEditorComponent', () => {
     const sections = fixture.elementRef.nativeElement.querySelectorAll(
       ':scope > gym-dialog form > section',
     );
-    expect(sections.length).toBe(5);
+    expect(sections.length).toBe(6);
     expect(sections[2].querySelector('header').innerText).not.toBe(
       'exercises.editor.weightType.header',
     );
@@ -112,6 +112,7 @@ describe('ExerciseEditorComponent', () => {
         ],
       },
       restingTime: 1,
+      remark: null,
     });
     expect(component.form.invalid).toBeTrue();
   });
@@ -140,6 +141,7 @@ describe('ExerciseEditorComponent', () => {
         ],
       },
       restingTime: 1,
+      remark: null,
     });
     expect(component.form.invalid).toBeFalse();
   });
@@ -168,6 +170,7 @@ describe('ExerciseEditorComponent', () => {
         ],
       },
       restingTime: 1,
+      remark: null,
     });
     expect(component.form.invalid).toBeTrue();
     component.form.controls.sets.controls.sets.controls[0].controls.repetitions.setValue(
@@ -200,6 +203,7 @@ describe('ExerciseEditorComponent', () => {
         ],
       },
       restingTime: 1,
+      remark: null,
     });
     expect(component.form.invalid).toBeFalse();
     component.form.controls.sets.controls.sets.controls[0].controls.repetitions.setValue(
@@ -232,6 +236,7 @@ describe('ExerciseEditorComponent', () => {
         ],
       },
       restingTime: 1,
+      remark: null,
     });
     expect(component.form.invalid).toBeTrue();
     component.form.controls.sets.controls.sets.controls[0].controls.time.setValue(
@@ -264,6 +269,7 @@ describe('ExerciseEditorComponent', () => {
         ],
       },
       restingTime: 1,
+      remark: null,
     });
     expect(component.form.invalid).toBeFalse();
     component.form.controls.sets.controls.sets.controls[0].controls.time.setValue(
@@ -296,6 +302,7 @@ describe('ExerciseEditorComponent', () => {
         ],
       },
       restingTime: 1,
+      remark: null,
     });
     expect(component.form.invalid).toBeTrue();
   });
@@ -324,6 +331,7 @@ describe('ExerciseEditorComponent', () => {
         ],
       },
       restingTime: 1,
+      remark: null,
     });
     expect(component.form.invalid).toBeFalse();
   });
@@ -352,6 +360,7 @@ describe('ExerciseEditorComponent', () => {
         ],
       },
       restingTime: 1,
+      remark: null,
     });
     expect(component.form.invalid).toBeFalse();
   });
@@ -381,6 +390,7 @@ describe('ExerciseEditorComponent', () => {
         ],
       },
       restingTime: 1,
+      remark: null,
     });
     expect(component.form.invalid).toBeTrue();
     component.onSubmitExercise();
@@ -402,6 +412,7 @@ describe('ExerciseEditorComponent', () => {
         },
       ],
       restingTime: 1,
+      remark: null,
     });
     spyOn(component.exercise, 'emit');
     fixture.detectChanges();
@@ -421,6 +432,7 @@ describe('ExerciseEditorComponent', () => {
         },
       ],
       restingTime: 1,
+      remark: null,
     });
   });
 });

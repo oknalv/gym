@@ -22,6 +22,7 @@ export interface Exercise {
   weighted: boolean;
   progressType: ProgressType;
   restingTime: number;
+  remark: Remark | null;
 }
 
 export interface Superset {
@@ -51,6 +52,11 @@ export enum ProgressType {
   time = 'time',
 }
 
+export enum Remark {
+  increase = 'increase',
+  failed = 'failed',
+}
+
 export interface ExecutionDTO {
   workoutId: number;
   completedExerciseIds: number[];
@@ -75,6 +81,7 @@ export interface ExerciseDTO {
   weighted: boolean;
   progressType: ProgressType;
   restingTime: number;
+  remark: Remark | null;
 }
 
 export interface SupersetDTO {

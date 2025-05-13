@@ -12,6 +12,12 @@
       />
       <div class="exercise-name">
         {{ exercise.type!.name }}
+        @if (exercise.remark) {
+          <br />
+          <gym-icon
+            [icon]="exercise.remark === 'failed' ? 'thumbsdown' : 'increase'"
+          />
+        }
       </div>
     </div>
   }

@@ -58,6 +58,11 @@
       "restingTime": {
         "header": "Tiempo de descanso entre series"
       },
+      "remark": {
+        "header": "Observaciones",
+        "increase": "Aumentar",
+        "failed": "Fallo"
+      },
       "supersetSetsWarning": "Advertencia: añadir o eliminar series se reflejará en las series del resto de ejercicios de la superserie. Eliminar una serie se reflejará eliminando la última serie del resto de ejercicios. Añadir una serie se reflejará añadiendo una copia de la última serie de cada uno de los otros ejercicios en sus ejercicios correspondientes.",
       "supersetRestingTimeWarning": "Advertencia: cambiar el tiempo de descanso modificará el tiempo de descanso del resto de los ejercicios de la superserie.",
       "errorAdd": "Hay errores en el nuevo ejercicio. Por favor, corrígelos antes de añadir el ejercicio.",
@@ -155,7 +160,7 @@
     "title": "Configuración",
     "weightUnit": "Elige qué unidad de peso quieres ver en la aplicación (cambiarla no convertirá los pesos ya introducidos)",
     "language": "Idioma de la aplicación",
-    "timerSound": "Reproducir un sonido cuando un temporizador termine"
+    "timerSound": "Reproducir un sonido cuando los temporizadores terminen"
   },
   "stopwatch": {
     "title": "Cronómetro"

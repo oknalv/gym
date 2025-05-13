@@ -10,8 +10,26 @@
       [src]="exercise().type!.image!"
       [alt]="exercise().type!.name"
     />
-    <h1>{{ exercise().type!.name }}</h1>
+    <h1>
+      {{ exercise().type!.name }}
+    </h1>
   </header>
+  <gym-switch
+    [options]="{
+      on: 'increase',
+      off: 'failed',
+    }"
+    [(ngModel)]="remark"
+    (ngModelChange)="onRemarkChange($event)"
+    [nullable]="true"
+  >
+    <span ngProjectAs="on-option">
+      <gym-icon icon="increase" />
+    </span>
+    <span ngProjectAs="off-option">
+      <gym-icon icon="thumbsdown" />
+    </span>
+  </gym-switch>
   <gym-ongoing-set
     [set]="set()"
     [progressType]="exercise().progressType"

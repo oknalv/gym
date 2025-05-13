@@ -58,6 +58,11 @@
       "restingTime": {
         "header": "Resting time between sets"
       },
+      "remark": {
+        "header": "Remarks",
+        "increase": "Increase",
+        "failed": "Failed"
+      },
       "supersetSetsWarning": "Warning: adding or removing sets will reflect in the sets of the rest of the exercises of the superset. Removing any set will reflect in removing the last set of the rest of the exercises. Adding a set will reflect in adding a copy of the last set of each of the other exercises in their corresponding exercises.",
       "supersetRestingTimeWarning": "Warning: changing the resting time will modify the resting time of the rest of the exercises of the superset.",
       "errorAdd": "There are errors in the new exercise. Please, correct them before adding the exercise.",
@@ -155,7 +160,7 @@
     "title": "Configuration",
     "weightUnit": "Choose what weight unit you want to see in the app (changing it won't convert the already input weights)",
     "language": "Language of the app",
-    "timerSound": "Play a sound when a timer is up",
+    "timerSound": "Play a sound when the timers finish",
     "en": "English",
     "es": "Español"
   },

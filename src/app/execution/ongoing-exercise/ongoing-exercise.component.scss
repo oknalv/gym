@@ -1,7 +1,7 @@
 .exercise-data {
   background-color: var(--table-1);
   padding: var(--padding);
-  header {
+  > header {
     text-align: center;
 
     > gym-exercise-image {
@@ -12,5 +12,10 @@
     > h1 {
       word-break: break-all;
     }
+  }
+
+  > gym-switch {
+    --table-1: var(--dark-pink);
+    --table-2: var(--dark-red);
   }
 }

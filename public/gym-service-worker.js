@@ -30,12 +30,22 @@ self.addEventListener("message", (event) => {
               );
               clearInterval(interval);
               timers.delete(event.data.timerId);
-              self.registration.showNotification("Gym", {
-                body: event.data.text,
-                icon: "icons/icon-72x72.png",
-                badge: "icons/icon-72x72.png",
-                silent: false,
-              });
+              self.registration
+                .getNotifications({
+                  tag: event.data.timerId,
+                })
+                .then((notifications) => {
+                  for (const notification of notifications) {
+                    notification.close();
+                  }
+                  self.registration.showNotification("Gym", {
+                    body: event.data.text,
+                    icon: "icons/icon-72x72.png",
+                    badge: "icons/icon-72x72.png",
+                    silent: false,
+                    tag: event.data.timerId,
+                  });
+                });
             }
           }, 10);
           timers.set(event.data.timerId, interval);

@@ -3,6 +3,7 @@ import { ExecutionService } from '../../execution.service';
 import { IconComponent } from '../../shared/icon/icon.component';
 import { TranslatePipe } from '@ngx-translate/core';
 import { TimerComponent } from '../../shared/timer/timer.component';
+import { TimerService } from '../../timer.service';
 
 @Component({
   selector: 'gym-execution-actions',
@@ -44,6 +45,7 @@ export class ExecutionActionsComponent {
     if (this.isLastExercise()) key += 'Workout';
     return key;
   });
+  private timerService = inject(TimerService);
 
   onAbandonExercise() {
     this.executionService.abandonExercise();
@@ -63,10 +65,6 @@ export class ExecutionActionsComponent {
   }
 
   onSkipRest() {
-    if (this.isLastSet()) {
-      this.executionService.completeExercise();
-    } else {
-      this.executionService.nextSet();
-    }
+    this.timerService.stop(this.timerId());
   }
 }
