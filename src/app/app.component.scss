@@ -20,8 +20,13 @@
     }
   }
   &.executing.in-execution {
-    --background-color: var(--dark-green);
-    --table-1: var(--dark-turquoise);
-    --table-2: var(--dark-green);
+    .app-body {
+      --table-1: var(--dark-turquoise);
+      --table-2: var(--dark-green);
+      --success-light: var(--light-cyan);
+      --success-dark: var(--dark-cyan);
+      --info-light: var(--light-green);
+      --info-dark: var(--dark-green);
+    }
   }
 }

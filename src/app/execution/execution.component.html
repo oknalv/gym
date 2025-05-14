@@ -13,15 +13,31 @@
         <section>
           @for (exercise of doneAndToDoExercises().toDo; track exercise.id) {
             @if (isExercise(exercise)) {
-              <gym-exercise-option
+              <gym-exercise
                 [exercise]="asExercise(exercise)"
                 (click)="onChooseExercise(exercise.id)"
               />
             } @else {
-              <gym-superset-option
-                [superset]="asSuperset(exercise)"
+              <div
+                class="superset-wrapper"
                 (click)="onChooseExercise(exercise.id)"
-              />
+              >
+                <div>
+                  <div>
+                    {{
+                      "execution.supersetOf"
+                        | translate
+                          : { count: asSuperset(exercise).exercises.length }
+                    }}
+                  </div>
+                  @for (
+                    supersetExercise of asSuperset(exercise).exercises;
+                    track supersetExercise.id
+                  ) {
+                    <gym-exercise [exercise]="supersetExercise" />
+                  }
+                </div>
+              </div>
             }
           }
         </section>
@@ -29,21 +45,49 @@
           <h3>{{ "execution.completedExercises" | translate }}</h3>
           <section>
             @for (exercise of doneAndToDoExercises().done; track exercise.id) {
-              <div class="completed-exercise">
-                @if (isExercise(exercise)) {
-                  <gym-exercise-option [exercise]="asExercise(exercise)" />
-                } @else {
-                  <gym-superset-option [superset]="asSuperset(exercise)" />
-                }
-                <button class="thick" (click)="redoExercise(exercise.id)">
-                  <gym-icon icon="repeat" />
-                </button>
-              </div>
+              @if (isExercise(exercise)) {
+                <div class="exercise-wrapper">
+                  <gym-exercise [exercise]="asExercise(exercise)" />
+                  <button
+                    class="thick success"
+                    (click)="redoExercise(exercise.id)"
+                  >
+                    <gym-icon icon="repeat" />
+                  </button>
+                </div>
+              } @else {
+                <div
+                  class="superset-wrapper"
+                  (click)="onChooseExercise(exercise.id)"
+                >
+                  <div>
+                    <div>
+                      {{
+                        "execution.supersetOf"
+                          | translate
+                            : { count: asSuperset(exercise).exercises.length }
+                      }}
+                    </div>
+                    @for (
+                      supersetExercise of asSuperset(exercise).exercises;
+                      track supersetExercise.id
+                    ) {
+                      <gym-exercise [exercise]="supersetExercise" />
+                    }
+                  </div>
+                  <button
+                    class="thick success"
+                    (click)="redoExercise(exercise.id)"
+                  >
+                    <gym-icon icon="repeat" />
+                  </button>
+                </div>
+              }
             }
           </section>
         }
         <div class="actions">
-          <button (click)="onAskLeaveWorkout()">
+          <button (click)="onAskLeaveWorkout()" class="error">
             <div>
               <gym-icon icon="exit" />
             </div>
@@ -58,11 +102,11 @@
         <p>
           {{ "execution.abandonWorkoutDialog.text" | translate }}
         </p>
-        <div class="abandon-actions">
+        <div class="dialog-actions">
           <button (click)="showAskLeaveWorkout.set(false)">
             {{ "execution.abandonWorkoutDialog.cancel" | translate }}</button
           >&nbsp;
-          <button (click)="onLeaveWorkout()">
+          <button (click)="onLeaveWorkout()" class="error">
             {{ "execution.abandonWorkoutDialog.abandon" | translate }}
           </button>
         </div>

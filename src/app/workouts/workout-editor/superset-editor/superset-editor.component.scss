@@ -1,15 +1,4 @@
-:host {
-  padding: var(--padding);
-  background-color: var(--table-2);
-
-  > button {
-    width: 100%;
-    background-color: var(--table-1);
-  }
-
-  .exercise-wrapper {
-    &:not(:last-child) {
-      margin-bottom: var(--padding);
-    }
-  }
+.add-exercise {
+  width: 100%;
+  background-color: var(--table-1);
 }

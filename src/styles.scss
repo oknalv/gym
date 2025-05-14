@@ -5,30 +5,43 @@
 html {
   --dark-red: #77172e;
   --light-red: #faafa8;
+  --dark-orange: #692b17;
+  --light-orange: #f39f76;
+  --dark-yellow: #7c4a03;
+  --light-yellow: #fff8b8;
   --dark-green: #264d3b;
   --light-green: #e2f6d3;
   --dark-turquoise: #0c625d;
   --light-turquoise: #b4ddd3;
-  --dark-yellow: #7c4a03;
-  --light-yellow: #fff8b8;
-  --dark-orange: #692b17;
-  --light-orange: #f39f76;
-  --dark-purple: #472e5b;
-  --light-purple: #d3bfdb;
   --dark-cyan: #256377;
   --light-cyan: #d4e4ed;
   --dark-blue: #284255;
   --light-blue: #aeccdc;
-  --light-pink: #f6e2dd;
+  --dark-purple: #472e5b;
+  --light-purple: #d3bfdb;
   --dark-pink: #6c394f;
+  --light-pink: #f6e2dd;
+  --dark-sand: #4b443a;
+  --light-sand: #e9e3d4;
+  --dark-gray: #232427;
+  --light-gray: #efeff1;
   --black: #202124;
+  --input-shade: rgba(255, 255, 255, 0.05);
   --table-1: var(--dark-blue);
   --table-2: var(--dark-cyan);
+  --error-light: var(--light-red);
+  --error-dark: var(--dark-red);
+  --success-light: var(--light-green);
+  --success-dark: var(--dark-green);
+  --info-light: var(--light-cyan);
+  --info-dark: var(--dark-cyan);
+  --error-text: var(--light-red);
+  --warning-text: var(--light-yellow);
+  --background-color: var(--black);
   --padding: 5px;
   --margin: 10px;
   --big-margin: 200px;
   --border-width: 5px;
-  --background-color: var(--black);
   background-color: var(--background-color);
   color: white;
   height: 100%;
@@ -55,6 +68,29 @@ button {
   background-color: var(--table-2);
   padding: var(--padding);
   color: white;
+
+  &.error {
+    background-color: var(--error-light);
+    color: var(--error-dark);
+  }
+
+  &.success {
+    background-color: var(--success-light);
+    color: var(--success-dark);
+  }
+
+  &.info {
+    background-color: var(--info-light);
+    color: var(--info-dark);
+  }
+
+  &.thick {
+    padding: calc(2 * var(--padding));
+  }
+}
+
+.dialog-actions {
+  float: right;
 }
 
 input {
@@ -62,15 +98,15 @@ input {
   outline: none;
 }
 
-.error {
-  color: var(--light-red);
+:not(button).error {
+  color: var(--error-text);
   font-style: italic;
   font-size: 0.75em;
   margin-left: var(--margin);
 }
 
-.warning {
-  color: var(--light-yellow);
+:not(button).warning {
+  color: var(--warning-text);
   font-style: italic;
   font-size: 0.75em;
   margin-left: var(--margin);
@@ -84,20 +120,23 @@ input {
   > :first-child {
     flex-grow: 1;
   }
-
-  > button:first-of-type {
-    background-color: var(--light-cyan);
-    color: var(--dark-cyan);
-  }
-
-  > button:last-of-type {
-    background-color: var(--light-red);
-    color: var(--dark-red);
-  }
 }
 
-button.thick {
-  padding: calc(2 * var(--padding));
+.superset-wrapper {
+  display: flex;
+
+  &:not(:last-child) {
+    margin-bottom: var(--margin);
+  }
+
+  > :first-child {
+    flex-grow: 1;
+    padding: var(--padding);
+    background-color: var(--table-2);
+    > :not(:last-child) {
+      margin-bottom: var(--padding);
+    }
+  }
 }
 
 h1 {

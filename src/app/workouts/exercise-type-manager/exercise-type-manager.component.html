@@ -4,11 +4,11 @@
     @for (exerciseType of exerciseTypes(); track exerciseType.id) {
       <div class="exercise-type-wrapper">
         <gym-exercise-type [type]="exerciseType" />
-        <button class="thick" (click)="onEditExerciseType(exerciseType)">
+        <button class="thick info" (click)="onEditExerciseType(exerciseType)">
           <gym-icon icon="pencil" />
         </button>
         <button
-          class="thick"
+          class="thick error"
           (click)="onAskDeleteExerciseType(exerciseType.id)"
         >
           <gym-icon icon="trashbin" />
@@ -19,11 +19,11 @@
   <gym-dialog [(open)]="showExerciseTypeEditor" [alert]="true">
     <header>{{ "exerciseTypes.manager.dialog.title" | translate }}</header>
     <gym-new-exercise-type [formGroup]="form" />
-    <div class="actions">
+    <div class="dialog-actions">
       <button (click)="showExerciseTypeEditor.set(false)">
         {{ "exerciseTypes.manager.dialog.cancel" | translate }}</button
       >&nbsp;
-      <button (click)="onSaveExerciseType()" class="green">
+      <button (click)="onSaveExerciseType()" class="success">
         {{ "exerciseTypes.manager.dialog.save" | translate }}
       </button>
     </div>
@@ -31,11 +31,11 @@
   <gym-dialog [(open)]="showDeleteExerciseTypeWarning" [alert]="true">
     <header>{{ "exerciseTypes.manager.warning.title" | translate }}</header>
     <p>{{ "exerciseTypes.manager.warning.text" | translate }}</p>
-    <div class="actions">
+    <div class="dialog-actions">
       <button (click)="showDeleteExerciseTypeWarning.set(false)">
         {{ "exerciseTypes.manager.warning.cancel" | translate }}</button
       >&nbsp;
-      <button (click)="onDeleteExerciseType()" class="red">
+      <button (click)="onDeleteExerciseType()" class="error">
         {{ "exerciseTypes.manager.warning.delete" | translate }}
       </button>
     </div>

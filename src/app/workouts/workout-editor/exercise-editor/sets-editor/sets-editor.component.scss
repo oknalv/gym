@@ -33,8 +33,6 @@
       .delete-set-button {
         bottom: calc(var(--size) * -1);
         right: 5px;
-        color: var(--dark-red);
-        background-color: var(--light-red);
         border-radius: 100px;
         display: flex;
         justify-content: center;
@@ -45,8 +43,6 @@
 
     .add-set-button {
       height: 100%;
-      background-color: var(--light-green);
-      color: var(--dark-green);
     }
   }
 }

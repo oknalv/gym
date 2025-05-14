@@ -14,10 +14,13 @@
       @if (isExercise(exercise)) {
         <div class="exercise-wrapper">
           <gym-exercise [exercise]="asExercise(exercise)" />
-          <button class="thick" (click)="onEditExercise(asExercise(exercise))">
+          <button
+            class="thick info"
+            (click)="onEditExercise(asExercise(exercise))"
+          >
             <gym-icon icon="pencil" />
           </button>
-          <button class="thick" (click)="onAskDeleteExercise($index)">
+          <button class="thick error" (click)="onAskDeleteExercise($index)">
             <gym-icon icon="trashbin" />
           </button>
         </div>
@@ -30,7 +33,7 @@
             (superset)="onGetSuperset($event, $index)"
             [showError]="firstSubmitClick()"
           />
-          <button class="thick" (click)="onAskDeleteSuperset($index)">
+          <button class="thick error" (click)="onAskDeleteSuperset($index)">
             <gym-icon icon="trashbin" />
           </button>
         </div>

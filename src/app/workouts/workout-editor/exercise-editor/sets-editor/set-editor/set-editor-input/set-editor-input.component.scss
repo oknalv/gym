@@ -29,7 +29,7 @@
 :host {
   &.ng-invalid {
     > input {
-      background-color: var(--light-red);
+      background-color: var(--error-text);
     }
   }
 }

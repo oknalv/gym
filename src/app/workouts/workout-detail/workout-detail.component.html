@@ -12,14 +12,22 @@
     </div>
   </div>
   <div class="actions">
-    <button class="play" (click)="onStartWorkout()" [disabled]="isExecuting()">
+    <button
+      class="success"
+      (click)="onStartWorkout()"
+      [disabled]="isExecuting()"
+    >
       <gym-icon icon="play" />
     </button>
     <div>
-      <button routerLink="edit" [disabled]="isBeingExecuted()">
+      <button class="info" routerLink="edit" [disabled]="isBeingExecuted()">
         <gym-icon icon="pencil" />
       </button>
-      <button (click)="onAskDeleteWorkout()" [disabled]="isBeingExecuted()">
+      <button
+        class="error"
+        (click)="onAskDeleteWorkout()"
+        [disabled]="isBeingExecuted()"
+      >
         <gym-icon icon="trashbin" />
       </button>
     </div>
@@ -27,20 +35,24 @@
 </header>
 <section>
   <h2>{{ "exercises.title" | translate }}</h2>
-  @for (exercise of workout?.exercises; track exercise.id) {
-    @if (isExercise(exercise)) {
-      <gym-exercise [exercise]="asExercise(exercise)" />
-    } @else {
-      <div class="superset-wrapper">
-        @for (
-          supersetExercise of asSuperset(exercise).exercises;
-          track supersetExercise.id
-        ) {
-          <gym-exercise [exercise]="supersetExercise" />
-        }
-      </div>
+  <div class="exercises">
+    @for (exercise of workout?.exercises; track exercise.id) {
+      @if (isExercise(exercise)) {
+        <gym-exercise [exercise]="asExercise(exercise)" />
+      } @else {
+        <div class="superset-wrapper">
+          <div>
+            @for (
+              supersetExercise of asSuperset(exercise).exercises;
+              track supersetExercise.id
+            ) {
+              <gym-exercise [exercise]="supersetExercise" />
+            }
+          </div>
+        </div>
+      }
     }
-  }
+  </div>
 </section>
 <gym-delete-warning-dialog
   [(open)]="showAskDeleteWorkout"

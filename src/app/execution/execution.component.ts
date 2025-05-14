@@ -9,26 +9,24 @@ import { ExecutionService } from '../execution.service';
 import { WorkoutService } from '../workout.service';
 import { TranslatePipe } from '@ngx-translate/core';
 import { asExercise, asSuperset, isExercise } from '../utils';
-import { ExerciseOptionComponent } from './exercise-option/exercise-option.component';
-import { SupersetOptionComponent } from './superset-option/superset-option.component';
 import { OngoingExerciseComponent } from './ongoing-exercise/ongoing-exercise.component';
 import { OngoingSupersetComponent } from './ongoing-superset/ongoing-superset.component';
 import { IconComponent } from '../shared/icon/icon.component';
 import { DialogComponent } from '../shared/dialog/dialog.component';
 import { RouterLink } from '@angular/router';
 import { Exercise, Superset } from '../gym.model';
+import { ExerciseComponent } from '../workouts/exercise/exercise.component';
 
 @Component({
   selector: 'gym-execution',
   imports: [
     TranslatePipe,
-    ExerciseOptionComponent,
-    SupersetOptionComponent,
     OngoingExerciseComponent,
     OngoingSupersetComponent,
     IconComponent,
     DialogComponent,
     RouterLink,
+    ExerciseComponent,
   ],
   templateUrl: './execution.component.html',
   styleUrl: './execution.component.scss',

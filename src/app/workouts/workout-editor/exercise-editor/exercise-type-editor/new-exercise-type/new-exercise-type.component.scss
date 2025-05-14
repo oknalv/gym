@@ -7,13 +7,6 @@
       flex-direction: column;
       margin-left: var(--margin);
       justify-content: space-evenly;
-
-      > :first-child {
-        & + * {
-          background-color: var(--light-red);
-          color: var(--dark-red);
-        }
-      }
     }
   }
 }

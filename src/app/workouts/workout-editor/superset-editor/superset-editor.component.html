@@ -1,11 +1,24 @@
+<gym-exercise-editor
+  [baseExercise]="editingExercise()"
+  [exerciseTypes]="exerciseTypes()"
+  [(open)]="exerciseEditorVisible"
+  (exercise)="onGetExercise($event)"
+  [numberOfSets]="numberOfSets()"
+  [inSuperset]="baseSuperset().exercises.length > 0"
+/>
+<gym-delete-warning-dialog
+  [(open)]="showAskDeleteExercise"
+  whatToDelete="exercise in the superset"
+  (delete)="onDeleteExercise()"
+/>
 @for (exercise of baseSuperset().exercises; track exercise.id) {
   <div class="exercise-wrapper">
     <gym-exercise [exercise]="exercise" />
-    <button class="edit-exercise thick" (click)="onEditExercise(exercise)">
+    <button class="edit-exercise thick info" (click)="onEditExercise(exercise)">
       <gym-icon icon="pencil" />
     </button>
     <button
-      class="ask-delete-exercise thick"
+      class="ask-delete-exercise thick error"
       (click)="onAskDeleteExercise($index)"
     >
       <gym-icon icon="trashbin" />
@@ -20,18 +33,3 @@
 <button class="add-exercise" (click)="showExerciseEditor()">
   {{ "supersets.editor.add" | translate }}
 </button>
-
-<gym-exercise-editor
-  [baseExercise]="editingExercise()"
-  [exerciseTypes]="exerciseTypes()"
-  [(open)]="exerciseEditorVisible"
-  (exercise)="onGetExercise($event)"
-  [numberOfSets]="numberOfSets()"
-  [inSuperset]="baseSuperset().exercises.length > 0"
-/>
-
-<gym-delete-warning-dialog
-  [(open)]="showAskDeleteExercise"
-  whatToDelete="exercise in the superset"
-  (delete)="onDeleteExercise()"
-/>

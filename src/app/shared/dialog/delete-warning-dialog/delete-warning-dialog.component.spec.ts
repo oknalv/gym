@@ -27,7 +27,7 @@ describe('DeleteWarningDialogComponent', () => {
     fixture.detectChanges();
     expect(component.open()).toBeTrue();
     fixture.elementRef.nativeElement
-      .querySelectorAll('.actions > button')[0]
+      .querySelectorAll('.dialog-actions > button')[0]
       .click();
     expect(component.open()).toBeFalse();
   });
@@ -36,7 +36,7 @@ describe('DeleteWarningDialogComponent', () => {
     fixture.detectChanges();
     spyOn(component.delete, 'emit');
     fixture.elementRef.nativeElement
-      .querySelectorAll('.actions > button')[1]
+      .querySelectorAll('.dialog-actions > button')[1]
       .click();
     expect(component.delete.emit).toHaveBeenCalled();
   });

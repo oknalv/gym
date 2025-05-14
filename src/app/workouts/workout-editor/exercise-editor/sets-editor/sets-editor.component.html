@@ -16,14 +16,14 @@
           [progressType]="progressType()"
         />
         @if ($count > 1) {
-          <button (click)="onDeleteSet($index)" class="delete-set-button">
+          <button (click)="onDeleteSet($index)" class="delete-set-button error">
             <gym-icon icon="times" />
           </button>
         }
       </div>
     }
     <div>
-      <button (click)="onAddSet()" class="add-set-button thick">
+      <button (click)="onAddSet()" class="add-set-button thick success">
         <gym-icon icon="+" />
       </button>
     </div>

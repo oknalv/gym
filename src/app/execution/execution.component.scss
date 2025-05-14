@@ -15,20 +15,6 @@ h1 {
   margin-bottom: var(--margin);
   > button {
     width: 100%;
-    background-color: var(--light-red);
-    color: var(--dark-red);
-  }
-}
-
-.abandon-actions {
-  float: right;
-  > button:first-child {
-    background-color: var(--dark-turquoise);
-    color: white;
-  }
-  > button:last-child {
-    background-color: var(--light-red);
-    color: var(--dark-red);
   }
 }
 
@@ -38,17 +24,5 @@ h1 {
 
   > button {
     margin-top: var(--margin);
-  }
-}
-
-.completed-exercise {
-  display: flex;
-  > :first-child {
-    flex-grow: 1;
-  }
-
-  > button {
-    background-color: var(--light-green);
-    color: var(--dark-green);
   }
 }

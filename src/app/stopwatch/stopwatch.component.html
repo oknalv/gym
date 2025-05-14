@@ -24,14 +24,14 @@
   @switch (status()) {
     @case ("play") {
       <button (click)="onStop()"><gym-icon icon="stop" /></button>
-      <button (click)="onPause()" class="center">
+      <button (click)="onPause()" class="center info">
         <gym-icon icon="pause" />
       </button>
       <button (click)="onAddLap()"><gym-icon icon="repeat" /></button>
     }
     @case ("pause") {
       <button (click)="onStop()"><gym-icon icon="stop" /></button>
-      <button (click)="onPlay()" class="center">
+      <button (click)="onPlay()" class="center info">
         <gym-icon icon="play" />
       </button>
       <div class="empty-space"></div>

@@ -8,8 +8,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: var(--light-turquoise);
-    color: var(--dark-turquoise);
+    background-color: var(--success-light);
+    color: var(--success-dark);
     padding: var(--padding);
 
     gym-icon {
@@ -40,14 +40,8 @@
     background-color: var(--light-yellow);
     color: var(--dark-yellow);
   }
-  .skip-exercise {
-    background-color: var(--light-red);
-    color: var(--dark-red);
-  }
 
   .finish {
-    background-color: var(--light-turquoise);
-    color: var(--dark-turquoise);
     font-size: 2em;
   }
 }

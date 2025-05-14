@@ -8,29 +8,7 @@
     cursor: pointer;
   }
 
-  > button:first-of-type {
-    background-color: var(--light-cyan);
-    color: var(--dark-cyan);
-  }
-
-  > button:last-of-type {
-    background-color: var(--light-red);
-    color: var(--dark-red);
-  }
-
   &:not(:last-child) {
     margin-bottom: var(--margin);
-  }
-}
-
-.actions {
-  float: right;
-  > .green {
-    background-color: var(--light-green);
-    color: var(--dark-green);
-  }
-  > .red {
-    background-color: var(--light-red);
-    color: var(--dark-red);
   }
 }

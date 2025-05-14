@@ -5,8 +5,8 @@
 footer {
   width: 100%;
   display: flex;
-  background-color: var(--dark-cyan);
-  color: var(--light-cyan);
+  background-color: var(--info-dark);
+  color: var(--info-light);
   justify-content: space-around;
   font-size: 1.5rem;
   box-sizing: border-box;
@@ -16,20 +16,20 @@ footer {
     text-align: center;
 
     &.active {
-      background-color: var(--light-cyan);
-      color: var(--dark-cyan);
+      background-color: var(--info-light);
+      color: var(--info-dark);
     }
   }
 }
 
 :host-context(.executing) {
   .execution {
-    background-color: var(--dark-green);
-    color: var(--light-green);
+    background-color: var(--dark-turquoise);
+    color: var(--light-turquoise);
 
     &.active {
-      background-color: var(--light-green);
-      color: var(--dark-green);
+      background-color: var(--light-turquoise);
+      color: var(--dark-turquoise);
     }
   }
 }

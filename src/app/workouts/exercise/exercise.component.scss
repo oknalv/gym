@@ -23,7 +23,7 @@
             margin-right: var(--margin);
           }
           &.remark {
-            color: var(--light-red);
+            color: var(--error-text);
           }
         }
       }
@@ -43,9 +43,9 @@
 
       > :first-child {
         padding: var(--padding);
-        background-color: var(--light-green);
+        background-color: var(--success-light);
+        color: var(--success-dark);
         font-size: 0.75em;
-        color: var(--dark-green);
       }
     }
   }

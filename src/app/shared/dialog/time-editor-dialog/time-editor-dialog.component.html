@@ -10,11 +10,11 @@
   @if (showError) {
     <div class="error">{{ "shared.timeEditorDialog.error" | translate }}</div>
   }
-  <div class="actions">
+  <div class="dialog-actions">
     <button (click)="onCancel()">
       {{ "shared.timeEditorDialog.cancel" | translate }}</button
     >&nbsp;
-    <button (click)="onAccept()">
+    <button (click)="onAccept()" class="success">
       {{ "shared.timeEditorDialog.accept" | translate }}
     </button>
   </div>

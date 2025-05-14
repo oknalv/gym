@@ -6,11 +6,11 @@
         | translate: { whatToDelete: whatToDeleteKey() | translate }
     }}
   </p>
-  <div class="actions">
+  <div class="dialog-actions">
     <button (click)="onCancel()">
       {{ "shared.deleteDialog.cancel" | translate }}</button
     >&nbsp;
-    <button (click)="onDelete()">
+    <button (click)="onDelete()" class="error">
       {{ "shared.deleteDialog.delete" | translate }}
     </button>
   </div>

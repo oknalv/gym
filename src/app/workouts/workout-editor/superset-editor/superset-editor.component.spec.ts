@@ -474,7 +474,7 @@ describe('SupersetEditorComponent', () => {
     fixture.componentRef.setInput('showError', true);
     fixture.detectChanges();
     expect(
-      fixture.elementRef.nativeElement.querySelector('.error'),
+      fixture.elementRef.nativeElement.querySelector('div.error'),
     ).toBeTruthy();
   });
 
@@ -503,7 +503,7 @@ describe('SupersetEditorComponent', () => {
     fixture.componentRef.setInput('showError', true);
     fixture.detectChanges();
     expect(
-      fixture.elementRef.nativeElement.querySelector('.error'),
+      fixture.elementRef.nativeElement.querySelector('div.error'),
     ).toBeFalsy();
   });
 
@@ -514,7 +514,7 @@ describe('SupersetEditorComponent', () => {
     });
     fixture.detectChanges();
     expect(
-      fixture.elementRef.nativeElement.querySelector('.error'),
+      fixture.elementRef.nativeElement.querySelector('div.error'),
     ).toBeFalsy();
   });
 });

@@ -17,7 +17,7 @@
     </button>
   </div>
 } @else {
-  <button class="finish" (click)="onRest()">
+  <button class="finish success" (click)="onRest()">
     <gym-icon icon="rest" />
     <div>
       {{ finishSetKey() | translate }}
@@ -31,7 +31,7 @@
       </div>
     </button>
     @if (!isLastSet()) {
-      <button class="skip-exercise" (click)="onSkipExercise()">
+      <button class="error" (click)="onSkipExercise()">
         <gym-icon icon="skip" />
         <div>
           {{ skipExerciseKey() | translate }}
