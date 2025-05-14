@@ -1,9 +1,9 @@
 import { Component, computed, inject, input } from '@angular/core';
-import { ExecutionService } from '../../execution.service';
+import { ExecutionService } from '../../services/execution.service';
 import { IconComponent } from '../../shared/icon/icon.component';
 import { TranslatePipe } from '@ngx-translate/core';
 import { TimerComponent } from '../../shared/timer/timer.component';
-import { TimerService } from '../../timer.service';
+import { TimerService } from '../../services/timer.service';
 
 @Component({
   selector: 'gym-execution-actions',

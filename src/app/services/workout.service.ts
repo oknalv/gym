@@ -8,7 +8,7 @@ import {
   SupersetDTO,
   Workout,
   WorkoutDTO,
-} from './gym.model';
+} from '../gym.model';
 import { DataService } from './data.service';
 import { ExecutionService } from './execution.service';
 import {
@@ -18,7 +18,7 @@ import {
   asSupersetDTO,
   isExercise,
   isExerciseDTO,
-} from './utils';
+} from '../utils';
 
 @Injectable({
   providedIn: 'root',

@@ -5,8 +5,8 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { ExecutionService } from '../execution.service';
-import { WorkoutService } from '../workout.service';
+import { ExecutionService } from '../services/execution.service';
+import { WorkoutService } from '../services/workout.service';
 import { TranslatePipe } from '@ngx-translate/core';
 import { asExercise, asSuperset, isExercise } from '../utils';
 import { OngoingExerciseComponent } from './ongoing-exercise/ongoing-exercise.component';

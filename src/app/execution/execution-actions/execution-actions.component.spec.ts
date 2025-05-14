@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ExecutionActionsComponent } from './execution-actions.component';
-import { ExecutionService } from '../../execution.service';
+import { ExecutionService } from '../../services/execution.service';
 import { TranslateModule } from '@ngx-translate/core';
 
 describe('ExecutionActionsComponent', () => {

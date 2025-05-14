@@ -1,12 +1,12 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { WorkoutPreviewComponent } from './workout-preview/workout-preview.component';
 import { RouterLink } from '@angular/router';
-import { WorkoutService } from '../workout.service';
+import { WorkoutService } from '../services/workout.service';
 import { TranslatePipe } from '@ngx-translate/core';
 import { IconComponent } from '../shared/icon/icon.component';
 import { ExerciseTypeManagerComponent } from './exercise-type-manager/exercise-type-manager.component';
-import { PortService } from '../port.service';
-import { ExecutionService } from '../execution.service';
+import { PortService } from '../services/port.service';
+import { ExecutionService } from '../services/execution.service';
 
 @Component({
   selector: 'gym-workouts',

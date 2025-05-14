@@ -1,5 +1,4 @@
 import { effect, inject, Injectable, signal } from '@angular/core';
-import { Configuration, WeightUnit } from './configuration.model';
 import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
@@ -56,4 +55,14 @@ export class ConfigurationService {
       return { ...configuration, timerSound };
     });
   }
+}
+export interface Configuration {
+  weightUnit: WeightUnit;
+  language: string;
+  timerSound: boolean;
+}
+
+export enum WeightUnit {
+  kg = 'kg',
+  lb = 'lb',
 }

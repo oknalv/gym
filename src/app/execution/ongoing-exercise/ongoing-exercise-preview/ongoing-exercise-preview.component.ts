@@ -1,11 +1,10 @@
 import { Component, computed, inject, input } from '@angular/core';
-import { OngoingExerciseComponent } from '../ongoing-exercise.component';
 import { setToString } from '../../../utils';
 import { Exercise } from '../../../gym.model';
-import { ExecutionService } from '../../../execution.service';
+import { ExecutionService } from '../../../services/execution.service';
 import { TimerComponent } from '../../../shared/timer/timer.component';
 import { IconComponent } from '../../../shared/icon/icon.component';
-import { ConfigurationService } from '../../../configuration.service';
+import { ConfigurationService } from '../../../services/configuration.service';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({

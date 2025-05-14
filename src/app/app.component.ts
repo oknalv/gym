@@ -1,12 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { FooterComponent } from './footer/footer.component';
-import {
-  ActivatedRoute,
-  NavigationEnd,
-  Router,
-  RouterOutlet,
-} from '@angular/router';
-import { ExecutionService } from './execution.service';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { ExecutionService } from './services/execution.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
 

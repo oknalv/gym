@@ -16,7 +16,7 @@ import {
 import { ProgressType, WeightType } from '../../../../../gym.model';
 import { SetEditorInputComponent } from './set-editor-input/set-editor-input.component';
 import { SetEditorTimeInputComponent } from './set-editor-time-input/set-editor-time-input.component';
-import { ConfigurationService } from '../../../../../configuration.service';
+import { ConfigurationService } from '../../../../../services/configuration.service';
 
 @Component({
   selector: 'gym-set-editor',

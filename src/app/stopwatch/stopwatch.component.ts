@@ -3,7 +3,7 @@ import { getHoursMinutesSecondsAndMilliseconds } from '../utils';
 import { WatchComponent } from '../shared/watch/watch.component';
 import { TranslatePipe } from '@ngx-translate/core';
 import { IconComponent } from '../shared/icon/icon.component';
-import { StopwatchService } from '../stopwatch.service';
+import { StopwatchService } from '../services/stopwatch.service';
 
 @Component({
   selector: 'gym-stopwatch',

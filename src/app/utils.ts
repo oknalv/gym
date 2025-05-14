@@ -7,7 +7,7 @@ import {
   Superset,
   SupersetDTO,
 } from './gym.model';
-import { WeightUnit } from './configuration.model';
+import { WeightUnit } from './services/configuration.service';
 
 export function asExercise(exercise: Exercise | Superset) {
   return exercise as Exercise;

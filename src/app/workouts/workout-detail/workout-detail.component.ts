@@ -7,7 +7,7 @@ import {
   signal,
 } from '@angular/core';
 import { Workout } from '../../gym.model';
-import { WorkoutService } from '../../workout.service';
+import { WorkoutService } from '../../services/workout.service';
 import { TranslatePipe } from '@ngx-translate/core';
 import { DatePipe } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
@@ -16,7 +16,7 @@ import { asExercise, asSuperset, isExercise } from '../../utils';
 import { ExerciseComponent } from '../exercise/exercise.component';
 import { IconComponent } from '../../shared/icon/icon.component';
 import { DeleteWarningDialogComponent } from '../../shared/dialog/delete-warning-dialog/delete-warning-dialog.component';
-import { ExecutionService } from '../../execution.service';
+import { ExecutionService } from '../../services/execution.service';
 
 @Component({
   selector: 'gym-workout-detail',

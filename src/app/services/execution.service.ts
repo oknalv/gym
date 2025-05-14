@@ -1,5 +1,5 @@
 import { effect, Injectable, signal } from '@angular/core';
-import { Execution, ExecutionDTO } from './gym.model';
+import { Execution, ExecutionDTO } from '../gym.model';
 
 @Injectable({
   providedIn: 'root',

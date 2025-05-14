@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { getHoursMinutesSecondsAndMilliseconds } from '../../utils';
 import { WatchComponent } from '../watch/watch.component';
-import { TimerService } from '../../timer.service';
+import { TimerService } from '../../services/timer.service';
 import { Subscription } from 'rxjs';
 
 @Component({

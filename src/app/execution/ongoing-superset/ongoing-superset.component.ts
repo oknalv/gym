@@ -3,7 +3,7 @@ import { Superset } from '../../gym.model';
 import { OngoingSupersetExerciseComponent } from '../ongoing-exercise/ongoing-superset-exercise/ongoing-superset-exercise.component';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ExecutionActionsComponent } from '../execution-actions/execution-actions.component';
-import { ExecutionService } from '../../execution.service';
+import { ExecutionService } from '../../services/execution.service';
 
 @Component({
   selector: 'gym-ongoing-superset',

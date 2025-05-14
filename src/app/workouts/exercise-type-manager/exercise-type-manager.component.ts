@@ -1,7 +1,7 @@
 import { Component, computed, inject, model, signal } from '@angular/core';
 import { DialogComponent } from '../../shared/dialog/dialog.component';
 import { TranslatePipe } from '@ngx-translate/core';
-import { WorkoutService } from '../../workout.service';
+import { WorkoutService } from '../../services/workout.service';
 import { ExerciseTypeComponent } from '../exercise-type/exercise-type.component';
 import { IconComponent } from '../../shared/icon/icon.component';
 import { ExerciseType } from '../../gym.model';

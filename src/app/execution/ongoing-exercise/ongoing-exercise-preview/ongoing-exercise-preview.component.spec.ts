@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OngoingExercisePreviewComponent } from './ongoing-exercise-preview.component';
 import { ProgressType, WeightType } from '../../../gym.model';
-import { ExecutionService } from '../../../execution.service';
+import { ExecutionService } from '../../../services/execution.service';
 import { TranslateModule } from '@ngx-translate/core';
 
 describe('OngoingExercisePreviewComponent', () => {

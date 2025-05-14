@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TimerDialogComponent } from './timer-dialog.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { TimerService } from '../../../timer.service';
+import { TimerService } from '../../../services/timer.service';
 import { MockTimerService } from '../../../../../test/mock-timer.service';
 
 describe('TimerDialogComponent', () => {

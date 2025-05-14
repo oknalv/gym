@@ -16,7 +16,7 @@ import {
 import { ExerciseEditorComponent } from './exercise-editor/exercise-editor.component';
 import { TextInputComponent } from '../../shared/text-input/text-input.component';
 import { Exercise, ExerciseType, Superset } from '../../gym.model';
-import { WorkoutService } from '../../workout.service';
+import { WorkoutService } from '../../services/workout.service';
 import { ExerciseComponent } from '../exercise/exercise.component';
 import { IconComponent } from '../../shared/icon/icon.component';
 import { SupersetEditorComponent } from './superset-editor/superset-editor.component';

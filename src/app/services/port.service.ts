@@ -1,8 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { ExerciseType, WorkoutDTO } from './gym.model';
-import { Configuration } from './configuration.model';
+import { ExerciseType, WorkoutDTO } from '../gym.model';
 import { DataService } from './data.service';
-import { ConfigurationService } from './configuration.service';
+import { ConfigurationService, Configuration } from './configuration.service';
 
 @Injectable({
   providedIn: 'root',

@@ -10,12 +10,12 @@ import { Exercise, Remark } from '../../gym.model';
 import { ExerciseImageComponent } from '../../shared/exercise-image/exercise-image.component';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ExecutionActionsComponent } from '../execution-actions/execution-actions.component';
-import { ExecutionService } from '../../execution.service';
+import { ExecutionService } from '../../services/execution.service';
 import { OngoingSetComponent } from './ongoing-set/ongoing-set.component';
 import { IconComponent } from '../../shared/icon/icon.component';
 import { SwitchComponent } from '../../shared/switch/switch.component';
 import { FormsModule } from '@angular/forms';
-import { WorkoutService } from '../../workout.service';
+import { WorkoutService } from '../../services/workout.service';
 
 @Component({
   selector: 'gym-ongoing-exercise',

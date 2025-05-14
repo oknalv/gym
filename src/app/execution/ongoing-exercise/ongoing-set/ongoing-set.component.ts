@@ -4,7 +4,7 @@ import { ExerciseSet, ProgressType, WeightType } from '../../../gym.model';
 import { TimePipe } from '../../../shared/pipes/time/time.pipe';
 import { TranslatePipe } from '@ngx-translate/core';
 import { TimerDialogComponent } from '../../../shared/dialog/timer-dialog/timer-dialog.component';
-import { ConfigurationService } from '../../../configuration.service';
+import { ConfigurationService } from '../../../services/configuration.service';
 
 @Component({
   selector: 'gym-ongoing-set',

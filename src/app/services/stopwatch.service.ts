@@ -1,5 +1,5 @@
 import { computed, effect, Injectable, signal } from '@angular/core';
-import { RunnerStatus } from './common.model';
+import { RunnerStatus } from '../common.model';
 
 @Injectable({
   providedIn: 'root',

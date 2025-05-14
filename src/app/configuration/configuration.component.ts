@@ -2,8 +2,10 @@ import { Component, effect, inject, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { SwitchComponent } from '../shared/switch/switch.component';
 import { FormsModule } from '@angular/forms';
-import { WeightUnit } from '../configuration.model';
-import { ConfigurationService } from '../configuration.service';
+import {
+  ConfigurationService,
+  WeightUnit,
+} from '../services/configuration.service';
 import { SelectComponent } from '../shared/select/select.component';
 import { IconComponent } from '../shared/icon/icon.component';
 

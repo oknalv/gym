@@ -8,14 +8,14 @@ import {
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 
 import { routes } from './app.routes';
-import { DataService } from './data.service';
+import { DataService } from './services/data.service';
 import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { WorkoutService } from './workout.service';
-import { ConfigurationService } from './configuration.service';
+import { WorkoutService } from './services/workout.service';
+import { ConfigurationService } from './services/configuration.service';
 import { provideServiceWorker } from '@angular/service-worker';
-import { TimerService } from './timer.service';
+import { TimerService } from './services/timer.service';
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient,

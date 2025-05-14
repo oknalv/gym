@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { OngoingSupersetComponent } from './ongoing-superset.component';
 import { ProgressType, WeightType } from '../../gym.model';
 import { TranslateModule } from '@ngx-translate/core';
-import { ExecutionService } from '../../execution.service';
+import { ExecutionService } from '../../services/execution.service';
 
 describe('OngoingSupersetComponent', () => {
   let component: OngoingSupersetComponent;

@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ExecutionPreviewComponent } from './execution-preview.component';
-import { ExecutionService } from '../../execution.service';
-import { WorkoutService } from '../../workout.service';
+import { ExecutionService } from '../../services/execution.service';
+import { WorkoutService } from '../../services/workout.service';
 
 describe('ExecutionPreviewComponent', () => {
   let component: ExecutionPreviewComponent;

@@ -7,7 +7,7 @@ import {
   signal,
 } from '@angular/core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { TimerService } from '../timer.service';
+import { TimerService } from '../services/timer.service';
 import { WatchComponent } from '../shared/watch/watch.component';
 import { getHoursMinutesSecondsAndMilliseconds } from '../utils';
 import { IconComponent } from '../shared/icon/icon.component';
