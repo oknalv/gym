@@ -6,13 +6,25 @@
       [label]="weightUnit()"
     />
   }
-  @if (progressType() === "repetitions") {
-    <gym-set-editor-input
-      formControlName="repetitions"
-      icon="repeat"
-      label="reps"
-    />
+  @if (failure) {
+    <div class="failure">
+      <gym-icon
+        [icon]="progressType() === 'repetitions' ? 'repeat' : 'hourglass'"
+      />
+      {{ "exercises.editor.sets.failure" | translate }}
+    </div>
   } @else {
-    <gym-set-editor-time-input formControlName="time" />
+    @if (progressType() === "repetitions") {
+      <gym-set-editor-input
+        formControlName="repetitions"
+        icon="repeat"
+        label="reps"
+      />
+    } @else {
+      <gym-set-editor-time-input formControlName="time" />
+    }
   }
+  <button (click)="onChangeFailure()" class="info">
+    {{ failureChangeKey | translate }}
+  </button>
 </div>

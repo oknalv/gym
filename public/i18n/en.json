@@ -68,7 +68,12 @@
       "errorAdd": "There are errors in the new exercise. Please, correct them before adding the exercise.",
       "errorSave": "There are errors in the exercise. Please, correct them before saving the exercise.",
       "add": "Add exercise",
-      "save": "Save exercise"
+      "save": "Save exercise",
+      "sets": {
+        "failure": "to failure",
+        "toFailure": "Do to failure",
+        "toValue": "Set value"
+      }
     }
   },
   "exerciseTypes": {
@@ -154,7 +159,8 @@
     "noWorkoutExecuting": "There isn't any ongoing workout.",
     "chooseWorkout": "Choose a workout",
     "completedExercises": "Completed exercises and supersets",
-    "restingTimerFinished": "Resting time's up!"
+    "restingTimerFinished": "Resting time's up!",
+    "failure": "to failure"
   },
   "configuration": {
     "title": "Configuration",

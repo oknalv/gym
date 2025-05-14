@@ -7,12 +7,17 @@
       {{ set().weight }} {{ weightUnit() }}
     }
     <br />
-    @if (progressType() === "repetitions") {
-      <gym-icon icon="repeat" />
-      {{ set().repetitions }} reps
+    <gym-icon
+      [icon]="progressType() === 'repetitions' ? 'repeat' : 'hourglass'"
+    />
+    @if (set().failure) {
+      {{ "execution.failure" | translate }}
     } @else {
-      <gym-icon icon="hourglass" />
-      {{ set().time | time }}
+      @if (progressType() === "repetitions") {
+        {{ set().repetitions }} reps
+      } @else {
+        {{ set().time | time }}
+      }
     }
   </div>
   @if (progressType() === "time") {

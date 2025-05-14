@@ -2,12 +2,7 @@
 <div [formGroup]="form">
   <div class="sets-editor" #setsEditor formArrayName="sets">
     @for (set of sets.controls; track set.controls["id"]) {
-      <div
-        class="set-container"
-        [style]="{
-          '--set-background-color': $even ? 'var(--table-1)' : 'var(--table-2)',
-        }"
-      >
+      <div class="set-container">
         <span class="index">{{ $index + 1 }}</span>
         <gym-set-editor
           [formGroup]="getSetForm($index)"

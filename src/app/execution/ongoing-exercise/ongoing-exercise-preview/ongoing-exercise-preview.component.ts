@@ -5,7 +5,7 @@ import { ExecutionService } from '../../../services/execution.service';
 import { TimerComponent } from '../../../shared/timer/timer.component';
 import { IconComponent } from '../../../shared/icon/icon.component';
 import { ConfigurationService } from '../../../services/configuration.service';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'gym-ongoing-exercise-preview',
@@ -18,6 +18,7 @@ export class OngoingExercisePreviewComponent {
   exercises = input.required<Exercise[]>();
   private executionService = inject(ExecutionService);
   private configurationService = inject(ConfigurationService);
+  private translateService = inject(TranslateService);
   private weightUnit = computed(() => {
     return this.configurationService.configuration().weightUnit;
   });
@@ -34,6 +35,7 @@ export class OngoingExercisePreviewComponent {
         exercise.weighted,
         exercise.progressType,
         this.weightUnit(),
+        this.translateService.instant('exercises.editor.sets.failure'),
       ),
     );
   });

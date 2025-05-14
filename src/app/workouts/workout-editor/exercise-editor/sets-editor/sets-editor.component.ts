@@ -13,7 +13,6 @@ import { SetEditorComponent } from './set-editor/set-editor.component';
 import { IconComponent } from '../../../../shared/icon/icon.component';
 import { ExerciseSet, ProgressType, WeightType } from '../../../../gym.model';
 import {
-  AbstractControl,
   ControlContainer,
   FormArray,
   FormControl,
@@ -24,6 +23,7 @@ import {
 } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { integerValidator } from '../../../../utils';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 let setId = 0;
 
@@ -98,12 +98,13 @@ export class SetsEditorComponent implements AfterViewChecked, OnInit {
 
   onAddSet() {
     const newForm = getNewFormGroupForSet(
-      { weight: 5, repetitions: 10, time: 60 },
+      { weight: 5, repetitions: 10, time: 60, failure: false },
       this.weighted(),
       this.progressType(),
+      this.destroyRef,
     );
-    newForm.patchValue({ ...this.sets.at(-1)!.value, id: setId++ });
     this.sets.push(newForm);
+    newForm.patchValue({ ...this.sets.at(-2)!.value, id: setId++ });
   }
 
   onDeleteSet(index: number) {
@@ -115,30 +116,59 @@ export function getWeightValidators(weighted: boolean) {
   return weighted ? [Validators.required, Validators.min(0)] : [];
 }
 
-export function getRepetitionsValidators(progressType: ProgressType) {
-  return progressType === ProgressType.repetitions
+export function getRepetitionsValidators(
+  progressType: ProgressType,
+  failure: boolean,
+) {
+  return progressType === ProgressType.repetitions && !failure
     ? [Validators.required, Validators.min(1), integerValidator]
     : [];
 }
 
-export function getTimeValidators(progressType: ProgressType) {
+export function getTimeValidators(
+  progressType: ProgressType,
+  failure: boolean,
+) {
   return progressType === ProgressType.repetitions
-    ? getRepetitionsValidators(ProgressType.time)
-    : getRepetitionsValidators(ProgressType.repetitions);
+    ? getRepetitionsValidators(ProgressType.time, failure)
+    : getRepetitionsValidators(ProgressType.repetitions, failure);
 }
 
 export function getNewFormGroupForSet(
   set: ExerciseSet,
   weighted: boolean,
   progressType: ProgressType,
+  destroyRef: DestroyRef,
 ) {
-  return new FormGroup({
-    id: new FormControl<number>(setId++),
-    weight: new FormControl<number>(set.weight, getWeightValidators(weighted)),
-    repetitions: new FormControl<number>(
+  const formGroup = new FormGroup({
+    id: new FormControl(setId++),
+    weight: new FormControl(set.weight, getWeightValidators(weighted)),
+    repetitions: new FormControl(
       set.repetitions,
-      getRepetitionsValidators(progressType),
+      getRepetitionsValidators(progressType, set.failure),
     ),
-    time: new FormControl<number>(set.time, getTimeValidators(progressType)),
+    time: new FormControl<number>(
+      set.time,
+      getTimeValidators(progressType, set.failure),
+    ),
+    failure: new FormControl(set.failure),
   });
+  formGroup.controls.failure.valueChanges
+    .pipe(takeUntilDestroyed(destroyRef))
+    .subscribe({
+      next: (newValue) => {
+        formGroup.controls.repetitions.setValidators(
+          getRepetitionsValidators(
+            (
+              formGroup.root! as FormGroup<{
+                progressType: FormControl<ProgressType>;
+              }>
+            ).controls.progressType.value,
+            newValue!,
+          ),
+        );
+        formGroup.controls.repetitions.updateValueAndValidity();
+      },
+    });
+  return formGroup;
 }

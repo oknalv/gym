@@ -4,5 +4,20 @@
     flex-direction: column;
     justify-content: center;
     height: 100%;
+
+    > .failure {
+      margin: var(--margin);
+      display: flex;
+      align-items: center;
+
+      > gym-icon {
+        margin-right: var(--margin);
+      }
+    }
+
+    > button {
+      margin: var(--margin);
+      white-space: nowrap;
+    }
   }
 }

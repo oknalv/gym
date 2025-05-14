@@ -68,7 +68,12 @@
       "errorAdd": "Hay errores en el nuevo ejercicio. Por favor, corrígelos antes de añadir el ejercicio.",
       "errorSave": "Hay errores en el ejercicio. Por favor, corrígelos antes de guardar el ejercicio.",
       "add": "Añadir ejercicio",
-      "save": "Guardar ejercicio"
+      "save": "Guardar ejercicio",
+      "sets": {
+        "failure": "al fallo",
+        "toFailure": "Hacer al fallo",
+        "toValue": "Fijar valor"
+      }
     }
   },
   "exerciseTypes": {
@@ -154,7 +159,8 @@
     "noWorkoutExecuting": "No hay ningún entrenamiento en progreso.",
     "chooseWorkout": "Elegir un entrenamiento",
     "completedExercises": "Ejercicios y superseries completados.",
-    "restingTimerFinished": "¡Se acabó el tiempo de descanso!"
+    "restingTimerFinished": "¡Se acabó el tiempo de descanso!",
+    "failure": "al fallo"
   },
   "configuration": {
     "title": "Configuración",

@@ -17,6 +17,8 @@ import { ProgressType, WeightType } from '../../../../../gym.model';
 import { SetEditorInputComponent } from './set-editor-input/set-editor-input.component';
 import { SetEditorTimeInputComponent } from './set-editor-time-input/set-editor-time-input.component';
 import { ConfigurationService } from '../../../../../services/configuration.service';
+import { IconComponent } from '../../../../../shared/icon/icon.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'gym-set-editor',
@@ -25,6 +27,8 @@ import { ConfigurationService } from '../../../../../services/configuration.serv
     FormsModule,
     SetEditorInputComponent,
     SetEditorTimeInputComponent,
+    IconComponent,
+    TranslatePipe,
   ],
   templateUrl: './set-editor.component.html',
   styleUrl: './set-editor.component.scss',
@@ -40,14 +44,21 @@ export class SetEditorComponent implements OnInit {
     return this.configurationService.configuration().weightUnit;
   });
 
-  weight = signal(5);
-  repetitions = signal(10);
-
-  invalid = output<string[]>();
-
   form!: FormGroup;
 
   ngOnInit(): void {
     this.form = this.controlContainer.control as FormGroup;
+  }
+
+  get failure() {
+    return this.form.value.failure as boolean;
+  }
+
+  get failureChangeKey() {
+    return 'exercises.editor.sets.' + (this.failure ? 'toValue' : 'toFailure');
+  }
+
+  onChangeFailure() {
+    this.form.controls['failure'].setValue(!this.failure);
   }
 }

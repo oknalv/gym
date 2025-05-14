@@ -2,6 +2,7 @@ import { Component, computed, inject, input } from '@angular/core';
 import { ExerciseSet, ProgressType } from '../../../gym.model';
 import { setToString } from '../../../utils';
 import { ConfigurationService } from '../../../services/configuration.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'gym-set',
@@ -14,6 +15,7 @@ export class SetComponent {
   weighted = input.required<boolean>();
   progressType = input.required<ProgressType>();
   private configurationService = inject(ConfigurationService);
+  private translateService = inject(TranslateService);
   weightUnit = computed(() => {
     return this.configurationService.configuration().weightUnit;
   });
@@ -23,6 +25,7 @@ export class SetComponent {
       this.weighted(),
       this.progressType(),
       this.weightUnit(),
+      this.translateService.instant('exercises.editor.sets.failure'),
     );
   });
 }

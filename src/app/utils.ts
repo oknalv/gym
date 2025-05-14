@@ -60,11 +60,18 @@ export function setToString(
   weighted: boolean,
   progressType: ProgressType,
   weightUnit: WeightUnit,
+  failureTranslation: string,
 ) {
-  const weight = weighted ? `${set.weight} ${weightUnit} × ` : '';
-  const progress =
-    progressType === ProgressType.repetitions
-      ? `${set.repetitions} reps`
-      : getFormattedTime(set.time);
-  return weight + progress;
+  let setString = weighted ? `${set.weight} ${weightUnit}` : '';
+  if (set.failure) {
+    if (setString) setString += ' ';
+    setString += failureTranslation;
+  } else {
+    if (setString) setString += ' × ';
+    setString +=
+      progressType === ProgressType.repetitions
+        ? `${set.repetitions} reps`
+        : getFormattedTime(set.time);
+  }
+  return setString;
 }

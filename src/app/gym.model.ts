@@ -40,6 +40,7 @@ export interface ExerciseSet {
   repetitions: number;
   time: number;
   weight: number;
+  failure: boolean;
 }
 
 export enum WeightType {

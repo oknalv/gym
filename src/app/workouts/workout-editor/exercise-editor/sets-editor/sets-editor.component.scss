@@ -15,6 +15,11 @@
       display: inline-block;
       position: relative;
       background-color: var(--set-background-color);
+      --set-background-color: var(--table-2);
+
+      &:nth-of-type(odd) {
+        --set-background-color: var(--table-1);
+      }
 
       .index {
         position: absolute;

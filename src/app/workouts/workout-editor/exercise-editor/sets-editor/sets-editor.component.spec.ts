@@ -29,12 +29,14 @@ class SetsEditorWrapper {
   progressType = signal(ProgressType.repetitions);
   child = viewChild(SetsEditorComponent);
   form = new FormGroup({
+    progressType: new FormControl(ProgressType.repetitions),
     sets: new FormArray([
       new FormGroup({
         id: new FormControl(0),
         weight: new FormControl(1),
         repetitions: new FormControl(1),
         time: new FormControl(1),
+        failure: new FormControl(false),
       }),
     ]),
   });
@@ -81,7 +83,7 @@ describe('SetsEditorComponent', () => {
   });
 
   it('should clone the last set when adding a new one and add it to the end', () => {
-    const newSetValue = { weight: 10, repetitions: 3, time: 8 };
+    const newSetValue = { weight: 10, repetitions: 3, time: 8, failure: false };
     fixture.detectChanges();
     component.child()!.onAddSet();
     fixture.detectChanges();
@@ -109,9 +111,27 @@ describe('SetsEditorComponent', () => {
   });
 
   it('should delete correctly', () => {
-    const newSetValue0 = { id: 0, weight: 1, repetitions: 2, time: 3 };
-    const newSetValue1 = { id: 1, weight: 10, repetitions: 3, time: 8 };
-    const newSetValue2 = { id: 2, weight: 11, repetitions: 7, time: 33 };
+    const newSetValue0 = {
+      id: 0,
+      weight: 1,
+      repetitions: 2,
+      time: 3,
+      failure: false,
+    };
+    const newSetValue1 = {
+      id: 1,
+      weight: 10,
+      repetitions: 3,
+      time: 8,
+      failure: false,
+    };
+    const newSetValue2 = {
+      id: 2,
+      weight: 11,
+      repetitions: 7,
+      time: 33,
+      failure: false,
+    };
     fixture.detectChanges();
     component
       .child()!

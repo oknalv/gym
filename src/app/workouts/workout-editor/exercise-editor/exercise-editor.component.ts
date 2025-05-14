@@ -1,11 +1,12 @@
 import {
   Component,
   computed,
+  DestroyRef,
   effect,
+  inject,
   input,
   model,
   output,
-  signal,
 } from '@angular/core';
 import {
   ExerciseType,
@@ -76,6 +77,8 @@ export class ExerciseEditorComponent {
     return !!this.baseExercise();
   });
 
+  private destroyRef = inject(DestroyRef);
+
   titleKey = computed(() => {
     return `exercises.editor.${this.editMode() ? 'edit' : 'new'}`;
   });
@@ -110,6 +113,7 @@ export class ExerciseEditorComponent {
           weight: FormControl<number | null>;
           repetitions: FormControl<number | null>;
           time: FormControl<number | null>;
+          failure: FormControl<boolean | null>;
         }>
       >([]),
     }),
@@ -155,10 +159,12 @@ export class ExerciseEditorComponent {
               'sets'
             ] as FormArray<FormGroup>
           ).controls) {
-            set.controls['time'].setValidators(getTimeValidators(newValue!));
+            set.controls['time'].setValidators(
+              getTimeValidators(newValue!, set.value.failure),
+            );
             set.controls['time'].updateValueAndValidity();
             set.controls['repetitions'].setValidators(
-              getRepetitionsValidators(newValue!),
+              getRepetitionsValidators(newValue!, set.value.failure),
             );
             set.controls['repetitions'].updateValueAndValidity();
           }
@@ -228,12 +234,14 @@ export class ExerciseEditorComponent {
       weight: number | null;
       repetitions: number | null;
       time: number | null;
+      failure: boolean | null;
     }>,
   ) {
     return {
       weight: set.weight!,
       repetitions: set.repetitions!,
       time: set.time!,
+      failure: set.failure!,
     };
   }
 
@@ -248,6 +256,7 @@ export class ExerciseEditorComponent {
         weight: 5,
         repetitions: 10,
         time: 60,
+        failure: false,
       })),
       restingTime: 60,
       remark: null,
@@ -272,7 +281,12 @@ export class ExerciseEditorComponent {
     this.form.controls['sets'].controls['sets'].clear();
     exercise.sets.forEach((set) => {
       this.form.controls['sets'].controls['sets'].push(
-        getNewFormGroupForSet(set, exercise.weighted, exercise.progressType),
+        getNewFormGroupForSet(
+          set,
+          exercise.weighted,
+          exercise.progressType,
+          this.destroyRef,
+        ),
       );
     });
     this.form.markAsPristine();
