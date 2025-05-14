@@ -152,10 +152,7 @@ export class WorkoutService {
     await this.initWorkouts();
   }
 
-  async editWorkout(workout: Workout) {
-    if (this.executionService.ongoingExecution()) {
-      throw 'WORKOUT_EXECUTING';
-    }
+  private async _editWorkout(workout: Workout) {
     const newExerciseTypes: Set<ExerciseType> = new Set();
     const editWorkoutDTO: WorkoutDTO = {
       id: workout.id,
@@ -205,6 +202,13 @@ export class WorkoutService {
       editWorkoutDTO,
     );
     await this.initWorkouts();
+  }
+
+  async editWorkout(workout: Workout) {
+    if (this.executionService.ongoingExecution()) {
+      throw 'WORKOUT_EXECUTING';
+    }
+    await this._editWorkout(workout);
   }
 
   async deleteWorkout(id: number) {
@@ -345,6 +349,6 @@ export class WorkoutService {
       }
       exercise.remark = remark;
     }
-    await this.editWorkout(workout);
+    await this._editWorkout(workout);
   }
 }
