@@ -6,6 +6,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { IconComponent } from '../shared/icon/icon.component';
 import { ExerciseTypeManagerComponent } from './exercise-type-manager/exercise-type-manager.component';
 import { PortService } from '../port.service';
+import { ExecutionService } from '../execution.service';
 
 @Component({
   selector: 'gym-workouts',
@@ -36,6 +37,10 @@ export class WorkoutsComponent {
   });
   manageExerciseTypesVisible = signal(false);
   private portService = inject(PortService);
+  private executionService = inject(ExecutionService);
+  isExecuting = computed(() => {
+    return !!this.executionService.ongoingExecution();
+  });
 
   onShowManageExerciseTypes() {
     this.manageExerciseTypesVisible.set(true);

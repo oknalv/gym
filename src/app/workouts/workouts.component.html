@@ -1,5 +1,9 @@
 <h1>
-  {{ "workouts.title" | translate }} <gym-icon icon="+" routerLink="new" />
+  {{ "workouts.title" | translate }}
+
+  @if (!isExecuting()) {
+    <gym-icon icon="+" routerLink="new" />
+  }
 </h1>
 <section>
   <div class="workouts-container">
@@ -14,11 +18,13 @@
 </section>
 <section class="actions">
   @if (hasExerciseTypes()) {
-    <button (click)="onShowManageExerciseTypes()">
-      <gym-icon icon="pencil" />
-      <br />
-      {{ "workouts.manageExerciseTypes" | translate }}
-    </button>
+    @if (!isExecuting()) {
+      <button (click)="onShowManageExerciseTypes()">
+        <gym-icon icon="pencil" />
+        <br />
+        {{ "workouts.manageExerciseTypes" | translate }}
+      </button>
+    }
     <button (click)="onExportData()">
       <gym-icon icon="export" />
       <br />

@@ -42,9 +42,6 @@ export class WorkoutDetailComponent {
   isExecuting = computed(() => {
     return !!this.executionService.ongoingExecution();
   });
-  isBeingExecuted = computed(() => {
-    return +this.id() === this.executionService.ongoingExecution()?.workoutId;
-  });
 
   constructor() {
     effect(() => {

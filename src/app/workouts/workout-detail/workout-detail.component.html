@@ -20,13 +20,13 @@
       <gym-icon icon="play" />
     </button>
     <div>
-      <button class="info" routerLink="edit" [disabled]="isBeingExecuted()">
+      <button class="info" routerLink="edit" [disabled]="isExecuting()">
         <gym-icon icon="pencil" />
       </button>
       <button
         class="error"
         (click)="onAskDeleteWorkout()"
-        [disabled]="isBeingExecuted()"
+        [disabled]="isExecuting()"
       >
         <gym-icon icon="trashbin" />
       </button>

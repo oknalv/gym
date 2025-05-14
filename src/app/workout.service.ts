@@ -100,6 +100,9 @@ export class WorkoutService {
   }
 
   async addWorkout(workout: Workout) {
+    if (this.executionService.ongoingExecution()) {
+      throw 'WORKOUT_EXECUTING';
+    }
     const newExerciseTypes: Set<ExerciseType> = new Set();
     const newWorkoutDTO: WorkoutDTO = {
       id: workout.id,
@@ -150,6 +153,9 @@ export class WorkoutService {
   }
 
   async editWorkout(workout: Workout) {
+    if (this.executionService.ongoingExecution()) {
+      throw 'WORKOUT_EXECUTING';
+    }
     const newExerciseTypes: Set<ExerciseType> = new Set();
     const editWorkoutDTO: WorkoutDTO = {
       id: workout.id,
@@ -202,7 +208,7 @@ export class WorkoutService {
   }
 
   async deleteWorkout(id: number) {
-    if (this.executionService.ongoingExecution()?.workoutId === id) {
+    if (this.executionService.ongoingExecution()) {
       throw 'WORKOUT_EXECUTING';
     }
     await this.dataService.deleteData(this.dataService.workoutStoreName, id);
@@ -210,6 +216,9 @@ export class WorkoutService {
   }
 
   async editExerciseType(exerciseType: ExerciseType) {
+    if (this.executionService.ongoingExecution()) {
+      throw 'WORKOUT_EXECUTING';
+    }
     await this.dataService.updateData(
       this.dataService.exerciseTypeStoreName,
       exerciseType,
@@ -218,6 +227,9 @@ export class WorkoutService {
   }
 
   async deleteExerciseType(id: number) {
+    if (this.executionService.ongoingExecution()) {
+      throw 'WORKOUT_EXECUTING';
+    }
     const workouts = (
       await this.dataService.getAllData(this.dataService.workoutStoreName)
     ).reduce(
