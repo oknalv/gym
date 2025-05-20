@@ -26,9 +26,11 @@ export class ExecutionActionsComponent {
   });
   skipRestKey = computed(() => {
     let key = 'execution.skipRest';
-    if (this.isLastSet()) key += 'Finish';
-    if (this.isLastExercise()) key += 'Workout';
-    else key += this._elementKey();
+    if (this.isLastSet()) {
+      key += 'Finish';
+      if (this.isLastExercise()) key += 'Workout';
+      else key += this._elementKey();
+    }
     return key;
   });
   finishSetKey = computed(() => {

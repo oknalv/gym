@@ -14,8 +14,10 @@ export class ExecutionPreviewComponent extends ExecutionComponent {
     super();
     effect(async () => {
       if (this.workoutFinished()) {
-        await this.updateWorkoutLastExecution();
+        const lastExecution = this.execution()!.workoutStart;
+        const workout = this.workout()!;
         this.onLeaveWorkout();
+        await this.updateWorkoutLastExecution(lastExecution, workout);
       }
     });
   }

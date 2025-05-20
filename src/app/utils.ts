@@ -24,12 +24,12 @@ export function asSupersetDTO(exercise: ExerciseDTO | SupersetDTO) {
   return exercise as SupersetDTO;
 }
 
-export function isExercise(exercise: Exercise | Superset) {
-  return !!(exercise as Exercise).type;
+export function isExercise(exercise: Exercise | Superset | null) {
+  return !!(exercise as Exercise)?.type;
 }
 
-export function isExerciseDTO(exercise: ExerciseDTO | SupersetDTO) {
-  return !!(exercise as ExerciseDTO).type;
+export function isExerciseDTO(exercise: ExerciseDTO | SupersetDTO | null) {
+  return !!(exercise as ExerciseDTO)?.type;
 }
 
 export function integerValidator(control: AbstractControl) {

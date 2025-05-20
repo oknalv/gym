@@ -14,7 +14,7 @@ import { OngoingSupersetComponent } from './ongoing-superset/ongoing-superset.co
 import { IconComponent } from '../shared/icon/icon.component';
 import { DialogComponent } from '../shared/dialog/dialog.component';
 import { RouterLink } from '@angular/router';
-import { Exercise, Superset } from '../gym.model';
+import { Exercise, Superset, Workout } from '../gym.model';
 import { ExerciseComponent } from '../workouts/exercise/exercise.component';
 
 @Component({
@@ -119,8 +119,10 @@ export class ExecutionComponent implements AfterViewInit {
 
   async ngAfterViewInit() {
     if (this.workoutFinished()) {
-      await this.updateWorkoutLastExecution();
+      const lastExecution = this.execution()!.workoutStart;
+      const workout = this.workout()!;
       this.onLeaveWorkout();
+      await this.updateWorkoutLastExecution(lastExecution, workout);
     }
   }
 
@@ -146,10 +148,13 @@ export class ExecutionComponent implements AfterViewInit {
     this.executionService.redoExercise(exerciseId);
   }
 
-  protected async updateWorkoutLastExecution() {
+  protected async updateWorkoutLastExecution(
+    lastExecution: Date,
+    workout: Workout,
+  ) {
     await this.workoutService.editWorkout({
-      ...this.workout()!,
-      lastExecution: this.execution()!.workoutStart,
+      ...workout,
+      lastExecution,
     });
   }
 }

@@ -1,7 +1,7 @@
 @if (mustChooseExercise()) {
   {{ "execution.chooseExercise" | translate }}
 } @else {
-  @if (!workoutFinished()) {
+  @if (!workoutFinished() && ongoingExercise()) {
     @if (isExercise(ongoingExercise()!)) {
       <gym-ongoing-exercise-preview
         [exercises]="[asExercise(ongoingExercise()!)]"
