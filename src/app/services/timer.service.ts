@@ -7,8 +7,7 @@ import { ConfigurationService } from './configuration.service';
 })
 export class TimerService {
   private readonly TIMERS_KEY = 'gym-timers';
-  private timers = new Map<string, [Timer, BehaviorSubject<number>]>();
-  private messageChannel = new MessageChannel();
+  private timers = new Map<string, Timer>();
   private notificationAudio = new Audio('timer-beep.mp3');
   private configurationService = inject(ConfigurationService);
   private timerSound = computed(
@@ -16,90 +15,93 @@ export class TimerService {
   );
 
   constructor() {
-    const timers: [string, Timer][] = JSON.parse(
+    const timers: [string, TimerDTO][] = JSON.parse(
       window.localStorage.getItem(this.TIMERS_KEY) || '[]',
     );
     timers.forEach(([timerId, timer]) => {
       if (timer.persist) {
         const remainingMilliseconds = Math.max(
           timer.remainingMilliseconds - (Date.now() - timer.lastUpdate),
-          0,
+          1000,
         );
-        if (remainingMilliseconds > 0) {
-          this.play(timerId, remainingMilliseconds, timer.text);
-        }
+        this.play(timerId, remainingMilliseconds, timer.text, timer.persist);
       } else {
         this.stop(timerId);
       }
     });
     this.updateLocalStorage();
-    navigator.serviceWorker.ready.then(() => {
-      navigator.serviceWorker.controller!.postMessage(
-        { type: 'PORT_INITIALIZATION' },
-        [this.messageChannel.port2],
-      );
-      this.messageChannel.port1.onmessage = (event) => {
-        const timerId = event.data.timerId;
-        const remainingMilliseconds = event.data.remainingMilliseconds;
-        const timerTuple = this.timers.get(timerId);
-        if (timerTuple) {
-          timerTuple[1].next(remainingMilliseconds);
-          this.timers.set(timerId, [
-            { ...timerTuple[0], remainingMilliseconds, lastUpdate: Date.now() },
-            timerTuple[1],
-          ]);
-        }
-        if (remainingMilliseconds === 0) {
-          if (this.timerSound()) this.notificationAudio.play();
-          this.timers.get(timerId)?.[1].complete();
-          this.timers.delete(timerId);
-        }
-        this.updateLocalStorage();
-      };
-    });
   }
 
   play(timerId: string, milliseconds: number, text: string, persist = true) {
-    navigator.serviceWorker.controller!.postMessage({
-      timerId,
-      milliseconds,
-      text,
-      type: 'play',
-    });
-    this.timers.set(timerId, [
-      {
-        remainingMilliseconds: milliseconds,
-        lastUpdate: Date.now(),
-        text,
-        persist,
-      },
-      new BehaviorSubject(milliseconds),
-    ]);
-    this.updateLocalStorage();
-    return this.getTimer(timerId)!;
+    if (!this.timers.has(timerId)) {
+      const startTime = Date.now();
+      const interval = window.setInterval(() => {
+        const remainingMilliseconds = Math.max(
+          milliseconds - (Date.now() - startTime),
+          0,
+        );
+        const timer = this.timers.get(timerId)!;
+        timer.subject.next(remainingMilliseconds);
+        this.timers.set(timerId, {
+          ...timer,
+          timerDto: {
+            ...timer.timerDto,
+            remainingMilliseconds,
+            lastUpdate: Date.now(),
+          },
+        });
+        if (remainingMilliseconds === 0) {
+          clearInterval(interval);
+          timer.subject.complete();
+          this.timers.delete(timerId);
+          if (this.timerSound()) this.notificationAudio.play();
+          new Notification('Gym', {
+            body: text,
+            icon: 'icons/favicon.png',
+            badge: 'icons/favicon.png',
+            silent: false,
+            tag: timerId,
+          });
+        }
+        this.updateLocalStorage();
+      });
+      this.timers.set(timerId, {
+        timerDto: {
+          remainingMilliseconds: milliseconds,
+          lastUpdate: Date.now(),
+          text,
+          persist,
+        },
+        subject: new BehaviorSubject(milliseconds),
+        interval,
+      });
+      this.updateLocalStorage();
+      return this.getTimer(timerId)!;
+    }
+    throw 'TIMER_ALREADY_STARTED';
   }
 
   stop(timerId: string) {
-    navigator.serviceWorker.controller!.postMessage({
-      timerId,
-      type: 'stop',
-    });
-    this.timers.get(timerId)?.[1].complete();
-    this.timers.delete(timerId);
-    this.updateLocalStorage();
+    const timer = this.timers.get(timerId);
+    if (timer) {
+      clearInterval(timer.interval);
+      timer.subject.complete();
+      this.timers.delete(timerId);
+      this.updateLocalStorage();
+    }
   }
 
   getTimer(timerId: string) {
-    return this.timers.get(timerId)?.[1].asObservable();
+    return this.timers.get(timerId)?.subject.asObservable();
   }
 
   private updateLocalStorage() {
     window.localStorage.setItem(
       this.TIMERS_KEY,
       JSON.stringify(
-        [...this.timers.entries()].map(([timerId, [timer, _]]) => [
+        [...this.timers.entries()].map(([timerId, { timerDto }]) => [
           timerId,
-          timer,
+          timerDto,
         ]),
       ),
     );
@@ -107,6 +109,12 @@ export class TimerService {
 }
 
 interface Timer {
+  timerDto: TimerDTO;
+  subject: BehaviorSubject<number>;
+  interval: number;
+}
+
+interface TimerDTO {
   remainingMilliseconds: number;
   lastUpdate: number;
   text: string;
