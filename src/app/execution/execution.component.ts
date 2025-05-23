@@ -144,7 +144,7 @@ export class ExecutionComponent implements AfterViewInit {
     this.executionService.abandonWorkout();
   }
 
-  redoExercise(exerciseId: number) {
+  onRedoExercise(exerciseId: number) {
     this.executionService.redoExercise(exerciseId);
   }
 

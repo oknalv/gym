@@ -160,7 +160,8 @@
     "chooseWorkout": "Elegir un entrenamiento",
     "completedExercises": "Ejercicios y superseries completados.",
     "restingTimerFinished": "¡Se acabó el tiempo de descanso!",
-    "failure": "al fallo"
+    "failure": "al fallo",
+    "nextSet": "Siguiente"
   },
   "configuration": {
     "title": "Configuración",

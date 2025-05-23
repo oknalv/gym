@@ -45,6 +45,10 @@ export class OngoingExerciseComponent implements OnInit {
   set = computed(() => {
     return this.exercise().sets[this.setIndex()];
   });
+  nextSet = computed(() => {
+    if (!this.isLastSet()) return this.exercise().sets[this.setIndex() + 1];
+    return undefined;
+  });
   remark = signal<Remark | null>(null);
   private workoutService = inject(WorkoutService);
 

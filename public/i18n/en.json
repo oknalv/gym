@@ -160,7 +160,8 @@
     "chooseWorkout": "Choose a workout",
     "completedExercises": "Completed exercises and supersets",
     "restingTimerFinished": "Resting time's up!",
-    "failure": "to failure"
+    "failure": "to failure",
+    "nextSet": "Next"
   },
   "configuration": {
     "title": "Configuration",

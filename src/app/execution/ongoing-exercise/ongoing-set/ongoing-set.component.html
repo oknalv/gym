@@ -20,7 +20,7 @@
       }
     }
   </div>
-  @if (progressType() === "time") {
+  @if (progressType() === "time" && !set().failure) {
     <div class="actions">
       <button (click)="onRunTimer()">
         <div>
@@ -29,6 +29,30 @@
         </div>
         {{ "execution.runTimer" | translate }}
       </button>
+    </div>
+  }
+  @if (nextSet()) {
+    <div class="next-set">
+      <div>{{ "execution.nextSet" | translate }}</div>
+      @if (weighted()) {
+        <gym-icon
+          [icon]="weightType() === 'total' ? 'dumbbell' : 'halfdumbbell'"
+        />
+        {{ nextSet()!.weight }} {{ weightUnit() }}
+      }
+      <br />
+      <gym-icon
+        [icon]="progressType() === 'repetitions' ? 'repeat' : 'hourglass'"
+      />
+      @if (nextSet()!.failure) {
+        {{ "execution.failure" | translate }}
+      } @else {
+        @if (progressType() === "repetitions") {
+          {{ nextSet()!.repetitions }} reps
+        } @else {
+          {{ nextSet()!.time | time }}
+        }
+      }
     </div>
   }
 </div>

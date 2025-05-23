@@ -50,16 +50,13 @@
                   <gym-exercise [exercise]="asExercise(exercise)" />
                   <button
                     class="thick success"
-                    (click)="redoExercise(exercise.id)"
+                    (click)="onRedoExercise(exercise.id)"
                   >
                     <gym-icon icon="repeat" />
                   </button>
                 </div>
               } @else {
-                <div
-                  class="superset-wrapper"
-                  (click)="onChooseExercise(exercise.id)"
-                >
+                <div class="superset-wrapper">
                   <div>
                     <div>
                       {{
@@ -77,7 +74,7 @@
                   </div>
                   <button
                     class="thick success"
-                    (click)="redoExercise(exercise.id)"
+                    (click)="onRedoExercise(exercise.id)"
                   >
                     <gym-icon icon="repeat" />
                   </button>

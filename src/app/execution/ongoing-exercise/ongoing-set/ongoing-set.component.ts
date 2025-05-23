@@ -16,6 +16,7 @@ export class OngoingSetComponent {
   weighted = input.required<boolean>();
   weightType = input.required<WeightType>();
   set = input.required<ExerciseSet>();
+  nextSet = input<ExerciseSet>();
   progressType = input.required<ProgressType>();
   showTimer = signal(false);
   private configurationService = inject(ConfigurationService);
