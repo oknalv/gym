@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { ExerciseType, WorkoutDTO } from '../gym.model';
+import { ExerciseDTO, ExerciseType, WorkoutDTO } from '../gym.model';
 import { DataService } from './data.service';
 import { ConfigurationService, Configuration } from './configuration.service';
 
@@ -18,6 +18,9 @@ export class PortService {
       ),
       exerciseTypes: await this.dataService.getAllData(
         this.dataService.exerciseTypeStoreName,
+      ),
+      exercises: await this.dataService.getAllData(
+        this.dataService.exerciseStoreName,
       ),
       configuration: this.configurationService.configuration(),
     };
@@ -48,6 +51,12 @@ export class PortService {
               exerciseType,
             );
           }
+          for (const exercise of appDataContainer.exercises) {
+            await this.dataService.addData(
+              this.dataService.exerciseStoreName,
+              exercise,
+            );
+          }
           for (const workout of appDataContainer.workouts) {
             await this.dataService.addData(
               this.dataService.workoutStoreName,
@@ -72,5 +81,6 @@ export class PortService {
 interface AppDataContainer {
   workouts: WorkoutDTO[];
   exerciseTypes: ExerciseType[];
+  exercises: ExerciseDTO[];
   configuration: Configuration;
 }

@@ -71,7 +71,7 @@ export interface WorkoutDTO {
   id: number;
   name: string;
   lastExecution: number | null;
-  exercises: (ExerciseDTO | SupersetDTO)[];
+  exercises: (number | SupersetDTO)[];
 }
 
 export interface ExerciseDTO {
@@ -87,5 +87,5 @@ export interface ExerciseDTO {
 
 export interface SupersetDTO {
   id: number;
-  exercises: ExerciseDTO[];
+  exercises: number[];
 }

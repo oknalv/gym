@@ -9,16 +9,8 @@ import {
   Workout,
   WorkoutDTO,
 } from '../gym.model';
-import { DataService } from './data.service';
+import { DataService, DBAction } from './data.service';
 import { ExecutionService } from './execution.service';
-import {
-  asExercise,
-  asExerciseDTO,
-  asSuperset,
-  asSupersetDTO,
-  isExercise,
-  isExerciseDTO,
-} from '../utils';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +18,8 @@ import {
 export class WorkoutService {
   private _exerciseTypes = signal<ExerciseType[]>([]);
   exerciseTypes = this._exerciseTypes.asReadonly();
+  private _exercises = signal<Exercise[]>([]);
+  exercises = this._exercises.asReadonly();
   private _workouts = signal<Workout[]>([]);
   workouts = this._workouts.asReadonly();
   private executionService = inject(ExecutionService);
@@ -49,9 +43,31 @@ export class WorkoutService {
     });
   }
 
-  private async initWorkouts() {
+  private async initExercises() {
     return new Promise<void>(async (resolve, reject) => {
       await this.initExerciseTypes();
+      this.dataService
+        .getAllData(this.dataService.exerciseStoreName)
+        .then((exerciseDTOs: ExerciseDTO[]) => {
+          this._exercises.set(
+            exerciseDTOs.map((exerciseDTO) => {
+              return {
+                ...exerciseDTO,
+                type: this.exerciseTypes().find(
+                  (exerciseType) => exerciseType.id === exerciseDTO.type,
+                )!,
+              };
+            }),
+          );
+          resolve();
+        })
+        .catch(reject);
+    });
+  }
+
+  private async initWorkouts() {
+    return new Promise<void>(async (resolve, reject) => {
+      await this.initExercises();
       this.dataService
         .getAllData(this.dataService.workoutStoreName)
         .then((workoutDTOs: WorkoutDTO[]) => {
@@ -62,31 +78,20 @@ export class WorkoutService {
               lastExecution: workoutDTO.lastExecution
                 ? new Date(workoutDTO.lastExecution)
                 : null,
-              exercises: workoutDTO.exercises.map((dto) => {
-                const type = (dto as ExerciseDTO).type;
-                if (type) {
-                  const exerciseDTO = dto as ExerciseDTO;
-                  return {
-                    ...exerciseDTO,
-                    type: this.exerciseTypes().find(
-                      (exerciseType) => exerciseType.id === exerciseDTO.type,
-                    ),
-                  } as Exercise;
+              exercises: workoutDTO.exercises.map((obj) => {
+                if (typeof obj === 'number') {
+                  return this.exercises().find(
+                    (exercise) => exercise.id === obj,
+                  );
                 } else {
-                  const supersetDto = dto as SupersetDTO;
+                  const supersetDto = obj as SupersetDTO;
                   return {
                     ...supersetDto,
-                    exercises: supersetDto.exercises.map(
-                      (supersetExerciseDTO) => {
-                        return {
-                          ...supersetExerciseDTO,
-                          type: this.exerciseTypes().find(
-                            (exerciseType) =>
-                              exerciseType.id === supersetExerciseDTO.type,
-                          ),
-                        };
-                      },
-                    ),
+                    exercises: supersetDto.exercises.map((exerciseId) => {
+                      return this.exercises().find(
+                        (exercise) => exercise.id === exerciseId,
+                      );
+                    }),
                   } as Superset;
                 }
               }),
@@ -103,7 +108,9 @@ export class WorkoutService {
     if (this.executionService.ongoingExecution()) {
       throw 'WORKOUT_EXECUTING';
     }
-    const newExerciseTypes: Set<ExerciseType> = new Set();
+    const newExerciseTypes: ExerciseType[] = [];
+    const newExerciseDTOs: ExerciseDTO[] = [];
+    const existingExerciseDTOs: ExerciseDTO[] = [];
     const newWorkoutDTO: WorkoutDTO = {
       id: workout.id,
       name: workout.name,
@@ -112,48 +119,76 @@ export class WorkoutService {
         const type = (exercise as Exercise).type;
         if (type) {
           const _exercise = exercise as Exercise;
-          if (
-            !this.exerciseTypes()
-              .map((type) => type.id)
-              .includes(type.id)
-          )
-            newExerciseTypes.add(type);
-          return { ..._exercise, type: type.id } as ExerciseDTO;
+          this.checkAddEditExercise(
+            _exercise,
+            newExerciseDTOs,
+            existingExerciseDTOs,
+            newExerciseTypes,
+          );
+          return _exercise.id;
         } else {
           const superset = exercise as Superset;
           return {
             ...superset,
             exercises: superset.exercises.map((supersetExercise) => {
-              if (
-                !this.exerciseTypes()
-                  .map((type) => type.id)
-                  .includes(supersetExercise.type!.id)
-              )
-                newExerciseTypes.add(supersetExercise.type!);
-              return {
-                ...supersetExercise,
-                type: supersetExercise.type!.id,
-              } as ExerciseDTO;
+              this.checkAddEditExercise(
+                supersetExercise,
+                newExerciseDTOs,
+                existingExerciseDTOs,
+                newExerciseTypes,
+              );
+              return supersetExercise.id;
             }),
           } as SupersetDTO;
         }
       }),
     };
-    for (const newExerciseType of newExerciseTypes) {
-      await this.dataService.addData(
-        this.dataService.exerciseTypeStoreName,
-        newExerciseType,
-      );
-    }
-    await this.dataService.addData(
-      this.dataService.workoutStoreName,
-      newWorkoutDTO,
-    );
+    const dbActions: DBAction[] = [
+      ...newExerciseTypes.map((newExerciseType) => {
+        return {
+          name: 'add',
+          storeName: this.dataService.exerciseTypeStoreName,
+          data: newExerciseType,
+        } as DBAction;
+      }),
+      ...newExerciseDTOs.map((newExerciseDTO) => {
+        return {
+          name: 'add',
+          storeName: this.dataService.exerciseStoreName,
+          data: newExerciseDTO,
+        } as DBAction;
+      }),
+      ...existingExerciseDTOs.map((existingExercise) => {
+        return {
+          name: 'update',
+          storeName: this.dataService.exerciseStoreName,
+          data: existingExercise,
+        } as DBAction;
+      }),
+      {
+        name: 'add',
+        storeName: this.dataService.workoutStoreName,
+        data: newWorkoutDTO,
+      },
+    ];
+    await this.dataService.batchExecute(dbActions);
     await this.initWorkouts();
   }
 
-  private async _editWorkout(workout: Workout) {
-    const newExerciseTypes: Set<ExerciseType> = new Set();
+  async editWorkout(workout: Workout) {
+    if (this.executionService.ongoingExecution()) {
+      throw 'WORKOUT_EXECUTING';
+    }
+    const oldWorkoutDTO = (await this.dataService.getData(
+      this.dataService.workoutStoreName,
+      workout.id,
+    )) as WorkoutDTO;
+    if (!oldWorkoutDTO) {
+      throw 'WORKOUT_NOT_FOUND';
+    }
+    const newExerciseTypes: ExerciseType[] = [];
+    const newExerciseDTOs: ExerciseDTO[] = [];
+    const existingExerciseDTOs: ExerciseDTO[] = [];
     const editWorkoutDTO: WorkoutDTO = {
       id: workout.id,
       name: workout.name,
@@ -164,58 +199,154 @@ export class WorkoutService {
         const type = (exercise as Exercise).type;
         if (type) {
           const _exercise = exercise as Exercise;
-          if (
-            !this.exerciseTypes()
-              .map((type) => type.id)
-              .includes(type.id)
-          )
-            newExerciseTypes.add(type);
-          return { ..._exercise, type: type.id } as ExerciseDTO;
+          this.checkAddEditExercise(
+            _exercise,
+            newExerciseDTOs,
+            existingExerciseDTOs,
+            newExerciseTypes,
+          );
+          return _exercise.id;
         } else {
           const superset = exercise as Superset;
           return {
             ...superset,
             exercises: superset.exercises.map((supersetExercise) => {
-              if (
-                !this.exerciseTypes()
-                  .map((type) => type.id)
-                  .includes(supersetExercise.type!.id)
-              )
-                newExerciseTypes.add(supersetExercise.type!);
-              return {
-                ...supersetExercise,
-                type: supersetExercise.type!.id,
-              } as ExerciseDTO;
+              this.checkAddEditExercise(
+                supersetExercise,
+                newExerciseDTOs,
+                existingExerciseDTOs,
+                newExerciseTypes,
+              );
+              return supersetExercise.id;
             }),
           } as SupersetDTO;
         }
       }),
     };
-    for (const newExerciseType of newExerciseTypes) {
-      await this.dataService.addData(
-        this.dataService.exerciseTypeStoreName,
-        newExerciseType,
-      );
-    }
-    await this.dataService.updateData(
-      this.dataService.workoutStoreName,
-      editWorkoutDTO,
-    );
+    const exerciseIdsNotToDelete = [
+      ...(await this.getExerciseIdsFromOtherWorkouts(oldWorkoutDTO.id)),
+      ...existingExerciseDTOs.map((exerciseDTO) => exerciseDTO.id),
+    ];
+    const exerciseIdsToDelete = this.getWorkoutExerciseIds(
+      oldWorkoutDTO,
+    ).filter((exerciseId) => !exerciseIdsNotToDelete.includes(exerciseId));
+
+    const dbActions: DBAction[] = [
+      ...newExerciseTypes.map((newExerciseType) => {
+        return {
+          name: 'add',
+          storeName: this.dataService.exerciseTypeStoreName,
+          data: newExerciseType,
+        } as DBAction;
+      }),
+      ...newExerciseDTOs.map((newExerciseDTO) => {
+        return {
+          name: 'add',
+          storeName: this.dataService.exerciseStoreName,
+          data: newExerciseDTO,
+        } as DBAction;
+      }),
+      ...existingExerciseDTOs.map((existingExercise) => {
+        return {
+          name: 'update',
+          storeName: this.dataService.exerciseStoreName,
+          data: existingExercise,
+        } as DBAction;
+      }),
+      ...exerciseIdsToDelete.map((exerciseId) => {
+        return {
+          name: 'delete',
+          storeName: this.dataService.exerciseStoreName,
+          data: exerciseId,
+        } as DBAction;
+      }),
+      {
+        name: 'update',
+        storeName: this.dataService.workoutStoreName,
+        data: editWorkoutDTO,
+      },
+    ];
+    await this.dataService.batchExecute(dbActions);
     await this.initWorkouts();
   }
 
-  async editWorkout(workout: Workout) {
-    if (this.executionService.ongoingExecution()) {
-      throw 'WORKOUT_EXECUTING';
+  private getWorkoutExerciseIds(workoutDTO: WorkoutDTO) {
+    return workoutDTO.exercises
+      .map((exercise) => {
+        if (typeof exercise === 'number') return exercise;
+        return exercise.exercises;
+      })
+      .flat();
+  }
+
+  private async getExerciseIdsFromOtherWorkouts(
+    idFromWorkoutToExclude: number,
+  ) {
+    return (
+      await this.dataService.getAllData(this.dataService.workoutStoreName)
+    )
+      .filter((workoutDTO) => workoutDTO.id != idFromWorkoutToExclude)
+      .map(this.getWorkoutExerciseIds)
+      .flat();
+  }
+
+  private checkAddEditExercise(
+    exercise: Exercise,
+    newExerciseDTOs: ExerciseDTO[],
+    existingExerciseDTOs: ExerciseDTO[],
+    newExerciseTypes: ExerciseType[],
+  ) {
+    if (
+      newExerciseDTOs.find((exerciseDTO) => exercise.id === exerciseDTO.id) ||
+      existingExerciseDTOs.find((exerciseDTO) => exercise.id === exerciseDTO.id)
+    ) {
+      throw 'DUPLICATED_EXERCISE';
     }
-    await this._editWorkout(workout);
+    if (!this.exercises().find((_exercise) => exercise.id === _exercise.id)) {
+      newExerciseDTOs.push({
+        ...exercise,
+        type: exercise.type!.id,
+      });
+    } else {
+      existingExerciseDTOs.push({
+        ...exercise,
+        type: exercise.type!.id,
+      });
+    }
+    if (
+      !this.exerciseTypes().find(
+        (exerciseType) => exerciseType.id === exercise.type!.id,
+      ) &&
+      !newExerciseTypes.find(
+        (exerciseType) => exerciseType.id === exercise.type!.id,
+      )
+    )
+      newExerciseTypes.push(exercise.type!);
   }
 
   async deleteWorkout(id: number) {
     if (this.executionService.ongoingExecution()) {
       throw 'WORKOUT_EXECUTING';
     }
-    await this.dataService.deleteData(this.dataService.workoutStoreName, id);
+    const exerciseIdsNotToDelete =
+      await this.getExerciseIdsFromOtherWorkouts(id);
+    const exerciseIdsToDelete = this.getWorkoutExerciseIds(
+      await this.dataService.getData(this.dataService.workoutStoreName, id),
+    ).filter((exerciseId) => !exerciseIdsNotToDelete.includes(exerciseId));
+    await this.dataService.batchExecute([
+      ...exerciseIdsToDelete.map((exerciseId) => {
+        return {
+          name: 'delete',
+          storeName: this.dataService.exerciseStoreName,
+          data: exerciseId,
+        } as DBAction;
+      }),
+      {
+        name: 'delete',
+        storeName: this.dataService.workoutStoreName,
+        data: id,
+      },
+    ]);
     await this.initWorkouts();
   }
 
@@ -234,32 +365,32 @@ export class WorkoutService {
     if (this.executionService.ongoingExecution()) {
       throw 'WORKOUT_EXECUTING';
     }
-    const workouts = (
+    const idsFromExercisesToDelete = (
+      await this.dataService.getAllData(this.dataService.exerciseStoreName)
+    )
+      .filter((exercise) => exercise.type === id)
+      .map((exercise) => exercise.id);
+    const workouts: { toDelete: WorkoutDTO[]; toUpdate: WorkoutDTO[] } = (
       await this.dataService.getAllData(this.dataService.workoutStoreName)
     ).reduce(
       (accumulator, workout: WorkoutDTO) => {
         let touched = false;
         for (let i = workout.exercises.length - 1; i >= 0; i--) {
           const exercise = workout.exercises[i];
-          if (isExerciseDTO(exercise)) {
-            if (asExerciseDTO(exercise).type === id) {
+          if (typeof exercise === 'number') {
+            if (idsFromExercisesToDelete.includes(exercise)) {
               workout.exercises.splice(i, 1);
               touched = true;
             }
           } else {
-            const superset = asSupersetDTO(exercise);
-            for (
-              let j = asSupersetDTO(exercise).exercises.length - 1;
-              j >= 0;
-              j--
-            ) {
-              const supersetExercise = superset.exercises[j];
-              if (supersetExercise.type === id) {
-                superset.exercises.splice(j, 1);
+            for (let j = exercise.exercises.length - 1; j >= 0; j--) {
+              const supersetExerciseId = exercise.exercises[j];
+              if (idsFromExercisesToDelete.includes(supersetExerciseId)) {
+                exercise.exercises.splice(j, 1);
                 touched = true;
               }
             }
-            if (superset.exercises.length === 0) {
+            if (exercise.exercises.length === 0) {
               workout.exercises.splice(i, 1);
               touched = true;
             }
@@ -279,76 +410,51 @@ export class WorkoutService {
         toDelete: [],
       } as { toUpdate: WorkoutDTO[]; toDelete: WorkoutDTO[] },
     );
-    for (const workout of workouts.toDelete) {
-      await this.dataService.deleteData(
-        this.dataService.workoutStoreName,
-        workout.id,
-      );
-    }
-    for (const workout of workouts.toUpdate) {
-      await this.dataService.updateData(
-        this.dataService.workoutStoreName,
-        workout,
-      );
-    }
-    await this.dataService.deleteData(
-      this.dataService.exerciseTypeStoreName,
-      id,
-    );
+    const dbActions: DBAction[] = [
+      ...idsFromExercisesToDelete.map((exerciseId) => {
+        return {
+          name: 'delete',
+          storeName: this.dataService.exerciseStoreName,
+          data: exerciseId,
+        } as DBAction;
+      }),
+      ...workouts.toDelete.map((workout) => {
+        return {
+          name: 'delete',
+          storeName: this.dataService.workoutStoreName,
+          data: workout.id,
+        } as DBAction;
+      }),
+      ...workouts.toUpdate.map((workout) => {
+        return {
+          name: 'update',
+          storeName: this.dataService.workoutStoreName,
+          data: workout,
+        } as DBAction;
+      }),
+      {
+        name: 'delete',
+        storeName: this.dataService.exerciseTypeStoreName,
+        data: id,
+      },
+    ];
+    await this.dataService.batchExecute(dbActions);
     await this.initWorkouts();
   }
 
-  async changeRemarkOfOngoingWorkoutExercise(
-    exerciseId: number,
-    remark: Remark | null,
-  ) {
-    if (!this.executionService.ongoingExecution()) {
-      throw 'WORKOUT_NOT_EXECUTING';
-    }
-    if (!this.executionService.ongoingExecution()!.ongoingExerciseId) {
-      throw 'EXERCISE_NOT_EXECUTING';
-    }
-    const workout = this._workouts().find(
-      (workout) =>
-        workout.id === this.executionService.ongoingExecution()!.workoutId,
+  async changeRemarkOfExercise(exerciseId: number, remark: Remark | null) {
+    const exerciseDTO: ExerciseDTO = await this.dataService.getData(
+      this.dataService.exerciseStoreName,
+      exerciseId,
     );
-    if (!workout) {
-      throw 'WORKOUT_NOT_FOUND';
+    if (!exerciseDTO) {
+      throw 'EXERCISE_NOT_FOUND';
     }
-    if (
-      this.executionService.ongoingExecution()!.ongoingExerciseId === exerciseId
-    ) {
-      let exercise = workout.exercises.find(
-        (exercise) => exercise.id === exerciseId,
-      );
-      if (!exercise) {
-        throw 'EXERCISE_NOT_FOUND';
-      }
-      if (!isExercise(exercise)) {
-        throw 'SUPERSET_INSTEAD_OF_EXERCISE';
-      }
-      exercise = asExercise(exercise);
-      exercise.remark = remark;
-    } else {
-      const superset = workout.exercises.find(
-        (exercise) =>
-          exercise.id ===
-          this.executionService.ongoingExecution()!.ongoingExerciseId,
-      );
-      if (!superset) {
-        throw 'SUPERSET_NOT_FOUND';
-      }
-      if (isExercise(superset)) {
-        throw 'EXERCISE_INSTEAD_OF_SUPERSET';
-      }
-      const exercise = asSuperset(superset).exercises.find(
-        (exercise) => exercise.id === exerciseId,
-      );
-      if (!exercise) {
-        throw 'EXERCISE_NOT_FOUND_IN_SUPERSET';
-      }
-      exercise.remark = remark;
-    }
-    await this._editWorkout(workout);
+    exerciseDTO.remark = remark;
+    await this.dataService.updateData(
+      this.dataService.exerciseStoreName,
+      exerciseDTO,
+    );
+    await this.initWorkouts();
   }
 }

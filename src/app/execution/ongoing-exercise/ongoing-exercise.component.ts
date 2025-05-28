@@ -57,7 +57,7 @@ export class OngoingExerciseComponent implements OnInit {
   }
 
   async onRemarkChange(remark: Remark | null) {
-    await this.workoutService.changeRemarkOfOngoingWorkoutExercise(
+    await this.workoutService.changeRemarkOfExercise(
       this.exercise().id,
       remark,
     );
