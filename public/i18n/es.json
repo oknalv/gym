@@ -34,6 +34,7 @@
     "empty": "Todavía no hay ejercicios.",
     "add": "Añadir ejercicio",
     "addSuperset": "Añadir superserie",
+    "import": "Importar ejercicio",
     "editor": {
       "new": "Nuevo ejercicio",
       "edit": "Editar ejercicio",
@@ -74,6 +75,10 @@
         "toFailure": "Hacer al fallo",
         "toValue": "Fijar valor"
       }
+    },
+    "importDialog": {
+      "title": "Importar un ejercicio existente desde otro entrenamiento",
+      "warning": "Advertencia: importar un ejercicio desde otro entrenamiento significa que todos los parámetros de ese ejercicio estarán sincronizados en los otros entrenamientos donde esté, por lo tanto, si cambias algo de ese ejercicio, se reflejará en todos los entrenamientos que lo tengan. Para evitar mal uso y comportamientos extraños en la aplicación, no puedes importar ejercicios desde y en superseries."
     }
   },
   "exerciseTypes": {

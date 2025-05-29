@@ -1,0 +1,11 @@
+<gym-dialog [(open)]="open">
+  <h2>{{ "exercises.importDialog.title" | translate }}</h2>
+
+  <gym-closeable-warning
+    [storageKey]="IMPORT_EXERCISE_WARNING_KEY"
+    warningKey="exercises.importDialog.warning"
+  />
+  @for (exercise of exercises(); track exercise.id) {
+    <gym-exercise [exercise]="exercise" (click)="onImportExercise(exercise)" />
+  }
+</gym-dialog>

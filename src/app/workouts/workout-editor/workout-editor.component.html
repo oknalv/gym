@@ -52,10 +52,13 @@
       (exercise)="onGetExercise($event)"
     />
     <div class="add-buttons">
-      <button (click)="showExerciseEditor()">
+      <button (click)="onShowExerciseEditor()">
         {{ "exercises.add" | translate }}
       </button>
-      <button (click)="addSuperset()">
+      <button (click)="onShowExerciseImportDialog()">
+        {{ "exercises.import" | translate }}
+      </button>
+      <button (click)="onAddSuperset()">
         {{ "exercises.addSuperset" | translate }}
       </button>
     </div>
@@ -68,4 +71,9 @@
   [(open)]="showAskDeleteExercise"
   [whatToDelete]="deleteSuperset() ? 'superset' : 'exercise'"
   (delete)="onDeleteExercise()"
+/>
+<gym-exercise-import-dialog
+  [(open)]="exerciseImportDialogVisible"
+  [existingExerciseIds]="exerciseIds"
+  (import)="onImportExercise($event)"
 />

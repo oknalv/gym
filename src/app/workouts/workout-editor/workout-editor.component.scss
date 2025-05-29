@@ -1,11 +1,13 @@
 .add-buttons {
   margin: var(--margin) 0;
+  display: flex;
 
   > button {
-    width: 50%;
+    width: calc(100% / 3);
+    background-color: var(--table-1);
 
-    &:first-child {
-      background-color: var(--table-1);
+    &:nth-child(2) {
+      background-color: var(--table-2);
     }
   }
 }

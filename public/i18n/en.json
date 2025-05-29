@@ -34,6 +34,7 @@
     "empty": "There are no exercises yet.",
     "add": "Add exercise",
     "addSuperset": "Add superset",
+    "import": "Import exercise",
     "editor": {
       "new": "New exercise",
       "edit": "Edit exercise",
@@ -74,6 +75,10 @@
         "toFailure": "Do to failure",
         "toValue": "Set value"
       }
+    },
+    "importDialog": {
+      "title": "Import an existing exercise from other workouts",
+      "warning": "Warning: importing an exercise from other workouts means that all the parameters of that exercise will be synchronized in the other workouts where it is, therefore, if you change anything in that exercise, it will reflect in all the workouts that have it. To avoid bad usages and strange behaviors of the app, you cannot import exercises from and into supersets."
     }
   },
   "exerciseTypes": {

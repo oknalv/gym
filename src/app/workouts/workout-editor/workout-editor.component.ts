@@ -21,10 +21,11 @@ import { ExerciseComponent } from '../exercise/exercise.component';
 import { IconComponent } from '../../shared/icon/icon.component';
 import { SupersetEditorComponent } from './superset-editor/superset-editor.component';
 import { DeleteWarningDialogComponent } from '../../shared/dialog/delete-warning-dialog/delete-warning-dialog.component';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { asExercise, asSuperset, isExercise } from '../../utils';
 import { BackLinkComponent } from '../../shared/back-link/back-link.component';
+import { ExerciseImportDialogComponent } from './exercise-import-dialog/exercise-import-dialog.component';
 
 @Component({
   selector: 'gym-workout-editor',
@@ -38,6 +39,7 @@ import { BackLinkComponent } from '../../shared/back-link/back-link.component';
     DeleteWarningDialogComponent,
     TranslatePipe,
     BackLinkComponent,
+    ExerciseImportDialogComponent,
   ],
   templateUrl: './workout-editor.component.html',
   styleUrl: './workout-editor.component.scss',
@@ -68,6 +70,7 @@ export class WorkoutEditorComponent {
     name: new FormControl('', [Validators.required]),
   });
   exerciseEditorVisible = signal(false);
+  exerciseImportDialogVisible = signal(false);
   showAskDeleteExercise = signal(false);
   deleteSuperset = signal(false);
   private exerciseToDelete!: number;
@@ -77,6 +80,17 @@ export class WorkoutEditorComponent {
   exercises: (Exercise | Superset)[] = [];
 
   private lastExecution: Date | null = null;
+
+  get exerciseIds() {
+    return this.exercises
+      .map((exercise) => {
+        if (isExercise(exercise)) return exercise.id;
+        else {
+          return asSuperset(exercise).exercises.map((exercise) => exercise.id);
+        }
+      })
+      .flat();
+  }
 
   constructor() {
     effect(() => {
@@ -110,8 +124,12 @@ export class WorkoutEditorComponent {
 
   isExercise = isExercise;
 
-  showExerciseEditor() {
+  onShowExerciseEditor() {
     this.exerciseEditorVisible.set(true);
+  }
+
+  onShowExerciseImportDialog() {
+    this.exerciseImportDialogVisible.set(true);
   }
 
   onGetExercise(receivedExercise: Exercise) {
@@ -164,7 +182,7 @@ export class WorkoutEditorComponent {
     this.newExerciseTypes.update((exerciseTypes) => [...exerciseTypes, type]);
   }
 
-  addSuperset() {
+  onAddSuperset() {
     this.exercises.push({
       id: Date.now(),
       exercises: [],
@@ -209,5 +227,9 @@ export class WorkoutEditorComponent {
       }
       this.router.navigate(['..'], { replaceUrl: true });
     }
+  }
+
+  onImportExercise(exercise: Exercise) {
+    this.exercises.push(exercise);
   }
 }
